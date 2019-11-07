@@ -26,7 +26,6 @@ public class FontDataBase{
 
 	public BufferedImage get(char key){
 		if (map.containsKey(key)) {
-			//no render isso aqui é chamado a todo tempo
 			return map.get(key);
 		} else {
 			System.out.println("Can not find " + key);

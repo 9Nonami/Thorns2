@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50053a92-1326-4f75-bf22-ca2e42361449" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/save/save.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/db/FontDataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/db/FontDataBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/loader/MyJukeBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/loader/MyJukeBox.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/MainMenuScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/MainMenuScene.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

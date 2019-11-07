@@ -124,7 +124,6 @@ public class Thorns extends Game {
     private void initPackTest(){
         ScenePackage packTest = new ScenePackage();
         setMyJukeBox(new MyJukeBox());
-        myJukeBox.load("/res/audio/click.wav", AUDIO_CHOICE);
 
         MainMenuScene mainMenuScene = new MainMenuScene(this, 66);
         packTest.put(0, mainMenuScene);
@@ -136,7 +135,6 @@ public class Thorns extends Game {
     private void initPack0(){
         ScenePackage pack0 = new ScenePackage();
         setMyJukeBox(new MyJukeBox());
-        //myJukeBox.load("/res/audio/click2.wav", AUDIO_CHOICE);
 
         //LOCAL-----------------------------------
 
@@ -429,3 +427,4 @@ public class Thorns extends Game {
 }
 
 /* todo : imageEfx e Stan, com os arrays estao ok, nao quero alterar  */
+//todo : colocar som depois de load
