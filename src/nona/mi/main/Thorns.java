@@ -14,7 +14,14 @@ import nona.mi.loader.MyJukeBox;
 import nona.mi.efx.Fade;
 import nona.mi.image.ImageEfx;
 import nona.mi.loader.TextLoader;
-import nona.mi.scene.*;
+import nona.mi.scene.EfxScene;
+import nona.mi.scene.FadeScene;
+import nona.mi.scene.FadeTopBottomScene;
+import nona.mi.scene.LoadScene;
+import nona.mi.scene.MainMenuScene;
+import nona.mi.scene.Scene;
+import nona.mi.scene.ScenePackage;
+import nona.mi.scene.StandardScene;
 
 public class Thorns extends Game {
 
@@ -89,13 +96,7 @@ public class Thorns extends Game {
         loadScene = new LoadScene(this, new BaseImage(ImageLoader.loadImage("/res/bg/load.png"), 0, 0));
         sceneBasis = loadScene;
 
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                initPacks();
-            }
-        });
-        thread.start();
+        loadPack();
     }
 
     @Override
@@ -287,17 +288,28 @@ public class Thorns extends Game {
 
             sceneBasis = loadScene;
 
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    initPacks();
-                }
-            });
-            thread.start();
+            loadPack();
 
         } else {
             sceneBasis = packBasis.get(scene);
         }
+    }
+
+    public void nextScene(int pack, int scene){
+        sceneBasis = loadScene;
+        this.pack = pack;
+        this.scene = scene;
+        loadPack();
+    }
+
+    private void loadPack(){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                initPacks();
+            }
+        });
+        thread.start();
     }
 
     @Override

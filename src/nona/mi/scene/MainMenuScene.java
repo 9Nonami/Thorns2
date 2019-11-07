@@ -1,5 +1,6 @@
 package nona.mi.scene;
 
+import nona.mi.loader.TextLoader;
 import nona.mi.main.Thorns;
 
 import java.awt.Graphics;
@@ -24,9 +25,16 @@ public class MainMenuScene extends Scene{
         if (menuBasis.isPressed()){
             if (menuBasis.getChosenOption() < menuBasis.getNumOptions()){ // 0 || 1
                 if (menuBasis.getChosenOption() == 0){
+                    //start game
                     setNextPack(0);
-                } //todo : load >> none == return
-                thorns.nextScene(LAST_SCENE);
+                    thorns.nextScene(LAST_SCENE);
+                } else if (menuBasis.getChosenOption() == 1){
+                    //load game
+                    String[] save = TextLoader.load("/save/save.txt").split("_");
+                    int pack = Integer.parseInt(save[0]);
+                    int scene = Integer.parseInt(save[1]);
+                    thorns.nextScene(0, 7);
+                }
             }
             reset();
         }
