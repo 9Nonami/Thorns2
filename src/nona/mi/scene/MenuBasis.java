@@ -94,9 +94,9 @@ public class MenuBasis {
 
     public void update() {
 
-        boolean up = thorns.getUp();
-        boolean down = thorns.getDown();
-        boolean space = thorns.getSpace();
+        boolean up = thorns.isUp();
+        boolean down = thorns.isDown();
+        boolean space = thorns.isSpace();
 
         if (rotatePointer){
             pointerRotation += pointerRotationSpeed;

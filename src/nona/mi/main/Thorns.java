@@ -14,14 +14,7 @@ import nona.mi.loader.MyJukeBox;
 import nona.mi.efx.Fade;
 import nona.mi.image.ImageEfx;
 import nona.mi.loader.TextLoader;
-import nona.mi.scene.EfxScene;
-import nona.mi.scene.FadeScene;
-import nona.mi.scene.FadeTopBottomScene;
-import nona.mi.scene.LoadScene;
-import nona.mi.scene.MainMenuScene;
-import nona.mi.scene.Scene;
-import nona.mi.scene.ScenePackage;
-import nona.mi.scene.StandardScene;
+import nona.mi.scene.*;
 
 public class Thorns extends Game {
 
@@ -125,8 +118,11 @@ public class Thorns extends Game {
         ScenePackage packTest = new ScenePackage();
         setMyJukeBox(new MyJukeBox());
 
-        MainMenuScene mainMenuScene = new MainMenuScene(this, 66);
-        packTest.put(0, mainMenuScene);
+        //MainMenuScene mainMenuScene = new MainMenuScene(this, 66);
+        //packTest.put(0, mainMenuScene);
+
+        TestScene testScene = new TestScene(this);
+        packTest.put(0, testScene);
 
         packBasis = packTest;
         sceneBasis = packBasis.get(0);
@@ -360,19 +356,19 @@ public class Thorns extends Game {
         }
     }
 
-    public boolean getUp() {
+    public boolean isUp() {
         return up;
     }
 
-    public boolean getDown() {
+    public boolean isDown() {
         return down;
     }
 
-    public boolean getLeft() {
+    public boolean isLeft() {
         return left;
     }
 
-    public boolean getRight() {
+    public boolean isRight() {
         return right;
     }
 
@@ -380,7 +376,7 @@ public class Thorns extends Game {
         return pointer;
     }
 
-    public boolean getSpace() {
+    public boolean isSpace() {
         return space;
     }
 
@@ -426,5 +422,5 @@ public class Thorns extends Game {
 
 }
 
-/* todo : imageEfx e Stan, com os arrays estao ok, nao quero alterar  */
-//todo : colocar som depois de load
+// todo : imageEfx e Stan, com os arrays estao ok, nao quero alterar
+// todo : definir som para cada cena no construtor

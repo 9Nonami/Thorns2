@@ -100,7 +100,7 @@ public class StandardScene extends Scene {
 
         dialogueBasis.update();
 
-        space = thorns.getSpace();
+        space = thorns.isSpace();
 
         if  (dialogueBasis.getEndAnimation()){
             setasAnim.update();

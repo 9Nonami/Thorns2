@@ -60,9 +60,9 @@ public class ChoiceScene extends Scene{
     @Override
     public void update(){
         super.update();
-        up = thorns.getUp();
-        down = thorns.getDown();
-        space = thorns.getSpace();
+        up = thorns.isUp();
+        down = thorns.isDown();
+        space = thorns.isSpace();
         if ((up || down) && !(thorns.getMyJukeBox().isPlaying(Thorns.AUDIO_CHOICE))) {
             swap();
             thorns.getMyJukeBox().play(Thorns.AUDIO_CHOICE);
