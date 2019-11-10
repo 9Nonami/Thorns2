@@ -25,10 +25,13 @@ public class Thorns extends Game {
     private boolean lockDown;
 
     private boolean left;
-    private boolean right;
+    private boolean lockLeft;
 
-    private boolean lockSpace;
+    private boolean right;
+    private boolean lockRight;
+
     private boolean space;
+    private boolean lockSpace;
 
     private int scene;
     private int pack;
@@ -98,6 +101,8 @@ public class Thorns extends Game {
         space = false;
         up = false;
         down = false;
+        left = false;
+        right = false;
     }
 
     @Override
@@ -321,10 +326,16 @@ public class Thorns extends Game {
             }
         }
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            left = true;
+            if (!lockLeft) {
+                lockLeft = true;
+                left = true;
+            }
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            right = true;
+            if (!lockRight) {
+                lockRight = true;
+                right = true;
+            }
         }
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             if (!lockSpace) {
@@ -345,9 +356,11 @@ public class Thorns extends Game {
             down = false;
         }
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            lockLeft = false;
             left = false;
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            lockRight = false;
             right = false;
         }
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {

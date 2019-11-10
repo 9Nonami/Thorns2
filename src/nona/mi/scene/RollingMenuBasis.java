@@ -12,7 +12,6 @@ public class RollingMenuBasis {
 
     private BufferedImage emptySlot;
     private BufferedImage filledSlot;
-
     private BufferedImage[] slots;
     private int totalSlots;
 
@@ -59,6 +58,12 @@ public class RollingMenuBasis {
 
         //SAVE
         if (space){
+            /*
+            verificar se ja contem save
+                >cria um novo
+                >override
+
+             */
             slots[visibleSlots[pointer]] = filledSlot;
         }
     }
@@ -100,3 +105,5 @@ public class RollingMenuBasis {
 }
 
 
+//slot focus
+//

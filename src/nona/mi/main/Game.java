@@ -180,7 +180,7 @@ public abstract class Game implements Runnable, KeyListener {
     }
 
     public void testFill() {
-        g.setColor(Color.PINK);
+        g.setColor(Color.BLACK);
         g.fillRect(0, 0, width, height);
     }
 
