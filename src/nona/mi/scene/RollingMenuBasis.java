@@ -2,10 +2,10 @@ package nona.mi.scene;
 
 import nona.mi.loader.ImageLoader;
 import nona.mi.main.Thorns;
+import nona.mi.save.Save;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.Arrays;
 
 public class RollingMenuBasis {
 
@@ -21,6 +21,8 @@ public class RollingMenuBasis {
 
     private int imageHeight;
 
+    private Save save;
+
 
     public RollingMenuBasis(Thorns thorns, int totalSlots){
         this.thorns = thorns;
@@ -30,6 +32,7 @@ public class RollingMenuBasis {
         filledSlot = ImageLoader.loadImage("/res/menu/filledSlot.png");
         imageHeight = filledSlot.getHeight();
         pointer = 3;
+        save = new Save();
     }
 
     public void update() {
@@ -64,7 +67,19 @@ public class RollingMenuBasis {
         }
     }
 
-    public void render(Graphics g){
+    private void render(Graphics g){
+        for (int i = 0; i < visibleSlots.length; i++) {
+            char temp = save.getSlots()[visibleSlots[i]].charAt(2);
+            if (temp == '0'){
+                g.drawImage(emptySlot, 0, i*imageHeight, null);
+            } else if (temp == '1'){
+                g.drawImage(filledSlot, 0, i*imageHeight, null);
+            }
+            //todo : x y
+        }
+    }
+
+    public void render2(Graphics g){
 
         int x = 0;
         int y = 0;
@@ -75,15 +90,6 @@ public class RollingMenuBasis {
         }
         //todo : y * height
 
-        /*
-
-        if (slot[i] == 0){
-            drawEmpty;
-        } else {
-            drawFilled();
-        }
-
-         */
     }
 
 

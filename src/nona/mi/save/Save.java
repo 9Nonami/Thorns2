@@ -9,7 +9,7 @@ import java.io.FileWriter;
 public class Save {
 
     private String[] slots;
-    private final int NUM_SLOTS = 10;
+    public static final int NUM_SLOTS = 10;
     private File folderPath;
     private File savePath;
 
@@ -17,11 +17,27 @@ public class Save {
 
         slots = new String[NUM_SLOTS];
 
-        String home = System.getProperty("user.home");
-        String folderStr = home + "\\.thorns";
-        folderPath = new File(folderStr);
-        String saveFileStr = folderStr + "\\save.9";
-        savePath = new File(saveFileStr);
+        String os = System.getProperty("os.name").toLowerCase();
+
+        String home;
+        String folderStr;
+        String saveFileStr;
+
+        if (os.startsWith("l")){
+            home = System.getProperty("user.home");
+            folderStr = home + "/thorns";
+            folderPath = new File(folderStr);
+            saveFileStr = folderStr + "/save.9";
+            savePath = new File(saveFileStr);
+        } else if (os.startsWith("w")){
+            home = System.getProperty("user.home");
+            folderStr = home + "\\.thorns";
+            folderPath = new File(folderStr);
+            saveFileStr = folderStr + "\\save.9";
+            savePath = new File(saveFileStr);
+        } else {
+            System.exit(0);
+        }
 
         //CRIA A PASTA
         if (!(folderPath.exists())){

@@ -312,15 +312,6 @@ public class Thorns extends Game {
         thread.start();
     }
 
-    private void verifySaveFile(){
-
-        String saveFolder = "/home/";
-        File folder = new File(saveFolder);
-        if (!folder.exists()){
-            folder.mkdir();
-        }
-    }
-
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP) {
