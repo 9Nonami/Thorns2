@@ -3,6 +3,7 @@ package nona.mi.main;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.HashMap;
 
 import nona.mi.db.FontDataBase;
@@ -309,6 +310,15 @@ public class Thorns extends Game {
             }
         });
         thread.start();
+    }
+
+    private void verifySaveFile(){
+
+        String saveFolder = "/home/";
+        File folder = new File(saveFolder);
+        if (!folder.exists()){
+            folder.mkdir();
+        }
     }
 
     @Override

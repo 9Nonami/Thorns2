@@ -5,6 +5,7 @@ import nona.mi.main.Thorns;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 
 public class RollingMenuBasis {
 
@@ -23,10 +24,11 @@ public class RollingMenuBasis {
 
     public RollingMenuBasis(Thorns thorns, int totalSlots){
         this.thorns = thorns;
-        this.totalSlots = totalSlots;
+        this.totalSlots = totalSlots; // todo : save.NUM_SLOTS
+        slots = new BufferedImage[totalSlots];
         emptySlot = ImageLoader.loadImage("/res/menu/emptySlot.png");
         filledSlot = ImageLoader.loadImage("/res/menu/filledSlot.png");
-        initSlots(false); //todo : metodo<<
+        imageHeight = filledSlot.getHeight();
         pointer = 3;
     }
 
@@ -58,12 +60,6 @@ public class RollingMenuBasis {
 
         //SAVE
         if (space){
-            /*
-            verificar se ja contem save
-                >cria um novo
-                >override
-
-             */
             slots[visibleSlots[pointer]] = filledSlot;
         }
     }
@@ -77,33 +73,19 @@ public class RollingMenuBasis {
             g.drawImage(slots[visibleSlots[i]], x, y, null);
             y += imageHeight;
         }
-    }
+        //todo : y * height
 
-    private void createSlots(){
+        /*
 
-        slots = new BufferedImage[totalSlots];
-
-        for (int i = 0; i < slots.length; i++) {
-            slots[i] = emptySlot;
-        }
-
-        imageHeight = slots[0].getHeight();
-    }
-
-    private void loadSlots(){
-
-    }
-
-    private void initSlots(boolean b){ // todo : metodo que retorne se existem os slots
-        if (b){
-            loadSlots();
+        if (slot[i] == 0){
+            drawEmpty;
         } else {
-            createSlots();
+            drawFilled();
         }
+
+         */
     }
+
+
 
 }
-
-
-//slot focus
-//
