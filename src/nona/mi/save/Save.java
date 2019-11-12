@@ -18,20 +18,18 @@ public class Save {
         slots = new String[NUM_SLOTS];
 
         String os = System.getProperty("os.name").toLowerCase();
+        String home = System.getProperty("user.home");
 
-        String home;
         String folderStr;
         String saveFileStr;
 
         if (os.startsWith("l")){
-            home = System.getProperty("user.home");
             folderStr = home + "/thorns";
             folderPath = new File(folderStr);
             saveFileStr = folderStr + "/save.9";
             savePath = new File(saveFileStr);
         } else if (os.startsWith("w")){
-            home = System.getProperty("user.home");
-            folderStr = home + "\\.thorns";
+            folderStr = home + "\\thorns";
             folderPath = new File(folderStr);
             saveFileStr = folderStr + "\\save.9";
             savePath = new File(saveFileStr);
@@ -48,7 +46,7 @@ public class Save {
         if (!(savePath.exists())){
             try {
                 savePath.createNewFile();
-                createBasicSaveText(savePath);
+                createBasicSaveFile(savePath);
             } catch (Exception ex){
                 ex.printStackTrace();
             }
@@ -58,7 +56,7 @@ public class Save {
 
     }
 
-    private void createBasicSaveText(File savePath){
+    private void createBasicSaveFile(File savePath){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(savePath))){
             for (int i = 0; i < slots.length; i++) {
                 String temp = "" + i + "-0-0-0&" + "\n";
@@ -75,6 +73,17 @@ public class Save {
         String[] splitted = loaded.split("&");
         for (int i = 0; i < slots.length; i++) {
             slots[i] = splitted[i];
+        }
+    }
+
+    public void save(){
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(savePath))){
+            for (int i = 0; i < slots.length; i++) {
+                bw.write(slots[i] + "&\n");
+            }
+            bw.flush();
+        } catch (Exception ex){
+            ex.printStackTrace();
         }
     }
 

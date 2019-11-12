@@ -2,6 +2,7 @@ package nona.mi.scene;
 
 import nona.mi.loader.ImageLoader;
 import nona.mi.main.Thorns;
+import nona.mi.save.Replacer;
 import nona.mi.save.Save;
 
 import java.awt.Graphics;
@@ -13,8 +14,6 @@ public class RollingMenuBasis {
 
     private BufferedImage emptySlot;
     private BufferedImage filledSlot;
-    private BufferedImage[] slots;
-    private int totalSlots;
 
     private int[] visibleSlots = {0, 1, 2, 3, 4, 5, 6, 7};
     private int pointer;
@@ -24,10 +23,8 @@ public class RollingMenuBasis {
     private Save save;
 
 
-    public RollingMenuBasis(Thorns thorns, int totalSlots){
+    public RollingMenuBasis(Thorns thorns){
         this.thorns = thorns;
-        this.totalSlots = totalSlots; // todo : save.NUM_SLOTS
-        slots = new BufferedImage[totalSlots];
         emptySlot = ImageLoader.loadImage("/res/menu/emptySlot.png");
         filledSlot = ImageLoader.loadImage("/res/menu/filledSlot.png");
         imageHeight = filledSlot.getHeight();
@@ -53,21 +50,23 @@ public class RollingMenuBasis {
         if (up || down){
             for (int i = 0; i < visibleSlots.length; i++) {
                 visibleSlots[i] = visibleSlots[i] + increment;
-                if (visibleSlots[i] > slots.length - 1) {
+                if (visibleSlots[i] > save.getSlots().length - 1) {
                     visibleSlots[i] = 0;
                 } else if (visibleSlots[i] < 0) {
-                    visibleSlots[i] = slots.length - 1;
+                    visibleSlots[i] = save.getSlots().length - 1;
                 }
             }
         }
 
         //SAVE
         if (space){
-            slots[visibleSlots[pointer]] = filledSlot;
+            String old = save.getSlots()[visibleSlots[pointer]];
+            save.getSlots()[visibleSlots[pointer]] = Replacer.replace(old, 2, '1');
+            save.save();
         }
     }
 
-    private void render(Graphics g){
+    public void render(Graphics g){
         for (int i = 0; i < visibleSlots.length; i++) {
             char temp = save.getSlots()[visibleSlots[i]].charAt(2);
             if (temp == '0'){
@@ -78,20 +77,5 @@ public class RollingMenuBasis {
             //todo : x y
         }
     }
-
-    public void render2(Graphics g){
-
-        int x = 0;
-        int y = 0;
-
-        for (int i = 0; i < visibleSlots.length; i++) {
-            g.drawImage(slots[visibleSlots[i]], x, y, null);
-            y += imageHeight;
-        }
-        //todo : y * height
-
-    }
-
-
 
 }
