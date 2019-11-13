@@ -12,9 +12,9 @@ public class Fade {
     public static final int SLOW = 1;
     public static final int MEDIUM = 2;
     public static final int FAST = 5;
-    private int alpha;
+    private float alpha;
     private int alphaBasis;
-    private int speed;
+    private float speed;
     private boolean endAnimation;
 
     private int r;
@@ -25,7 +25,7 @@ public class Fade {
 
     public Fade(Thorns thorns, int alphaValue, int speed) {
         this.thorns = thorns;
-        this.speed = speed;
+        this.speed = (speed * thorns.getSpeedAdjust());
         endAnimation = false;
 
         this.alpha = alphaValue;
@@ -61,7 +61,7 @@ public class Fade {
     }
 
     public void render(Graphics g) {
-        g.setColor(new Color(this.r, this.g, this.b, this.alpha));
+        g.setColor(new Color(this.r, this.g, this.b, (int)this.alpha));
         g.fillRect(0, 0, thorns.getWidth(), thorns.getHeight());
     }
 

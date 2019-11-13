@@ -25,19 +25,34 @@ public abstract class Game implements Runnable, KeyListener {
 
     private double limit;
     private int fps;
+    private float speedAdjust;
 
     public static final int HARD_GAME_LOOP = 0;
     public static final int SMOOTH_GAME_LOOP = 1;
     private int gameLoopStyle;
     private boolean showLoopLog;
 
-    public Game(int width, int height, int fps, String title, int gameLoopStyle) {
+    public Game(int width, int height, String title, int gameLoopStyle) {
 
         this.width = width;
         this.height = height;
-        this.fps = fps;
         this.gameLoopStyle = gameLoopStyle;
+
+        if (gameLoopStyle == HARD_GAME_LOOP){
+            fps = 30;
+        } else {
+            fps = 60;
+        }
+
         limit = (double) 1_000_000_000 / fps;
+
+        //se for 30fps, roda com os valores definidos
+        //se for 60fps, nao deixa ser o dobro da velocidade
+        if (gameLoopStyle == HARD_GAME_LOOP){
+            speedAdjust = 1;
+        } else {
+            speedAdjust = 0.5f;
+        }
 
         jframe = new JFrame(title);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -198,5 +213,9 @@ public abstract class Game implements Runnable, KeyListener {
 
     public int getFps() {
         return fps;
+    }
+
+    public float getSpeedAdjust() {
+        return speedAdjust;
     }
 }

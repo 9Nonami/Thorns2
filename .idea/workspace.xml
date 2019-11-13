@@ -3,8 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="50053a92-1326-4f75-bf22-ca2e42361449" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/save/Save.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/save/Save.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/save/Save.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/save/Save.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/efx/Fade.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/efx/Fade.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/image/ImageEfx.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/image/ImageEfx.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/Dialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/Dialogue.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/efx/Fade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/efx/Fade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/image/ImageEfx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/image/ImageEfx.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/Dialogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/Dialogue.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

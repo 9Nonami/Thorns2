@@ -18,7 +18,6 @@ import java.awt.Graphics;
 
 import nona.mi.db.FontDataBase;
 import nona.mi.image.BaseImage;
-import nona.mi.main.Game;
 import nona.mi.main.Thorns;
 
 
@@ -34,7 +33,7 @@ public class Dialogue {
     private int y;
     private int spacing;
 
-    private double textSpeed;
+    private float textSpeed;
 
     private int fontHeight;
 
@@ -62,7 +61,7 @@ public class Dialogue {
         this.y = y;
 
         cont = 0;
-        textSpeed = 1;
+        textSpeed = 2 * thorns.getSpeedAdjust();
 
         this.textArea = textArea;
         this.nameBg = nameBg;
@@ -70,6 +69,8 @@ public class Dialogue {
         spacing = 5;
     }
 
+    //todo : ver se e necessario esse construtor
+    /*
     public Dialogue(Thorns thorns, FontDataBase fdb, BaseImage textArea, BaseImage nameBg) {
         this.thorns = thorns;
         this.fdb = fdb;
@@ -86,6 +87,7 @@ public class Dialogue {
 
         spacing = 5;
     }
+    //*/
 
     public void setAudio(float audioDelay, String audioName, String audioPath){ //audioDelay in seconds
         this.audioDelay = (int) (audioDelay * thorns.getFps());

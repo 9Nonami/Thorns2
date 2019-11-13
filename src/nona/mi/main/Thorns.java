@@ -1,9 +1,9 @@
 package nona.mi.main;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.HashMap;
 
 import nona.mi.db.FontDataBase;
@@ -15,7 +15,14 @@ import nona.mi.loader.MyJukeBox;
 import nona.mi.efx.Fade;
 import nona.mi.image.ImageEfx;
 import nona.mi.loader.TextLoader;
-import nona.mi.scene.*;
+import nona.mi.scene.EfxScene;
+import nona.mi.scene.FadeScene;
+import nona.mi.scene.FadeTopBottomScene;
+import nona.mi.scene.LoadScene;
+import nona.mi.scene.Scene;
+import nona.mi.scene.ScenePackage;
+import nona.mi.scene.StandardScene;
+import nona.mi.scene.TestScene;
 
 public class Thorns extends Game {
 
@@ -34,6 +41,7 @@ public class Thorns extends Game {
     private boolean space;
     private boolean lockSpace;
 
+    private boolean showScene;
     private int scene;
     private int pack;
 
@@ -54,9 +62,9 @@ public class Thorns extends Game {
     private ImageEfx setasAnim;
     public static final String AUDIO_CHOICE = "ac";
 
-    public Thorns(int width, int height, int fps, String title, int gameLoopStyle) {
+    public Thorns(int width, int height, String title, int gameLoopStyle) {
 
-        super(width, height, fps, title, gameLoopStyle);
+        super(width, height, title, gameLoopStyle);
 
         //FONTE DA VN
         fontDataBase = new FontDataBase("/res/font/myfont.png", "/res/font/text.txt");
@@ -83,10 +91,10 @@ public class Thorns extends Game {
         BufferedImage tres = ImageLoader.loadImage("/res/menu/tres.png");
         BufferedImage[] setas = {uno, dos, tres};
         Coordinates setasCoord = new Coordinates(getWidth() - uno.getWidth(), getHeight() - uno.getHeight());
-        setasAnim = new ImageEfx(setas, setasCoord, (0.15f / 2), ImageEfx.LOOP); //todo : var que se adapte ao stilo do gameloop
+        setasAnim = new ImageEfx(this, setas, setasCoord, 0.15f , ImageEfx.LOOP);
 
         //PACK E SCENE
-        pack = 1;
+        pack = 0;
         scene = 0;
 
         //LOAD SCENE
@@ -110,6 +118,10 @@ public class Thorns extends Game {
     public void renderClass(Graphics g) {
         super.testFill();
         sceneBasis.render(g);
+        if (showScene) {
+            g.setColor(Color.WHITE);
+            g.drawString("scene: " + scene, 5, 15);
+        }
     }
 
     private synchronized void initPacks() {
@@ -178,10 +190,10 @@ public class Thorns extends Game {
         pack0.put(1, scene1);
 
         //cena 2
-        ImageEfx efxRose = new ImageEfx(rose, roseCoordScene2);
+        ImageEfx efxRose = new ImageEfx(this, rose, roseCoordScene2);
         efxRose.setAlpha(ImageEfx.TRANSPARENT, 0.02f);
         efxRose.setMoveTo(0, 0, 1, 0); //rose e tuli estao movendo 30px
-        ImageEfx efxTuli = new ImageEfx(tuli, tuliCoordScene2);
+        ImageEfx efxTuli = new ImageEfx(this, tuli, tuliCoordScene2);
         efxTuli.setAlpha(ImageEfx.TRANSPARENT, 0.02f);
         efxTuli.setMoveTo(400, 0, 1, 0);
         ImageEfx[] images = {efxRose, efxTuli};
@@ -197,12 +209,12 @@ public class Thorns extends Game {
         scene3.setCharacters(characters);
         pack0.put(3, scene3);
 
-        //cena 4
+        //cena 4 //0.05f old speed
         BaseImage[] bottom4 = {bgScene0, roseSc3, tuliSc3};
-        ImageEfx bgSc4 = new ImageEfx(imgScene0, new Coordinates(0, 0));
-        bgSc4.setAlpha(ImageEfx.TRANSPARENT, 0.05f);
-        ImageEfx tuliSc4 = new ImageEfx(tuli, (new Coordinates((float)((getWidth() / 2) - (tuli.getWidth() / 2)), 0)));
-        tuliSc4.setAlpha(ImageEfx.TRANSPARENT, 0.05f);
+        ImageEfx bgSc4 = new ImageEfx(this, imgScene0, new Coordinates(0, 0));
+        bgSc4.setAlpha(ImageEfx.TRANSPARENT, 0.025f);
+        ImageEfx tuliSc4 = new ImageEfx(this, tuli, (new Coordinates((float)((getWidth() / 2) - (tuli.getWidth() / 2)), 0)));
+        tuliSc4.setAlpha(ImageEfx.TRANSPARENT, 0.025f);
         ImageEfx[] top4 = {bgSc4, tuliSc4};
         FadeTopBottomScene scene4 = new FadeTopBottomScene(this, bottom4, top4, 5);
         scene4.setTextArea(textArea);
@@ -218,9 +230,9 @@ public class Thorns extends Game {
 
         //cena 6
         BaseImage[] bottom6 = {bgScene0, tuliSc5};
-        ImageEfx bgSc6 = new ImageEfx(imgScene0, new Coordinates(0, 0));
+        ImageEfx bgSc6 = new ImageEfx(this, imgScene0, new Coordinates(0, 0));
         bgSc6.setAlpha(ImageEfx.TRANSPARENT, 0.01f);
-        ImageEfx roseSc6 = new ImageEfx(rose, new Coordinates(((float)(getWidth() / 2) - (float)(rose.getWidth() / 2)), 0));
+        ImageEfx roseSc6 = new ImageEfx(this, rose, new Coordinates(((float)(getWidth() / 2) - (float)(rose.getWidth() / 2)), 0));
         roseSc6.setAlpha(ImageEfx.TRANSPARENT, 0.01f);
         ImageEfx[] top6 = {bgSc6, roseSc6};
         FadeTopBottomScene scene6 = new FadeTopBottomScene(this, bottom6, top6, 7);
@@ -249,7 +261,7 @@ public class Thorns extends Game {
         pack0.put(10, scene10);
 
         //cena 11
-        ImageEfx efxLivro2 = new ImageEfx(livro2Buffered, new Coordinates(0, 0));
+        ImageEfx efxLivro2 = new ImageEfx(this, livro2Buffered, new Coordinates(0, 0));
         efxLivro2.setAlpha(ImageEfx.TRANSPARENT, 0.02f);
         EfxScene scene11 = new EfxScene(this, new ImageEfx[]{efxLivro2}, livro1, 12);
         //scene11.setTextArea(textArea);
@@ -263,8 +275,8 @@ public class Thorns extends Game {
         pack0.put(12, scene12);
 
         //cena 13
-        ImageEfx efxLivro3 = new ImageEfx(livro3Buffered, new Coordinates(0, 0));
-        efxLivro3.setAlpha(ImageEfx.TRANSPARENT, 0.01f);
+        ImageEfx efxLivro3 = new ImageEfx(this, livro3Buffered, new Coordinates(0, 0));
+        efxLivro3.setAlpha(ImageEfx.TRANSPARENT, 0.02f);
         EfxScene scene13 = new EfxScene(this, new ImageEfx[]{efxLivro3}, imagesSc12, 14);
         pack0.put(13, scene13);
 
@@ -434,7 +446,10 @@ public class Thorns extends Game {
         this.myJukeBox = myJukeBox;
     }
 
-}
+    public void setShowScene(boolean showScene) {
+        this.showScene = showScene;
+    }
 
-// todo : imageEfx e Stan, com os arrays estao ok, nao quero alterar
-// todo : definir som para cada cena no construtor
+    // todo : imageEfx e Stan, com os arrays estao ok, nao quero alterar
+    // todo : definir som para cada cena no construtor - isso evita dar load numa cena e vir sem som (o qual so inicia em outra cena especifica)
+}

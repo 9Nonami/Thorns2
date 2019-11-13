@@ -1,5 +1,7 @@
 package nona.mi.image;
 
+import nona.mi.main.Thorns;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.AlphaComposite;
@@ -39,9 +41,12 @@ public class ImageEfx extends BaseImage{
     public static final int TRANSPARENT = 0;
     public static final int ONCE = 2;
     public static final int LOOP = 3;
-    
-    public ImageEfx(BufferedImage image, Coordinates coordinates) {
+
+    private Thorns thorns;
+
+    public ImageEfx(Thorns thorns, BufferedImage image, Coordinates coordinates) {
         super(image);
+        this.thorns = thorns;
         this.coordinates = coordinates;
         
         this.endMoveAnimation = true;
@@ -49,11 +54,12 @@ public class ImageEfx extends BaseImage{
         this.endAnimatedImageAnimation = true;
     }
     
-    public ImageEfx(BufferedImage[] images, Coordinates coordinates, float delay, int style){
+    public ImageEfx(Thorns thorns, BufferedImage[] images, Coordinates coordinates, float delay, int style){
         super(null);
+        this.thorns = thorns;
         this.images = images;
         this.coordinates = coordinates;
-        this.delay = delay;
+        this.delay = delay * thorns.getSpeedAdjust(); //todo : se der erro, eh aqui
         this.style = style;
         this.animatedImage = true;
         this.id = 0;
@@ -68,8 +74,9 @@ public class ImageEfx extends BaseImage{
         this.endMoveAnimation = false;
         this.destinationX = destinationX;
         this.destinationY = destinationY;
-        this.speedX = speedX;
-        this.speedY = speedY;
+
+        this.speedX = speedX * thorns.getSpeedAdjust(); //todo : se der erro, eh aqui
+        this.speedY = speedY * thorns.getSpeedAdjust();
         
         baseEndMx = false;
         baseEndMy = false;
@@ -95,7 +102,8 @@ public class ImageEfx extends BaseImage{
         this.endAlphaAnimation = false;
         this.aspect = aspect;
         this.aspectBase = aspect;
-        this.speedAlpha = speedAlpha;
+        this.speedAlpha = speedAlpha * thorns.getSpeedAdjust(); //todo : se der erro, eh aqui
+
         if (aspect == SOLID) {
             this.speedAlpha *= -1;
         }
