@@ -50,9 +50,9 @@ public class Save {
             } catch (Exception ex){
                 ex.printStackTrace();
             }
-        } else {
-            load();
         }
+
+        load();
 
     }
 
