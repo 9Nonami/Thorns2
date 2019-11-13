@@ -1,7 +1,8 @@
-package nona.mi.scene;
+package nona.mi.scene; //todo : mudar para nona.mi.menu
 
 import nona.mi.loader.ImageLoader;
 import nona.mi.main.Thorns;
+import nona.mi.menu.Menu;
 import nona.mi.save.Replacer;
 import nona.mi.save.Save;
 
@@ -22,6 +23,11 @@ public class RollingMenuBasis {
 
     private Save save;
 
+    //
+    private Menu menu;
+    private boolean showMenu;
+    private boolean rollingMenuFocus;
+
 
     public RollingMenuBasis(Thorns thorns){
         this.thorns = thorns;
@@ -30,6 +36,9 @@ public class RollingMenuBasis {
         imageHeight = filledSlot.getHeight();
         pointer = 3;
         save = new Save();
+        menu = new Menu(thorns, thorns.getChoicebg(), thorns.getFontDataBase(), thorns.getPointer(), Menu.STYLE_HORIZONTAL);
+        menu.createOptions(10, 10, 10, "WRITE_CANCEL");
+        rollingMenuFocus = true;
     }
 
     public void update() {
@@ -38,31 +47,56 @@ public class RollingMenuBasis {
         boolean down = thorns.isDown();
         boolean space = thorns.isSpace(); //todo anim. confirmacao
 
-        int increment = 0;
-        if (up){
-            increment = -1;
-        }
-        if (down){
-            increment = 1;
-        }
+        if (rollingMenuFocus) {
 
-        //ROLL
-        if (up || down){
-            for (int i = 0; i < visibleSlots.length; i++) {
-                visibleSlots[i] = visibleSlots[i] + increment;
-                if (visibleSlots[i] > save.getSlots().length - 1) {
-                    visibleSlots[i] = 0;
-                } else if (visibleSlots[i] < 0) {
-                    visibleSlots[i] = save.getSlots().length - 1;
+            int increment = 0;
+            if (up) {
+                increment = -1;
+            }
+            if (down) {
+                increment = 1;
+            }
+
+            //ROLL
+            if (up || down) {
+                for (int i = 0; i < visibleSlots.length; i++) {
+                    visibleSlots[i] = visibleSlots[i] + increment;
+                    if (visibleSlots[i] > save.getSlots().length - 1) {
+                        visibleSlots[i] = 0;
+                    } else if (visibleSlots[i] < 0) {
+                        visibleSlots[i] = save.getSlots().length - 1;
+                    }
                 }
             }
-        }
 
-        //SAVE
-        if (space){
-            String old = save.getSlots()[visibleSlots[pointer]];
-            save.getSlots()[visibleSlots[pointer]] = Replacer.replace(old, 2, '1');
-            save.save();
+            //SAVE
+            if (space) {
+                String old = save.getSlots()[visibleSlots[pointer]]; //x-x-x-x << retorno
+                if (old.charAt(Save.IMAGE_SLOT_ID) == '1'){
+                    showMenu = true;
+                    rollingMenuFocus = false;
+                } else {
+                    save.getSlots()[visibleSlots[pointer]] = Replacer.replace(old, Save.IMAGE_SLOT_ID, '1');
+                    save.save();
+                }
+            }
+
+        } else {
+            menu.update();
+            if (menu.isPressed()){
+                if (menu.getChosenOptionAsString().equals("CANCEL")) {
+                    showMenu = false;
+                    rollingMenuFocus = true;
+                    menu.reset();
+                } else {
+                    String old = save.getSlots()[visibleSlots[pointer]];
+                    save.getSlots()[visibleSlots[pointer]] = Replacer.replace(old, Save.IMAGE_SLOT_ID, '1');
+                    save.save();
+                    showMenu = false;
+                    rollingMenuFocus = true;
+                    menu.reset();
+                }
+            }
         }
     }
 
@@ -76,6 +110,14 @@ public class RollingMenuBasis {
             }
             //todo : x y
         }
+        if (showMenu){
+            menu.render(g);
+        }
+
+    }
+
+    public void reset(){
+        rollingMenuFocus = true;
     }
 
 }

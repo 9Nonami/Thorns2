@@ -94,7 +94,7 @@ public class Thorns extends Game {
         setasAnim = new ImageEfx(this, setas, setasCoord, 0.15f , ImageEfx.LOOP);
 
         //PACK E SCENE
-        pack = 0;
+        pack = 1;
         scene = 0;
 
         //LOAD SCENE

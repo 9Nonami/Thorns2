@@ -13,6 +13,8 @@ public class Save {
     private File folderPath;
     private File savePath;
 
+    public static final int IMAGE_SLOT_ID = 2;
+
     public Save(){
 
         slots = new String[NUM_SLOTS];
