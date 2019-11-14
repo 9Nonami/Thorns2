@@ -23,21 +23,38 @@ public class RollingMenuBasis {
 
     private Save save;
 
-    //
-    private Menu menu;
+
+    private Menu containerMenu;
+    private Menu saveMenu;
+    private Menu deleteMenu;
     private boolean showMenu;
     private boolean rollingMenuFocus;
 
+    private String old; //representa o slot especificado pelo pointer, antes de alterar
 
-    public RollingMenuBasis(Thorns thorns){
+    private int mode;
+    public static final int SAVE_MODE = 0;
+    public static final int LOAD_MODE = 1;
+    public static final int COPY_MODE = 2;
+    public static final int DELETE_MODE = 3;
+
+
+    public RollingMenuBasis(Thorns thorns, int mode){
         this.thorns = thorns;
+        this.mode = mode;
         emptySlot = ImageLoader.loadImage("/res/menu/emptySlot.png");
         filledSlot = ImageLoader.loadImage("/res/menu/filledSlot.png");
         imageHeight = filledSlot.getHeight();
         pointer = 3;
         save = new Save();
-        menu = new Menu(thorns, thorns.getChoicebg(), thorns.getFontDataBase(), thorns.getPointer(), Menu.STYLE_HORIZONTAL);
-        menu.createOptions(10, 10, 10, "WRITE_CANCEL");
+
+        saveMenu = new Menu(thorns, thorns.getChoicebg(), thorns.getFontDataBase(), thorns.getPointer(), Menu.STYLE_HORIZONTAL);
+        saveMenu.createOptions(10, 10, 10, "WRITE_CANCEL");
+
+        deleteMenu = new Menu(thorns, thorns.getChoicebg(), thorns.getFontDataBase(), thorns.getPointer(), Menu.STYLE_HORIZONTAL);
+        deleteMenu.createOptions(10, 10, 10, "DELETE_CANCEL");
+
+        containerMenu = deleteMenu;
         rollingMenuFocus = true;
     }
 
@@ -46,6 +63,10 @@ public class RollingMenuBasis {
         boolean up = thorns.isUp();
         boolean down = thorns.isDown();
         boolean space = thorns.isSpace(); //todo anim. confirmacao
+        //
+        boolean left = thorns.isLeft();
+        boolean right = thorns.isRight();
+
 
         if (rollingMenuFocus) {
 
@@ -71,32 +92,48 @@ public class RollingMenuBasis {
 
             //SAVE
             if (space) {
-                String old = save.getSlots()[visibleSlots[pointer]]; //x-x-x-x << retorno
-                if (old.charAt(Save.IMAGE_SLOT_ID) == '1'){
-                    showMenu = true;
-                    rollingMenuFocus = false;
-                } else {
-                    save.getSlots()[visibleSlots[pointer]] = Replacer.replace(old, Save.IMAGE_SLOT_ID, '1');
-                    save.save();
+
+                old = save.getSlots()[visibleSlots[pointer]]; //returns x-x-x-x
+
+                if (mode == SAVE_MODE) {
+
+                    if (old.charAt(Save.IMAGE_SLOT_ID) == '1') {
+                        containerMenu = saveMenu;
+                        gotoMenu();
+                    } else {
+                        save.getSlots()[visibleSlots[pointer]] = Replacer.replace(old, Save.IMAGE_SLOT_ID, '1');
+                        save.save();
+                    }
+
+                } else if (mode == LOAD_MODE) {
+
+                } else if (mode == COPY_MODE) {
+
+                } else if (mode == DELETE_MODE) {
+                    if (old.charAt(Save.IMAGE_SLOT_ID) == '1') {
+                        containerMenu = deleteMenu;
+                        gotoMenu();
+                    }
                 }
+
             }
 
         } else {
-            menu.update();
-            if (menu.isPressed()){
-                if (menu.getChosenOptionAsString().equals("CANCEL")) {
-                    showMenu = false;
-                    rollingMenuFocus = true;
-                    menu.reset();
-                } else {
-                    String old = save.getSlots()[visibleSlots[pointer]];
+
+            containerMenu.update();
+
+            if (containerMenu.isPressed()){
+
+                if (containerMenu.getChosenOptionAsString().equals("WRITE")) {
                     save.getSlots()[visibleSlots[pointer]] = Replacer.replace(old, Save.IMAGE_SLOT_ID, '1');
                     save.save();
-                    showMenu = false;
-                    rollingMenuFocus = true;
-                    menu.reset();
+                } else if (containerMenu.getChosenOptionAsString().equals("DELETE")) {
+                    save.getSlots()[visibleSlots[pointer]] = "" + visibleSlots[pointer] + "-0-0-0";
+                    save.save();
                 }
+                gotoRolling();
             }
+
         }
     }
 
@@ -111,13 +148,30 @@ public class RollingMenuBasis {
             //todo : x y
         }
         if (showMenu){
-            menu.render(g);
+            containerMenu.render(g);
         }
 
+    }
+
+    private void gotoMenu(){
+        showMenu = true;
+        rollingMenuFocus = false;
+    }
+
+    private void gotoRolling(){
+        showMenu = false; //para o render
+        rollingMenuFocus = true;
+        containerMenu.reset();
+    }
+
+    public void setMode(int mode) {
+        this.mode = mode;
     }
 
     public void reset(){
         rollingMenuFocus = true;
     }
 
+
+    //todo : nome das opcoes que alteram o menu como variaveis
 }

@@ -13,7 +13,9 @@ public class Save {
     private File folderPath;
     private File savePath;
 
+    public static final int SLOT_ID = 0;
     public static final int IMAGE_SLOT_ID = 2;
+
 
     public Save(){
 

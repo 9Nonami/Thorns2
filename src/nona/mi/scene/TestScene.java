@@ -12,7 +12,7 @@ public class TestScene extends Scene {
 
     public TestScene(Thorns thorns) {
         super(thorns, 666);
-        rollingMenuBasis = new RollingMenuBasis(thorns);
+        rollingMenuBasis = new RollingMenuBasis(thorns, RollingMenuBasis.DELETE_MODE);
         //menu = new Menu(thorns, thorns.getChoicebg(), thorns.getFontDataBase(), thorns.getPointer(), Menu.STYLE_VERTICAL);
         //menu.createOptions(10, 10, 10, "ARTICUNO_ZAPDOS_MOLTRES_MISSINGNO");
     }
