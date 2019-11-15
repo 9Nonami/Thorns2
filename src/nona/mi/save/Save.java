@@ -20,6 +20,8 @@ public class Save {
     public static final int PACK_ID = 4;
     public static final int SCENE_ID = 6;
 
+    public static final char FILLED = '1';
+    public static final char EMPTY = '0';
 
     public Save(){
 

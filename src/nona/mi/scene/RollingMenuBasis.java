@@ -28,10 +28,14 @@ public class RollingMenuBasis {
     private Menu saveMenu;
     private Menu deleteMenu;
     private Menu loadMenu;
+    private Menu copyMenu;
     private boolean showMenu;
     private boolean rollingMenuFocus;
 
     private String old; //representa o slot especificado pelo pointer, antes de alterar
+    private String copy;
+
+    private boolean lockCopy;
 
     private int mode;
     public static final int SAVE_MODE = 0;
@@ -59,9 +63,14 @@ public class RollingMenuBasis {
         loadMenu = new Menu(thorns, thorns.getChoicebg(), thorns.getFontDataBase(), thorns.getPointer(), Menu.STYLE_HORIZONTAL);
         loadMenu.createOptions(10, 10, 10, "LOAD_CANCEL");
 
+        copyMenu = new Menu(thorns, thorns.getChoicebg(), thorns.getFontDataBase(), thorns.getPointer(), Menu.STYLE_HORIZONTAL);
+        copyMenu.createOptions(10, 10, 10, "COPY_CANCEL");
+
         containerMenu = deleteMenu;
         rollingMenuFocus = true;
         old = "";
+        copy = "";
+        lockCopy = false;
     }
 
     public void update() {
@@ -122,11 +131,8 @@ public class RollingMenuBasis {
 
     private void managePressedOption(boolean space) {
         if (space) {
-
             old = save.getSlots()[visibleSlots[pointer]]; //returns x-x-x-x
-
             if (mode == SAVE_MODE) {
-
                 if (old.charAt(Save.IMAGE_SLOT_ID) == '1') {
                     containerMenu = saveMenu;
                     gotoMenu();
@@ -134,27 +140,36 @@ public class RollingMenuBasis {
                     save.getSlots()[visibleSlots[pointer]] = Replacer.replace(old, Save.IMAGE_SLOT_ID, '1');
                     save.save();
                 }
-
             } else if (mode == LOAD_MODE) {
-
                 if (old.charAt(Save.IMAGE_SLOT_ID) != '0') {
                     containerMenu = loadMenu;
                     gotoMenu();
                 }
-
             } else if (mode == COPY_MODE) {
-
+                if (!lockCopy && old.charAt(Save.IMAGE_SLOT_ID) == Save.FILLED){ // todo :
+                    lockCopy = true;
+                    copy = old;
+                } else if (lockCopy) {
+                    if (old.charAt(Save.IMAGE_SLOT_ID) == Save.EMPTY){
+                        String temp = "" + visibleSlots[pointer] + copy.substring(1); // 1 para excluir o primeiro caractere (0)
+                        save.getSlots()[visibleSlots[pointer]] = temp;
+                        save.save();
+                        lockCopy = false;
+                    } else {
+                        containerMenu = copyMenu;
+                        gotoMenu();
+                    }
+                }
             } else if (mode == DELETE_MODE) {
                 if (old.charAt(Save.IMAGE_SLOT_ID) == '1') {
                     containerMenu = deleteMenu;
                     gotoMenu();
                 }
             }
-
         }
     }
 
-    private void updateContainerMenu(){
+    private void updateContainerMenu(){ // todo : mudar par if com as constantes
         containerMenu.update();
         if (containerMenu.isPressed()){
             if (containerMenu.getChosenOptionAsString().equals("WRITE")) {
@@ -170,6 +185,11 @@ public class RollingMenuBasis {
                 thorns.nextScene(pack, scene);
                 reset();
                 return;
+            } else if (containerMenu.getChosenOptionAsString().equals("COPY")) {
+                String temp = "" + visibleSlots[pointer] + copy.substring(1); // 1 para excluir o primeiro caractere (0)
+                save.getSlots()[visibleSlots[pointer]] = temp;
+                save.save();
+                lockCopy = false;
             }
             gotoRolling();
         }
@@ -190,9 +210,14 @@ public class RollingMenuBasis {
             containerMenu.render(g);
         }
 
+        //todo : apagar os testes
         //test
         g.setColor(Color.WHITE);
         g.drawString(String.valueOf(mode), 5, 15);
+
+        //test2
+        g.drawString(String.valueOf(lockCopy), 100, 15);
+        g.drawString(String.valueOf(visibleSlots[pointer]), 150, 15);
 
     }
 
@@ -215,7 +240,9 @@ public class RollingMenuBasis {
         rollingMenuFocus = true;
         containerMenu.reset();
         old = "";
+        copy = "";
         mode = SAVE_MODE;
+        lockCopy = false;
     }
 
 
