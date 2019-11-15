@@ -13,8 +13,12 @@ public class Save {
     private File folderPath;
     private File savePath;
 
+    //x-x-x-x
+    //[0]id_do_slot [1]- [2]id_filling_state [3]- [4]pack [5]- [6]scene
     public static final int SLOT_ID = 0;
     public static final int IMAGE_SLOT_ID = 2;
+    public static final int PACK_ID = 4;
+    public static final int SCENE_ID = 6;
 
 
     public Save(){

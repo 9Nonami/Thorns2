@@ -450,6 +450,10 @@ public class Thorns extends Game {
         this.showScene = showScene;
     }
 
+    public void showLoadScene() {
+        sceneBasis = loadScene;
+    }
+
     // todo : imageEfx e Stan, com os arrays estao ok, nao quero alterar
     // todo : definir som para cada cena no construtor - isso evita dar load numa cena e vir sem som (o qual so inicia em outra cena especifica)
 }

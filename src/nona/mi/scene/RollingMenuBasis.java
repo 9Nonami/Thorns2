@@ -6,6 +6,7 @@ import nona.mi.menu.Menu;
 import nona.mi.save.Replacer;
 import nona.mi.save.Save;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -23,10 +24,10 @@ public class RollingMenuBasis {
 
     private Save save;
 
-
     private Menu containerMenu;
     private Menu saveMenu;
     private Menu deleteMenu;
+    private Menu loadMenu;
     private boolean showMenu;
     private boolean rollingMenuFocus;
 
@@ -37,6 +38,7 @@ public class RollingMenuBasis {
     public static final int LOAD_MODE = 1;
     public static final int COPY_MODE = 2;
     public static final int DELETE_MODE = 3;
+    private final int TOTAL_MODES = 4;
 
 
     public RollingMenuBasis(Thorns thorns, int mode){
@@ -54,8 +56,12 @@ public class RollingMenuBasis {
         deleteMenu = new Menu(thorns, thorns.getChoicebg(), thorns.getFontDataBase(), thorns.getPointer(), Menu.STYLE_HORIZONTAL);
         deleteMenu.createOptions(10, 10, 10, "DELETE_CANCEL");
 
+        loadMenu = new Menu(thorns, thorns.getChoicebg(), thorns.getFontDataBase(), thorns.getPointer(), Menu.STYLE_HORIZONTAL);
+        loadMenu.createOptions(10, 10, 10, "LOAD_CANCEL");
+
         containerMenu = deleteMenu;
         rollingMenuFocus = true;
+        old = "";
     }
 
     public void update() {
@@ -63,79 +69,112 @@ public class RollingMenuBasis {
         boolean up = thorns.isUp();
         boolean down = thorns.isDown();
         boolean space = thorns.isSpace(); //todo anim. confirmacao
-        //
         boolean left = thorns.isLeft();
         boolean right = thorns.isRight();
 
-
         if (rollingMenuFocus) {
-
-            int increment = 0;
-            if (up) {
-                increment = -1;
-            }
-            if (down) {
-                increment = 1;
-            }
-
-            //ROLL
-            if (up || down) {
-                for (int i = 0; i < visibleSlots.length; i++) {
-                    visibleSlots[i] = visibleSlots[i] + increment;
-                    if (visibleSlots[i] > save.getSlots().length - 1) {
-                        visibleSlots[i] = 0;
-                    } else if (visibleSlots[i] < 0) {
-                        visibleSlots[i] = save.getSlots().length - 1;
-                    }
-                }
-            }
-
-            //SAVE
-            if (space) {
-
-                old = save.getSlots()[visibleSlots[pointer]]; //returns x-x-x-x
-
-                if (mode == SAVE_MODE) {
-
-                    if (old.charAt(Save.IMAGE_SLOT_ID) == '1') {
-                        containerMenu = saveMenu;
-                        gotoMenu();
-                    } else {
-                        save.getSlots()[visibleSlots[pointer]] = Replacer.replace(old, Save.IMAGE_SLOT_ID, '1');
-                        save.save();
-                    }
-
-                } else if (mode == LOAD_MODE) {
-
-                } else if (mode == COPY_MODE) {
-
-                } else if (mode == DELETE_MODE) {
-                    if (old.charAt(Save.IMAGE_SLOT_ID) == '1') {
-                        containerMenu = deleteMenu;
-                        gotoMenu();
-                    }
-                }
-
-            }
-
+            rollMenu(up, down);
+            changeMode(left, right);
+            managePressedOption(space);
         } else {
+            updateContainerMenu();
+        }
 
-            containerMenu.update();
+    }
 
-            if (containerMenu.isPressed()){
+    private void rollMenu(boolean up, boolean down){
+        int increment = 0;
+        if (up) {
+            increment = -1;
+        }
+        if (down) {
+            increment = 1;
+        }
 
-                if (containerMenu.getChosenOptionAsString().equals("WRITE")) {
+        if (up || down) {
+            for (int i = 0; i < visibleSlots.length; i++) {
+                visibleSlots[i] = visibleSlots[i] + increment;
+                if (visibleSlots[i] > save.getSlots().length - 1) {
+                    visibleSlots[i] = 0;
+                } else if (visibleSlots[i] < 0) {
+                    visibleSlots[i] = save.getSlots().length - 1;
+                }
+            }
+        }
+    }
+
+    private void changeMode(boolean left, boolean right){
+        if (left) {
+            mode--;
+        }
+        if (right) {
+            mode++;
+        }
+
+        if (left || right){
+            if (mode > TOTAL_MODES - 1) { // -1 pois eh base 0
+                mode = 0;
+            } else if (mode < 0) {
+                mode = TOTAL_MODES - 1;
+            }
+        }
+    }
+
+    private void managePressedOption(boolean space) {
+        if (space) {
+
+            old = save.getSlots()[visibleSlots[pointer]]; //returns x-x-x-x
+
+            if (mode == SAVE_MODE) {
+
+                if (old.charAt(Save.IMAGE_SLOT_ID) == '1') {
+                    containerMenu = saveMenu;
+                    gotoMenu();
+                } else {
                     save.getSlots()[visibleSlots[pointer]] = Replacer.replace(old, Save.IMAGE_SLOT_ID, '1');
                     save.save();
-                } else if (containerMenu.getChosenOptionAsString().equals("DELETE")) {
-                    save.getSlots()[visibleSlots[pointer]] = "" + visibleSlots[pointer] + "-0-0-0";
-                    save.save();
                 }
-                gotoRolling();
+
+            } else if (mode == LOAD_MODE) {
+
+                if (old.charAt(Save.IMAGE_SLOT_ID) != '0') {
+                    containerMenu = loadMenu;
+                    gotoMenu();
+                }
+
+            } else if (mode == COPY_MODE) {
+
+            } else if (mode == DELETE_MODE) {
+                if (old.charAt(Save.IMAGE_SLOT_ID) == '1') {
+                    containerMenu = deleteMenu;
+                    gotoMenu();
+                }
             }
 
         }
     }
+
+    private void updateContainerMenu(){
+        containerMenu.update();
+        if (containerMenu.isPressed()){
+            if (containerMenu.getChosenOptionAsString().equals("WRITE")) {
+                save.getSlots()[visibleSlots[pointer]] = Replacer.replace(old, Save.IMAGE_SLOT_ID, '1');
+                save.save();
+            } else if (containerMenu.getChosenOptionAsString().equals("DELETE")) {
+                save.getSlots()[visibleSlots[pointer]] = "" + visibleSlots[pointer] + "-0-0-0";
+                save.save();
+            } else if (containerMenu.getChosenOptionAsString().equals("LOAD")) {
+                int pack = Integer.parseInt(String.valueOf(old.charAt(Save.PACK_ID)));
+                int scene = Integer.parseInt(String.valueOf(old.charAt(Save.SCENE_ID)));
+                thorns.showLoadScene();
+                thorns.nextScene(pack, scene);
+                reset();
+                return;
+            }
+            gotoRolling();
+        }
+    }
+
 
     public void render(Graphics g){
         for (int i = 0; i < visibleSlots.length; i++) {
@@ -150,6 +189,10 @@ public class RollingMenuBasis {
         if (showMenu){
             containerMenu.render(g);
         }
+
+        //test
+        g.setColor(Color.WHITE);
+        g.drawString(String.valueOf(mode), 5, 15);
 
     }
 
@@ -170,6 +213,9 @@ public class RollingMenuBasis {
 
     public void reset(){
         rollingMenuFocus = true;
+        containerMenu.reset();
+        old = "";
+        mode = SAVE_MODE;
     }
 
 
