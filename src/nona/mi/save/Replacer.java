@@ -20,4 +20,6 @@ public class Replacer {
         return new String(temp);
     }
 
+    //todo : criar replace com string
+
 }

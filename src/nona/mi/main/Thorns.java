@@ -450,6 +450,14 @@ public class Thorns extends Game {
         this.showScene = showScene;
     }
 
+    public int getScene() {
+        return scene;
+    }
+
+    public int getPack() {
+        return pack;
+    }
+
     public void showLoadScene() {
         sceneBasis = loadScene;
     }

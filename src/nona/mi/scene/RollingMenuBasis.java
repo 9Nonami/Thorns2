@@ -141,7 +141,8 @@ public class RollingMenuBasis {
                     containerMenu = saveMenu;
                     gotoMenu();
                 } else {
-                    save.getSlots()[visibleSlots[pointer]] = Replacer.replace(old, Save.IMAGE_SLOT_ID, Save.FILLED);
+                    String temp = "" + old.charAt(Save.SLOT_ID) + "-" + Save.FILLED + "-" + thorns.getPack() + "-" + thorns.getScene();
+                    save.getSlots()[visibleSlots[pointer]] = temp;
                     save.save();
                 }
             } else if (mode == LOAD_MODE) {
@@ -180,7 +181,8 @@ public class RollingMenuBasis {
         if (containerMenu.isPressed()){
             if (mode == SAVE_MODE) {
                 if (containerMenu.getChosenOptionAsString().equals("WRITE")) {
-                    save.getSlots()[visibleSlots[pointer]] = Replacer.replace(old, Save.IMAGE_SLOT_ID, Save.FILLED);
+                    String temp = "" + old.charAt(Save.SLOT_ID) + "-" + Save.FILLED + "-" + thorns.getPack() + "-" + thorns.getScene();
+                    save.getSlots()[visibleSlots[pointer]] = temp;
                     save.save();
                 }
             } else if (mode == DELETE_MODE) {
