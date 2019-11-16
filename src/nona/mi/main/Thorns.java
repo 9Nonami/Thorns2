@@ -152,14 +152,11 @@ public class Thorns extends Game {
         ScenePackage packTest = new ScenePackage();
         setMyJukeBox(new MyJukeBox());
 
-        //MainMenuScene mainMenuScene = new MainMenuScene(this, 66);
-        //packTest.put(0, mainMenuScene);
-
-        TestScene testScene = new TestScene(this);
-        packTest.put(0, testScene);
+        TestScene scene0 = new TestScene(this);
+        packTest.put(0, scene0);
 
         packBasis = packTest;
-        sceneBasis = packBasis.get(0);
+        sceneBasis = packBasis.get(scene);
     }
 
     private void initPack0(){

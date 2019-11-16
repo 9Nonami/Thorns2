@@ -1,31 +1,32 @@
 package nona.mi.scene;
 
+import nona.mi.image.Coordinates;
+import nona.mi.image.ImageEfx;
 import nona.mi.main.Thorns;
-import nona.mi.menu.RollingMenuScene;
 
 import java.awt.Graphics;
 
 public class TestScene extends Scene {
 
-    private RollingMenuScene rollingMenu;
-    //private Menu menu;
+    private ImageEfx imageEfx;
 
     public TestScene(Thorns thorns) {
-        super(thorns, 666);
-        rollingMenu = new RollingMenuScene(thorns);
-        //menu = new Menu(thorns, thorns.getChoicebg(), thorns.getFontDataBase(), thorns.getPointer(), Menu.STYLE_VERTICAL);
-        //menu.createOptions(10, 10, 10, "ARTICUNO_ZAPDOS_MOLTRES_MISSINGNO");
+        super(thorns, -666);
+        imageEfx = new ImageEfx(thorns, thorns.getChoicebg(), new Coordinates(10, 10));
+        imageEfx.setAlpha(ImageEfx.SOLID, 0.01f); //0.05f
     }
 
     @Override
     public void update(){
-        rollingMenu.update();
-        //menu.update();
+        imageEfx.update();
+        if (imageEfx.getEndAlphaAnimation()) {
+            imageEfx.reset();
+        }
     }
 
     @Override
     public void render(Graphics g) {
-        rollingMenu.render(g);
-        //menu.render(g);
+        imageEfx.render(g);
     }
+
 }

@@ -1,5 +1,7 @@
 package nona.mi.menu;
 
+import nona.mi.image.Coordinates;
+import nona.mi.image.ImageEfx;
 import nona.mi.loader.ImageLoader;
 import nona.mi.main.Thorns;
 import nona.mi.save.Save;
@@ -43,12 +45,16 @@ public class RollingMenuScene {
     public static final int DELETE_MODE = 3;
     private final int TOTAL_MODES = 4;
 
+    private boolean startSlotChangeAnimation;
+    private ImageEfx slotAnimation;
 
     public RollingMenuScene(Thorns thorns) {
         this.thorns = thorns;
         mode = SAVE_MODE;
         emptySlot = ImageLoader.loadImage("/res/menu/emptySlot.png");
         filledSlot = ImageLoader.loadImage("/res/menu/filledSlot.png");
+        BufferedImage slotEfx = ImageLoader.loadImage("/res/menu/slotEfx.png");
+
         imageHeight = filledSlot.getHeight();
         pointer = 3;
         save = new Save();
@@ -71,6 +77,9 @@ public class RollingMenuScene {
         copy = "";
         lockCopy = false;
         lockMode = false;
+
+        slotAnimation = new ImageEfx(thorns, slotEfx, new Coordinates(0, pointer * imageHeight));
+        slotAnimation.setAlpha(ImageEfx.SOLID, 0.05f);
     }
 
     public void update() {
@@ -81,12 +90,20 @@ public class RollingMenuScene {
         boolean left = thorns.isLeft();
         boolean right = thorns.isRight();
 
-        if (rollingMenuFocus) {
-            rollMenu(up, down);
-            changeMode(left, right);
-            managePressedOption(space);
+        if (!startSlotChangeAnimation) {
+            if (rollingMenuFocus) {
+                rollMenu(up, down);
+                changeMode(left, right);
+                managePressedOption(space);
+            } else {
+                updateContainerMenu();
+            }
         } else {
-            updateContainerMenu();
+            slotAnimation.update();
+            if (slotAnimation.getEndAlphaAnimation()) {
+                startSlotChangeAnimation = false;
+                slotAnimation.reset();
+            }
         }
 
     }
@@ -142,6 +159,10 @@ public class RollingMenuScene {
                     String temp = "" + old.charAt(Save.SLOT_ID) + "-" + Save.FILLED + "-" + thorns.getPack() + "-" + thorns.getScene();
                     save.getSlots()[visibleSlots[pointer]] = temp;
                     save.save();
+
+                    //todo : allow animation
+                    System.out.println("HUSE");
+                    startSlotChangeAnimation = true;
                 }
             } else if (mode == LOAD_MODE) {
                 if (old.charAt(Save.IMAGE_SLOT_ID) == Save.FILLED) {
@@ -234,6 +255,10 @@ public class RollingMenuScene {
         g.drawString(String.valueOf(lockCopy), 100, 15);
         g.drawString(String.valueOf(visibleSlots[pointer]), 150, 15);
 
+        if (startSlotChangeAnimation) {
+            slotAnimation.render(g);
+        }
+
     }
 
     private void gotoMenu(){
@@ -259,6 +284,8 @@ public class RollingMenuScene {
         loadMenu.reset();
         copyMenu.reset();
         deleteMenu.reset();
+
+        slotAnimation.reset();
     }
 
 }
