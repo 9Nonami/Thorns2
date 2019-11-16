@@ -67,7 +67,7 @@ public class Thorns extends Game {
 
     private RollingMenuScene rollingMenu;
     private boolean showRollingMenu;
-
+    private int escapeCont;
 
     public Thorns(int width, int height, String title, int gameLoopStyle) {
 
@@ -111,6 +111,7 @@ public class Thorns extends Game {
         //MENU DE SAVE
         rollingMenu = new RollingMenuScene(this);
         showRollingMenu = false;
+        escapeCont = 0;
 
         loadPack();
     }
@@ -374,8 +375,15 @@ public class Thorns extends Game {
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             if (!lockEscape){
                 lockEscape = true;
-                showRollingMenu = true;
-                rollingMenu.setMode(RollingMenuScene.SAVE_MODE);
+                escapeCont++;
+                if (escapeCont == 1){
+                    showRollingMenu = true;
+                    rollingMenu.setMode(RollingMenuScene.SAVE_MODE);
+                } else if (escapeCont == 2){
+                    showRollingMenu = false;
+                    rollingMenu.reset();
+                    escapeCont = 0;
+                }
             }
         }
     }
