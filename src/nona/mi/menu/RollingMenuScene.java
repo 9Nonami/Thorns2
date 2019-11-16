@@ -1,16 +1,14 @@
-package nona.mi.scene; //todo : mudar para nona.mi.menu
+package nona.mi.menu;
 
 import nona.mi.loader.ImageLoader;
 import nona.mi.main.Thorns;
-import nona.mi.menu.Menu;
-import nona.mi.save.Replacer;
 import nona.mi.save.Save;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-public class RollingMenuBasis {
+public class RollingMenuScene {
 
     private Thorns thorns;
 
@@ -36,7 +34,7 @@ public class RollingMenuBasis {
     private String copy;
 
     private boolean lockCopy;
-    private boolean lockMode;
+    private boolean lockMode; //nao deixa apertar left/right durante o processo de copia -o modo nao pode ser alterado
 
     private int mode;
     public static final int SAVE_MODE = 0;
@@ -46,9 +44,9 @@ public class RollingMenuBasis {
     private final int TOTAL_MODES = 4;
 
 
-    public RollingMenuBasis(Thorns thorns, int mode){
+    public RollingMenuScene(Thorns thorns) {
         this.thorns = thorns;
-        this.mode = mode;
+        mode = SAVE_MODE;
         emptySlot = ImageLoader.loadImage("/res/menu/emptySlot.png");
         filledSlot = ImageLoader.loadImage("/res/menu/filledSlot.png");
         imageHeight = filledSlot.getHeight();
@@ -176,7 +174,7 @@ public class RollingMenuBasis {
         }
     }
 
-    private void updateContainerMenu(){ // todo : mudar par if com as constantes
+    private void updateContainerMenu(){
         containerMenu.update();
         if (containerMenu.isPressed()){
             if (mode == SAVE_MODE) {
@@ -194,11 +192,11 @@ public class RollingMenuBasis {
                 if (containerMenu.getChosenOptionAsString().equals("LOAD")) {
                     int pack = Integer.parseInt(String.valueOf(old.charAt(Save.PACK_ID)));
                     int scene = Integer.parseInt(String.valueOf(old.charAt(Save.SCENE_ID)));
-                    thorns.showLoadScene();
+                    thorns.showLoadScene(); //todo : so no caso de outro pack
                     thorns.nextScene(pack, scene);
-                    reset();
-                    return;
-                }
+                    thorns.setShowRollingMenu(false);
+                    //return;
+                } //todo : verificar se ja nao esta no pack certo para nao dar load 2 vezes sem necessidade
             } else if (mode == COPY_MODE) {
                 if (containerMenu.getChosenOptionAsString().equals("COPY")) {
                     String temp = "" + visibleSlots[pointer] + copy.substring(1); // 1 para excluir o primeiro caractere (0)
@@ -208,7 +206,7 @@ public class RollingMenuBasis {
                 lockCopy = false;
                 lockMode = false;
             }
-            gotoRolling();
+            reset();
         }
     }
 
@@ -243,23 +241,24 @@ public class RollingMenuBasis {
         rollingMenuFocus = false;
     }
 
-    private void gotoRolling(){
-        showMenu = false; //para o render
-        rollingMenuFocus = true;
-        containerMenu.reset();
-    }
-
     public void setMode(int mode) {
         this.mode = mode;
     }
 
     public void reset(){
+        showMenu = false;
         rollingMenuFocus = true;
-        containerMenu.reset();
+
         old = "";
         copy = "";
-        mode = SAVE_MODE;
+
         lockCopy = false;
+        lockMode = false;
+
+        saveMenu.reset();
+        loadMenu.reset();
+        copyMenu.reset();
+        deleteMenu.reset();
     }
 
 }

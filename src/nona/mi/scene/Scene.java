@@ -42,9 +42,10 @@ public abstract class Scene{
 
 			lock = true;
 		}
+
 	}
 
-	public abstract void render(Graphics g);	
+	public abstract void render(Graphics g);
 
 	public void setNextPack(int nextPack){
 		this.nextPack = nextPack;

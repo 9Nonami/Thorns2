@@ -15,6 +15,7 @@ import nona.mi.loader.MyJukeBox;
 import nona.mi.efx.Fade;
 import nona.mi.image.ImageEfx;
 import nona.mi.loader.TextLoader;
+import nona.mi.menu.RollingMenuScene;
 import nona.mi.scene.EfxScene;
 import nona.mi.scene.FadeScene;
 import nona.mi.scene.FadeTopBottomScene;
@@ -41,6 +42,8 @@ public class Thorns extends Game {
     private boolean space;
     private boolean lockSpace;
 
+    private boolean lockEscape;
+
     private boolean showScene;
     private int scene;
     private int pack;
@@ -61,6 +64,10 @@ public class Thorns extends Game {
     private BufferedImage pointer;
     private ImageEfx setasAnim;
     public static final String AUDIO_CHOICE = "ac";
+
+    private RollingMenuScene rollingMenu;
+    private boolean showRollingMenu;
+
 
     public Thorns(int width, int height, String title, int gameLoopStyle) {
 
@@ -94,30 +101,38 @@ public class Thorns extends Game {
         setasAnim = new ImageEfx(this, setas, setasCoord, 0.15f , ImageEfx.LOOP);
 
         //PACK E SCENE
-        pack = 1;
+        pack = 0;
         scene = 0;
 
         //LOAD SCENE
         loadScene = new LoadScene(this, new BaseImage(ImageLoader.loadImage("/res/bg/load.png"), 0, 0));
         sceneBasis = loadScene;
 
+        //MENU DE SAVE
+        rollingMenu = new RollingMenuScene(this);
+        showRollingMenu = false;
+
         loadPack();
     }
 
     @Override
     public void updateClass() {
-        sceneBasis.update();
-        space = false;
-        up = false;
-        down = false;
-        left = false;
-        right = false;
+        if (!showRollingMenu) {
+            sceneBasis.update();
+        } else {
+            rollingMenu.update();
+        }
+        resetKeys();
     }
 
     @Override
     public void renderClass(Graphics g) {
         super.testFill();
-        sceneBasis.render(g);
+        if (!showRollingMenu) {
+            sceneBasis.render(g);
+        } else {
+            rollingMenu.render(g);
+        }
         if (showScene) {
             g.setColor(Color.WHITE);
             g.drawString("scene: " + scene, 5, 15);
@@ -356,6 +371,13 @@ public class Thorns extends Game {
                 space = true;
             }
         }
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            if (!lockEscape){
+                lockEscape = true;
+                showRollingMenu = true;
+                rollingMenu.setMode(RollingMenuScene.SAVE_MODE);
+            }
+        }
     }
 
     @Override
@@ -380,6 +402,18 @@ public class Thorns extends Game {
             lockSpace = false;
             space = false;
         }
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            lockEscape = false;
+
+        }
+    }
+
+    private void resetKeys(){
+        space = false;
+        up = false;
+        down = false;
+        left = false;
+        right = false;
     }
 
     public boolean isUp() {
@@ -460,6 +494,10 @@ public class Thorns extends Game {
 
     public void showLoadScene() {
         sceneBasis = loadScene;
+    }
+
+    public void setShowRollingMenu(boolean showRollingMenu) {
+        this.showRollingMenu = showRollingMenu;
     }
 
     // todo : imageEfx e Stan, com os arrays estao ok, nao quero alterar

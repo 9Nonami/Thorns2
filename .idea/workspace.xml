@@ -3,10 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="50053a92-1326-4f75-bf22-ca2e42361449" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/RollingMenuBasis.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/RollingMenuBasis.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/save/Replacer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/RollingMenuBasis.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/Scene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/Scene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/TestScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/TestScene.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/save/Replacer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/save/Replacer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/RollingMenuBasis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/RollingMenuBasis.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/save/Replacer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/RollingMenuBasis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/menu/RollingMenuScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/Scene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/TestScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/TestScene.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,6 +42,9 @@
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="nona.mi.menu" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Mi\IdeaProjects\Thorns2\src\res\audio" />
       <recent name="C:\Users\Mi\IdeaProjects\Thorns2\src\nona\mi\loader" />
