@@ -13,12 +13,12 @@ public class StandardScene extends Scene {
     private BaseImage[] backgrounds;
     private BaseImage[] characters;
 
-    private Dialogue[] dialogues;
+    private Dialogue[] dialogues; //resets
     private int dialogueID;
     private Dialogue dialogueBasis;
     private boolean space;
 
-    private ImageEfx setasAnim;
+    private ImageEfx setasAnim; //resets
 
 
     public StandardScene(Thorns thorns, BaseImage background, String dialog, int nextScene) {
@@ -113,15 +113,14 @@ public class StandardScene extends Scene {
             }
 
             dialogueBasis.reset();
-            setasAnim.reset();
+            setasAnim.reset(); //I don't think it is really necessary, but ok
 
             dialogueID++;
 
             if (dialogueID == dialogues.length) {
                 dialogueID = 0;
                 dialogueBasis = dialogues[dialogueID];
-                thorns.nextScene(nextScene);
-                reset();
+                thorns.nextScene(); //todo : se der erro, ver. aqui
                 return;
             }
 
@@ -156,6 +155,16 @@ public class StandardScene extends Scene {
     @Override
     public void reset(){
         super.reset();
+
+        //se der load durante a animacao do dialogue,
+        //talvez ele nao seja resetado, isso aqui
+        //forca o reset, mesmo que ja esteja resetado
+        dialogueID = 0;
+        dialogueBasis = dialogues[dialogueID];
+        for (int i = 0; i < dialogues.length; i++) {
+            dialogues[i].reset();
+        }
+        setasAnim.reset();
     }
 
 }

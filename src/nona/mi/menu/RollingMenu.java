@@ -1,5 +1,6 @@
 package nona.mi.menu;
 
+import nona.mi.efx.Fade;
 import nona.mi.image.Coordinates;
 import nona.mi.image.ImageEfx;
 import nona.mi.loader.ImageLoader;
@@ -10,7 +11,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-public class RollingMenuScene {
+public class RollingMenu {
 
     private Thorns thorns;
 
@@ -45,10 +46,16 @@ public class RollingMenuScene {
     public static final int DELETE_MODE = 3;
     private final int TOTAL_MODES = 4;
 
-    private boolean startSlotChangeAnimation;
+    private boolean slotChangeAnimation;
     private ImageEfx slotAnimation;
 
-    public RollingMenuScene(Thorns thorns) {
+    private boolean fadeinAnimation;
+    private Fade fadein;
+
+    private boolean animating;
+
+
+    public RollingMenu(Thorns thorns) {
         this.thorns = thorns;
         mode = SAVE_MODE;
         emptySlot = ImageLoader.loadImage("/res/menu/emptySlot.png");
@@ -80,6 +87,11 @@ public class RollingMenuScene {
 
         slotAnimation = new ImageEfx(thorns, slotEfx, new Coordinates(0, pointer * imageHeight));
         slotAnimation.setAlpha(ImageEfx.SOLID, 0.05f);
+
+        animating = false;
+
+        fadein = new Fade(thorns, Fade.TRANSPARENT, Fade.FAST);
+        fadeinAnimation = false;
     }
 
     public void update() {
@@ -90,7 +102,7 @@ public class RollingMenuScene {
         boolean left = thorns.isLeft();
         boolean right = thorns.isRight();
 
-        if (!startSlotChangeAnimation) {
+        if (!animating) {
             if (rollingMenuFocus) {
                 rollMenu(up, down);
                 changeMode(left, right);
@@ -99,10 +111,49 @@ public class RollingMenuScene {
                 updateContainerMenu();
             }
         } else {
-            slotAnimation.update();
-            if (slotAnimation.getEndAlphaAnimation()) {
-                startSlotChangeAnimation = false;
-                slotAnimation.reset();
+            if (slotChangeAnimation) {
+                slotAnimation.update();
+                if (slotAnimation.getEndAlphaAnimation()) {
+                    slotChangeAnimation = false;
+                    slotAnimation.reset();
+                    animating = false;
+                }
+            } else if (fadeinAnimation) {
+                fadein.update();
+                if (fadein.getEndAnimation()) {
+                    fadeinAnimation = false;
+                    fadein.reset();
+
+                    //PARAMETROS DO SAVE -- load nao pode ter resetado os textos
+                    int[] hifen = new int[3];
+                    int cont = 0;
+                    for (int i = 0; i < old.length(); i++) {
+                        if (old.charAt(i) == '-'){
+                            hifen[cont] = i;
+                            cont++;
+                        }
+                    }
+
+                    //slot-filling-pack-scene
+                    int preFillId = 0;
+                    int prePackId = 1;
+                    int preSceneId = 2;
+
+                    int pack = Integer.parseInt(old.substring(hifen[prePackId] + 1, hifen[preSceneId]));
+                    int scene = Integer.parseInt(old.substring(hifen[preSceneId] + 1));
+
+                    //VERIFICA SE O LOAD ESTA CHAMANDO A CENA DO PACK ATUAL
+                    //EVITA O CARREGAMENTO DO MESMO PACK VARIAS VEZES
+                    if (thorns.getPack() == pack){
+                        thorns.setDirectScene(thorns.getPackBasis().get(scene));
+                    } else {
+                        thorns.nextScene(pack, scene);
+                    }
+
+                    reset();
+                    animating = false; //todo : ver um local seguro para isso aqui
+                    thorns.setShowRollingMenu(false);
+                }
             }
         }
 
@@ -159,10 +210,8 @@ public class RollingMenuScene {
                     String temp = "" + old.charAt(Save.SLOT_ID) + "-" + Save.FILLED + "-" + thorns.getPack() + "-" + thorns.getScene();
                     save.getSlots()[visibleSlots[pointer]] = temp;
                     save.save();
-
-                    //todo : allow animation
-                    System.out.println("HUSE");
-                    startSlotChangeAnimation = true;
+                    animating = true;
+                    slotChangeAnimation = true;
                 }
             } else if (mode == LOAD_MODE) {
                 if (old.charAt(Save.IMAGE_SLOT_ID) == Save.FILLED) {
@@ -211,13 +260,10 @@ public class RollingMenuScene {
                 }
             } else if (mode == LOAD_MODE) {
                 if (containerMenu.getChosenOptionAsString().equals("LOAD")) {
-                    int pack = Integer.parseInt(String.valueOf(old.charAt(Save.PACK_ID)));
-                    int scene = Integer.parseInt(String.valueOf(old.charAt(Save.SCENE_ID)));
-                    thorns.showLoadScene(); //todo : so no caso de outro pack
-                    thorns.nextScene(pack, scene);
-                    thorns.setShowRollingMenu(false);
-                    //return;
-                } //todo : verificar se ja nao esta no pack certo para nao dar load 2 vezes sem necessidade
+                    animating = true;
+                    fadeinAnimation = true;
+                    return;
+                }
             } else if (mode == COPY_MODE) {
                 if (containerMenu.getChosenOptionAsString().equals("COPY")) {
                     String temp = "" + visibleSlots[pointer] + copy.substring(1); // 1 para excluir o primeiro caractere (0)
@@ -255,8 +301,12 @@ public class RollingMenuScene {
         g.drawString(String.valueOf(lockCopy), 100, 15);
         g.drawString(String.valueOf(visibleSlots[pointer]), 150, 15);
 
-        if (startSlotChangeAnimation) {
+        if (slotChangeAnimation) {
             slotAnimation.render(g);
+        }
+
+        if (fadeinAnimation) {
+            fadein.render(g);
         }
 
     }
@@ -268,6 +318,10 @@ public class RollingMenuScene {
 
     public void setMode(int mode) {
         this.mode = mode;
+    }
+
+    public boolean isAnimating() {
+        return animating;
     }
 
     public void reset(){
@@ -284,8 +338,6 @@ public class RollingMenuScene {
         loadMenu.reset();
         copyMenu.reset();
         deleteMenu.reset();
-
-        slotAnimation.reset();
     }
 
 }

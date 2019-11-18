@@ -55,6 +55,10 @@ public abstract class Scene{
 		return nextPack;
 	}
 
+	public int getNextScene() {
+		return nextScene;
+	}
+
 	public void createSound(String path, int style){
 		String key = path.substring(path.lastIndexOf("/") + 1, path.indexOf("."));
 		thorns.getMyJukeBox().load(path, key);
