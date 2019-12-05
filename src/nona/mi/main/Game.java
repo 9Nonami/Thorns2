@@ -2,15 +2,18 @@ package nona.mi.main;
 
 import javax.swing.JFrame;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferStrategy;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Color;
-import java.awt.event.KeyListener;
-import java.awt.event.KeyEvent;
 import java.awt.BorderLayout;
 
-public abstract class Game implements Runnable, KeyListener {
+public abstract class Game implements Runnable, KeyListener, MouseListener, MouseMotionListener {
 
     private JFrame jframe;
     private BufferStrategy bs;
@@ -31,6 +34,12 @@ public abstract class Game implements Runnable, KeyListener {
     public static final int SMOOTH_GAME_LOOP = 1;
     private int gameLoopStyle;
     private boolean showLoopLog;
+
+    private boolean clicked;
+    private int mouseX;
+    private int mouseY;
+
+
 
     public Game(int width, int height, String title, int gameLoopStyle) {
 
@@ -74,6 +83,8 @@ public abstract class Game implements Runnable, KeyListener {
 
         jframe.setIgnoreRepaint(true);
         canvas.setFocusable(false);
+        canvas.addMouseListener(this);
+        canvas.addMouseMotionListener(this);
 
         t = new Thread(this);
     }
@@ -194,6 +205,43 @@ public abstract class Game implements Runnable, KeyListener {
 
     }
 
+    @Override
+    public void mouseClicked(MouseEvent mouseEvent) {
+        clicked = true;
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent mouseEvent) {
+        mouseX = mouseEvent.getX();
+        mouseY = mouseEvent.getY();
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent mouseEvent) {
+        mouseX = mouseEvent.getX();
+        mouseY = mouseEvent.getY();
+    }
+
     public void testFill() {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, width, height);
@@ -217,5 +265,13 @@ public abstract class Game implements Runnable, KeyListener {
 
     public float getSpeedAdjust() {
         return speedAdjust;
+    }
+
+    public boolean isClicked() {
+        return clicked;
+    }
+
+    public void setClicked(boolean clicked) {
+        this.clicked = clicked;
     }
 }

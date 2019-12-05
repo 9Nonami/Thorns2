@@ -17,6 +17,7 @@ public class StandardScene extends Scene {
     private int dialogueID;
     private Dialogue dialogueBasis;
     private boolean space;
+    private boolean clicked;
 
     private ImageEfx setasAnim; //resets
 
@@ -101,12 +102,13 @@ public class StandardScene extends Scene {
         dialogueBasis.update();
 
         space = thorns.isSpace();
+        clicked = thorns.isClicked();
 
-        if  (dialogueBasis.getEndAnimation()){
+        if (dialogueBasis.getEndAnimation()){
             setasAnim.update();
         }
 
-        if (dialogueBasis.getEndAnimation() && space) {
+        if (dialogueBasis.getEndAnimation() && (space || clicked)) {
 
             if(dialogueBasis.getAudioName() != null){
                 thorns.getMyJukeBox().stop(dialogueBasis.getAudioName());

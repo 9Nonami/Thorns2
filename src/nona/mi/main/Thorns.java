@@ -15,7 +15,6 @@ import nona.mi.loader.MyJukeBox;
 import nona.mi.efx.Fade;
 import nona.mi.image.ImageEfx;
 import nona.mi.loader.TextLoader;
-import nona.mi.menu.RollingMenu;
 import nona.mi.scene.EfxScene;
 import nona.mi.scene.FadeScene;
 import nona.mi.scene.FadeTopBottomScene;
@@ -43,6 +42,9 @@ public class Thorns extends Game {
 
     private boolean lockEscape;
 
+    private boolean backspace;
+    private boolean lockBackspace;
+
     private boolean showScene;
     private int scene;
     private int pack;
@@ -64,11 +66,6 @@ public class Thorns extends Game {
     private ImageEfx setasAnim;
     public static final String AUDIO_CHOICE = "ac";
 
-    private RollingMenu rollingMenu;
-    private boolean showRollingMenu;
-    private int escapeCont;
-
-    private boolean loadingPack;
 
 
     public Thorns(int width, int height, String title, int gameLoopStyle) {
@@ -110,33 +107,21 @@ public class Thorns extends Game {
         loadScene = new LoadScene(this, new BaseImage(ImageLoader.loadImage("/res/bg/load.png"), 0, 0));
         sceneBasis = loadScene;
 
-        //MENU DE SAVE
-        rollingMenu = new RollingMenu(this);
-        showRollingMenu = false;
-        escapeCont = 0;
-
-        loadingPack = true;
         loadPack();
     }
 
     @Override
     public void updateClass() {
-        if (!showRollingMenu) {
-            sceneBasis.update();
-        } else {
-            rollingMenu.update();
-        }
+        sceneBasis.update();
         resetKeys();
     }
 
     @Override
     public void renderClass(Graphics g) {
         super.testFill();
-        if (!showRollingMenu) {
-            sceneBasis.render(g);
-        } else {
-            rollingMenu.render(g);
-        }
+        sceneBasis.render(g);
+
+        //DESENHA O NUMERO ATUAL DA CENA
         if (showScene) {
             g.setColor(Color.WHITE);
             g.drawString("scene: " + scene, 5, 15);
@@ -146,34 +131,7 @@ public class Thorns extends Game {
     private synchronized void initPacks() {
         if (pack == 0) {
             initPack0();
-        } else {
-            initPackTest(); //pack1
         }
-        loadingPack = false;
-    }
-
-    private void initPackTest(){
-        ScenePackage packTest = new ScenePackage();
-        setMyJukeBox(new MyJukeBox());
-
-        //TestScene scene0 = new TestScene(this);
-        //packTest.put(0, scene0);
-
-
-        //cena 0
-        BufferedImage imgScene0 = ImageLoader.loadImage("/res/bg/trainning-center.png");
-        BaseImage bgScene0 = new BaseImage(imgScene0, 0, 0);
-
-        //--------------------------------------------------------------
-
-        StandardScene scene0 = new StandardScene(this, bgScene0, "-:hello darkness, my old friend._-ASD:wanna play...", 0);
-        packTest.put(0, scene0);
-
-        //StandardScene scene1 = new StandardScene(this, bgScene0, "-:Wanna play, pretty please", 0);
-        //packTest.put(1, scene1);
-
-        packBasis = packTest;
-        sceneBasis = packBasis.get(scene);
     }
 
     private void initPack0(){
@@ -321,7 +279,7 @@ public class Thorns extends Game {
         sceneBasis = packBasis.get(scene);
     }
 
-
+    //todo : apagar
     public void nextScene(int scene) {
         this.scene = scene;
         //sceneBasis.reset();
@@ -360,7 +318,6 @@ public class Thorns extends Game {
     }
 
     private void loadPack(){
-        loadingPack = true;
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -402,20 +359,6 @@ public class Thorns extends Game {
                 space = true;
             }
         }
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE && !loadingPack && !(rollingMenu.isAnimating())) {
-            if (!lockEscape){
-                lockEscape = true;
-                escapeCont++;
-                if (escapeCont == 1){
-                    showRollingMenu = true;
-                    rollingMenu.setMode(RollingMenu.SAVE_MODE);
-                } else if (escapeCont == 2){
-                    showRollingMenu = false;
-                    rollingMenu.reset();
-                    escapeCont = 0;
-                }
-            }
-        }
     }
 
     @Override
@@ -444,6 +387,10 @@ public class Thorns extends Game {
             lockEscape = false;
 
         }
+        if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+            lockBackspace = false;
+            backspace = false;
+        }
     }
 
     private void resetKeys(){
@@ -452,6 +399,8 @@ public class Thorns extends Game {
         down = false;
         left = false;
         right = false;
+        backspace = false;
+        setClicked(false);
     }
 
     public boolean isUp() {
@@ -468,6 +417,10 @@ public class Thorns extends Game {
 
     public boolean isRight() {
         return right;
+    }
+
+    public boolean isBackspace() {
+        return backspace;
     }
 
     public BufferedImage getPointer() {
@@ -518,7 +471,6 @@ public class Thorns extends Game {
         this.myJukeBox = myJukeBox;
     }
 
-    //PARA DEBUG, NUMERO DA CENA
     public void setShowScene(boolean showScene) {
         this.showScene = showScene;
     }
@@ -531,10 +483,6 @@ public class Thorns extends Game {
         return pack;
     }
 
-    public void setShowRollingMenu(boolean showRollingMenu) {
-        this.showRollingMenu = showRollingMenu;
-    }
-
     public void setDirectScene(Scene scene){
         sceneBasis.reset();
         sceneBasis = scene;
@@ -542,6 +490,11 @@ public class Thorns extends Game {
 
     public ScenePackage getPackBasis() {
         return packBasis;
+    }
+
+
+    public Scene getSceneBasis() {
+        return sceneBasis;
     }
 
     // todo : imageEfx e Stan, com os arrays estao ok, nao quero alterar

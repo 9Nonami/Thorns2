@@ -62,6 +62,7 @@ public class Dialogue {
 
         cont = 0;
         textSpeed = 2 * thorns.getSpeedAdjust();
+        //textSpeed = thorns.getSpeedAdjust();
 
         this.textArea = textArea;
         this.nameBg = nameBg;
@@ -122,7 +123,7 @@ public class Dialogue {
             System.out.println("null dialogue");
             System.exit(0);
         }
-    }
+            }
 
     private void renderNameBg(Graphics g) {
         if (name != null) {
