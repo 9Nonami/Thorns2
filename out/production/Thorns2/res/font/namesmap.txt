@@ -1,0 +1,2 @@
+Rose1-/res/font/rose1.png;
+Rose2-/res/font/rose2.png;
