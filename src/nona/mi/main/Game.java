@@ -274,4 +274,12 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     public void setClicked(boolean clicked) {
         this.clicked = clicked;
     }
+
+    public int getMouseX() {
+        return mouseX;
+    }
+
+    public int getMouseY() {
+        return mouseY;
+    }
 }

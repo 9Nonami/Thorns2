@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="50053a92-1326-4f75-bf22-ca2e42361449" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Game.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,8 +35,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Mouse" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
@@ -109,21 +112,25 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="981" height="204" key="GridCell.Tab.0.bottom" timestamp="1575585743134">
+    <state x="292" y="118" key="FileChooserDialogImpl" timestamp="1575588396849">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state width="981" height="204" key="GridCell.Tab.0.bottom/0.0.1024.728@0.0.1024.728" timestamp="1575585743134" />
-    <state width="981" height="204" key="GridCell.Tab.0.center" timestamp="1575585743134">
+    <state x="292" y="118" key="FileChooserDialogImpl/0.0.1024.728@0.0.1024.728" timestamp="1575588396849" />
+    <state width="981" height="204" key="GridCell.Tab.0.bottom" timestamp="1575590177154">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state width="981" height="204" key="GridCell.Tab.0.center/0.0.1024.728@0.0.1024.728" timestamp="1575585743134" />
-    <state width="981" height="204" key="GridCell.Tab.0.left" timestamp="1575585743134">
+    <state width="981" height="204" key="GridCell.Tab.0.bottom/0.0.1024.728@0.0.1024.728" timestamp="1575590177154" />
+    <state width="981" height="204" key="GridCell.Tab.0.center" timestamp="1575590177154">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state width="981" height="204" key="GridCell.Tab.0.left/0.0.1024.728@0.0.1024.728" timestamp="1575585743134" />
-    <state width="981" height="204" key="GridCell.Tab.0.right" timestamp="1575585743134">
+    <state width="981" height="204" key="GridCell.Tab.0.center/0.0.1024.728@0.0.1024.728" timestamp="1575590177154" />
+    <state width="981" height="204" key="GridCell.Tab.0.left" timestamp="1575590177154">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state width="981" height="204" key="GridCell.Tab.0.right/0.0.1024.728@0.0.1024.728" timestamp="1575585743134" />
+    <state width="981" height="204" key="GridCell.Tab.0.left/0.0.1024.728@0.0.1024.728" timestamp="1575590177154" />
+    <state width="981" height="204" key="GridCell.Tab.0.right" timestamp="1575590177154">
+      <screen x="0" y="0" width="1024" height="728" />
+    </state>
+    <state width="981" height="204" key="GridCell.Tab.0.right/0.0.1024.728@0.0.1024.728" timestamp="1575590177154" />
   </component>
 </project>
