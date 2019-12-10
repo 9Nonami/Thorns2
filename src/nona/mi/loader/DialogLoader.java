@@ -11,7 +11,7 @@ public class DialogLoader {
     3=huse
     */
     
-    public static HashMap<Integer, String> load(String  stringao){
+    public static HashMap<Integer, String> load(String  stringao) {
         HashMap<Integer, String> map = new HashMap<Integer, String>();
         String[] lines = stringao.split("%");
         for (int i = 0; i < lines.length; i++) {

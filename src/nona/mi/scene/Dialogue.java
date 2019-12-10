@@ -18,7 +18,7 @@ import java.awt.Graphics;
 
 import nona.mi.db.FontDataBase;
 import nona.mi.image.BaseImage;
-import nona.mi.main.Thorns;
+import nona.mi.main.Game;
 
 
 public class Dialogue {
@@ -49,11 +49,11 @@ public class Dialogue {
 
     //
     private boolean playFullAudio;
-    private Thorns thorns;
+    private Game game;
 
 
-    public Dialogue(Thorns thorns, FontDataBase fdb, int x, int y, BaseImage textArea, BaseImage nameBg) {
-        this.thorns = thorns;
+    public Dialogue(Game game, FontDataBase fdb, int x, int y, BaseImage textArea, BaseImage nameBg) {
+        this.game = game;
         this.fdb = fdb;
         fontHeight = fdb.getFontHeight();
 
@@ -61,7 +61,7 @@ public class Dialogue {
         this.y = y;
 
         cont = 0;
-        textSpeed = 2 * thorns.getSpeedAdjust();
+        textSpeed = 2 * game.getSpeedAdjust();
         //textSpeed = thorns.getSpeedAdjust();
 
         this.textArea = textArea;
@@ -90,22 +90,22 @@ public class Dialogue {
     }
     //*/
 
-    public void setAudio(float audioDelay, String audioName, String audioPath){ //audioDelay in seconds
-        this.audioDelay = (int) (audioDelay * thorns.getFps());
+    public void setAudio(float audioDelay, String audioName, String audioPath) { //audioDelay in seconds
+        this.audioDelay = (int) (audioDelay * game.getFps());
         this.audioName = audioName;
         this.timeCont = 0;
         this.lockAudio = false;
-        thorns.getMyJukeBox().load(audioPath, this.audioName);
+        game.getPackJukebox().load(audioPath, this.audioName);
     }
 
     public void update() {
 
         if (!lockAudio && audioName != null) {
             timeCont++;
-            if(timeCont >= audioDelay){
+            if (timeCont >= audioDelay) {
                 lockAudio = true;
                 timeCont = 0;
-                thorns.getMyJukeBox().play(this.audioName);
+                game.getPackJukebox().play(this.audioName);
             }
         }
 
@@ -166,7 +166,6 @@ public class Dialogue {
 
     public void render(Graphics g) {
 
-        //background esta na classe que extends scene
         textArea.render(g);
 
         renderNameBg(g);
@@ -194,7 +193,7 @@ public class Dialogue {
 
     public boolean getEndAnimation() {
         if  (playFullAudio && (audioName != null)){
-            return endAnimation && !thorns.getMyJukeBox().isPlaying(audioName);
+            return endAnimation && !game.getPackJukebox().isPlaying(audioName);
         }
         return endAnimation;
     }
@@ -216,11 +215,11 @@ public class Dialogue {
         return (int) ((nameBg.getWidth() / 2) - (width / 2));
     }
 
-    public String getAudioName(){
+    public String getAudioName() {
         return audioName;
     }
 
-    public void setPlayFullAudio(boolean b){
+    public void setPlayFullAudio(boolean b) {
         playFullAudio = b;
     }
 

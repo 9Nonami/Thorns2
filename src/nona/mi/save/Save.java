@@ -23,7 +23,7 @@ public class Save {
     public static final char FILLED = '1';
     public static final char EMPTY = '0';
 
-    public Save(){
+    public Save() {
 
         slots = new String[NUM_SLOTS];
 
@@ -33,27 +33,28 @@ public class Save {
         String folderStr;
         String saveFileStr;
 
-        if (os.startsWith("l")){
+        if (os.startsWith("l")) {
             folderStr = home + "/thorns";
             folderPath = new File(folderStr);
             saveFileStr = folderStr + "/save.9";
             savePath = new File(saveFileStr);
-        } else if (os.startsWith("w")){
+        } else if (os.startsWith("w")) {
             folderStr = home + "\\thorns";
             folderPath = new File(folderStr);
             saveFileStr = folderStr + "\\save.9";
             savePath = new File(saveFileStr);
         } else {
+            System.out.println("I guess you're not using Linux or Windows. The save for this system was not implemented yet. Please see the Save.class to adjust it.");
             System.exit(0);
         }
 
         //CRIA A PASTA
-        if (!(folderPath.exists())){
+        if (!(folderPath.exists())) {
             folderPath.mkdir();
         }
 
         //CRIA O ARQUIVO
-        if (!(savePath.exists())){
+        if (!(savePath.exists())) {
             try {
                 savePath.createNewFile();
                 createBasicSaveFile(savePath);
@@ -66,7 +67,7 @@ public class Save {
 
     }
 
-    private void createBasicSaveFile(File savePath){
+    private void createBasicSaveFile(File savePath) {
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(savePath))){
             for (int i = 0; i < slots.length; i++) {
                 String temp = "" + i + "-0-0-0&" + "\n";
@@ -78,7 +79,7 @@ public class Save {
         }
     }
 
-    public void load(){
+    public void load() {
         String loaded = TextLoader.loadFromDisk(savePath);
         String[] splitted = loaded.split("&");
         for (int i = 0; i < slots.length; i++) {
@@ -86,13 +87,13 @@ public class Save {
         }
     }
 
-    public void save(){
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(savePath))){
+    public void save() {
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(savePath))) {
             for (int i = 0; i < slots.length; i++) {
                 bw.write(slots[i] + "&\n");
             }
             bw.flush();
-        } catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }

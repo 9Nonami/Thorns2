@@ -15,16 +15,16 @@ public class FontDataBase{
 	private HashMap<Character, BufferedImage> map;
 	private int fontHeight;
 
-	public FontDataBase(String imagePath, String textPath){
+	public FontDataBase(String imagePath, String textPath) {
 		map = FontGenerator.generateFont(imagePath, textPath);
 		fontHeight = FontGenerator.getHeight(imagePath);
 	}
 
-	public int getFontHeight(){
+	public int getFontHeight() {
 		return fontHeight;
 	}
 
-	public BufferedImage get(char key){
+	public BufferedImage get(char key) {
 		if (map.containsKey(key)) {
 			return map.get(key);
 		} else {

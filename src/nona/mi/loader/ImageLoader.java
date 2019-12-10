@@ -4,9 +4,9 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 
-public class ImageLoader{
+public class ImageLoader {
 
-	public static BufferedImage loadImage(String path){
+	public static BufferedImage loadImage(String path) {
 
 		BufferedImage temp = null;
 		InputStream is = null;

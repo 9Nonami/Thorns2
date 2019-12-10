@@ -5,9 +5,9 @@ import java.awt.image.BufferedImage;
 
 import nona.mi.db.FontDataBase;
 import nona.mi.image.BaseImage;
-import nona.mi.main.Thorns;
+import nona.mi.main.Game;
 
-public class ChoiceScene extends Scene{
+public class ChoiceScene extends Scene {
 
     private char[] option1;
     private int[] xzesOption1;
@@ -36,14 +36,15 @@ public class ChoiceScene extends Scene{
     private int yChoiceDown;
     private int xChoice;
 
-    public ChoiceScene(Thorns thorns, BaseImage background, String texts, int nextSceneOp1, int nextSceneOp2){
-        super(thorns, nextSceneOp1);
+    private String audioName;
+
+
+
+    public ChoiceScene(Game game, BaseImage background, String texts, int nextSceneOp1, int nextSceneOp2) {
+        super(game, nextSceneOp1);
         this.background = background;
-        this.fdb = thorns.getFontDataBase();
-        this.fdbFocus = thorns.getFontFocus();
         this.nextSceneOp1 = nextSceneOp1;
         this.nextSceneOp2 = nextSceneOp2;
-        this.choiceBg = thorns.getChoicebg();
 
         initTexts(texts);
 
@@ -57,24 +58,40 @@ public class ChoiceScene extends Scene{
         fontop2 = fdb;
     }
 
+    public void setFdb(FontDataBase fdb) {
+        this.fdb = fdb;
+    }
+
+    public void setFdbFocus(FontDataBase fdbFocus) {
+        this.fdbFocus = fdbFocus;
+    }
+
+    public void setChoiceBg(BufferedImage choiceBg) {
+        this.choiceBg = choiceBg;
+    }
+
+    public void setAudioName(String audioName) {
+        this.audioName = audioName;
+    }
+
     @Override
-    public void update(){
+    public void update() {
         super.update();
-        up = thorns.isUp();
-        down = thorns.isDown();
-        space = thorns.isSpace();
-        if ((up || down) && !(thorns.getMyJukeBox().isPlaying(Thorns.AUDIO_CHOICE))) {
+        up = game.isUp();
+        down = game.isDown();
+        space = game.isSpace();
+        if ((up || down) && !(game.getStandardJukeBox().isPlaying(audioName))) {
             swap();
-            thorns.getMyJukeBox().play(Thorns.AUDIO_CHOICE);
+            game.getStandardJukeBox().play(audioName);
         }
         if (space) {
-            thorns.nextScene(nextScene);
+            game.nextScene(); //todo : ????
             reset();
         }
     }
 
     @Override
-    public void render(Graphics g){
+    public void render(Graphics g) {
         background.render(g);
 
         renderChoicebg(g);
@@ -85,7 +102,7 @@ public class ChoiceScene extends Scene{
     }
 
     @Override
-    public void reset(){
+    public void reset() {
         super.reset();
         up = false;
         down = false;
@@ -96,7 +113,7 @@ public class ChoiceScene extends Scene{
         fontop2 = fdb;
     }
 
-    private void swap(){
+    private void swap() {
         // swp começa com true
         // true = texto de cima
         // false = texto de baixo
@@ -116,7 +133,7 @@ public class ChoiceScene extends Scene{
         }
     }
 
-    private void renderArr(Graphics g, char[] option, int[] xzes, int y, FontDataBase fdb){
+    private void renderArr(Graphics g, char[] option, int[] xzes, int y, FontDataBase fdb) {
         //xzes armazena o valor inicial de x do texto centralizado
         //o numero de indices é igual ao numero de '@' no texto
         int tempX = xzes[0];
@@ -136,20 +153,20 @@ public class ChoiceScene extends Scene{
         }
     }
 
-    private void renderChoicebg(Graphics g){
+    private void renderChoicebg(Graphics g) {
         g.drawImage(choiceBg, xChoice, yChoiceUp, null);
         g.drawImage(choiceBg, xChoice, yChoiceDown, null);
     }
 
-    private int getCenterOf(char[] c){  //centro em X de cada frase
+    private int getCenterOf(char[] c) {  //centro em X de cada frase
         int width = 0;
         for (int i = 0; i < c.length; i++) {
             width += fdb.get(c[i]).getWidth();
         }
-        return (int) (thorns.getWidth() / 2) - (width/2);
+        return (int) (game.getWidth() / 2) - (width/2);
     }
 
-    private void initTexts(String s){ //option1_option2
+    private void initTexts(String s) { //option1_option2
 
         String[] ss = s.split("_"); //option1[0] option2[1]
 
@@ -160,18 +177,18 @@ public class ChoiceScene extends Scene{
         xzesOption2 = createXArr(ss[1]);
     }
 
-    private int[] createXArr(String option){
+    private int[] createXArr(String option) {
         String[] splitedOption = option.split("@");
 
         int[] temp = new int[splitedOption.length];
-        for (int i = 0; i < splitedOption.length; i++){
+        for (int i = 0; i < splitedOption.length; i++) {
             temp[i] = getCenterOf(splitedOption[i].toCharArray());
         }
 
         return temp; //retorna o centro em X de cada frase separada por @
     }
 
-    private int getOptionHeight(char[] option){
+    private int getOptionHeight(char[] option) {
         int height = this.fdb.getFontHeight();
         for (int i = 0; i < option.length; i++) {
             if (option[i] == '@') {
@@ -181,13 +198,13 @@ public class ChoiceScene extends Scene{
         return height;
     }
 
-    private void initCoordinates(){
-        int middleScreenY = thorns.getHeight() / 2;
+    private void initCoordinates() {
+        int middleScreenY = game.getHeight() / 2;
         int offset = this.fdb.getFontHeight();
 
         this.yChoiceUp = middleScreenY - offset - choiceBg.getHeight();
         this.yChoiceDown = middleScreenY + offset;
-        this.xChoice = thorns.getWidth() / 2 - choiceBg.getWidth() / 2;
+        this.xChoice = game.getWidth() / 2 - choiceBg.getWidth() / 2;
 
         int option1Height = getOptionHeight(this.option1);
         int option2Height = getOptionHeight(this.option2);

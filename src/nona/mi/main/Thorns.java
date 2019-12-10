@@ -2,7 +2,6 @@ package nona.mi.main;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
@@ -25,46 +24,17 @@ import nona.mi.scene.StandardScene;
 
 public class Thorns extends Game {
 
-    private boolean up;
-    private boolean lockUp;
-
-    private boolean down;
-    private boolean lockDown;
-
-    private boolean left;
-    private boolean lockLeft;
-
-    private boolean right;
-    private boolean lockRight;
-
-    private boolean space;
-    private boolean lockSpace;
-
-    private boolean lockEscape;
-
-    private boolean backspace;
-    private boolean lockBackspace;
-
-    private boolean showScene;
-    private int scene;
-    private int pack;
-
-    private ScenePackage packBasis;
-    private Scene sceneBasis;
-
-    private String currentSound;
-    private MyJukeBox myJukeBox;
-
     //global res
     private FontDataBase fontDataBase;
     private FontDataBase fontFocus;
     private BaseImage nameBg;
-    private LoadScene loadScene;
     private BaseImage textArea;
     private BufferedImage choicebg;
     private BufferedImage pointer;
     private ImageEfx setasAnim;
     public static final String AUDIO_CHOICE = "ac";
+
+    private boolean showScene;
 
 
 
@@ -100,12 +70,11 @@ public class Thorns extends Game {
         setasAnim = new ImageEfx(this, setas, setasCoord, 0.15f , ImageEfx.LOOP);
 
         //PACK E SCENE
-        pack = 0;
         scene = 0;
+        pack = 0;
 
         //LOAD SCENE
-        loadScene = new LoadScene(this, new BaseImage(ImageLoader.loadImage("/res/bg/load.png"), 0, 0));
-        sceneBasis = loadScene;
+        setLoadScene(new LoadScene(this, new BaseImage(ImageLoader.loadImage("/res/bg/load.png"), 0, 0)));
 
         loadPack();
     }
@@ -128,15 +97,14 @@ public class Thorns extends Game {
         }
     }
 
-    private synchronized void initPacks() {
+    @Override
+    public synchronized void initPacks() {
         if (pack == 0) {
             initPack0();
         }
     }
 
-    private void initPack0(){
-        ScenePackage pack0 = new ScenePackage();
-        setMyJukeBox(new MyJukeBox());
+    private void initPack0() {
 
         //LOCAL-----------------------------------
 
@@ -170,12 +138,13 @@ public class Thorns extends Game {
         //cena 0
         FadeScene scene0 = new FadeScene(this, bgScene0, fadeoutSlow, 1);
         scene0.createSound("/res/audio/scene0.wav", MyJukeBox.LOOP);
-        pack0.put(0, scene0);
+        packBasis.put(0, scene0);
 
         //cena 1
         String txtScene1 = sentences.get(1);
-        StandardScene scene1 = new StandardScene(this, bgScene0, txtScene1, 2);
-        pack0.put(1, scene1);
+        StandardScene scene1 = new StandardScene(this, bgScene0, setasAnim, 2);
+        scene1.setDialog(txtScene1, fontDataBase, textArea, nameBg);
+        packBasis.put(1, scene1);
 
         //cena 2
         ImageEfx efxRose = new ImageEfx(this, rose, roseCoordScene2);
@@ -186,16 +155,17 @@ public class Thorns extends Game {
         efxTuli.setMoveTo(400, 0, 1, 0);
         ImageEfx[] images = {efxRose, efxTuli};
         EfxScene scene2 = new EfxScene(this, images, bgScene0, 3);
-        pack0.put(2, scene2);
+        packBasis.put(2, scene2);
 
         //cena 3
         BaseImage roseSc3 = new BaseImage(rose, 0, 0);
         BaseImage tuliSc3 = new BaseImage(tuli, 400, 0);
         BaseImage[] characters = {roseSc3, tuliSc3};
         String txtScene3 = sentences.get(3);
-        StandardScene scene3 = new StandardScene(this, bgScene0, txtScene3, 4);
+        StandardScene scene3 = new StandardScene(this, bgScene0, setasAnim, 4);
+        scene3.setDialog(txtScene3, fontDataBase, textArea, nameBg);
         scene3.setCharacters(characters);
-        pack0.put(3, scene3);
+        packBasis.put(3, scene3);
 
         //cena 4 //0.05f old speed
         BaseImage[] bottom4 = {bgScene0, roseSc3, tuliSc3};
@@ -206,15 +176,16 @@ public class Thorns extends Game {
         ImageEfx[] top4 = {bgSc4, tuliSc4};
         FadeTopBottomScene scene4 = new FadeTopBottomScene(this, bottom4, top4, 5);
         scene4.setTextArea(textArea);
-        pack0.put(4, scene4);
+        packBasis.put(4, scene4);
 
         //cena 5
         String txtScene5 = sentences.get(5);
-        StandardScene scene5 = new StandardScene(this, bgScene0, txtScene5, 6);
+        StandardScene scene5 = new StandardScene(this, bgScene0, setasAnim, 6);
+        scene5.setDialog(txtScene5, fontDataBase, textArea, nameBg);
         BaseImage tuliSc5 = new BaseImage(tuli, (int)((getWidth() / 2) - (tuli.getWidth()/2)), 0);
         BaseImage[] chars5 = {tuliSc5};
         scene5.setCharacters(chars5);
-        pack0.put(5, scene5);
+        packBasis.put(5, scene5);
 
         //cena 6
         BaseImage[] bottom6 = {bgScene0, tuliSc5};
@@ -225,210 +196,72 @@ public class Thorns extends Game {
         ImageEfx[] top6 = {bgSc6, roseSc6};
         FadeTopBottomScene scene6 = new FadeTopBottomScene(this, bottom6, top6, 7);
         scene6.setTextArea(textArea);
-        pack0.put(6, scene6);
+        packBasis.put(6, scene6);
 
         //cena 7
         String txtScene7 = sentences.get(7);
-        StandardScene scene7 = new StandardScene(this, bgScene0, txtScene7, 8);
+        StandardScene scene7 = new StandardScene(this, bgScene0, setasAnim, 8);
+        scene7.setDialog(txtScene7, fontDataBase, textArea, nameBg);
         BaseImage roseSc7 = new BaseImage(rose, getWidth() / 2 - rose.getWidth() / 2, 0);
         scene7.setCharacters(new BaseImage[]{roseSc7});
-        pack0.put(7, scene7);
+        packBasis.put(7, scene7);
 
         //cena 8
         FadeScene scene8 = new FadeScene(this, new BaseImage[]{bgScene0, roseSc7}, fadeinFast, 9);
-        pack0.put(8, scene8);
+        packBasis.put(8, scene8);
 
         //cena 9
         BaseImage livro1 = new BaseImage(livro1Buffered);
         FadeScene scene9 = new FadeScene(this, livro1, fadeoutFast, 10);
-        pack0.put(9, scene9);
+        packBasis.put(9, scene9);
 
         //cena 10
         String txtScene10 = sentences.get(10);
-        StandardScene scene10 = new StandardScene(this, livro1, txtScene10, 11);
-        pack0.put(10, scene10);
+        StandardScene scene10 = new StandardScene(this, livro1, setasAnim, 11);
+        scene10.setDialog(txtScene10, fontDataBase, textArea, nameBg);
+        packBasis.put(10, scene10);
 
         //cena 11
         ImageEfx efxLivro2 = new ImageEfx(this, livro2Buffered, new Coordinates(0, 0));
         efxLivro2.setAlpha(ImageEfx.TRANSPARENT, 0.02f);
         EfxScene scene11 = new EfxScene(this, new ImageEfx[]{efxLivro2}, livro1, 12);
         //scene11.setTextArea(textArea);
-        pack0.put(11, scene11);
+        packBasis.put(11, scene11);
 
         //cena 12
         String txtScene12 = sentences.get(12);
         BaseImage livro2 = new BaseImage(livro2Buffered);
         BaseImage[] imagesSc12 = {livro1, livro2};
-        StandardScene scene12 = new StandardScene(this, imagesSc12, txtScene12, 13);
-        pack0.put(12, scene12);
+        StandardScene scene12 = new StandardScene(this, imagesSc12, setasAnim, 13);
+        scene12.setDialog(txtScene12, fontDataBase, textArea, nameBg);
+        packBasis.put(12, scene12);
 
         //cena 13
         ImageEfx efxLivro3 = new ImageEfx(this, livro3Buffered, new Coordinates(0, 0));
         efxLivro3.setAlpha(ImageEfx.TRANSPARENT, 0.02f);
         EfxScene scene13 = new EfxScene(this, new ImageEfx[]{efxLivro3}, imagesSc12, 14);
-        pack0.put(13, scene13);
+        packBasis.put(13, scene13);
 
         //scene 14
         String txtScene14 = sentences.get(14);
         BaseImage livro3 = new BaseImage(livro3Buffered);
-        StandardScene scene14 = new StandardScene(this, new BaseImage[]{livro1, livro2, livro3}, txtScene14, 0);
-        pack0.put(14, scene14);
+        StandardScene scene14 = new StandardScene(this, new BaseImage[]{livro1, livro2, livro3}, setasAnim, 0);
+        scene14.setDialog(txtScene14, fontDataBase, textArea, nameBg);
+        packBasis.put(14, scene14);
 
-
-        packBasis = pack0;
-        sceneBasis = packBasis.get(scene);
     }
 
-    //todo : apagar
-    public void nextScene(int scene) {
-        this.scene = scene;
-        //sceneBasis.reset();
-        if (scene == Scene.LAST_SCENE) {
-            this.pack = sceneBasis.getNextPack();
-            this.scene = 0;
-            sceneBasis = loadScene;
-            loadPack();
-        } else {
-            sceneBasis = packBasis.get(scene);
-        }
-    }
-
-    //USADO MAIS QUANDO UMA CENA VAI PARA OUTRA
-    public void nextScene() {
-        if (sceneBasis.getNextScene() == Scene.LAST_SCENE) {
-            pack = sceneBasis.getNextPack();
-            scene = 0;
-            sceneBasis.reset();
-            sceneBasis = loadScene;
-            loadPack();
-        } else {
-            scene = sceneBasis.getNextScene();
-            sceneBasis.reset();
-            sceneBasis = packBasis.get(scene);
-        }
-    }
-
-    //USADO POR ROLLINGMENU, NO LOAD
-    public void nextScene(int pack, int scene){
-        sceneBasis.reset();
-        sceneBasis = loadScene;
-        this.pack = pack;
-        this.scene = scene;
-        loadPack();
-    }
-
-    private void loadPack(){
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                initPacks();
-            }
-        });
-        thread.start();
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
-            if (!lockUp) {
-                lockUp = true;
-                up = true;
-            }
-        }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            if (!lockDown) {
-                lockDown = true;
-                down = true;
-            }
-        }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            if (!lockLeft) {
-                lockLeft = true;
-                left = true;
-            }
-        }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            if (!lockRight) {
-                lockRight = true;
-                right = true;
-            }
-        }
-        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            if (!lockSpace) {
-                lockSpace = true;
-                space = true;
-            }
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
-            lockUp = false;
-            up = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            lockDown = false;
-            down = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            lockLeft = false;
-            left = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            lockRight = false;
-            right = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            lockSpace = false;
-            space = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            lockEscape = false;
-
-        }
-        if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-            lockBackspace = false;
-            backspace = false;
-        }
-    }
-
-    private void resetKeys(){
+    private void resetKeys() {
         space = false;
         up = false;
         down = false;
         left = false;
         right = false;
-        backspace = false;
         setClicked(false);
-    }
-
-    public boolean isUp() {
-        return up;
-    }
-
-    public boolean isDown() {
-        return down;
-    }
-
-    public boolean isLeft() {
-        return left;
-    }
-
-    public boolean isRight() {
-        return right;
-    }
-
-    public boolean isBackspace() {
-        return backspace;
     }
 
     public BufferedImage getPointer() {
         return pointer;
-    }
-
-    public boolean isSpace() {
-        return space;
     }
 
     public FontDataBase getFontDataBase(){
@@ -455,22 +288,6 @@ public class Thorns extends Game {
         return setasAnim;
     }
 
-    public String getCurrentSound(){
-        return this.currentSound;
-    }
-
-    public void setCurrentSound(String currentSound){
-        this.currentSound = currentSound;
-    }
-
-    public  MyJukeBox getMyJukeBox(){
-        return myJukeBox;
-    }
-
-    public void setMyJukeBox(MyJukeBox myJukeBox){
-        this.myJukeBox = myJukeBox;
-    }
-
     public void setShowScene(boolean showScene) {
         this.showScene = showScene;
     }
@@ -483,15 +300,9 @@ public class Thorns extends Game {
         return pack;
     }
 
-    public void setDirectScene(Scene scene){
-        sceneBasis.reset();
-        sceneBasis = scene;
-    }
-
     public ScenePackage getPackBasis() {
         return packBasis;
     }
-
 
     public Scene getSceneBasis() {
         return sceneBasis;

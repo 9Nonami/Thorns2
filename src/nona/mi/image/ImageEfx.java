@@ -1,13 +1,13 @@
 package nona.mi.image;
 
-import nona.mi.main.Thorns;
+import nona.mi.main.Game;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.AlphaComposite;
 import java.awt.image.BufferedImage;
 
-public class ImageEfx extends BaseImage{
+public class ImageEfx extends BaseImage {
     
     private Coordinates coordinates;
     
@@ -42,11 +42,11 @@ public class ImageEfx extends BaseImage{
     public static final int ONCE = 2;
     public static final int LOOP = 3;
 
-    private Thorns thorns;
+    private Game game;
 
-    public ImageEfx(Thorns thorns, BufferedImage image, Coordinates coordinates) {
+    public ImageEfx(Game game, BufferedImage image, Coordinates coordinates) {
         super(image);
-        this.thorns = thorns;
+        this.game = game;
         this.coordinates = coordinates;
         
         this.endMoveAnimation = true;
@@ -54,12 +54,12 @@ public class ImageEfx extends BaseImage{
         this.endAnimatedImageAnimation = true;
     }
     
-    public ImageEfx(Thorns thorns, BufferedImage[] images, Coordinates coordinates, float delay, int style){
+    public ImageEfx(Game game, BufferedImage[] images, Coordinates coordinates, float delay, int style) {
         super(null);
-        this.thorns = thorns;
+        this.game = game;
         this.images = images;
         this.coordinates = coordinates;
-        this.delay = delay * thorns.getSpeedAdjust(); //todo : se der erro, eh aqui
+        this.delay = delay * game.getSpeedAdjust(); //todo : se der erro, eh aqui
         this.style = style;
         this.animatedImage = true;
         this.id = 0;
@@ -69,14 +69,14 @@ public class ImageEfx extends BaseImage{
         this.endAnimatedImageAnimation = false;
     } 
     
-    public void setMoveTo(int destinationX, int destinationY, float speedX, float speedY){
+    public void setMoveTo(int destinationX, int destinationY, float speedX, float speedY) {
         this.move = true;
         this.endMoveAnimation = false;
         this.destinationX = destinationX;
         this.destinationY = destinationY;
 
-        this.speedX = speedX * thorns.getSpeedAdjust(); //todo : se der erro, eh aqui
-        this.speedY = speedY * thorns.getSpeedAdjust();
+        this.speedX = speedX * game.getSpeedAdjust(); //todo : se der erro, eh aqui
+        this.speedY = speedY * game.getSpeedAdjust();
         
         baseEndMx = false;
         baseEndMy = false;
@@ -97,12 +97,12 @@ public class ImageEfx extends BaseImage{
 
     }
     
-    public void setAlpha(int aspect, float speedAlpha){
+    public void setAlpha(int aspect, float speedAlpha) {
         this.alpha = true;
         this.endAlphaAnimation = false;
         this.aspect = aspect;
         this.aspectBase = aspect;
-        this.speedAlpha = speedAlpha * thorns.getSpeedAdjust(); //todo : se der erro, eh aqui
+        this.speedAlpha = speedAlpha * game.getSpeedAdjust(); //todo : se der erro, eh aqui
 
         if (aspect == SOLID) {
             this.speedAlpha *= -1;
@@ -113,7 +113,7 @@ public class ImageEfx extends BaseImage{
     }
     
     @Override
-    public void update(){
+    public void update() {
         if (animatedImage) {
             //System.out.println("updating images");
             if (!lockId) {
@@ -173,7 +173,7 @@ public class ImageEfx extends BaseImage{
     }
     
     @Override
-    public void render(Graphics g){
+    public void render(Graphics g) {
         Graphics2D g2d = (Graphics2D) g.create();
         if (alpha) {
             g2d.setComposite(AlphaComposite.SrcOver.derive((float)aspect));
@@ -190,19 +190,19 @@ public class ImageEfx extends BaseImage{
         return this.endMoveAnimation;
     }
     
-    public boolean getEndAlphaAnimation(){
+    public boolean getEndAlphaAnimation() {
         return this.endAlphaAnimation;
     }
     
-    public boolean getEndAnimatedImageAnimation(){
+    public boolean getEndAnimatedImageAnimation() {
         return this.endAnimatedImageAnimation;
     }
     
-    public boolean getAllFinishedAnimations(){
+    public boolean getAllFinishedAnimations() {
         return (getEndMoveAnimation() && getEndAlphaAnimation() && getEndAnimatedImageAnimation());
     }
     
-    public void reset(){
+    public void reset() {
         coordinates.reset();
         if (move) {
             endMoveAnimation = false;
@@ -220,7 +220,7 @@ public class ImageEfx extends BaseImage{
         }
     }
     
-    public Coordinates getCoordinates(){
+    public Coordinates getCoordinates() {
         return this.coordinates;
     }
     

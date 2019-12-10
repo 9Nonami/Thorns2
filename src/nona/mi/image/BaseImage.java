@@ -9,39 +9,39 @@ public class BaseImage {
     protected int y;
     protected BufferedImage image;
     
-    public BaseImage(BufferedImage image){
+    public BaseImage(BufferedImage image) {
         this.image = image;
         this.x = 0;
         this.y = 0;
     }
     
-    public BaseImage(BufferedImage image, int x, int y){
+    public BaseImage(BufferedImage image, int x, int y) {
         this.image = image;
         this.x = x;
         this.y = y;
     }
     
-    public int getX(){
+    public int getX() {
         return this.x;
     }
     
-    public void setX(int x){
+    public void setX(int x) {
         this.x = x;
     }
     
-    public int getY(){
+    public int getY() {
         return this.y;
     }
     
-    public void setY(int y){
+    public void setY(int y) {
         this.y = y;
     }
     
-    public int getWidth(){
+    public int getWidth() {
         return this.image.getWidth();
     }
     
-    public int getHeight(){
+    public int getHeight() {
         return this.image.getHeight();
     }
 
@@ -49,11 +49,11 @@ public class BaseImage {
         return image;
     }
 
-    public void update(){
+    public void update() {
         
     }
     
-    public void render(Graphics g){
+    public void render(Graphics g) {
         if (image != null) {
             g.drawImage(image, x, y, null);
         } else {

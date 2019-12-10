@@ -2,7 +2,7 @@ package nona.mi.scene;
 
 import nona.mi.db.FontDataBase;
 import nona.mi.image.BaseImage;
-import nona.mi.main.Thorns;
+import nona.mi.main.Game;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -28,18 +28,32 @@ public class MenuBasis {
     private int pointerRotation;
     private int pointerRotationSpeed;
 
-    private Thorns thorns;
+    private Game game;
 
     private boolean pressed;
     private int chosenOption;
     private int optionID;
     private int maxOptionID;
 
+    private String audioName;
+
+
+
     //CONSTRUCTOR
-    public MenuBasis(Thorns thorns) {
-        this.thorns = thorns;
-        optionBg = thorns.getChoicebg();
-        fdb = thorns.getFontDataBase();
+    public MenuBasis(Game game) {
+        this.game = game;
+    }
+
+    public void setOptionBg(BufferedImage optionBg) {
+        this.optionBg = optionBg;
+    }
+
+    public void setFdb(FontDataBase fdb) {
+        this.fdb = fdb;
+    }
+
+    public void setAudioName(String audioName) {
+        this.audioName = audioName;
     }
 
     public void createOptions(int numOptions, int x, int y, int spacing, String texts){
@@ -55,12 +69,9 @@ public class MenuBasis {
         for (int i = 1; i < numOptions; i++) {
             yOptions[i] = yOptions[i - 1] + optionBg.getHeight() + spacing;
         }
-
-        createTexts(texts);
-        createPointer();
     }
 
-    private void createTexts(String texts){
+    public void createTexts(String texts){
 
         this.texts = texts.split("_");
 
@@ -77,12 +88,9 @@ public class MenuBasis {
         }
     }
 
-    private void createPointer(){
-
-        BufferedImage tempPointerImage = thorns.getPointer();
+    public void createPointer(BufferedImage tempPointerImage){
         int pointerX = xOption;
         int pointerY = yOptions[0] + (optionBg.getHeight() / 2) - (tempPointerImage.getHeight() / 2);
-
         this.pointer = new BaseImage(tempPointerImage, pointerX, pointerY);
     }
 
@@ -94,9 +102,9 @@ public class MenuBasis {
 
     public void update() {
 
-        boolean up = thorns.isUp();
-        boolean down = thorns.isDown();
-        boolean space = thorns.isSpace();
+        boolean up = game.isUp();
+        boolean down = game.isDown();
+        boolean space = game.isSpace();
 
         if (rotatePointer){
             pointerRotation += pointerRotationSpeed;
@@ -105,16 +113,16 @@ public class MenuBasis {
             }
         }
 
-        if (!(thorns.getMyJukeBox().isPlaying(Thorns.AUDIO_CHOICE))){
+        if (!(game.getStandardJukeBox().isPlaying(audioName))){
             if (up) {
-                thorns.getMyJukeBox().play(Thorns.AUDIO_CHOICE);
+                game.getStandardJukeBox().play(audioName);
                 optionID--;
                 if (optionID < 0) {
                     optionID = maxOptionID;
                 }
                 pointer.setY(yOptions[optionID] + (optionBg.getHeight() / 2) - (pointer.getHeight() / 2));
             } else if (down) {
-                thorns.getMyJukeBox().play(Thorns.AUDIO_CHOICE);
+                game.getStandardJukeBox().play(audioName);
                 optionID++;
                 if (optionID > maxOptionID) {
                     optionID = 0;

@@ -1,5 +1,10 @@
 package nona.mi.main;
 
+import nona.mi.loader.MyJukeBox;
+import nona.mi.scene.LoadScene;
+import nona.mi.scene.Scene;
+import nona.mi.scene.ScenePackage;
+
 import javax.swing.JFrame;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -38,6 +43,29 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     private boolean clicked;
     private int mouseX;
     private int mouseY;
+
+    private MyJukeBox standardJukeBox;
+    protected int scene;
+    protected int pack;
+
+    private MyJukeBox packJukebox;
+    private String currentSound;
+
+    protected ScenePackage packBasis;
+    protected Scene sceneBasis;
+
+    protected boolean up;
+    protected boolean lockUp;
+    protected boolean down;
+    protected boolean lockDown;
+    protected boolean left;
+    protected boolean lockLeft;
+    protected boolean right;
+    protected boolean lockRight;
+    protected boolean space;
+    protected boolean lockSpace;
+
+    protected LoadScene loadScene;
 
 
 
@@ -86,6 +114,8 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         canvas.addMouseListener(this);
         canvas.addMouseMotionListener(this);
 
+        standardJukeBox = new MyJukeBox();
+
         t = new Thread(this);
     }
 
@@ -93,6 +123,10 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         running = true;
         jframe.setVisible(true);
         t.start();
+    }
+
+    public void setLoadScene(LoadScene loadScene) {
+        this.loadScene = loadScene;
     }
 
     private void update() {
@@ -113,8 +147,8 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     public abstract void renderClass(Graphics g);
 
     @Override
-    public void run(){
-        if (gameLoopStyle == HARD_GAME_LOOP){
+    public void run() {
+        if (gameLoopStyle == HARD_GAME_LOOP) {
             hardGameLoop();
         } else {
             smoothGameLoop();
@@ -141,6 +175,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
                     }
                     Thread.sleep((long) wait);
                 } catch (Exception ex) {
+
                 }
             } else {
                 if (showLoopLog) {
@@ -150,7 +185,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         }
     }
 
-	public void smoothGameLoop(){
+	public void smoothGameLoop() {
 		double ini = 0;
 		double end = 0;
 		double delta = 0;
@@ -172,7 +207,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 				delta -= limit;
 			}
 			render();
-			try{
+			try {
 				Thread.sleep(1);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -190,14 +225,94 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 		}
 	}
 
+    public void nextScene() {
+        if (sceneBasis.getNextScene() == Scene.LAST_SCENE) {
+            pack = sceneBasis.getNextPack();
+            scene = 0;
+            sceneBasis.reset();
+            sceneBasis = loadScene;
+            loadPack();
+        } else {
+            scene = sceneBasis.getNextScene();
+            sceneBasis.reset();
+            sceneBasis = packBasis.get(scene);
+        }
+    }
+
+    public void loadPack() {
+        sceneBasis = loadScene;
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                packBasis = new ScenePackage();
+                packJukebox = new MyJukeBox(); //todo : resetar tudo antes
+
+                initPacks();
+
+                sceneBasis = packBasis.get(scene);
+            }
+        });
+        thread.start();
+    }
+
+    public abstract void initPacks();
+
     @Override
     public void keyPressed(KeyEvent e) {
-
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            if (!lockUp) {
+                lockUp = true;
+                up = true;
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            if (!lockDown) {
+                lockDown = true;
+                down = true;
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            if (!lockLeft) {
+                lockLeft = true;
+                left = true;
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            if (!lockRight) {
+                lockRight = true;
+                right = true;
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            if (!lockSpace) {
+                lockSpace = true;
+                space = true;
+            }
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            lockUp = false;
+            up = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            lockDown = false;
+            down = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            lockLeft = false;
+            left = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            lockRight = false;
+            right = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            lockSpace = false;
+            space = false;
+        }
     }
 
     @Override
@@ -207,7 +322,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
-        clicked = true;
+
     }
 
     @Override
@@ -222,7 +337,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
-
+        clicked = true;
     }
 
     @Override
@@ -282,4 +397,47 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     public int getMouseY() {
         return mouseY;
     }
+
+    public MyJukeBox getStandardJukeBox() {
+        return standardJukeBox;
+    }
+
+    public String getCurrentSound() {
+        return currentSound;
+    }
+
+    public void setCurrentSound(String currentSound) {
+        this.currentSound = currentSound;
+    }
+
+    public MyJukeBox getPackJukebox() {
+        return packJukebox;
+    }
+
+    public void setPackJukebox(MyJukeBox packJukebox) {
+        this.packJukebox = packJukebox;
+    }
+
+    public boolean isUp() {
+        return up;
+    }
+
+    public boolean isDown() {
+        return down;
+    }
+
+    public boolean isLeft() {
+        return left;
+    }
+
+    public boolean isRight() {
+        return right;
+    }
+
+    public boolean isSpace() {
+        return space;
+    }
+
+    //todo : uma jukebox so para armazenar audios globais
+    //todo : uma jukebox que armazena apenas o conteudo do pack
 }

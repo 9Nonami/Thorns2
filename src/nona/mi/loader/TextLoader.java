@@ -5,14 +5,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.InputStreamReader;
 
-public class TextLoader{
+public class TextLoader {
 
 	public static String load(String path) {
 
 	    String stringao = "";
         String read = "";
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(TextLoader.class.getResourceAsStream(path)))){
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(TextLoader.class.getResourceAsStream(path)))) {
 
             while (((read = br.readLine()) != null)) {
                 stringao += read;
@@ -32,7 +32,7 @@ public class TextLoader{
         String stringao = "";
         String read = "";
 
-        try (BufferedReader br = new BufferedReader(new FileReader(file))){
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 
             while (((read = br.readLine()) != null)) {
                 stringao += read;

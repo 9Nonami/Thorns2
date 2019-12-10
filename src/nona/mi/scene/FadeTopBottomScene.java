@@ -2,7 +2,7 @@ package nona.mi.scene;
 
 import java.awt.Graphics;
 
-import nona.mi.main.Thorns;
+import nona.mi.main.Game;
 import nona.mi.image.BaseImage;
 import nona.mi.image.ImageEfx;
 
@@ -12,8 +12,10 @@ public class FadeTopBottomScene extends Scene {
     private ImageEfx[] top;
     private BaseImage textArea;
 
-    public FadeTopBottomScene(Thorns thorns, BaseImage[] bottom, ImageEfx[] top, int nextScene) {
-        super(thorns, nextScene);
+
+
+    public FadeTopBottomScene(Game game, BaseImage[] bottom, ImageEfx[] top, int nextScene) {
+        super(game, nextScene);
         this.bottom = bottom;
         this.top = top;
     }
@@ -30,7 +32,7 @@ public class FadeTopBottomScene extends Scene {
                 top[i].update();
             }
         } else {
-            thorns.nextScene(nextScene);
+            game.nextScene();
             reset();
         }
     }

@@ -2,7 +2,7 @@ package nona.mi.menu;
 
 import nona.mi.db.FontDataBase;
 import nona.mi.image.BaseImage;
-import nona.mi.main.Thorns;
+import nona.mi.main.Game;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -23,7 +23,7 @@ public class Menu {
     private int[] yTexts;
     private FontDataBase fdb;
 
-    private Thorns thorns;
+    private Game game;
 
     private boolean pressed;
     private int chosenOption;
@@ -34,17 +34,20 @@ public class Menu {
     public static final int STYLE_HORIZONTAL = 1;
     private int style;
 
+    private String audioName;
+
+
 
     //CONSTRUCTOR
-    public Menu(Thorns thorns, BufferedImage optionBg, FontDataBase fdb, BufferedImage pointerImage, int style) {
-        this.thorns = thorns;
+    public Menu(Game game, BufferedImage optionBg, FontDataBase fdb, BufferedImage pointerImage, int style) {
+        this.game = game;
         this.optionBg = optionBg;
         this.fdb = fdb;
         this.style = style;
         this.pointer = new BaseImage(pointerImage, 0, 0);
     }
 
-    public void createOptions(int x, int y, int spacing, String texts){
+    public void createOptions(int x, int y, int spacing, String texts) {
 
         String[] temp = texts.split("_");
 
@@ -62,7 +65,7 @@ public class Menu {
         createTexts(temp);
     }
 
-    private void createTexts(String[] texts){
+    private void createTexts(String[] texts) {
 
         //TEXTOS
         this.texts = texts;
@@ -99,16 +102,20 @@ public class Menu {
 
     }
 
+    public void setAudioName(String audioName) {
+        this.audioName = audioName;
+    }
+
     //UPDATE
     public void update() {
 
-        boolean up = thorns.isUp();
-        boolean down = thorns.isDown();
-        boolean left = thorns.isLeft();
-        boolean right = thorns.isRight();
-        boolean space = thorns.isSpace();
+        boolean up = game.isUp();
+        boolean down = game.isDown();
+        boolean left = game.isLeft();
+        boolean right = game.isRight();
+        boolean space = game.isSpace();
 
-        if (!(thorns.getMyJukeBox().isPlaying(Thorns.AUDIO_CHOICE))){
+        if (!(game.getStandardJukeBox().isPlaying(audioName))){
             if (style == STYLE_VERTICAL) {
 
                 if (up) {
@@ -154,15 +161,15 @@ public class Menu {
         }
     }
 
-    private void playSound(){
-        thorns.getMyJukeBox().play(Thorns.AUDIO_CHOICE);
+    private void playSound() {
+        game.getStandardJukeBox().play(audioName);
     }
 
-    private void movePointerVertically(){
+    private void movePointerVertically() {
         pointer.setY(y + (optionBg.getHeight() * optionID) + (spacing * optionID));
     }
 
-    private void movePointerHorizontally(){
+    private void movePointerHorizontally() {
         pointer.setX(x + (optionBg.getWidth() * optionID) + (spacing * optionID));
     }
 
@@ -174,7 +181,7 @@ public class Menu {
     }
 
     //RENDERIZA AS IMAGENS
-    private void renderOptions(Graphics g){
+    private void renderOptions(Graphics g) {
         int x = this.x;
         int y = this.y;
         for (int i = 0; i < numOptions; i++) {
@@ -188,7 +195,7 @@ public class Menu {
     }
 
     //RENDERIZA OS TEXTOS
-    private void renderTexts(Graphics g){
+    private void renderTexts(Graphics g) {
         for (int i = 0; i < numOptions; i++) {
             int tempX = xTexts[i];
             for (int j = 0; j < texts[i].length(); j++) {
@@ -199,7 +206,7 @@ public class Menu {
     }
 
     //RENDERIZA O PONTEIRO DO TEXTO
-    private void renderPointer(Graphics g){
+    private void renderPointer(Graphics g) {
         pointer.render(g);
     }
 
@@ -212,7 +219,7 @@ public class Menu {
         return chosenOption;
     }
 
-    public String getChosenOptionAsString(){
+    public String getChosenOptionAsString() {
         return texts[chosenOption];
     }
 

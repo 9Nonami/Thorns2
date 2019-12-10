@@ -3,7 +3,7 @@ package nona.mi.efx;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import nona.mi.main.Thorns;
+import nona.mi.main.Game;
 
 public class Fade {
 
@@ -21,11 +21,13 @@ public class Fade {
     private int g;
     private int b;
 
-    private Thorns thorns;
+    private Game game;
 
-    public Fade(Thorns thorns, int alphaValue, int speed) {
-        this.thorns = thorns;
-        this.speed = (speed * thorns.getSpeedAdjust());
+
+
+    public Fade(Game game, int alphaValue, int speed) {
+        this.game = game;
+        this.speed = (speed * game.getSpeedAdjust());
         endAnimation = false;
 
         this.alpha = alphaValue;
@@ -40,7 +42,7 @@ public class Fade {
         this.b = 0;
     }
     
-    public void setColor(Color color){
+    public void setColor(Color color) {
         this.r = color.getRed();
         this.g = color.getGreen();
         this.b = color.getBlue();
@@ -62,7 +64,7 @@ public class Fade {
 
     public void render(Graphics g) {
         g.setColor(new Color(this.r, this.g, this.b, (int)this.alpha));
-        g.fillRect(0, 0, thorns.getWidth(), thorns.getHeight());
+        g.fillRect(0, 0, game.getWidth(), game.getHeight());
     }
 
     public boolean getEndAnimation() {

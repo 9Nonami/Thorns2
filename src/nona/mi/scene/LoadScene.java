@@ -3,14 +3,14 @@ package nona.mi.scene;
 import java.awt.Graphics;
 
 import nona.mi.image.BaseImage;
-import nona.mi.main.Thorns;
+import nona.mi.main.Game;
 
 public class LoadScene extends Scene {
 
     private BaseImage background;
 
-    public LoadScene(Thorns thorns, BaseImage background) {
-        super(thorns, -1); //nextScene nunca usado
+    public LoadScene(Game game, BaseImage background) {
+        super(game);
         this.background = background;
     }
 

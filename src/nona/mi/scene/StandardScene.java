@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import nona.mi.image.BaseImage;
 import nona.mi.db.FontDataBase;
 import nona.mi.image.ImageEfx;
-import nona.mi.main.Thorns;
+import nona.mi.main.Game;
 
 public class StandardScene extends Scene {
 
@@ -22,19 +22,18 @@ public class StandardScene extends Scene {
     private ImageEfx setasAnim; //resets
 
 
-    public StandardScene(Thorns thorns, BaseImage background, String dialog, int nextScene) {
-        super(thorns, nextScene);
+
+    public StandardScene(Game game, BaseImage background, ImageEfx setasAnim, int nextScene) {
+        super(game, nextScene);
         this.background = background;
-        this.setasAnim = thorns.getSetasAnim();
-        setDialog(dialog, thorns.getFontDataBase(), thorns.getTextArea(), thorns.getNameBg());
+        this.setasAnim = setasAnim;
     }
 
     //para o caso de mais uma imagem como BG
-    public StandardScene(Thorns thorns, BaseImage[] backgrounds, String dialog, int nextScene) {
-        super(thorns, nextScene);
+    public StandardScene(Game game, BaseImage[] backgrounds, ImageEfx setasAnim, int nextScene) {
+        super(game, nextScene);
         this.backgrounds = backgrounds;
-        this.setasAnim = thorns.getSetasAnim();
-        setDialog(dialog, thorns.getFontDataBase(), thorns.getTextArea(), thorns.getNameBg());
+        this.setasAnim = setasAnim;
     }
 
     public void setDialog(String s, FontDataBase fdb, BaseImage textArea, BaseImage nameBg) {
@@ -49,7 +48,7 @@ public class StandardScene extends Scene {
 
         for (int i = 0; i < tempDialogues.length; i++) {
             //CRIA O DIALOG
-            tempDialogues[i] = new Dialogue(thorns, fdb, xx, yy, textArea, nameBg);
+            tempDialogues[i] = new Dialogue(game, fdb, xx, yy, textArea, nameBg);
 
             //DEFINE O TEXTO E O AUDIO, CASO HAJA
             String dialog;
@@ -101,8 +100,8 @@ public class StandardScene extends Scene {
 
         dialogueBasis.update();
 
-        space = thorns.isSpace();
-        clicked = thorns.isClicked();
+        space = game.isSpace();
+        clicked = game.isClicked();
 
         if (dialogueBasis.getEndAnimation()){
             setasAnim.update();
@@ -111,7 +110,7 @@ public class StandardScene extends Scene {
         if (dialogueBasis.getEndAnimation() && (space || clicked)) {
 
             if(dialogueBasis.getAudioName() != null){
-                thorns.getMyJukeBox().stop(dialogueBasis.getAudioName());
+                game.getStandardJukeBox().stop(dialogueBasis.getAudioName());
             }
 
             dialogueBasis.reset();
@@ -122,7 +121,7 @@ public class StandardScene extends Scene {
             if (dialogueID == dialogues.length) {
                 dialogueID = 0;
                 dialogueBasis = dialogues[dialogueID];
-                thorns.nextScene(); //todo : se der erro, ver. aqui
+                game.nextScene(); //todo : se der erro, ver. aqui
                 return;
             }
 

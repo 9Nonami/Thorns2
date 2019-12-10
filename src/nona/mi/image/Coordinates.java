@@ -14,7 +14,7 @@ public class Coordinates {
         this.baseY = (int) y;
     }
 
-    public void reset(){
+    public void reset() {
         x = baseX;
         y = baseY;
     } 
@@ -35,11 +35,11 @@ public class Coordinates {
         this.y = y;
     }
     
-    public void addX(float value){
+    public void addX(float value) {
         this.x += value;
     }
     
-    public void addY(float value){
+    public void addY(float value) {
         this.y += value;
     }
 

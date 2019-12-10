@@ -17,14 +17,14 @@ import java.util.ArrayList;
 import java.awt.Color;
 import java.util.HashMap;
 
-public class FontGenerator{
+public class FontGenerator {
 
-	public static int getHeight(String imagePath){
+	public static int getHeight(String imagePath) {
 		BufferedImage temp = ImageLoader.loadImage(imagePath);
 		return temp.getHeight();
 	}
 
-	public static HashMap<Character, BufferedImage> generateFont(String imagePath, String keysPath){
+	public static HashMap<Character, BufferedImage> generateFont(String imagePath, String keysPath) {
 		
 		BufferedImage image = ImageLoader.loadImage(imagePath);
 		char[] c = TextLoader.load(keysPath).toCharArray();

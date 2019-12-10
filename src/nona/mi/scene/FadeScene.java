@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 import nona.mi.efx.Fade;
 import nona.mi.image.BaseImage;
-import nona.mi.main.Thorns;
+import nona.mi.main.Game;
 
 public class FadeScene extends Scene {
 
@@ -12,14 +12,14 @@ public class FadeScene extends Scene {
     private BaseImage background;
     private BaseImage[] backgrounds;
 
-    public FadeScene(Thorns thorns, BaseImage[] backgrounds, Fade fade, int nextScene) {
-        super(thorns, nextScene);
+    public FadeScene(Game game, BaseImage[] backgrounds, Fade fade, int nextScene) {
+        super(game, nextScene);
         this.backgrounds = backgrounds;
         this.fade = fade;
     }
 
-    public FadeScene(Thorns thorns, BaseImage background, Fade fade, int nextScene) {
-        super(thorns, nextScene);
+    public FadeScene(Game game, BaseImage background, Fade fade, int nextScene) {
+        super(game, nextScene);
         this.background = background;
         this.fade = fade;
     }
@@ -31,7 +31,7 @@ public class FadeScene extends Scene {
         if (!fade.getEndAnimation()) {
             fade.update();
         } else {
-            thorns.nextScene(nextScene);
+            game.nextScene();
             reset();
         }
     }
@@ -51,7 +51,7 @@ public class FadeScene extends Scene {
     }
 
     @Override
-    public void reset(){
+    public void reset() {
         super.reset();
         fade.reset();
     }

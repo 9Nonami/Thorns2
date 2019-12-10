@@ -1,7 +1,5 @@
 package nona.mi.loader;
 
-import nona.mi.main.Thorns;
-
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -20,7 +18,7 @@ public class MyJukeBox {
     public static final int LOOP = 0;
     public static final int ONCE = 1;
 
-    public MyJukeBox(){
+    public MyJukeBox() {
         init();
     }
 
@@ -28,9 +26,6 @@ public class MyJukeBox {
     public void init() {
         clips = new HashMap<String, Clip>();
         gap = 0;
-
-        //SONS GLOBAIS
-        load("/res/audio/click.wav", Thorns.AUDIO_CHOICE);
     }
 
     // Loads up audio located at path "s" and stores
@@ -39,7 +34,7 @@ public class MyJukeBox {
         if(clips.get(n) != null) return;
         Clip clip;
         try {
-            InputStream in = JukeBox.class.getResourceAsStream(s);
+            InputStream in = MyJukeBox.class.getResourceAsStream(s);
             InputStream bin = new BufferedInputStream(in);
             AudioInputStream ais =
                     AudioSystem.getAudioInputStream(bin);

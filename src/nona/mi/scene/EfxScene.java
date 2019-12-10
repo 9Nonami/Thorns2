@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 import nona.mi.image.ImageEfx;
 import nona.mi.image.BaseImage;
-import nona.mi.main.Thorns;
+import nona.mi.main.Game;
 
 public class EfxScene extends Scene {
 
@@ -14,14 +14,14 @@ public class EfxScene extends Scene {
     private BaseImage textArea;
     private boolean endAnimation;
 
-    public EfxScene(Thorns thorns, ImageEfx[] images, BaseImage background, int nextScene) {
-        super(thorns, nextScene);
+    public EfxScene(Game game, ImageEfx[] images, BaseImage background, int nextScene) {
+        super(game, nextScene);
         this.images = images;
         this.background = background;
     }
 
-    public EfxScene(Thorns thorns, ImageEfx[] images, BaseImage[] backgrounds, int nextScene) {
-        super(thorns, nextScene);
+    public EfxScene(Game game, ImageEfx[] images, BaseImage[] backgrounds, int nextScene) {
+        super(game, nextScene);
         this.images = images;
         this.backgrounds = backgrounds;
     }
@@ -34,7 +34,7 @@ public class EfxScene extends Scene {
                 images[i].update();
                 if (allImagesAreLoaded()) {
                     endAnimation = true;
-                    thorns.nextScene(nextScene);
+                    game.nextScene();
                     reset();
                 }
             }
