@@ -7,7 +7,7 @@ public class Todo {
     *
     *   todo : Scene so toca musica de fundo! <<<<<<
     *
-    *   todo : ver a diferenca entre stop e close da jukebox
+    *   todo : em Thorns, quem usa o getScene??
     *
     *   todo : resetar todos audios na mudança de pack
     *
@@ -19,6 +19,6 @@ public class Todo {
     *
     *   todo : testar ChoiceScene
     *
-    *   todo : lock para click so ser pego depois de endAnimation
+    *
     * */
 }

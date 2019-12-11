@@ -1,10 +1,11 @@
 package nona.mi.main;
 
-import nona.mi.loader.MyJukeBox;
+import nona.mi.jukebox.MyJukeBox;
 import nona.mi.scene.LoadScene;
 import nona.mi.scene.Scene;
 import nona.mi.scene.ScenePackage;
 
+import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -17,6 +18,7 @@ import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.BorderLayout;
+import java.util.Map;
 
 public abstract class Game implements Runnable, KeyListener, MouseListener, MouseMotionListener {
 
@@ -48,7 +50,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     protected int scene;
     protected int pack;
 
-    private MyJukeBox packJukebox;
+    protected MyJukeBox packJukebox;
     private String currentSound;
 
     protected ScenePackage packBasis;
@@ -245,7 +247,17 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
             @Override
             public void run() {
                 packBasis = new ScenePackage();
-                packJukebox = new MyJukeBox(); //todo : resetar tudo antes
+
+                //not sure if this is the best way to iterate and modify the hashmap contents
+                if (packJukebox != null) {
+                    for (Map.Entry<String, Clip> temp : packJukebox.getClips().entrySet()) {
+                        System.out.println("closing: " + temp.getKey());
+                        temp.getValue().close();
+                    }
+                    System.out.println("");
+                }
+                currentSound = null;
+                packJukebox = new MyJukeBox();
 
                 initPacks();
 
@@ -412,10 +424,6 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     public MyJukeBox getPackJukebox() {
         return packJukebox;
-    }
-
-    public void setPackJukebox(MyJukeBox packJukebox) {
-        this.packJukebox = packJukebox;
     }
 
     public boolean isUp() {

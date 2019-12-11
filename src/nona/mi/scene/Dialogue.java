@@ -123,7 +123,7 @@ public class Dialogue {
             System.out.println("null dialogue");
             System.exit(0);
         }
-            }
+    }
 
     private void renderNameBg(Graphics g) {
         if (name != null) {

@@ -109,8 +109,8 @@ public class StandardScene extends Scene {
 
         if (dialogueBasis.getEndAnimation() && (space || clicked)) {
 
-            if(dialogueBasis.getAudioName() != null){
-                game.getStandardJukeBox().stop(dialogueBasis.getAudioName());
+            if(dialogueBasis.getAudioName() != null && game.getPackJukebox().isPlaying(dialogueBasis.getAudioName())) {
+                game.getPackJukebox().stop(dialogueBasis.getAudioName());
             }
 
             dialogueBasis.reset();
