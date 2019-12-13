@@ -9,7 +9,7 @@ public class Todo {
     *
     *   todo : em Thorns, quem usa o getScene??
     *
-    *   todo : resetar todos audios na mudança de pack
+    *
     *
     *   todo : criar audios globais em thorns
     *
@@ -19,6 +19,7 @@ public class Todo {
     *
     *   todo : testar ChoiceScene
     *
+    *   todo : criar uma MainScene mais abstrata
     *
     * */
 }

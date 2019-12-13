@@ -9,13 +9,20 @@ public class Fade {
 
     public static final int TRANSPARENT = 0;
     public static final int SOLID = 255;
+
     public static final int SLOW = 1;
     public static final int MEDIUM = 2;
     public static final int FAST = 5;
+    public static final int DEMONIAC = 25;
+
     private float alpha;
     private int alphaBasis;
+
     private float speed;
+    private float speedBasis;
+
     private boolean endAnimation;
+    private boolean fadeOutIn;
 
     private int r;
     private int g;
@@ -37,6 +44,8 @@ public class Fade {
 
         alphaBasis = alphaValue;
 
+        speedBasis = this.speed;
+
         this.r = 0;
         this.g = 0;
         this.b = 0;
@@ -51,12 +60,22 @@ public class Fade {
     public void update() {
         if (!endAnimation) {
             alpha += speed;
-            if (alpha > 255 || alpha < 0) {
-                endAnimation = true;
-                if (alpha > 255) {
-                    alpha = 255;
-                } else if (alpha < 0) {
-                    alpha = 0;
+            if (!fadeOutIn) {
+                if (alpha > SOLID || alpha < TRANSPARENT) {
+                    endAnimation = true;
+                    if (alpha > SOLID) {
+                        alpha = SOLID;
+                    } else if (alpha < TRANSPARENT) {
+                        alpha = TRANSPARENT;
+                    }
+                }
+            } else {
+                if (alpha < TRANSPARENT) {
+                    alpha = TRANSPARENT;
+                    speed *= -1;
+                } else if (alpha > SOLID) {
+                    alpha = SOLID;
+                    endAnimation = true;
                 }
             }
         }
@@ -71,8 +90,13 @@ public class Fade {
         return endAnimation;
     }
 
+    public void setFadeOutIn(boolean fadeOutIn) {
+        this.fadeOutIn = fadeOutIn;
+    }
+
     public void reset() {
         alpha = alphaBasis;
+        speed = speedBasis;
         endAnimation = false;
     }
 

@@ -14,12 +14,7 @@ import nona.mi.jukebox.MyJukeBox;
 import nona.mi.efx.Fade;
 import nona.mi.image.ImageEfx;
 import nona.mi.loader.TextLoader;
-import nona.mi.scene.EfxScene;
-import nona.mi.scene.FadeScene;
-import nona.mi.scene.FadeTopBottomScene;
-import nona.mi.scene.LoadScene;
-import nona.mi.scene.Scene;
-import nona.mi.scene.StandardScene;
+import nona.mi.scene.*;
 
 public class Thorns extends Game {
 
@@ -66,13 +61,26 @@ public class Thorns extends Game {
         setasAnim = new ImageEfx(this, setas, setasCoord, 0.15f , ImageEfx.LOOP);
 
         //PACK E SCENE
-        scene = 15;
+        scene = 0;
         pack = 0;
 
         //LOAD SCENE
-        setLoadScene(new LoadScene(this, new BaseImage(ImageLoader.loadImage("/res/bg/load.png"), 0, 0)));
+        loadScene = new LoadScene(this, new BaseImage(ImageLoader.loadImage("/res/bg/load.png"), 0, 0));
 
-        loadPack();
+        //MAIN MENU SCEBE
+        TestButtonScene2 testButtonScene = new TestButtonScene2(this);
+        mainMenu = testButtonScene;
+
+        //FADESCENE logo
+        Fade fadeLogo = new Fade(this, Fade.SOLID, Fade.FAST);
+        fadeLogo.setFadeOutIn(true);
+        FadeScene fs = new FadeScene(this, new BaseImage(ImageLoader.loadImage("/res/menu/logo.png"), 0, 0), fadeLogo, Scene.LAST_SCENE);
+        fs.setDirectScene(mainMenu);
+        sceneBasis = fs;
+
+        //STANDARD AUDIOS
+        standardJukeBox.load("/res/audio/click.wav", "click");
+
     }
 
     @Override
@@ -97,8 +105,6 @@ public class Thorns extends Game {
     public synchronized void initPacks() {
         if (pack == 0) {
             initPack0();
-        } else if (pack == 1) {
-            initPack1();
         }
     }
 
@@ -268,39 +274,12 @@ public class Thorns extends Game {
 
         //cena 15 - temp
         String txtScene15 = sentences.get(15);
-        StandardScene scene15 = new StandardScene(this, bgScene0, setasAnim, Scene.LAST_SCENE);
-        scene15.setNextPack(1);
+        StandardScene scene15 = new StandardScene(this, bgScene0, setasAnim, 0);
+        //scene15.setNextPack(0);
         scene15.setDialog(txtScene15, fontDataBase, textArea, nameBg);
         scene15.defineSound(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(15, scene15);
 
-    }
-
-    private void initPack1() {
-        //IMAGE
-        BufferedImage imgScene0 = ImageLoader.loadImage("/res/bg/trainning-center.png");
-        BaseImage trainningCenterImg = new BaseImage(imgScene0, 0, 0);
-
-        //BACKGROUND AUDIO
-        String mlm = "tainningCenterAudio";
-        packJukebox.load("/res/audio/mlm.wav", mlm);
-
-        //------------------------------------------------------------------------------------------------
-
-        //cena 0
-        String txtScene0 = "-:Articuno_-:Zapdos_-:Moltres";
-        StandardScene scene0 = new StandardScene(this, trainningCenterImg, setasAnim, 1);
-        scene0.setDialog(txtScene0, fontDataBase, textArea, nameBg);
-        scene0.defineSound(mlm, MyJukeBox.LOOP);
-        packBasis.put(0, scene0);
-
-        //cena 1
-        String txtScene1 = "-:Aldora...";
-        StandardScene scene1 = new StandardScene(this, trainningCenterImg, setasAnim, Scene.LAST_SCENE);
-        scene1.setNextPack(0);
-        scene1.setDialog(txtScene1, fontDataBase, textArea, nameBg);
-        scene1.defineSound(mlm, MyJukeBox.LOOP);
-        packBasis.put(1, scene1);
     }
 
     private void resetKeys() {

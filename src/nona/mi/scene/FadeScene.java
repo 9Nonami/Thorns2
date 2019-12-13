@@ -11,6 +11,9 @@ public class FadeScene extends Scene {
     private Fade fade;
     private BaseImage background;
     private BaseImage[] backgrounds;
+    private Scene directScene;
+
+
 
     public FadeScene(Game game, BaseImage[] backgrounds, Fade fade, int nextScene) {
         super(game, nextScene);
@@ -24,6 +27,10 @@ public class FadeScene extends Scene {
         this.fade = fade;
     }
 
+    public void setDirectScene(Scene directScene) {
+        this.directScene = directScene;
+    }
+
     @Override
     public void update() {
         super.update();
@@ -31,8 +38,12 @@ public class FadeScene extends Scene {
         if (!fade.getEndAnimation()) {
             fade.update();
         } else {
-            game.nextScene();
-            reset();
+
+            if (directScene != null) {
+                game.setSceneBasis(directScene);
+            } else {
+                game.nextScene();
+            }
         }
     }
 

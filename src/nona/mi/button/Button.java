@@ -20,6 +20,11 @@ public abstract class Button {
     protected boolean lockAudio;
 
 
+
+    public Button(Game game) {
+        this.game = game;
+    }
+
     public Button(Game game, int nextScene) {
         this.game = game;
         this.nextScene = nextScene;

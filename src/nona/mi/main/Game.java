@@ -1,7 +1,6 @@
 package nona.mi.main;
 
 import nona.mi.jukebox.MyJukeBox;
-import nona.mi.scene.LoadScene;
 import nona.mi.scene.Scene;
 import nona.mi.scene.ScenePackage;
 
@@ -46,7 +45,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     private int mouseX;
     private int mouseY;
 
-    private MyJukeBox standardJukeBox;
+    protected MyJukeBox standardJukeBox;
     protected int scene;
     protected int pack;
 
@@ -67,7 +66,9 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     protected boolean space;
     protected boolean lockSpace;
 
-    protected LoadScene loadScene;
+    protected Scene loadScene;
+    protected Scene mainMenu;
+    //todo : colocar no hashmap
 
 
 
@@ -125,10 +126,6 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         running = true;
         jframe.setVisible(true);
         t.start();
-    }
-
-    public void setLoadScene(LoadScene loadScene) {
-        this.loadScene = loadScene;
     }
 
     private void update() {
@@ -446,6 +443,9 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         return space;
     }
 
-    //todo : uma jukebox so para armazenar audios globais
-    //todo : uma jukebox que armazena apenas o conteudo do pack
+    public void setSceneBasis(Scene sceneBasis) {
+        this.sceneBasis.reset();
+        this.sceneBasis = sceneBasis;
+    }
+
 }
