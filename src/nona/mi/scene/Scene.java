@@ -2,8 +2,10 @@ package nona.mi.scene;
 
 import java.awt.Graphics;
 
+import nona.mi.button.Button;
 import nona.mi.jukebox.MyJukeBox;
 import nona.mi.main.Game;
+import nona.mi.menu.Menu;
 
 // Com relacao ao audio, Scene so toca musicas de fundo.
 // Caso algum audio esteja relacionado a fala do personagem
@@ -18,6 +20,8 @@ public abstract class Scene {
 	protected int soundStyle; //loop ou once
 	protected boolean lock; //faz com que o codigo do update so execute uma vez
 	public static final int LAST_SCENE = -99; //definir como last_scene significa que depois desta cena, outro pack eh carregado. NAO ESQUECER DE DEFINIR O PACK!
+	public static final int SAVE_MENU_SCENE = -98;
+	protected Menu menu;
 
 
 
@@ -63,9 +67,36 @@ public abstract class Scene {
 
 			lock = true;
 		}
+
+		updateMenu();
+
 	}
 
-	public abstract void render(Graphics g);
+	private void updateMenu() { //todo : parar o audio??
+		if (menu != null) {
+			menu.update();
+			for (Button temp : menu.getButtons()) {
+				if (temp.isClicked()) {
+					if (temp.getNextScene() == SAVE_MENU_SCENE) {
+						game.getSaveMenu().setInfo(game.getPack(), game.getScene(), game.getFrame());
+						game.setSceneBasisWithoutReset(game.getSaveMenu());
+						menu.reset();
+						game.setClicked(false);
+					} //todo : outras cenas
+					break;
+				}
+			}
+		}
+	}
+
+	public void render(Graphics g) {
+		renderScene(g);
+		if (menu != null) {
+			menu.render(g);
+		}
+	}
+
+	public abstract void renderScene(Graphics g);
 
 	public void defineSound(String soundName, int soundStyle) {
 		this.soundName = soundName;
@@ -80,12 +111,23 @@ public abstract class Scene {
 		return nextPack;
 	}
 
+	public void setNextScene(int nextScene) {
+		this.nextScene = nextScene;
+	}
+
 	public int getNextScene() {
 		return nextScene;
 	}
 
+	public void setMenu(Menu menu) {
+		this.menu = menu;
+	}
+
 	public void reset() {
 		lock = false;
+		if (menu != null) {
+			menu.reset();
+		}
 	}
 
 	public void createSound(String path, int soundStyle) {

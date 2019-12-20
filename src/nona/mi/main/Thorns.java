@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
+import nona.mi.button.Button;
+import nona.mi.button.RectButton;
 import nona.mi.db.FontDataBase;
 import nona.mi.image.BaseImage;
 import nona.mi.image.Coordinates;
@@ -14,6 +16,8 @@ import nona.mi.jukebox.MyJukeBox;
 import nona.mi.efx.Fade;
 import nona.mi.image.ImageEfx;
 import nona.mi.loader.TextLoader;
+import nona.mi.menu.Menu;
+import nona.mi.save.Save;
 import nona.mi.scene.*;
 
 public class Thorns extends Game {
@@ -26,6 +30,7 @@ public class Thorns extends Game {
     private BufferedImage pointer;
     private ImageEfx setasAnim;
     private boolean showScene;
+    private Menu menu;
 
 
 
@@ -53,12 +58,15 @@ public class Thorns extends Game {
         pointer = ImageLoader.loadImage("/res/font/pointer.png");
 
         //ANIMACAO SETAS
-        BufferedImage uno = ImageLoader.loadImage("/res/menu/uno.png");
-        BufferedImage dos = ImageLoader.loadImage("/res/menu/dos.png");
-        BufferedImage tres = ImageLoader.loadImage("/res/menu/tres.png");
-        BufferedImage[] setas = {uno, dos, tres};
-        Coordinates setasCoord = new Coordinates(getWidth() - uno.getWidth(), getHeight() - uno.getHeight());
-        setasAnim = new ImageEfx(this, setas, setasCoord, 0.15f , ImageEfx.LOOP);
+        BufferedImage s1 = ImageLoader.loadImage("/res/misc/s1.png");
+        BufferedImage s2 = ImageLoader.loadImage("/res/misc/s2.png");
+        BufferedImage s3 = ImageLoader.loadImage("/res/misc/s3.png");
+        BufferedImage s4 = ImageLoader.loadImage("/res/misc/s4.png");
+        BufferedImage s5 = ImageLoader.loadImage("/res/misc/s5.png");
+
+        BufferedImage[] setas = {s1, s2, s3, s4, s5};
+        Coordinates setasCoord = new Coordinates(getWidth() - s1.getWidth(), getHeight() - s1.getHeight());
+        setasAnim = new ImageEfx(this, setas, setasCoord, 0.25f , ImageEfx.LOOP); //0.15f
 
         //PACK E SCENE
         scene = 0;
@@ -67,8 +75,8 @@ public class Thorns extends Game {
         //LOAD SCENE
         loadScene = new LoadScene(this, new BaseImage(ImageLoader.loadImage("/res/bg/load.png"), 0, 0));
 
-        //MAIN MENU SCEBE
-        TestButtonScene2 testButtonScene = new TestButtonScene2(this);
+        //MAIN MENU SCENE
+        TestButtonScene testButtonScene = new TestButtonScene(this);
         mainMenu = testButtonScene;
 
         //FADESCENE logo
@@ -81,6 +89,20 @@ public class Thorns extends Game {
         //STANDARD AUDIOS
         standardJukeBox.load("/res/audio/click.wav", "click");
 
+        //MENU
+        RectButton rb = new RectButton(this, Scene.SAVE_MENU_SCENE);
+        rb.setImages(ImageLoader.loadImage("/res/buttons/uno.png"), ImageLoader.loadImage("/res/buttons/dos.png"), 50, 50);
+        rb.setAudioName("click");
+        menu = new Menu(this, new Button[]{rb});
+
+        //SAVE
+        save = new Save(12);
+
+        //SAVE MENU
+        SaveMenuScene saveMenuScene = new SaveMenuScene(this, save); // todo : save
+        saveMenuScene.createButtons(12, 2, 3, 0, 0, 10);
+        saveMenu = saveMenuScene;
+
     }
 
     @Override
@@ -91,8 +113,8 @@ public class Thorns extends Game {
 
     @Override
     public void renderClass(Graphics g) {
-        super.testFill();
-        sceneBasis.render(g);
+        testFill(g);
+        sceneBasis.render(g);//todo
 
         //DESENHA O NUMERO ATUAL DA CENA
         if (showScene) {
@@ -154,6 +176,7 @@ public class Thorns extends Game {
         StandardScene scene1 = new StandardScene(this, bgScene0, setasAnim, 2);
         scene1.setDialog(txtScene1, fontDataBase, textArea, nameBg);
         scene1.defineSound(trainningCenterAudio, MyJukeBox.LOOP);
+        scene1.setMenu(menu);
         packBasis.put(1, scene1);
 
         //cena 2

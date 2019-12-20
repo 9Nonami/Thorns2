@@ -36,7 +36,7 @@ public class TestButtonScene extends Scene {
     }
 
     @Override
-    public void render(Graphics g) {
+    public void renderScene(Graphics g) {
         rectButton.render(g);
     }
 

@@ -6,6 +6,7 @@ public class Main{
 		//new Thorns(854, 480, "Thorns & Petals", Thorns.SMOOTH_GAME_LOOP).start();
 		Thorns thorns = new Thorns(854, 480, "Thorns & Petals", Thorns.SMOOTH_GAME_LOOP);
 		thorns.setShowScene(true);
+		//thorns.setShowLoopLog(true);
 		thorns.start();
 	}
 }

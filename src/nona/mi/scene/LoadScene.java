@@ -20,7 +20,7 @@ public class LoadScene extends Scene {
     }
 
     @Override
-    public void render(Graphics g) {
+    public void renderScene(Graphics g) {
         background.render(g);
     }
 

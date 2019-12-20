@@ -38,7 +38,7 @@ public class FadeTopBottomScene extends Scene {
     }
 
     @Override
-    public void render(Graphics g) {
+    public void renderScene(Graphics g) {
         for (int i = 0; i < bottom.length; i++) {
             bottom[i].render(g);
         }

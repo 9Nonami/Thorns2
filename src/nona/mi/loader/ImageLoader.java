@@ -2,6 +2,7 @@ package nona.mi.loader;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.InputStream;
 
 public class ImageLoader {
@@ -26,6 +27,22 @@ public class ImageLoader {
 				System.out.println("closing stream error");
 				System.exit(0);
 			}
+		}
+
+		return temp;
+	}
+
+	public static BufferedImage loadFromDisk(String path) {
+
+		File file = new File(path);
+		BufferedImage temp = null;
+
+		try{
+			temp = ImageIO.read(file);
+		} catch (Exception ex){
+			ex.printStackTrace();
+			System.out.println("image loading error");
+			System.exit(0);
 		}
 
 		return temp;

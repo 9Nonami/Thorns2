@@ -130,7 +130,7 @@ public class StandardScene extends Scene {
     }
 
     @Override
-    public void render(Graphics g) {
+    public void renderScene(Graphics g) {
 
         if (backgrounds != null) {
             for (int i = 0; i < backgrounds.length; i++) {

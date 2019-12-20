@@ -18,6 +18,7 @@ public abstract class Button {
     protected int imageY;
     protected String audioName;
     protected boolean lockAudio;
+    protected int id;
 
 
 
@@ -90,4 +91,15 @@ public abstract class Button {
         this.audioName = audioName;
     }
 
+    public void setStandardImage(BufferedImage standardImage) {
+        this.standardImage = standardImage;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

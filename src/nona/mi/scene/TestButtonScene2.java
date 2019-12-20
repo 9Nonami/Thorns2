@@ -4,8 +4,11 @@ import nona.mi.button.RectButton;
 import nona.mi.loader.ImageLoader;
 import nona.mi.main.Game;
 
+import javax.imageio.ImageIO;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class TestButtonScene2 extends Scene implements Runnable{
 
@@ -52,11 +55,11 @@ public class TestButtonScene2 extends Scene implements Runnable{
             if (!thread.isAlive()) {
                 yes.update();
                 no.update();
-                if (yes.isClicked() || no.isClicked()) {
-                    //confirm = false;
+                if (yes.isClicked()) {
                     thread = new Thread(this);
                     thread.start();
-                    //reset();
+                } else if (no.isClicked()) {
+                    reset();
                 }
             }
         }
@@ -66,18 +69,33 @@ public class TestButtonScene2 extends Scene implements Runnable{
     @Override
     public void run() {
         System.out.println("iniciando a thread");
+
+        String home = System.getProperty("user.home");
+        String image = home + "\\thorns\\asd.png";
+        File file = new File(image);
+
+
         try {
+            //file.createNewFile();
+            ImageIO.write(game.getFrame(), "png", file);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
+
+        /*try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
+
         System.out.println("foi");
-        confirm = false;
+
         reset();
     }
 
     @Override
-    public void render(Graphics g) {
+    public void renderScene(Graphics g) {
         rectButton.render(g);
         if (confirm) {
             yes.render(g);

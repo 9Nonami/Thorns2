@@ -1,6 +1,8 @@
 package nona.mi.main;
 
 import nona.mi.jukebox.MyJukeBox;
+import nona.mi.save.Save;
+import nona.mi.scene.SaveMenuScene;
 import nona.mi.scene.Scene;
 import nona.mi.scene.ScenePackage;
 
@@ -17,6 +19,7 @@ import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.BorderLayout;
+import java.awt.image.BufferedImage;
 import java.util.Map;
 
 public abstract class Game implements Runnable, KeyListener, MouseListener, MouseMotionListener {
@@ -66,8 +69,13 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     protected boolean space;
     protected boolean lockSpace;
 
+    private BufferedImage frame;
+
+    protected Save save;
+
     protected Scene loadScene;
     protected Scene mainMenu;
+    protected SaveMenuScene saveMenu;
     //todo : colocar no hashmap
 
 
@@ -106,7 +114,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         jframe.add(canvas, BorderLayout.CENTER);
         jframe.pack();
         jframe.setLocationRelativeTo(null);
-        jframe.setResizable(false);
+        //jframe.setResizable(false);
 
         jframe.addKeyListener(this);
 
@@ -134,6 +142,28 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     public abstract void updateClass();
 
+    //*
+    private void render() {
+        bs = canvas.getBufferStrategy();
+
+        //tendo que usar uma imagem para ter o screenshot da tela.
+        //pelo que vi, reduziu +-200 fps
+        frame = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics g = frame.getGraphics();
+        g.clearRect(0, 0, width, height);
+        renderClass(g);
+
+        this.g = bs.getDrawGraphics();
+        this.g.drawImage(frame, 0, 0, null);
+
+        g.dispose();
+        this.g.dispose();
+
+        bs.show();
+    }
+    //*/
+
+    /*
     private void render() {
         bs = canvas.getBufferStrategy();
         g = bs.getDrawGraphics();
@@ -142,6 +172,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         g.dispose();
         bs.show();
     }
+    //*/
 
     public abstract void renderClass(Graphics g);
 
@@ -366,7 +397,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         mouseY = mouseEvent.getY();
     }
 
-    public void testFill() {
+    public void testFill(Graphics g) {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, width, height);
     }
@@ -443,9 +474,62 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         return space;
     }
 
+    public ScenePackage getPackBasis() {
+        return packBasis;
+    }
+
     public void setSceneBasis(Scene sceneBasis) {
-        this.sceneBasis.reset();
+        this.sceneBasis.reset(); //todo : achar onde isso aqui eh usado
         this.sceneBasis = sceneBasis;
     }
 
+    public void setSceneBasisWithoutReset(int scene) {
+        sceneBasis = packBasis.get(scene);
+    }
+
+    public void setSceneBasisWithoutReset(Scene scene) {
+        sceneBasis = scene;
+    }
+
+    public int getPack() {
+        return pack;
+    }
+
+    public int getScene() {
+        return scene;
+    }
+
+    public BufferedImage getFrame() {
+        return frame;
+    }
+
+    public Save getSave() {
+        return save;
+    }
+
+    public void setSave(Save save) {
+        this.save = save;
+    }
+
+
+
+
+
+
+
+
+
+
+    //todo : temp : so testando a mudanca de cena. APAGAR!
+    public Scene getLoadScene() {
+        return loadScene;
+    }
+
+    public Scene getMainMenu() {
+        return mainMenu;
+    }
+
+    public SaveMenuScene getSaveMenu() {
+        return saveMenu;
+    }
 }

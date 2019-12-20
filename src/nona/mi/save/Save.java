@@ -9,25 +9,23 @@ import java.io.FileWriter;
 public class Save {
 
     private String[] slots;
-    public static final int NUM_SLOTS = 10;
     private File folderPath;
     private File savePath;
+    private String os;
 
-    //x-x-x-x
-    //[0]id_do_slot [1]- [2]id_filling_state [3]- [4]pack [5]- [6]scene
-    public static final int SLOT_ID = 0;
-    public static final int IMAGE_SLOT_ID = 2;
-    public static final int PACK_ID = 4;
-    public static final int SCENE_ID = 6;
+    //x-x
+    //[0]pack [1]- [2]scene
 
-    public static final char FILLED = '1';
-    public static final char EMPTY = '0';
+    public static final int PACK_ID = 0;
+    public static final int SCENE_ID = 2;
 
-    public Save() {
 
-        slots = new String[NUM_SLOTS];
 
-        String os = System.getProperty("os.name").toLowerCase();
+    public Save(int totalSlots) {
+
+        slots = new String[totalSlots];
+
+        os = System.getProperty("os.name").toLowerCase();
         String home = System.getProperty("user.home");
 
         String folderStr;
@@ -44,7 +42,7 @@ public class Save {
             saveFileStr = folderStr + "\\save.9";
             savePath = new File(saveFileStr);
         } else {
-            System.out.println("I guess you're not using Linux or Windows. The save for this system was not implemented yet. Please see the Save.class to adjust it.");
+            System.out.println("I guess you're not using Linux or Windows. The save file for this system was not implemented yet. Please see the Save.class to adjust it.");
             System.exit(0);
         }
 
@@ -70,8 +68,8 @@ public class Save {
     private void createBasicSaveFile(File savePath) {
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(savePath))){
             for (int i = 0; i < slots.length; i++) {
-                String temp = "" + i + "-0-0-0&" + "\n";
-                bw.write(temp);
+                String temp = "" + i + "0-0-0&" + "\n";
+                bw.write("0-0&\n");
             }
             bw.flush();
         } catch (Exception ex){
@@ -100,5 +98,13 @@ public class Save {
 
     public String[] getSlots() {
         return slots;
+    }
+
+    public File getFolderPath() {
+        return folderPath;
+    }
+
+    public String getOs() {
+        return os;
     }
 }
