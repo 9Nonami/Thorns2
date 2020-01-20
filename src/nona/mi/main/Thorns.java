@@ -15,6 +15,7 @@ import nona.mi.loader.ImageLoader;
 import nona.mi.jukebox.MyJukeBox;
 import nona.mi.efx.Fade;
 import nona.mi.image.ImageEfx;
+import nona.mi.loader.ScreenshotLoader;
 import nona.mi.loader.TextLoader;
 import nona.mi.menu.Menu;
 import nona.mi.save.Save;
@@ -30,7 +31,7 @@ public class Thorns extends Game {
     private BufferedImage pointer;
     private ImageEfx setasAnim;
     private boolean showScene;
-    private Menu menu;
+    private Menu optionsMenu;
 
 
 
@@ -76,7 +77,7 @@ public class Thorns extends Game {
         loadScene = new LoadScene(this, new BaseImage(ImageLoader.loadImage("/res/bg/load.png"), 0, 0));
 
         //MAIN MENU SCENE
-        TestButtonScene testButtonScene = new TestButtonScene(this);
+        TestButtonScene testButtonScene = new TestButtonScene(this); //todo : tirar o 2
         mainMenu = testButtonScene;
 
         //FADESCENE logo
@@ -93,14 +94,18 @@ public class Thorns extends Game {
         RectButton rb = new RectButton(this, Scene.SAVE_MENU_SCENE);
         rb.setImages(ImageLoader.loadImage("/res/buttons/uno.png"), ImageLoader.loadImage("/res/buttons/dos.png"), 50, 50);
         rb.setAudioName("click");
-        menu = new Menu(this, new Button[]{rb});
+        optionsMenu = new Menu(this, new Button[]{rb});
 
         //SAVE
         save = new Save(12);
 
+        //SCREENSHOTS
+        screenshots = ScreenshotLoader.loadScreenshots(save);
+
         //SAVE MENU
-        SaveMenuScene saveMenuScene = new SaveMenuScene(this, save); // todo : save
-        saveMenuScene.createButtons(12, 2, 3, 0, 0, 10);
+        SaveMenuScene saveMenuScene = new SaveMenuScene(this, save, 6); // todo : save
+        saveMenuScene.setImages("/res/buttons/empty-slot.png", "/res/buttons/focused-slot.png");
+        saveMenuScene.createButtons(12, 2, 3, 44, 44, 31);
         saveMenu = saveMenuScene;
 
     }
@@ -176,7 +181,7 @@ public class Thorns extends Game {
         StandardScene scene1 = new StandardScene(this, bgScene0, setasAnim, 2);
         scene1.setDialog(txtScene1, fontDataBase, textArea, nameBg);
         scene1.defineSound(trainningCenterAudio, MyJukeBox.LOOP);
-        scene1.setMenu(menu);
+        scene1.setMenu(optionsMenu);
         packBasis.put(1, scene1);
 
         //cena 2

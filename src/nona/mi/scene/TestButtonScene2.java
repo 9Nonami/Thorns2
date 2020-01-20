@@ -8,7 +8,6 @@ import javax.imageio.ImageIO;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 
 public class TestButtonScene2 extends Scene implements Runnable{
 
@@ -83,11 +82,11 @@ public class TestButtonScene2 extends Scene implements Runnable{
             System.exit(0);
         }
 
-        /*try {
-            Thread.sleep(1000);
+        try {
+            Thread.sleep(4000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }*/
+        }
 
         System.out.println("foi");
 

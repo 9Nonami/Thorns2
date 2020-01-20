@@ -2,53 +2,58 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50053a92-1326-4f75-bf22-ca2e42361449" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/nona/mi/scene/SaveMenuScene.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/res/buttons/empty-slot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/res/buttons/focused-slot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/res/misc/s1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/res/misc/s2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/res/misc/s3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/res/misc/s4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/res/misc/s5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/nona/mi/button/ButtonGroup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/nona/mi/loader/ScreenshotLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/Button.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/Button.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/loader/ImageLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/loader/ImageLoader.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/menu/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/menu/Menu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/save/Save.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/save/Save.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/ChoiceScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/ChoiceScene.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/EfxScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/EfxScene.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/FadeScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/FadeScene.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/FadeTopBottomScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/FadeTopBottomScene.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/LoadScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/LoadScene.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/Scene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/Scene.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/StandardScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/StandardScene.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/TestButtonScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/TestButtonScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/TestButtonScene2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/TestButtonScene2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/res/buttons/dos.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/res/buttons/dos.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/res/dialog/scene0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/res/dialog/scene0.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/res/font/namesmap.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/res/font/namesmap.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/res/font/text.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/res/font/text.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/animatedcomponent/AnimatedComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/animatedcomponent/AnimatedComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/button/AnimatedRectButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/AnimatedRectButton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/button/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/Button.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/button/PolygonalButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/PolygonalButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/button/RectButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/RectButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/db/FontDataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/db/FontDataBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/efx/Fade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/efx/Fade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/image/BaseImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/image/BaseImage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/image/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/image/Coordinates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/image/ImageEfx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/image/ImageEfx.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/jukebox/MyJukeBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/jukebox/MyJukeBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/loader/DialogLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/loader/DialogLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/loader/FontGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/loader/FontGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/loader/ImageLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/loader/ImageLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/loader/TextLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/loader/TextLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/menu/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/save/Save.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/save/Save.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/ChoiceScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/ChoiceScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/Dialogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/Dialogue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/EfxScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/EfxScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/FadeScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/FadeScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/FadeTopBottomScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/FadeTopBottomScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/LoadScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/LoadScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/MenuBasis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/MenuBasis.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/SaveMenuScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/SaveMenuScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/Scene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/ScenePackage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/ScenePackage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/StandardScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/StandardScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/TestButtonScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/TestButtonScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/TestButtonScene2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/TestButtonScene2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/buttons/dos.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/buttons/uno.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/save/save.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/spritesheet/SpriteSheet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/spritesheet/SpriteSheet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/dialog/scene0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/dialog/scene0.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/font/namesmap.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/font/namesmap.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/font/text.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/font/text.txt" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -99,6 +104,18 @@
       <recent name="C:\Users\Mi\IdeaProjects\Thorns2\src\res" />
     </key>
   </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="nona.mi.main.Main" />
@@ -118,18 +135,6 @@
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -185,22 +190,22 @@
       <screen x="0" y="0" width="1024" height="728" />
     </state>
     <state x="292" y="118" key="FileChooserDialogImpl/0.0.1024.728@0.0.1024.728" timestamp="1576359340533" />
-    <state width="980" height="252" key="GridCell.Tab.0.bottom" timestamp="1576832680803">
+    <state width="980" height="225" key="GridCell.Tab.0.bottom" timestamp="1579477173061">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state width="980" height="252" key="GridCell.Tab.0.bottom/0.0.1024.728@0.0.1024.728" timestamp="1576832680803" />
-    <state width="980" height="252" key="GridCell.Tab.0.center" timestamp="1576832680803">
+    <state width="980" height="225" key="GridCell.Tab.0.bottom/0.0.1024.728@0.0.1024.728" timestamp="1579477173061" />
+    <state width="980" height="225" key="GridCell.Tab.0.center" timestamp="1579477173061">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state width="980" height="252" key="GridCell.Tab.0.center/0.0.1024.728@0.0.1024.728" timestamp="1576832680803" />
-    <state width="980" height="252" key="GridCell.Tab.0.left" timestamp="1576832680803">
+    <state width="980" height="225" key="GridCell.Tab.0.center/0.0.1024.728@0.0.1024.728" timestamp="1579477173061" />
+    <state width="980" height="225" key="GridCell.Tab.0.left" timestamp="1579477173061">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state width="980" height="252" key="GridCell.Tab.0.left/0.0.1024.728@0.0.1024.728" timestamp="1576832680803" />
-    <state width="980" height="252" key="GridCell.Tab.0.right" timestamp="1576832680803">
+    <state width="980" height="225" key="GridCell.Tab.0.left/0.0.1024.728@0.0.1024.728" timestamp="1579477173061" />
+    <state width="980" height="225" key="GridCell.Tab.0.right" timestamp="1579477173061">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state width="980" height="252" key="GridCell.Tab.0.right/0.0.1024.728@0.0.1024.728" timestamp="1576832680803" />
+    <state width="980" height="225" key="GridCell.Tab.0.right/0.0.1024.728@0.0.1024.728" timestamp="1579477173061" />
     <state width="980" height="249" key="GridCell.Tab.1.bottom" timestamp="1576473057549">
       <screen x="0" y="0" width="1024" height="728" />
     </state>

@@ -39,6 +39,7 @@ public abstract class Button {
     }
 
     public void update() {
+        clicked = false; // todo : ver se isso aqui nao vai atrapalhar
         if (isMouseOnButton()) {
             focused = true;
             if (!lockAudio) {

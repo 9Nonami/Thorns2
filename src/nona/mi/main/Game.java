@@ -20,6 +20,7 @@ import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Game implements Runnable, KeyListener, MouseListener, MouseMotionListener {
@@ -77,6 +78,10 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     protected Scene mainMenu;
     protected SaveMenuScene saveMenu;
     //todo : colocar no hashmap
+
+
+    //
+    protected HashMap<Integer, BufferedImage> screenshots;
 
 
 
@@ -531,5 +536,9 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     public SaveMenuScene getSaveMenu() {
         return saveMenu;
+    }
+
+    public HashMap<Integer, BufferedImage> getScreenshots() {
+        return screenshots;
     }
 }
