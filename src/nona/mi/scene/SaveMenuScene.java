@@ -5,7 +5,7 @@ import nona.mi.main.Game;
 import nona.mi.save.Save;
 
 import javax.imageio.ImageIO;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -70,7 +70,14 @@ public class SaveMenuScene extends Scene {
                                 String tempPath = save.getFolderPath() + "/" + buttonGroup.getClickedButton() + ".png";
                                 System.out.println(tempPath);
                                 //image-creation
-                                ImageIO.write(screenshot, "png", new File(tempPath));
+
+                                Image scaledInstance = screenshot.getScaledInstance(235, 132, Image.SCALE_SMOOTH);
+                                BufferedImage resized = new BufferedImage(235, 132, BufferedImage.TYPE_INT_ARGB);
+                                Graphics2D g2d = resized.createGraphics();
+                                g2d.drawImage(scaledInstance, 0, 0, null);
+                                g2d.dispose();
+
+                                ImageIO.write(resized, "png", new File(tempPath));
                                 System.out.println("foi");
                                 //Thread.sleep(3000);
                             } catch (Exception ex) {

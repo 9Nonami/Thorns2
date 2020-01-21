@@ -2,56 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50053a92-1326-4f75-bf22-ca2e42361449" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/nona/mi/button/ButtonGroup.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/nona/mi/loader/ScreenshotLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/Button.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/Button.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/TestButtonScene2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/TestButtonScene2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/res/dialog/scene0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/res/dialog/scene0.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/res/font/namesmap.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/res/font/namesmap.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/res/font/text.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/res/font/text.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/animatedcomponent/AnimatedComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/animatedcomponent/AnimatedComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/button/AnimatedRectButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/AnimatedRectButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/button/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/Button.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/button/PolygonalButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/PolygonalButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/button/RectButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/RectButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/db/FontDataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/db/FontDataBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/efx/Fade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/efx/Fade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/image/BaseImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/image/BaseImage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/image/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/image/Coordinates.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/image/ImageEfx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/image/ImageEfx.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/jukebox/MyJukeBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/jukebox/MyJukeBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/loader/DialogLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/loader/DialogLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/loader/FontGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/loader/FontGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/loader/ImageLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/loader/ImageLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/loader/TextLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/loader/TextLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/menu/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/save/Save.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/save/Save.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/ChoiceScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/ChoiceScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/Dialogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/Dialogue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/EfxScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/EfxScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/FadeScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/FadeScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/FadeTopBottomScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/FadeTopBottomScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/LoadScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/LoadScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/MenuBasis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/MenuBasis.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/SaveMenuScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/SaveMenuScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/Scene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/ScenePackage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/ScenePackage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/StandardScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/StandardScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/TestButtonScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/TestButtonScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/TestButtonScene2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/TestButtonScene2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/spritesheet/SpriteSheet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/spritesheet/SpriteSheet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/dialog/scene0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/dialog/scene0.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/font/namesmap.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/font/namesmap.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/font/text.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/font/text.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
