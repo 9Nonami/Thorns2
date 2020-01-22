@@ -99,9 +99,13 @@ public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se v
                     reset();
                     return;
                 } else if (buttonGroup.getClickedButton() == PREVIOUS_SLOT_GROUP) {
-                    slotGroup.decrement();
-                } else if (buttonGroup.getClickedButton() == NEXT_SLOT_GROUP) {
-                    slotGroup.increment();
+                    if (slotGroup.getStartIncrement() > 0) { // 0 = first slot. there is nothing before it.
+                        slotGroup.decrement();
+                    }
+                } else if (buttonGroup.getClickedButton() == NEXT_SLOT_GROUP) { //12 - 6
+                    if (slotGroup.getStartIncrement() < slotGroup.getTotalButtons() - slotGroup.getButtonsToShow()) {
+                        slotGroup.increment();
+                    }
                 }
             }
 

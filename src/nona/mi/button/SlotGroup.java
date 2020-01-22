@@ -14,6 +14,7 @@ public class SlotGroup {
     private int buttonsToShow; //numero parcial do slots mostrados
     private int startIncrement; //controla qual eh o primeiro id. inicia com 0, mas incrementa o numero total de slots, para que aconteca o intervalo
     private int showIncrement; //controla qual vai ser o id maximo
+    private int totalButtons;
     private BufferedImage standardButtonImage;
     private BufferedImage focusedButtonImage;
     private Game game;
@@ -42,6 +43,8 @@ public class SlotGroup {
         *mudar para SlotGroup, pois esta muito quadrado
      */
     public void createButtons(int totalButtons, int row, int column, int x, int y, int spacing, HashMap<Integer, BufferedImage> screenshots) {
+
+        this.totalButtons = totalButtons;
 
         //cria os botoes (rect), atribui o id e o audio
         this.buttons = new Button[totalButtons];
@@ -103,6 +106,22 @@ public class SlotGroup {
         startIncrement -= buttonsToShow;
         showIncrement--;
     }
+
+    //------------------------------------
+
+    public int getTotalButtons() {
+        return totalButtons;
+    }
+
+    public int getButtonsToShow() {
+        return buttonsToShow;
+    }
+
+    public int getStartIncrement() {
+        return startIncrement;
+    }
+
+    //------------------------------------
 
     public int getClickedSlot() {
         return clickedSlot;
