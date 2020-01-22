@@ -8,7 +8,7 @@ import java.io.FileWriter;
 
 public class Save {
 
-    private String[] slots;
+    private String[] slots; //contem "p-s"; o &\n eh adicionado no loop
     private File folderPath;
     private File savePath;
     private String os;
@@ -39,7 +39,7 @@ public class Save {
         } else if (os.startsWith("w")) {
             folderStr = home + "\\thorns";
             folderPath = new File(folderStr);
-            saveFileStr = folderStr + "\\save.9";
+            saveFileStr = folderStr + "\\save.9"; //todo : dava pra deixar em 1 linha
             savePath = new File(saveFileStr);
         } else {
             System.out.println("I guess you're not using Linux or Windows. The save file for this system was not implemented yet. Please see the Save.class to adjust it.");
@@ -68,7 +68,6 @@ public class Save {
     private void createBasicSaveFile(File savePath) {
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(savePath))){
             for (int i = 0; i < slots.length; i++) {
-                String temp = "" + i + "0-0-0&" + "\n";
                 bw.write("0-0&\n");
             }
             bw.flush();
@@ -85,7 +84,8 @@ public class Save {
         }
     }
 
-    public void save() {
+    public void save(int slot, int pack, int scene) {
+        slots[slot] = "" + pack + "-" + scene;
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(savePath))) {
             for (int i = 0; i < slots.length; i++) {
                 bw.write(slots[i] + "&\n");

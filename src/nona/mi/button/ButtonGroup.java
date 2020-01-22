@@ -98,6 +98,14 @@ public class ButtonGroup {
         return clickedButton;
     }
 
+    public Button[] getButtons() {
+        return buttons;
+    }
+
+    public BufferedImage getStandardButtonImage() {
+        return standardButtonImage;
+    }
+
     public void render(Graphics g) {
         for (int i = startButtonID + startIncrement; i < buttonsToShow * showIncrement; i++) {
             buttons[i].render(g);

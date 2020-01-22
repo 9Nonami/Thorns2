@@ -5,7 +5,9 @@ import nona.mi.main.Game;
 import nona.mi.save.Save;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -18,8 +20,6 @@ public class SaveMenuScene extends Scene {
 
     private ButtonGroup buttonGroup;
     private Save save;
-
-    //
     private boolean lockForSave;
 
 
@@ -50,13 +50,13 @@ public class SaveMenuScene extends Scene {
         super.update();
 
         if (!lockForSave) { //nao deixa atualizar se estiver salvando
+
             buttonGroup.update();
 
             if (buttonGroup.getClickedButton() != ButtonGroup.NO_CLICK) {
                 //lockForSave = true; //todo : ver.
-                if (game.getScreenshots().containsKey(buttonGroup.getClickedButton())) {
-                    //override
-                } else {
+
+                if (buttonGroup.getButtons()[buttonGroup.getClickedButton()].getStandardImage() == buttonGroup.getStandardButtonImage()) {
                     //create
                     //lock-update
                     lockForSave = true;
@@ -66,7 +66,7 @@ public class SaveMenuScene extends Scene {
                         public void run() {
 
                             try {
-                                //no linuxrix
+                                //no linuxrix, mas ta funcionando no windows tambem
                                 String tempPath = save.getFolderPath() + "/" + buttonGroup.getClickedButton() + ".png";
                                 System.out.println(tempPath);
                                 //image-creation
@@ -78,6 +78,12 @@ public class SaveMenuScene extends Scene {
                                 g2d.dispose();
 
                                 ImageIO.write(resized, "png", new File(tempPath));
+
+                                buttonGroup.getButtons()[buttonGroup.getClickedButton()].setStandardImage(resized);
+
+                                //salva no .9
+                                save.save(buttonGroup.getClickedButton(), savePack, saveScene);
+
                                 System.out.println("foi");
                                 //Thread.sleep(3000);
                             } catch (Exception ex) {

@@ -92,6 +92,11 @@ public abstract class Button {
         this.audioName = audioName;
     }
 
+    //get/set usados pela saveScene para ver. se ja ha dados no slot(button)
+    public BufferedImage getStandardImage() {
+        return standardImage;
+    }
+
     public void setStandardImage(BufferedImage standardImage) {
         this.standardImage = standardImage;
     }
@@ -103,4 +108,6 @@ public abstract class Button {
     public void setId(int id) {
         this.id = id;
     }
+
+
 }
