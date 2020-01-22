@@ -5,7 +5,7 @@ import nona.mi.main.Game;
 
 import java.awt.Graphics;
 
-public class Menu {
+public class Menu { // todo : ver. se esta fazendo o mesmo que buttonGroup
 
     private Game game;
     private Button[] buttons;

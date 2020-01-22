@@ -105,7 +105,7 @@ public class Thorns extends Game {
         //SAVE MENU
         SaveMenuScene saveMenuScene = new SaveMenuScene(this, save, 6); // todo : save
         saveMenuScene.setImages("/res/buttons/empty-slot.png", "/res/buttons/focused-slot.png");
-        saveMenuScene.createButtons(12, 2, 3, 44, 44, 31);
+        saveMenuScene.createSlots(12, 2, 3, 44, 44, 31);
         saveMenu = saveMenuScene;
 
     }
