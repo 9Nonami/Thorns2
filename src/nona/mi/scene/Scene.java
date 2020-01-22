@@ -79,7 +79,7 @@ public abstract class Scene {
 				if (temp.isClicked()) {
 					if (temp.getNextScene() == SAVE_MENU_SCENE) {
 						game.getSaveMenu().setInfo(game.getPack(), game.getScene(), game.getFrame());
-						game.setSceneBasisWithoutReset(game.getSaveMenu());
+						game.setSceneBasisWithoutReset(game.getSaveMenu()); //para nao comecar a cena do 0 quando voltar
 						menu.reset();
 						game.setClicked(false);
 					} //todo : outras cenas

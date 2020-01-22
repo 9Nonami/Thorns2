@@ -484,12 +484,8 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     }
 
     public void setSceneBasis(Scene sceneBasis) {
-        this.sceneBasis.reset(); //todo : achar onde isso aqui eh usado
+        //this.sceneBasis.reset(); //todo : achar onde isso aqui eh usado
         this.sceneBasis = sceneBasis;
-    }
-
-    public void setSceneBasisWithoutReset(int scene) {
-        sceneBasis = packBasis.get(scene);
     }
 
     public void setSceneBasisWithoutReset(Scene scene) {

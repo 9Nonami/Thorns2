@@ -1,6 +1,8 @@
 package nona.mi.scene;
 
 import nona.mi.button.ButtonGroup;
+import nona.mi.button.RectButton;
+import nona.mi.loader.ImageLoader;
 import nona.mi.main.Game;
 import nona.mi.save.Save;
 
@@ -12,7 +14,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 
-public class SaveMenuScene extends Scene {
+public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se voltar para algum lugar que nao seja ela
 
     private int saveScene;
     private int savePack;
@@ -22,6 +24,9 @@ public class SaveMenuScene extends Scene {
     private Save save;
     private boolean lockForSave;
 
+    //todo : como saber a cena para a qual retornar? > game.get p-s
+    RectButton rb;
+
 
 
     public SaveMenuScene(Game game, Save save, int buttonsToShow) {
@@ -29,6 +34,11 @@ public class SaveMenuScene extends Scene {
         this.save = save;
         buttonGroup = new ButtonGroup(game, buttonsToShow);
         lockForSave = false;
+
+        //todo : del?
+        rb = new RectButton(game);
+        rb.setImages(ImageLoader.loadImage("/res/buttons/uno.png"), ImageLoader.loadImage("/res/buttons/dos.png"), 50, 390);
+        rb.setAudioName("click");
     }
 
     public void setInfo(int savePack, int saveScene, BufferedImage screenshot) {
@@ -50,6 +60,15 @@ public class SaveMenuScene extends Scene {
         super.update();
 
         if (!lockForSave) { //nao deixa atualizar se estiver salvando
+
+            //todo : updatear os outros botoes
+            rb.update();
+            if (rb.isClicked()) {
+                game.setSceneBasis(game.getPackBasis().get(game.getScene())); //todo : nao esta pegando a cena certa
+                reset();
+                return;
+            }
+
 
             buttonGroup.update();
 
@@ -95,7 +114,7 @@ public class SaveMenuScene extends Scene {
                     });
                     thread.start();
                 }
-                //updatear o save
+
             }
         }
     }
@@ -103,6 +122,8 @@ public class SaveMenuScene extends Scene {
     @Override
     public void renderScene(Graphics g) {
         buttonGroup.render(g);
+
+        rb.render(g);
     }
 
     @Override
@@ -110,6 +131,8 @@ public class SaveMenuScene extends Scene {
         super.reset();
         buttonGroup.reset();
         lockForSave = false; //talvez nem precise - ver.
+
+        rb.reset();
     }
 
 }
