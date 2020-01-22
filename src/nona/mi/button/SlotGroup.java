@@ -10,20 +10,19 @@ import java.util.HashMap;
 public class SlotGroup {
 
     private Button[] buttons;
-    private int startButtonID;
-    private int buttonsToShow;
-    private int startIncrement;
-    private int showIncrement;
+    private int startButtonID; //id do primeiro botao para u/r
+    private int buttonsToShow; //numero parcial do slots mostrados
+    private int startIncrement; //controla qual eh o primeiro id. inicia com 0, mas incrementa o numero total de slots, para que aconteca o intervalo
+    private int showIncrement; //controla qual vai ser o id maximo
     private BufferedImage standardButtonImage;
     private BufferedImage focusedButtonImage;
     private Game game;
     private int clickedSlot;
-
-    public static final int NO_CLICK = -97;
-
+    public static final int NO_CLICK = -97; //todo : colocar em Button
 
 
-    public SlotGroup(Game game, int buttonsToShow) {
+
+    public SlotGroup(Game game, int buttonsToShow) { //6
         this.game = game;
         this.buttonsToShow = buttonsToShow;
         startButtonID = 0;
@@ -93,6 +92,16 @@ public class SlotGroup {
                 break;
             }
         }
+    }
+
+    public void increment() {
+        startIncrement += buttonsToShow;
+        showIncrement ++;
+    }
+
+    public void decrement() {
+        startIncrement -= buttonsToShow;
+        showIncrement--;
     }
 
     public int getClickedSlot() {
