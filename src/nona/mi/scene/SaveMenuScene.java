@@ -110,56 +110,71 @@ public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se v
         yn = new ButtonGroup(new Button[]{yes, no});
     }
 
+
+    //--------------------------------------------
+
+    private boolean updateButtons() {
+        buttonGroup.update();
+        if (buttonGroup.getClickedButton() != ButtonGroup.NO_CLICK) {
+            if (buttonGroup.getClickedButton() == RETURN_TO_LAST_SCENE) {
+                game.setSceneBasis(game.getPackBasis().get(game.getScene()));
+                reset();
+                return true; //para nao atualizar os slots
+            } else if (buttonGroup.getClickedButton() == PREVIOUS_SLOT_GROUP) {
+                if (slotGroup.getStartIncrement() > 0) { // 0 = first slot. there is nothing before it.
+                    slotGroup.decrement();
+                }
+            } else if (buttonGroup.getClickedButton() == NEXT_SLOT_GROUP) { //12 - 6
+                if (slotGroup.getStartIncrement() < slotGroup.getTotalButtons() - slotGroup.getButtonsToShow()) {
+                    slotGroup.increment();
+                }
+            }
+        }
+        return  false;
+    }
+
+    private void updateSlots() {
+        slotGroup.update();
+        if (slotGroup.getClickedSlot() != SlotGroup.NO_CLICK) {
+            lockForSave = true;
+            if (slotGroup.getButtons()[slotGroup.getClickedSlot()].getStandardImage() == slotGroup.getStandardButtonImage()) {
+                //clicou em slot vazio
+                save();
+            } else {
+                //clicou em slot com progresso
+                lockForOverwrite = false;
+            }
+        }
+    }
+
+    private void updateYn() {
+        yn.update();
+        if (yn.getClickedButton() == YES) {
+            save();
+            lockForOverwrite = true;
+        } else if (yn.getClickedButton() == NO) {
+            yn.reset();
+            lockForOverwrite = true;
+            lockForSave = false;
+        }
+    }
+
+    //--------------------------------------------
+
     @Override
     public void update() {
         super.update();
 
         if (!lockForSave) { //nao deixa atualizar se estiver salvando ou verificando Y/N
 
-            buttonGroup.update();
-            if (buttonGroup.getClickedButton() != ButtonGroup.NO_CLICK) {
-                if (buttonGroup.getClickedButton() == RETURN_TO_LAST_SCENE) {
-                    game.setSceneBasis(game.getPackBasis().get(game.getScene()));
-                    reset();
-                    return;
-                } else if (buttonGroup.getClickedButton() == PREVIOUS_SLOT_GROUP) {
-                    if (slotGroup.getStartIncrement() > 0) { // 0 = first slot. there is nothing before it.
-                        slotGroup.decrement();
-                    }
-                } else if (buttonGroup.getClickedButton() == NEXT_SLOT_GROUP) { //12 - 6
-                    if (slotGroup.getStartIncrement() < slotGroup.getTotalButtons() - slotGroup.getButtonsToShow()) {
-                        slotGroup.increment();
-                    }
-                }
+            if (updateButtons()) {
+                return; //se foi clicado no botao de return, nao atualiza os slots
             }
 
-            //colocar em metodo ^
-            //--------------------------------------------------------------------
-
-            slotGroup.update();
-            if (slotGroup.getClickedSlot() != SlotGroup.NO_CLICK) {
-
-                lockForSave = true;
-
-                //update para click em slot vazio
-                if (slotGroup.getButtons()[slotGroup.getClickedSlot()].getStandardImage() == slotGroup.getStandardButtonImage()) {
-                    save();
-                } else { //update para click em slot com progresso
-                    lockForOverwrite = false;
-                }
-
-            }
+            updateSlots();
 
         } else if (!lockForOverwrite) {
-            yn.update();
-            if (yn.getClickedButton() == YES) {
-                save();
-                lockForOverwrite = true;
-            } else if (yn.getClickedButton() == NO) {
-                yn.reset();
-                lockForOverwrite = true;
-                lockForSave = false;
-            }
+            updateYn();
         }
     }
 
