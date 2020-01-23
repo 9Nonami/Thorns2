@@ -2,10 +2,9 @@ package nona.mi.scene;
 
 import java.awt.Graphics;
 
-import nona.mi.button.Button;
+import nona.mi.button.ButtonGroup;
 import nona.mi.jukebox.MyJukeBox;
 import nona.mi.main.Game;
-import nona.mi.menu.Menu;
 
 // Com relacao ao audio, Scene so toca musicas de fundo.
 // Caso algum audio esteja relacionado a fala do personagem
@@ -20,8 +19,7 @@ public abstract class Scene {
 	protected int soundStyle; //loop ou once
 	protected boolean lock; //faz com que o codigo do update so execute uma vez
 	public static final int LAST_SCENE = -99; //definir como last_scene significa que depois desta cena, outro pack eh carregado. NAO ESQUECER DE DEFINIR O PACK!
-	public static final int SAVE_MENU_SCENE = -98;
-	protected Menu menu;
+	private ButtonGroup buttonGroup; //save, load, copy, del
 
 
 
@@ -68,22 +66,27 @@ public abstract class Scene {
 			lock = true;
 		}
 
-		updateMenu();
+		updateButtonGroup();
 
 	}
 
-	private void updateMenu() { //todo : parar o audio??
-		if (menu != null) {
-			menu.update();
-			for (Button temp : menu.getButtons()) {
-				if (temp.isClicked()) {
-					if (temp.getNextScene() == SAVE_MENU_SCENE) {
-						game.getSaveMenu().setInfo(game.getPack(), game.getScene(), game.getFrame());
-						game.setSceneBasisWithoutReset(game.getSaveMenu()); //para nao comecar a cena do 0 quando voltar
-						menu.reset();
-						game.setClicked(false);
-					} //todo : outras cenas
-					break;
+	private void updateButtonGroup() { //todo : parar o audio?? > se pah nao > se for fala, sim; talvez o bg nao, mas se pah sim.
+		if (buttonGroup != null) {
+			buttonGroup.update();
+			int type = buttonGroup.getClickedButton();
+			if (type != ButtonGroup.NO_CLICK) {
+				if (type == SaveMenuScene.SAVE) {
+					game.getSaveMenuScene().setType(type);
+					game.getSaveMenuScene().setInfo(game.getPack(), game.getScene(), game.getFrame());
+					game.setSceneBasisWithoutReset(game.getSaveMenuScene()); //para nao comecar a cena do 0 quando voltar
+					buttonGroup.reset();
+					game.setClicked(false);
+				} else if (type == SaveMenuScene.LOAD) {
+
+				} else if (type == SaveMenuScene.COPY) {
+
+				} else if (type == SaveMenuScene.DEL) {
+
 				}
 			}
 		}
@@ -91,8 +94,8 @@ public abstract class Scene {
 
 	public void render(Graphics g) {
 		renderScene(g);
-		if (menu != null) {
-			menu.render(g);
+		if (buttonGroup != null) {
+			buttonGroup.render(g);
 		}
 	}
 
@@ -119,14 +122,14 @@ public abstract class Scene {
 		return nextScene;
 	}
 
-	public void setMenu(Menu menu) {
-		this.menu = menu;
+	public void setButtonGroup(ButtonGroup buttonGroup) {
+		this.buttonGroup = buttonGroup;
 	}
 
 	public void reset() {
 		lock = false;
-		if (menu != null) {
-			menu.reset();
+		if (buttonGroup != null) {
+			buttonGroup.reset();
 		}
 	}
 

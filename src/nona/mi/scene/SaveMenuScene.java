@@ -9,10 +9,14 @@ import nona.mi.main.Game;
 import nona.mi.save.Save;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+//todo : DataManagerScene
 //todo : texto "saving" no lock4save
 // todo : ver se para deixar mais abstrato seria legal dar setButtonGroup e setSlotGroup, em polimorquaza
 public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se voltar para algum lugar que nao seja ela
@@ -34,6 +38,13 @@ public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se v
     private ButtonGroup yn;
     private final int YES = 3;
     private final int NO = 4;
+
+    private int type;
+    public static final int SAVE = 5;
+    public static final int LOAD = 6;
+    public static final int COPY = 7;
+    public static final int DEL = 8;
+    //main
 
 
 
@@ -225,8 +236,8 @@ public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se v
         }
     }
 
-    private void drawShadow() {
-        //todo:
+    public void setType(int type) {
+        this.type = type;
     }
 
     @Override

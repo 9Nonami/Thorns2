@@ -76,7 +76,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     protected Scene loadScene;
     protected Scene mainMenu;
-    protected SaveMenuScene saveMenu;
+    protected SaveMenuScene saveMenuScene;
     //todo : colocar no hashmap
 
 
@@ -530,8 +530,8 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         return mainMenu;
     }
 
-    public SaveMenuScene getSaveMenu() {
-        return saveMenu;
+    public SaveMenuScene getSaveMenuScene() {
+        return saveMenuScene;
     }
 
     public HashMap<Integer, BufferedImage> getScreenshots() {

@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 import nona.mi.button.Button;
+import nona.mi.button.ButtonGroup;
 import nona.mi.button.RectButton;
 import nona.mi.db.FontDataBase;
 import nona.mi.image.BaseImage;
@@ -17,9 +18,15 @@ import nona.mi.efx.Fade;
 import nona.mi.image.ImageEfx;
 import nona.mi.loader.ScreenshotLoader;
 import nona.mi.loader.TextLoader;
-import nona.mi.menu.Menu;
 import nona.mi.save.Save;
-import nona.mi.scene.*;
+import nona.mi.scene.EfxScene;
+import nona.mi.scene.FadeScene;
+import nona.mi.scene.FadeTopBottomScene;
+import nona.mi.scene.LoadScene;
+import nona.mi.scene.SaveMenuScene;
+import nona.mi.scene.Scene;
+import nona.mi.scene.StandardScene;
+import nona.mi.scene.TestButtonScene;
 
 public class Thorns extends Game {
 
@@ -31,7 +38,8 @@ public class Thorns extends Game {
     private BufferedImage pointer;
     private ImageEfx setasAnim;
     private boolean showScene;
-    private Menu optionsMenu;
+
+    private ButtonGroup sceneMenu; //save, load, copy, del
 
 
 
@@ -44,8 +52,8 @@ public class Thorns extends Game {
         fontFocus = new FontDataBase("/res/font/myfontfocus.png", "/res/font/text.txt");
 
         //AREA DO DIALOGO
-        BufferedImage tempTextArea = ImageLoader.loadImage("/res/font/txtarea.png");
-        textArea = new BaseImage(tempTextArea, 0, (int)(getHeight() - tempTextArea.getHeight()));
+        BufferedImage tempTextArea = ImageLoader.loadImage("/res/misc/textarea.png");// /res/font/txtarea.png
+        textArea = new BaseImage(tempTextArea, 10, (int)(getHeight() - tempTextArea.getHeight() - 10));
 
         //BACKGROUND PARA TODOS OS NOMES
         BufferedImage tempNameBg = ImageLoader.loadImage("/res/font/nameBg.png");
@@ -90,11 +98,37 @@ public class Thorns extends Game {
         //STANDARD AUDIOS
         standardJukeBox.load("/res/audio/click.wav", "click");
 
-        //MENU
-        RectButton rb = new RectButton(this, Scene.SAVE_MENU_SCENE);
-        rb.setImages(ImageLoader.loadImage("/res/buttons/uno.png"), ImageLoader.loadImage("/res/buttons/dos.png"), 50, 50);
-        rb.setAudioName("click");
-        optionsMenu = new Menu(this, new Button[]{rb});
+        //MENU COM SAVE, LOAD, COPY E DEL
+        BufferedImage saveImage = ImageLoader.loadImage("/res/misc/save.png");
+        BufferedImage loadImage = ImageLoader.loadImage("/res/misc/load.png");
+        BufferedImage copyImage = ImageLoader.loadImage("/res/misc/copy.png");
+        BufferedImage deleteImage = ImageLoader.loadImage("/res/misc/delete.png");
+        BufferedImage focusImage = ImageLoader.loadImage("/res/misc/focus.png");
+        int spacing = 3;
+        String audioButtons = "click"; // todo : <<< deixar publico
+
+        RectButton saveButton = new RectButton(this);
+        saveButton.setImages(saveImage, focusImage, (textArea.getX() + tempTextArea.getWidth() + spacing), textArea.getY());
+        saveButton.setAudioName(audioButtons);
+        saveButton.setId(SaveMenuScene.SAVE);
+
+        RectButton loadButton = new RectButton(this);
+        loadButton.setImages(loadImage, focusImage, saveButton.getX(), (saveButton.getY() + saveButton.getHeight() + spacing));
+        loadButton.setAudioName(audioButtons);
+        loadButton.setId(SaveMenuScene.LOAD);
+
+        RectButton copyButton = new RectButton(this);
+        copyButton.setImages(copyImage, focusImage, loadButton.getX(), (loadButton.getY() + loadButton.getHeight() + spacing));
+        copyButton.setAudioName(audioButtons);
+        copyButton.setId(SaveMenuScene.COPY);
+
+        RectButton deleteButton = new RectButton(this);
+        deleteButton.setImages(deleteImage, focusImage, copyButton.getX(), (copyButton.getY() + copyButton.getHeight() + spacing));
+        deleteButton.setAudioName(audioButtons);
+        deleteButton.setId(SaveMenuScene.DEL);
+
+        sceneMenu = new ButtonGroup(new Button[]{saveButton, loadButton, copyButton, deleteButton});
+
 
         //SAVE
         save = new Save(12);
@@ -106,7 +140,7 @@ public class Thorns extends Game {
         SaveMenuScene saveMenuScene = new SaveMenuScene(this, save, 6); // todo : save
         saveMenuScene.setImages("/res/buttons/empty-slot.png", "/res/buttons/focused-slot.png");
         saveMenuScene.createSlots(12, 2, 3, 44, 44, 31);
-        saveMenu = saveMenuScene;
+        this.saveMenuScene = saveMenuScene;
 
     }
 
@@ -144,7 +178,7 @@ public class Thorns extends Game {
         BaseImage bgScene0 = new BaseImage(imgScene0, 0, 0);
 
         //FADES
-        Fade fadeoutSlow = new Fade(this, Fade.SOLID, Fade.SLOW); //TODO : SLOW
+        Fade fadeoutSlow = new Fade(this, Fade.SOLID, Fade.DEMONIAC); //TODO : SLOW
         Fade fadeoutFast = new Fade(this, Fade.SOLID, Fade.FAST);
         Fade fadeinFast = new Fade(this, Fade.TRANSPARENT, Fade.FAST);
 
@@ -181,7 +215,7 @@ public class Thorns extends Game {
         StandardScene scene1 = new StandardScene(this, bgScene0, setasAnim, 2);
         scene1.setDialog(txtScene1, fontDataBase, textArea, nameBg);
         scene1.defineSound(trainningCenterAudio, MyJukeBox.LOOP);
-        scene1.setMenu(optionsMenu);
+        scene1.setButtonGroup(sceneMenu);
         packBasis.put(1, scene1);
 
         //cena 2

@@ -109,5 +109,20 @@ public abstract class Button {
         this.id = id;
     }
 
+    public int getX() {
+        return imageX;
+    }
+
+    public int getY() {
+        return imageY;
+    }
+
+    public int getWidth() {
+        return standardImage.getWidth();
+    }
+
+    public int getHeight() {
+        return standardImage.getHeight();
+    }
 
 }
