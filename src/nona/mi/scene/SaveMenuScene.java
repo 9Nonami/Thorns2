@@ -9,12 +9,11 @@ import nona.mi.main.Game;
 import nona.mi.save.Save;
 
 import javax.imageio.ImageIO;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+//todo : texto "saving" no lock4save
 // todo : ver se para deixar mais abstrato seria legal dar setButtonGroup e setSlotGroup, em polimorquaza
 public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se voltar para algum lugar que nao seja ela
 
@@ -26,11 +25,15 @@ public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se v
     private Save save;
     private boolean lockForSave;
 
-    //
     private ButtonGroup buttonGroup;
     private final int RETURN_TO_LAST_SCENE = 0;
     private final int PREVIOUS_SLOT_GROUP = 1;
     private final int NEXT_SLOT_GROUP = 2;
+    private boolean lockForOverwrite;
+
+    private ButtonGroup yn;
+    private final int YES = 3;
+    private final int NO = 4;
 
 
 
@@ -39,8 +42,10 @@ public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se v
         this.save = save;
         slotGroup = new SlotGroup(game, buttonsToShow);
         lockForSave = false;
+        lockForOverwrite = true;
 
         createButtons();
+        createYnButtons();
     }
 
     public void setInfo(int savePack, int saveScene, BufferedImage screenshot) {
@@ -84,15 +89,34 @@ public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se v
         buttonGroup = new ButtonGroup(new Button[]{returnToLastScene, previous, next});
     }
 
+    private void createYnButtons() {
+        //todo : del e pegar as img certas
+        BufferedImage stan = ImageLoader.loadImage("/res/buttons/uno.png");
+        BufferedImage focus = ImageLoader.loadImage("/res/buttons/dos.png");
+
+        //YES
+        RectButton yes = new RectButton(game);
+        yes.setImages(stan, focus, 150, 50);
+        yes.setAudioName("click");
+        yes.setId(YES);
+
+        //NO
+        RectButton no = new RectButton(game);
+        no.setImages(stan, focus, 350, 50);
+        no.setAudioName("click"); //TODO : DEIXAR ESSE CLICK PUBLICO!!!!!!! <<<<<<<<<<<<<<<<<<<<
+        no.setId(NO);
+
+        //BUTTON GROUP
+        yn = new ButtonGroup(new Button[]{yes, no});
+    }
+
     @Override
     public void update() {
         super.update();
 
-        if (!lockForSave) { //nao deixa atualizar se estiver salvando
+        if (!lockForSave) { //nao deixa atualizar se estiver salvando ou verificando Y/N
 
-            //todo : updatear os outros botoes
             buttonGroup.update();
-
             if (buttonGroup.getClickedButton() != ButtonGroup.NO_CLICK) {
                 if (buttonGroup.getClickedButton() == RETURN_TO_LAST_SCENE) {
                     game.setSceneBasis(game.getPackBasis().get(game.getScene()));
@@ -112,61 +136,82 @@ public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se v
             //colocar em metodo ^
             //--------------------------------------------------------------------
 
-
             slotGroup.update();
-
             if (slotGroup.getClickedSlot() != SlotGroup.NO_CLICK) {
-                //lockForSave = true; //todo : ver.
 
+                lockForSave = true;
+
+                //update para click em slot vazio
                 if (slotGroup.getButtons()[slotGroup.getClickedSlot()].getStandardImage() == slotGroup.getStandardButtonImage()) {
-                    //create
-                    //lock-update
-                    lockForSave = true;
-                    //thread
-                    Thread thread = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            try {
-                                //no linuxrix, mas ta funcionando no windows tambem
-                                String tempPath = save.getFolderPath() + "/" + slotGroup.getClickedSlot() + ".png";
-                                System.out.println(tempPath);
-                                //image-creation
-
-                                Image scaledInstance = screenshot.getScaledInstance(235, 132, Image.SCALE_SMOOTH);
-                                BufferedImage resized = new BufferedImage(235, 132, BufferedImage.TYPE_INT_ARGB);
-                                Graphics2D g2d = resized.createGraphics();
-                                g2d.drawImage(scaledInstance, 0, 0, null);
-                                g2d.dispose();
-
-                                ImageIO.write(resized, "png", new File(tempPath));
-
-                                slotGroup.getButtons()[slotGroup.getClickedSlot()].setStandardImage(resized);
-
-                                //salva no .9
-                                save.save(slotGroup.getClickedSlot(), savePack, saveScene);
-
-                                System.out.println("foi");
-                                //Thread.sleep(3000);
-                            } catch (Exception ex) {
-                                ex.printStackTrace();
-                            }
-
-                            lockForSave = false;
-                        }
-                    });
-                    thread.start();
+                    save();
+                } else { //update para click em slot com progresso
+                    lockForOverwrite = false;
                 }
 
             }
+
+        } else if (!lockForOverwrite) {
+            yn.update();
+            if (yn.getClickedButton() == YES) {
+                save();
+                lockForOverwrite = true;
+            } else if (yn.getClickedButton() == NO) {
+                yn.reset();
+                lockForOverwrite = true;
+                lockForSave = false;
+            }
         }
+    }
+
+    private void save() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //no linuxrix, mas ta funcionando no windows tambem
+                    String tempPath = save.getFolderPath() + "/" + slotGroup.getClickedSlot() + ".png";
+                    System.out.println(tempPath);
+                    //image-creation
+
+                    Image scaledInstance = screenshot.getScaledInstance(235, 132, Image.SCALE_SMOOTH);
+                    BufferedImage resized = new BufferedImage(235, 132, BufferedImage.TYPE_INT_ARGB);
+                    Graphics2D g2d = resized.createGraphics();
+                    g2d.drawImage(scaledInstance, 0, 0, null);
+                    g2d.dispose();
+
+                    ImageIO.write(resized, "png", new File(tempPath));
+
+                    slotGroup.getButtons()[slotGroup.getClickedSlot()].setStandardImage(resized);
+
+                    //salva no .9
+                    save.save(slotGroup.getClickedSlot(), savePack, saveScene);
+
+                    System.out.println("foi");
+                    //Thread.sleep(3000);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+                lockForSave = false;
+                //render
+            }
+        });
+        thread.start();
     }
 
     @Override
     public void renderScene(Graphics g) {
         slotGroup.render(g);
-
         buttonGroup.render(g);
+        if (!lockForOverwrite) {
+            g.setColor(new Color(0, 0, 0, 180)); //todo : criar metodo
+            g.fillRect(0, 0, game.getWidth(), game.getHeight());
+            yn.render(g);
+        }
+    }
+
+    private void drawShadow() {
+        //todo:
     }
 
     @Override
@@ -174,8 +219,9 @@ public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se v
         super.reset();
         slotGroup.reset();
         lockForSave = false; //talvez nem precise - ver.
-
+        lockForOverwrite = true;
         buttonGroup.reset();
+        yn.reset();
     }
 
 }

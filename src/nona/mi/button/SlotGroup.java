@@ -90,7 +90,6 @@ public class SlotGroup {
         for (int i = startButtonID + startIncrement; i < buttonsToShow * showIncrement; i++) {
             buttons[i].update();
             if (buttons[i].isClicked()) {
-                System.out.println("buttonsgroup-button: " + buttons[i].getId());
                 clickedSlot = buttons[i].getId();
                 break;
             }
