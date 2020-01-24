@@ -70,24 +70,15 @@ public abstract class Scene {
 
 	}
 
-	private void updateButtonGroup() { //todo : parar o audio?? > se pah nao > se for fala, sim; talvez o bg nao, mas se pah sim.
+	private void updateButtonGroup() { //todo : parar o audio?? > se pah nao > se for fala, sim; talvez o bg nao, mas se pah sim. > scene nao toca falas
 		if (buttonGroup != null) {
 			buttonGroup.update();
-			int type = buttonGroup.getClickedButton();
-			if (type != ButtonGroup.NO_CLICK) {
-				if (type == SaveMenuScene.SAVE) {
-					game.getSaveMenuScene().setType(type);
-					game.getSaveMenuScene().setInfo(game.getPack(), game.getScene(), game.getFrame());
-					game.setSceneBasisWithoutReset(game.getSaveMenuScene()); //para nao comecar a cena do 0 quando voltar
-					buttonGroup.reset();
-					game.setClicked(false);
-				} else if (type == SaveMenuScene.LOAD) {
-
-				} else if (type == SaveMenuScene.COPY) {
-
-				} else if (type == SaveMenuScene.DEL) {
-
-				}
+			if (buttonGroup.getClickedButton() != ButtonGroup.NO_CLICK) {
+				game.getSaveMenuScene().setType(buttonGroup.getClickedButton());
+				game.getSaveMenuScene().setInfo(game.getPack(), game.getScene(), game.getFrame()); //soh save precisa disso, mas nao vou criar um if soh pra ele
+				game.setSceneBasisWithoutReset(game.getSaveMenuScene()); //para nao comecar a cena do 0 quando voltar
+				buttonGroup.reset();
+				game.setClicked(false);
 			}
 		}
 	}

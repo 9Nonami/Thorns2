@@ -96,6 +96,18 @@ public class Save {
         }
     }
 
+    public void delete(int slot) {
+        slots[slot] = "0-0";
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(savePath))) {
+            for (int i = 0; i < slots.length; i++) {
+                bw.write(slots[i] + "&\n");
+            }
+            bw.flush();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public String[] getSlots() {
         return slots;
     }
