@@ -16,66 +16,59 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+//todo : imagem ou texto que identifique para o player qual eh o typo da cena atual
 //todo : DataManagerScene
-//todo : texto "saving" no lock4save
-// todo : ver se para deixar mais abstrato seria legal dar setButtonGroup e setSlotGroup, em polimorquaza
-public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se voltar para algum lugar que nao seja ela
+//todo : resetar a cena anterior se voltar para algum lugar que nao seja ela
+//todo : retornar para o main
+public class SaveMenuScene extends Scene {
 
     private int saveScene;
     private int savePack;
     private BufferedImage screenshot;
 
-    private SlotGroup slotGroup;
     private Save save;
-    private boolean lockForSave;
 
+    private int type;
+
+    private SlotGroup slotGroup;
     private ButtonGroup buttonGroup;
+    private ButtonGroup yn;
+
     private final int RETURN_TO_LAST_SCENE = 0;
     private final int PREVIOUS_SLOT_GROUP = 1;
     private final int NEXT_SLOT_GROUP = 2;
-    private boolean lockForOverwrite;
-
-    private ButtonGroup yn;
     private final int YES = 3;
     private final int NO = 4;
-
-    private int type;
     public static final int SAVE = 5;
     public static final int LOAD = 6;
     public static final int COPY = 7;
     public static final int DEL = 8;
-    //main
+
+    private boolean lockForSave;
+    private boolean lockYnForSave;
 
     private boolean lockForDel;
     private boolean lockYnForDel;
 
+    private boolean pleaseWait;
+
+
+
+    //ESSENCIAL-------------------------------------
 
     public SaveMenuScene(Game game, Save save, int buttonsToShow) {
         super(game);
         this.save = save;
         slotGroup = new SlotGroup(game, buttonsToShow);
+
         lockForSave = false;
-        lockForOverwrite = true;
+        lockYnForSave = true;
 
         lockForDel = false;
         lockYnForDel = true;
 
         createButtons();
         createYnButtons();
-    }
-
-    public void setInfo(int savePack, int saveScene, BufferedImage screenshot) {
-        this.savePack = savePack;
-        this.saveScene = saveScene;
-        this.screenshot = screenshot;
-    }
-
-    public void setImages(String standardButtonImage, String focusedButtonImage) {
-        slotGroup.setImages(standardButtonImage, focusedButtonImage);
-    }
-
-    public void createSlots(int totalButtons, int row, int column, int x, int y, int spacing) {
-        slotGroup.createButtons(totalButtons, row, column, x, y, spacing, game.getScreenshots());
     }
 
     private void createButtons() {
@@ -86,7 +79,7 @@ public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se v
         //RETURN BUTTON
         RectButton returnToLastScene = new RectButton(game);
         returnToLastScene.setImages(stan, focus, 50, 390);
-        returnToLastScene.setAudioName("click");
+        returnToLastScene.setAudioName("click"); //todo : talvez pegar de thorns
         returnToLastScene.setId(RETURN_TO_LAST_SCENE);
 
         //PREV BUTTON
@@ -126,38 +119,35 @@ public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se v
         yn = new ButtonGroup(new Button[]{yes, no});
     }
 
+    public void setImages(String standardButtonImage, String focusedButtonImage) {
+        slotGroup.setImages(standardButtonImage, focusedButtonImage);
+    }
+
+    public void createSlots(int totalButtons, int row, int column, int x, int y, int spacing) {
+        slotGroup.createButtons(totalButtons, row, column, x, y, spacing, game.getScreenshots());
+    }
+
+    //-----------------------------------------------
+
+
+
+    //GS---------------------------------------------
+
+    public void setInfo(int savePack, int saveScene, BufferedImage screenshot) {
+        this.savePack = savePack;
+        this.saveScene = saveScene;
+        this.screenshot = screenshot;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 
     //--------------------------------------------
 
-    private void updateSave() {
-        if (!lockForSave) { //nao deixa atualizar se estiver salvando ou verificando Y/N
 
-            if (updateButtons()) {
-                return; //se foi clicado no botao de return, nao atualiza os slots
-            }
 
-            updateSlots();
-
-        } else if (!lockForOverwrite) {
-            updateYn();
-        }
-    }
-
-    private void updateDel() {
-        //ver se image eh padrao
-        //de for, confirmar acao de del
-        //deletar no .9 e colocar a stan como imagem
-
-        if (!lockForDel) {
-            if (updateButtons()) {
-                return;
-            }
-            updateSlotsForDel(); //da lock aqui se clicar no lugar certo > thread unlocks
-        } else if (!lockYnForDel) {
-            updateYnForDel();
-        }
-
-    }
+    //UPDATES ESPECIFICOS-------------------------
 
     //update do return, prev e next
     private boolean updateButtons() {
@@ -180,18 +170,58 @@ public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se v
         return  false;
     }
 
-    //slots - save
-    private void updateSlots() {
+
+
+    //TYPE SAVE
+    private void updateSave() {
+        if (!lockForSave) { //nao deixa atualizar se estiver salvando ou verificando Y/N
+            if (updateButtons()) {
+                return; //se foi clicado no botao de return, nao atualiza os slots
+            }
+            updateSlotsForSave();
+        } else if (!lockYnForSave) {
+            updateYnForSave();
+        }
+    }
+
+    private void updateSlotsForSave() {
         slotGroup.update();
         if (slotGroup.getClickedSlot() != SlotGroup.NO_CLICK) {
             lockForSave = true;
             if (slotGroup.getButtons()[slotGroup.getClickedSlot()].getStandardImage() == slotGroup.getStandardButtonImage()) {
-                //clicou em slot vazio
+                pleaseWait = true;
                 save();
             } else {
                 //clicou em slot com progresso
-                lockForOverwrite = false;
+                lockYnForSave = false;
             }
+        }
+    }
+
+    private void updateYnForSave() {
+        yn.update();
+        if (yn.getClickedButton() == YES) {
+            lockYnForSave = true;
+            pleaseWait = true;
+            save();
+        } else if (yn.getClickedButton() == NO) {
+            yn.reset();
+            lockForSave = false;
+            lockYnForSave = true;
+        }
+    }
+
+
+
+    //TYPE DEL
+    private void updateDel() {
+        if (!lockForDel) {
+            if (updateButtons()) {
+                return;
+            }
+            updateSlotsForDel(); //da lock aqui se clicar no lugar certo > thread unlocks
+        } else if (!lockYnForDel) {
+            updateYnForDel();
         }
     }
 
@@ -203,27 +233,12 @@ public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se v
         }
     }
 
-    //confirmacao yes | no
-    private void updateYn() {
-        yn.update();
-        if (yn.getClickedButton() == YES) {
-            lockForOverwrite = true;
-            save();
-        } else if (yn.getClickedButton() == NO) {
-            yn.reset();
-            lockForSave = false;
-            lockForOverwrite = true;
-        }
-    }
-
     private void updateYnForDel() {
         yn.update();
         if (yn.getClickedButton() == YES) {
-            //del
-            //thread = unlocks
             lockYnForDel = true; //nao deixa o infeliz iniciar mais de 1 thread
+            pleaseWait = true;
             del();
-            //setWaitMessage
         } else if (yn.getClickedButton() == NO) {
             yn.reset();
             lockForDel = false;
@@ -233,21 +248,9 @@ public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se v
 
     //--------------------------------------------
 
-    @Override
-    public void update() {
-        super.update();
 
-        if (type == SAVE) {
-            updateSave();
-        } else if (type == LOAD) {
 
-        } else if (type == COPY) {
-
-        } else if (type == DEL) {
-            updateDel();
-        }
-
-    }
+    //ACOES ESPECIFICAS---------------------------
 
     private void save() {
         Thread thread = new Thread(new Runnable() {
@@ -281,8 +284,8 @@ public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se v
                     ex.printStackTrace();
                 }
 
+                pleaseWait = false;
                 lockForSave = false;
-                //render
             }
         });
         thread.start();
@@ -325,27 +328,63 @@ public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se v
                 //deleta os dados do .9
                 save.delete(slotGroup.getClickedSlot());
 
+                //tira a mensagem de wait
+                pleaseWait = false;
 
                 //desbloqueia o update da cena
                 lockForDel = false;
+
             }
         });
         thread.start();
+    }
+
+    private void renderShadow(Graphics g) {
+        g.setColor(new Color(0, 0, 0, 180));
+        g.fillRect(0, 0, game.getWidth(), game.getHeight());
+    }
+
+    private void renderPleaseWait(Graphics g) {
+        if (pleaseWait) {
+            g.setColor(Color.RED);
+            g.drawString("PLEASE WAIT", 50, 50);
+        }
+    }
+
+    //--------------------------------------------
+
+
+
+    //URR-----------------------------------------
+
+    @Override
+    public void update() {
+        super.update();
+
+        if (type == SAVE) {
+            updateSave();
+        } else if (type == LOAD) {
+
+        } else if (type == COPY) {
+
+        } else if (type == DEL) {
+            updateDel();
+        }
+
     }
 
     @Override
     public void renderScene(Graphics g) {
         slotGroup.render(g);
         buttonGroup.render(g);
-        if (!lockForOverwrite || !lockYnForDel) {
-            g.setColor(new Color(0, 0, 0, 180)); //todo : criar metodo
-            g.fillRect(0, 0, game.getWidth(), game.getHeight());
+        if (!lockYnForSave || !lockYnForDel) {
+            renderShadow(g);
             yn.render(g);
         }
-    }
-
-    public void setType(int type) {
-        this.type = type;
+        if (pleaseWait) {
+            renderShadow(g);
+            renderPleaseWait(g);
+        }
     }
 
     @Override
@@ -353,14 +392,18 @@ public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se v
         super.reset();
         slotGroup.reset();
 
-        lockForSave = false; //talvez nem precise - ver.
-        lockForOverwrite = true;
+        lockForSave = false;
+        lockYnForSave = true;
 
         lockForDel = false;
         lockYnForDel = true;
 
+        pleaseWait = false;
+
         buttonGroup.reset();
         yn.reset();
     }
+
+    //--------------------------------------------
 
 }

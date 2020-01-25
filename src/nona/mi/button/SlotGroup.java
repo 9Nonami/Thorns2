@@ -23,6 +23,7 @@ public class SlotGroup {
 
 
 
+    //CONSTRUCTOR - essencial
     public SlotGroup(Game game, int buttonsToShow) { //6
         this.game = game;
         this.buttonsToShow = buttonsToShow;
@@ -35,6 +36,8 @@ public class SlotGroup {
         this.standardButtonImage = ImageLoader.loadImage(standardButtonImage);
         this.focusedButtonImage = ImageLoader.loadImage(focusedButtonImage);
     }
+
+
 
     public void saveImage(BufferedImage image) {
         buttons[clickedSlot].setStandardImage(image);
