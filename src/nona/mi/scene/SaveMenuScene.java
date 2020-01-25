@@ -254,26 +254,29 @@ public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se v
             @Override
             public void run() {
                 try {
-                    //no linuxrix, mas ta funcionando no windows tambem
-                    String tempPath = save.getFolderPath() + "/" + slotGroup.getClickedSlot() + ".png";
-                    System.out.println(tempPath);
-                    //image-creation
 
+                    //obtem o caminho da imagem de acordo com o os
+                    String tempPath = "";
+                    if (save.getOs().startsWith("w")) {
+                        tempPath = save.getFolderPath() + "\\" + slotGroup.getClickedSlot() + ".png";
+                    } else if (save.getOs().startsWith("l")) {
+                        tempPath = save.getFolderPath() + "/" + slotGroup.getClickedSlot() + ".png";
+                    }
+
+                    //cria e salva a imagem no disco
                     Image scaledInstance = screenshot.getScaledInstance(235, 132, Image.SCALE_SMOOTH);
                     BufferedImage resized = new BufferedImage(235, 132, BufferedImage.TYPE_INT_ARGB);
                     Graphics2D g2d = resized.createGraphics();
                     g2d.drawImage(scaledInstance, 0, 0, null);
                     g2d.dispose();
-
                     ImageIO.write(resized, "png", new File(tempPath));
 
-                    slotGroup.getButtons()[slotGroup.getClickedSlot()].setStandardImage(resized);
+                    //salva a imagem no slot
+                    slotGroup.saveImage(resized);
 
                     //salva no .9
                     save.save(slotGroup.getClickedSlot(), savePack, saveScene);
 
-                    System.out.println("foi");
-                    //Thread.sleep(3000);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -289,13 +292,16 @@ public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se v
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
+
                 //coloca a imagem padrao
-                slotGroup.getButtons()[slotGroup.getClickedSlot()].setStandardImage(slotGroup.getStandardButtonImage());
+                //slotGroup.redefineStandardImage(int buttonID, BufferedImage nImage);
+                slotGroup.deleteImage();
+                //slotGroup.getButtons()[slotGroup.getClickedSlot()].setStandardImage(slotGroup.getStandardButtonImage());
 
                 //deleta a imagem salva no disco
                 try {
 
-                    //obtem o caminho de acordo com o os
+                    //obtem o caminho da imagem de acordo com o os
                     String tempPath = "";
                     if (save.getOs().startsWith("w")) {
                         tempPath = save.getFolderPath() + "\\" + slotGroup.getClickedSlot() + ".png";
@@ -311,6 +317,7 @@ public class SaveMenuScene extends Scene { //todo : resetar a cena anterior se v
                     } else {
                         System.exit(0);
                     }
+
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }

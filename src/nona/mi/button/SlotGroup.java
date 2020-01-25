@@ -36,6 +36,14 @@ public class SlotGroup {
         this.focusedButtonImage = ImageLoader.loadImage(focusedButtonImage);
     }
 
+    public void saveImage(BufferedImage image) {
+        buttons[clickedSlot].setStandardImage(image);
+    }
+
+    public void deleteImage() {
+        buttons[clickedSlot].setStandardImage(standardButtonImage);
+    }
+
     /*todo
         tentar deixar os screenshots publicos
         ai podera alterar e checar qual slot ja tem save

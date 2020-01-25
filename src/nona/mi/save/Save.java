@@ -13,12 +13,6 @@ public class Save {
     private File savePath;
     private String os;
 
-    //x-x
-    //[0]pack [1]- [2]scene
-
-    public static final int PACK_ID = 0;
-    public static final int SCENE_ID = 2;
-
 
 
     public Save(int totalSlots) {
@@ -79,16 +73,14 @@ public class Save {
     public void load() {
         String loaded = TextLoader.loadFromDisk(savePath);
         String[] splitted = loaded.split("&");
-        for (int i = 0; i < slots.length; i++) {
-            slots[i] = splitted[i];
-        }
+        System.arraycopy(splitted, 0, slots, 0, slots.length); //copia o array lido para o array da classe (slots)
     }
 
     public void save(int slot, int pack, int scene) {
         slots[slot] = "" + pack + "-" + scene;
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(savePath))) {
-            for (int i = 0; i < slots.length; i++) {
-                bw.write(slots[i] + "&\n");
+            for (String s : slots) {
+                bw.write(s + "&\n");
             }
             bw.flush();
         } catch (Exception ex) {
@@ -99,17 +91,13 @@ public class Save {
     public void delete(int slot) {
         slots[slot] = "0-0";
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(savePath))) {
-            for (int i = 0; i < slots.length; i++) {
-                bw.write(slots[i] + "&\n");
+            for (String s : slots) {
+                bw.write(s + "&\n");
             }
             bw.flush();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    public String[] getSlots() {
-        return slots;
     }
 
     public File getFolderPath() {
