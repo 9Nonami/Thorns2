@@ -18,7 +18,7 @@ public class ButtonGroup {
 
     private Button[] buttons;
     private int clickedButton;
-    public static final int NO_CLICK = -97; //todo : deixar soh 1. SlotGroup tem o mesmo --deixar em button??
+    public static final int NO_CLICK = -97; //todo : deixar soh 1. SlotGroup tem o mesmo --deixar em button?? > pode ser
 
 
 

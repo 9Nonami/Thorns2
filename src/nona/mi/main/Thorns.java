@@ -1,8 +1,8 @@
 package nona.mi.main;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.nio.Buffer;
 import java.util.HashMap;
 
 import nona.mi.button.Button;
@@ -28,6 +28,9 @@ import nona.mi.scene.Scene;
 import nona.mi.scene.StandardScene;
 import nona.mi.scene.TestButtonScene;
 
+//TODO : DAR UM JEITO DE CRIAR OS AUDIOS E BUTTONS TUDO AQUI. NADA DE FAZER ISSO DENTRO DAS CLASSES!
+//todo : ver. se eh interessante criar metodos para encapsular a criacao de qualquer objeto que use muitas linhas
+//todo : deixar ao maximo tudo quanto eh load de imagem aqui!
 public class Thorns extends Game {
 
     private FontDataBase fontDataBase;
@@ -38,7 +41,6 @@ public class Thorns extends Game {
     private BufferedImage pointer;
     private ImageEfx setasAnim;
     private boolean showScene;
-
     private ButtonGroup sceneMenu; //save, load, copy, del
 
 
@@ -46,6 +48,12 @@ public class Thorns extends Game {
     public Thorns(int width, int height, String title, int gameLoopStyle) {
 
         super(width, height, title, gameLoopStyle);
+
+        //SOM BOTOES
+        String audioClick = "click";
+
+        //STANDARD AUDIOS
+        standardJukeBox.load("/res/audio/click.wav", audioClick);
 
         //FONTE DA VN
         fontDataBase = new FontDataBase("/res/font/myfont.png", "/res/font/text.txt");
@@ -95,52 +103,107 @@ public class Thorns extends Game {
         fs.setDirectScene(mainMenu);
         sceneBasis = fs;
 
-        //STANDARD AUDIOS
-        standardJukeBox.load("/res/audio/click.wav", "click");
-
-        //MENU COM SAVE, LOAD, COPY E DEL
-        BufferedImage saveImage = ImageLoader.loadImage("/res/misc/save.png");
-        BufferedImage loadImage = ImageLoader.loadImage("/res/misc/load.png");
-        BufferedImage copyImage = ImageLoader.loadImage("/res/misc/copy.png");
-        BufferedImage deleteImage = ImageLoader.loadImage("/res/misc/delete.png");
-        BufferedImage focusImage = ImageLoader.loadImage("/res/misc/focus.png");
-        int spacing = 3;
-        String audioButtons = "click"; // todo : <<< deixar publico
-
-        RectButton saveButton = new RectButton(this);
-        saveButton.setImages(saveImage, focusImage, (textArea.getX() + tempTextArea.getWidth() + spacing), textArea.getY());
-        saveButton.setAudioName(audioButtons);
-        saveButton.setId(SaveMenuScene.SAVE);
-
-        RectButton loadButton = new RectButton(this);
-        loadButton.setImages(loadImage, focusImage, saveButton.getX(), (saveButton.getY() + saveButton.getHeight() + spacing));
-        loadButton.setAudioName(audioButtons);
-        loadButton.setId(SaveMenuScene.LOAD);
-
-        RectButton copyButton = new RectButton(this);
-        copyButton.setImages(copyImage, focusImage, loadButton.getX(), (loadButton.getY() + loadButton.getHeight() + spacing));
-        copyButton.setAudioName(audioButtons);
-        copyButton.setId(SaveMenuScene.COPY);
-
-        RectButton deleteButton = new RectButton(this);
-        deleteButton.setImages(deleteImage, focusImage, copyButton.getX(), (copyButton.getY() + copyButton.getHeight() + spacing));
-        deleteButton.setAudioName(audioButtons);
-        deleteButton.setId(SaveMenuScene.DEL);
-
-        sceneMenu = new ButtonGroup(new Button[]{saveButton, loadButton, copyButton, deleteButton});
-
-
         //SAVE
         save = new Save(12);
 
         //SCREENSHOTS
         screenshots = ScreenshotLoader.loadScreenshots(save);
 
-        //SAVE MENU
-        SaveMenuScene saveMenuScene = new SaveMenuScene(this, save, 6); // todo : save
-        saveMenuScene.setImages("/res/buttons/empty-slot.png", "/res/buttons/focused-slot.png");
-        saveMenuScene.createSlots(12, 2, 3, 44, 44, 31);
-        this.saveMenuScene = saveMenuScene;
+
+
+        //IMAGEM DE FOCO PARA SAVE, LOAD...
+        BufferedImage focusMisc = ImageLoader.loadImage("/res/misc/focus.png");
+
+        //MENU COM SAVE, LOAD, COPY E DEL
+        createSceneMenu(focusMisc, audioClick, tempTextArea);
+
+        //DATA MANAGER SCENE --------------------------------------------------------
+        createDataManagerScene(focusMisc, audioClick);
+
+    }
+
+    private void createDataManagerScene(BufferedImage focusMisc, String audioClick) {
+
+        BufferedImage uno = ImageLoader.loadImage("/res/buttons/uno.png");
+        BufferedImage dos = ImageLoader.loadImage("/res/buttons/dos.png");
+
+        BufferedImage returnImage = ImageLoader.loadImage("/res/misc/return.png");
+        //BufferedImage prevImage = ImageLoader.loadImage("/res/buttons/uno.png");
+        //BufferedImage nextImage = ImageLoader.loadImage("/res/buttons/uno.png");
+        //BufferedImage pnFocus = ImageLoader.loadImage("/res/buttons/dos.png");
+
+        //RETURN BUTTON
+        RectButton returnButton = new RectButton(this);
+        returnButton.setImages(returnImage, focusMisc, 50, 390);
+        returnButton.setAudioName(audioClick);
+        returnButton.setId(SaveMenuScene.RETURN_TO_LAST_SCENE);
+
+        //PREV BUTTON
+        RectButton previousButton = new RectButton(this);
+        previousButton.setImages(uno, dos, 250, 390);
+        previousButton.setAudioName(audioClick);
+        previousButton.setId(SaveMenuScene.PREVIOUS_SLOT_GROUP);
+
+        //NEXT BUTTON
+        RectButton nextButton = new RectButton(this);
+        nextButton.setImages(uno, dos, 400, 390);
+        nextButton.setAudioName(audioClick);
+        nextButton.setId(SaveMenuScene.NEXT_SLOT_GROUP);
+
+
+
+        //YES BUTTON
+        RectButton yesButton = new RectButton(this);
+        yesButton.setImages(uno, dos, 150, 50);
+        yesButton.setAudioName(audioClick);
+        yesButton.setId(SaveMenuScene.YES);
+
+        //NO BUTTON
+        RectButton noButton = new RectButton(this);
+        noButton.setImages(uno, dos, 350, 50);
+        noButton.setAudioName(audioClick);
+        noButton.setId(SaveMenuScene.NO);
+
+
+
+        SaveMenuScene tempSaveMenuScene = new SaveMenuScene(this, save, 6);
+        tempSaveMenuScene.setSlotImages(ImageLoader.loadImage("/res/buttons/empty-slot.png"), ImageLoader.loadImage("/res/buttons/focused-slot.png"));
+        tempSaveMenuScene.createSlots(12, 2, 3, 44, 44, 31);
+        tempSaveMenuScene.createMiscButtons(new Button[]{returnButton, previousButton, nextButton});
+        tempSaveMenuScene.createYn(new Button[]{yesButton, noButton});
+        saveMenuScene = tempSaveMenuScene;
+    }
+
+    private void createSceneMenu(BufferedImage focusMisc, String audioClick, BufferedImage tempTextArea) {
+
+        BufferedImage saveImage = ImageLoader.loadImage("/res/misc/save.png");
+        BufferedImage loadImage = ImageLoader.loadImage("/res/misc/load.png");
+        BufferedImage copyImage = ImageLoader.loadImage("/res/misc/copy.png");
+        BufferedImage deleteImage = ImageLoader.loadImage("/res/misc/delete.png");
+        int spacing = 3;
+
+
+        RectButton saveButton = new RectButton(this);
+        saveButton.setImages(saveImage, focusMisc, (textArea.getX() + tempTextArea.getWidth() + spacing), textArea.getY());
+        saveButton.setAudioName(audioClick);
+        saveButton.setId(SaveMenuScene.SAVE);
+
+        RectButton loadButton = new RectButton(this);
+        loadButton.setImages(loadImage, focusMisc, saveButton.getX(), (saveButton.getY() + saveButton.getHeight() + spacing));
+        loadButton.setAudioName(audioClick);
+        loadButton.setId(SaveMenuScene.LOAD);
+
+        RectButton copyButton = new RectButton(this);
+        copyButton.setImages(copyImage, focusMisc, loadButton.getX(), (loadButton.getY() + loadButton.getHeight() + spacing));
+        copyButton.setAudioName(audioClick);
+        copyButton.setId(SaveMenuScene.COPY);
+
+        RectButton deleteButton = new RectButton(this);
+        deleteButton.setImages(deleteImage, focusMisc, copyButton.getX(), (copyButton.getY() + copyButton.getHeight() + spacing));
+        deleteButton.setAudioName(audioClick);
+        deleteButton.setId(SaveMenuScene.DEL);
+
+        sceneMenu = new ButtonGroup(new Button[]{saveButton, loadButton, copyButton, deleteButton});
 
     }
 

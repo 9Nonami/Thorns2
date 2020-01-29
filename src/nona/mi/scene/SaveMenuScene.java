@@ -3,8 +3,7 @@ package nona.mi.scene;
 import nona.mi.button.Button;
 import nona.mi.button.ButtonGroup;
 import nona.mi.button.SlotGroup;
-import nona.mi.button.RectButton;
-import nona.mi.loader.ImageLoader;
+import nona.mi.image.BaseImage;
 import nona.mi.main.Game;
 import nona.mi.save.Save;
 
@@ -34,11 +33,11 @@ public class SaveMenuScene extends Scene {
     private ButtonGroup buttonGroup;
     private ButtonGroup yn;
 
-    private final int RETURN_TO_LAST_SCENE = 0;
-    private final int PREVIOUS_SLOT_GROUP = 1;
-    private final int NEXT_SLOT_GROUP = 2;
-    private final int YES = 3;
-    private final int NO = 4;
+    public static final int RETURN_TO_LAST_SCENE = 0;
+    public static final int PREVIOUS_SLOT_GROUP = 1;
+    public static final int NEXT_SLOT_GROUP = 2;
+    public static final int YES = 3;
+    public static final int NO = 4;
     public static final int SAVE = 5;
     public static final int LOAD = 6;
     public static final int COPY = 7;
@@ -51,6 +50,8 @@ public class SaveMenuScene extends Scene {
     private boolean lockYnForDel;
 
     private boolean pleaseWait;
+
+    private BaseImage mode; //
 
 
 
@@ -67,60 +68,18 @@ public class SaveMenuScene extends Scene {
         lockForDel = false;
         lockYnForDel = true;
 
-        createButtons();
-        createYnButtons();
     }
 
-    private void createButtons() {
-        //todo : ver se algumas imagens podem ficar publicas em Game --thorns nao
-        BufferedImage stan = ImageLoader.loadImage("/res/buttons/uno.png");
-        BufferedImage focus = ImageLoader.loadImage("/res/buttons/dos.png");
-
-        //RETURN BUTTON
-        RectButton returnToLastScene = new RectButton(game);
-        returnToLastScene.setImages(stan, focus, 50, 390);
-        returnToLastScene.setAudioName("click"); //todo : talvez pegar de thorns
-        returnToLastScene.setId(RETURN_TO_LAST_SCENE);
-
-        //PREV BUTTON
-        RectButton previous = new RectButton(game);
-        previous.setImages(stan, focus, 250, 390);
-        previous.setAudioName("click");
-        previous.setId(PREVIOUS_SLOT_GROUP);
-
-        //NEXT BUTTON
-        RectButton next = new RectButton(game);
-        next.setImages(stan, focus, 400, 390);
-        next.setAudioName("click");
-        next.setId(NEXT_SLOT_GROUP);
-
-        //BUTTON GROUP
-        buttonGroup = new ButtonGroup(new Button[]{returnToLastScene, previous, next});
+    public void createMiscButtons(Button[] miscButtons) {
+        buttonGroup = new ButtonGroup(miscButtons);
     }
 
-    private void createYnButtons() {
-        //todo : del e pegar as img certas
-        BufferedImage stan = ImageLoader.loadImage("/res/buttons/uno.png");
-        BufferedImage focus = ImageLoader.loadImage("/res/buttons/dos.png");
-
-        //YES
-        RectButton yes = new RectButton(game);
-        yes.setImages(stan, focus, 150, 50);
-        yes.setAudioName("click");
-        yes.setId(YES);
-
-        //NO
-        RectButton no = new RectButton(game);
-        no.setImages(stan, focus, 350, 50);
-        no.setAudioName("click"); //TODO : DEIXAR ESSE CLICK PUBLICO!!!!!!! <<<<<<<<<<<<<<<<<<<<
-        no.setId(NO);
-
-        //BUTTON GROUP
-        yn = new ButtonGroup(new Button[]{yes, no});
+    public void createYn(Button[] ynButtons) {
+        yn = new ButtonGroup(ynButtons);
     }
 
-    public void setImages(String standardButtonImage, String focusedButtonImage) {
-        slotGroup.setImages(standardButtonImage, focusedButtonImage);
+    public void setSlotImages(BufferedImage standard, BufferedImage focus) {
+        slotGroup.setImages(standard, focus);
     }
 
     public void createSlots(int totalButtons, int row, int column, int x, int y, int spacing) {
@@ -141,6 +100,10 @@ public class SaveMenuScene extends Scene {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public void setMode() {
+
     }
 
     //--------------------------------------------

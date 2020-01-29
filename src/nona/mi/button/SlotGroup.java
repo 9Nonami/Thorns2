@@ -32,9 +32,9 @@ public class SlotGroup {
         showIncrement = 1;
     }
 
-    public void setImages(String standardButtonImage, String focusedButtonImage) {
-        this.standardButtonImage = ImageLoader.loadImage(standardButtonImage);
-        this.focusedButtonImage = ImageLoader.loadImage(focusedButtonImage);
+    public void setImages(BufferedImage standardButtonImage, BufferedImage focusedButtonImage) {
+        this.standardButtonImage = standardButtonImage;
+        this.focusedButtonImage = focusedButtonImage;
     }
 
 
