@@ -14,8 +14,8 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.HashMap;
 
-//todo : imagem ou texto que identifique para o player qual eh o typo da cena atual
 //todo : DataManagerScene
 //todo : resetar a cena anterior se voltar para algum lugar que nao seja ela
 //todo : retornar para o main
@@ -51,7 +51,7 @@ public class SaveMenuScene extends Scene {
 
     private boolean pleaseWait;
 
-    private BaseImage mode; //
+    private HashMap<Integer, BaseImage> modes;
 
 
 
@@ -86,6 +86,10 @@ public class SaveMenuScene extends Scene {
         slotGroup.createButtons(totalButtons, row, column, x, y, spacing, game.getScreenshots());
     }
 
+    public void createModes(HashMap<Integer, BaseImage> modes) {
+        this.modes = modes;
+    }
+
     //-----------------------------------------------
 
 
@@ -100,10 +104,6 @@ public class SaveMenuScene extends Scene {
 
     public void setType(int type) {
         this.type = type;
-    }
-
-    public void setMode() {
-
     }
 
     //--------------------------------------------
@@ -314,6 +314,10 @@ public class SaveMenuScene extends Scene {
         }
     }
 
+    private void renderModes(Graphics g) {
+        modes.get(type).render(g);
+    }
+
     //--------------------------------------------
 
 
@@ -338,6 +342,7 @@ public class SaveMenuScene extends Scene {
 
     @Override
     public void renderScene(Graphics g) {
+        renderModes(g);
         slotGroup.render(g);
         buttonGroup.render(g);
         if (!lockYnForSave || !lockYnForDel) {

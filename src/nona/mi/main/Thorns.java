@@ -166,11 +166,27 @@ public class Thorns extends Game {
 
 
 
+        //MODOS
+        int modeX = 0;
+        int modeY = 0;
+        BaseImage saveMode = new BaseImage(ImageLoader.loadImage("/res/misc/save-mode.png"), modeX, modeY);
+        BaseImage loadMode = new BaseImage(ImageLoader.loadImage("/res/misc/load-mode.png"), modeX, modeY);
+        BaseImage copyMode = new BaseImage(ImageLoader.loadImage("/res/misc/copy-mode.png"), modeX, modeY);
+        BaseImage deleteMode = new BaseImage(ImageLoader.loadImage("/res/misc/delete-mode.png"), modeX, modeY);
+        HashMap<Integer, BaseImage> modes = new HashMap<Integer, BaseImage>();
+        modes.put(SaveMenuScene.SAVE, saveMode);
+        modes.put(SaveMenuScene.LOAD, loadMode);
+        modes.put(SaveMenuScene.COPY, copyMode);
+        modes.put(SaveMenuScene.DEL, deleteMode);
+
+
+
         SaveMenuScene tempSaveMenuScene = new SaveMenuScene(this, save, 6);
         tempSaveMenuScene.setSlotImages(ImageLoader.loadImage("/res/buttons/empty-slot.png"), ImageLoader.loadImage("/res/buttons/focused-slot.png"));
         tempSaveMenuScene.createSlots(12, 2, 3, 44, 44, 31);
         tempSaveMenuScene.createMiscButtons(new Button[]{returnButton, previousButton, nextButton});
         tempSaveMenuScene.createYn(new Button[]{yesButton, noButton});
+        tempSaveMenuScene.createModes(modes);
         saveMenuScene = tempSaveMenuScene;
     }
 
