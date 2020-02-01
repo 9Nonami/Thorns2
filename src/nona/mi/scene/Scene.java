@@ -17,11 +17,13 @@ public abstract class Scene {
 	protected int nextScene;
 	protected String soundName; //background sound
 	protected int soundStyle; //loop ou once
-	protected boolean lock; //faz com que o codigo do update so execute uma vez
+	protected boolean lock; //faz com que o codigo do updateAudio so execute uma vez
 	public static final int LAST_SCENE = -99; //definir como last_scene significa que depois desta cena, outro pack eh carregado. NAO ESQUECER DE DEFINIR O PACK!
 	private ButtonGroup buttonGroup; //save, load, copy, del
 
 
+
+	//ESSENCIAL------------------------------------------------------
 
 	public Scene(Game game, int nextScene) {
 		this.game = game;
@@ -32,7 +34,21 @@ public abstract class Scene {
 		this.game = game;
 	}
 
+	//----------------------------------------------------------------
+
+
+	//UR--------------------------------------------------------------
+
 	public void update() {
+
+
+		updateAudio();
+		updateButtonGroup();
+	}
+
+
+
+	private void updateAudio() {
 		if	(!lock && soundName != null) {
 
 			String temp = game.getCurrentSound();
@@ -65,9 +81,6 @@ public abstract class Scene {
 
 			lock = true;
 		}
-
-		updateButtonGroup();
-
 	}
 
 	private void updateButtonGroup() { //todo : parar o audio?? > se pah nao > se for fala, sim; talvez o bg nao, mas se pah sim. > scene nao toca falas
@@ -92,7 +105,12 @@ public abstract class Scene {
 
 	public abstract void renderScene(Graphics g);
 
-	public void defineSound(String soundName, int soundStyle) {
+	//----------------------------------------------------------------
+
+
+	//GS--------------------------------------------------------------
+
+	public void setBackgroundAudio(String soundName, int soundStyle) {
 		this.soundName = soundName;
 		this.soundStyle = soundStyle;
 	}
@@ -117,18 +135,13 @@ public abstract class Scene {
 		this.buttonGroup = buttonGroup;
 	}
 
+	//----------------------------------------------------------------
+
 	public void reset() {
 		lock = false;
 		if (buttonGroup != null) {
 			buttonGroup.reset();
 		}
-	}
-
-	public void createSound(String path, int soundStyle) {
-		String key = path.substring(path.lastIndexOf("/") + 1, path.indexOf("."));
-		game.getPackJukebox().load(path, key);
-		soundName = key;
-		this.soundStyle = soundStyle;
 	}
 
 }

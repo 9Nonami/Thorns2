@@ -70,6 +70,10 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     protected boolean space;
     protected boolean lockSpace;
 
+    //
+    protected  boolean escape;
+    protected boolean lockEscape;
+
     private BufferedImage frame;
 
     protected Save save;
@@ -302,6 +306,9 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     public abstract void initPacks();
 
+
+    //INPUT-----------------------------------------------------------------
+
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP) {
@@ -334,6 +341,12 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
                 space = true;
             }
         }
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            if (!lockEscape) {
+                lockEscape = true;
+                escape = true;
+            }
+        }
     }
 
     @Override
@@ -357,6 +370,10 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             lockSpace = false;
             space = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            lockEscape = false;
+            escape = false;
         }
     }
 
@@ -401,6 +418,10 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         mouseX = mouseEvent.getX();
         mouseY = mouseEvent.getY();
     }
+
+    //----------------------------------------------------------------------
+
+
 
     public void testFill(Graphics g) {
         g.setColor(Color.BLACK);
@@ -459,6 +480,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         return packJukebox;
     }
 
+
     public boolean isUp() {
         return up;
     }
@@ -478,6 +500,11 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     public boolean isSpace() {
         return space;
     }
+
+    public boolean isEscape() {
+        return escape;
+    }
+
 
     public ScenePackage getPackBasis() {
         return packBasis;

@@ -18,7 +18,7 @@ import java.util.HashMap;
 
 //todo : DataManagerScene
 //todo : resetar a cena anterior se voltar para algum lugar que nao seja ela
-//todo : retornar para o main
+//todo : retornar para o main >> scene
 public class SaveMenuScene extends Scene {
 
     private int saveScene;
@@ -78,7 +78,7 @@ public class SaveMenuScene extends Scene {
         yn = new ButtonGroup(ynButtons);
     }
 
-    public void setSlotImages(BufferedImage standard, BufferedImage focus) {
+    public void createSlotImages(BufferedImage standard, BufferedImage focus) {
         slotGroup.setImages(standard, focus);
     }
 

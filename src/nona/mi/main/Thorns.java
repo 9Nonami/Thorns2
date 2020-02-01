@@ -2,7 +2,6 @@ package nona.mi.main;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
 import java.util.HashMap;
 
 import nona.mi.button.Button;
@@ -117,7 +116,7 @@ public class Thorns extends Game {
         //MENU COM SAVE, LOAD, COPY E DEL
         createSceneMenu(focusMisc, audioClick, tempTextArea);
 
-        //DATA MANAGER SCENE --------------------------------------------------------
+        //DATA MANAGER SCENE
         createDataManagerScene(focusMisc, audioClick);
 
     }
@@ -182,7 +181,7 @@ public class Thorns extends Game {
 
 
         SaveMenuScene tempSaveMenuScene = new SaveMenuScene(this, save, 6);
-        tempSaveMenuScene.setSlotImages(ImageLoader.loadImage("/res/buttons/empty-slot.png"), ImageLoader.loadImage("/res/buttons/focused-slot.png"));
+        tempSaveMenuScene.createSlotImages(ImageLoader.loadImage("/res/buttons/empty-slot.png"), ImageLoader.loadImage("/res/buttons/focused-slot.png"));
         tempSaveMenuScene.createSlots(12, 2, 3, 44, 44, 31);
         tempSaveMenuScene.createMiscButtons(new Button[]{returnButton, previousButton, nextButton});
         tempSaveMenuScene.createYn(new Button[]{yesButton, noButton});
@@ -286,14 +285,14 @@ public class Thorns extends Game {
 
         //cena 0
         FadeScene scene0 = new FadeScene(this, bgScene0, fadeoutSlow, 1);
-        scene0.defineSound(trainningCenterAudio, MyJukeBox.LOOP);
+        scene0.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(0, scene0);
 
         //cena 1
         String txtScene1 = sentences.get(1);
         StandardScene scene1 = new StandardScene(this, bgScene0, setasAnim, 2);
         scene1.setDialog(txtScene1, fontDataBase, textArea, nameBg);
-        scene1.defineSound(trainningCenterAudio, MyJukeBox.LOOP);
+        scene1.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         scene1.setButtonGroup(sceneMenu);
         packBasis.put(1, scene1);
 
@@ -306,7 +305,7 @@ public class Thorns extends Game {
         efxTuli.setMoveTo(400, 0, 1, 0);
         ImageEfx[] images = {efxRose, efxTuli};
         EfxScene scene2 = new EfxScene(this, images, bgScene0, 3);
-        scene2.defineSound(trainningCenterAudio, MyJukeBox.LOOP);
+        scene2.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(2, scene2);
 
         //cena 3
@@ -317,7 +316,7 @@ public class Thorns extends Game {
         StandardScene scene3 = new StandardScene(this, bgScene0, setasAnim, 4);
         scene3.setDialog(txtScene3, fontDataBase, textArea, nameBg);
         scene3.setCharacters(characters);
-        scene3.defineSound(trainningCenterAudio, MyJukeBox.LOOP);
+        scene3.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(3, scene3);
 
         //cena 4 //0.05f old speed
@@ -329,7 +328,7 @@ public class Thorns extends Game {
         ImageEfx[] top4 = {bgSc4, tuliSc4};
         FadeTopBottomScene scene4 = new FadeTopBottomScene(this, bottom4, top4, 5);
         scene4.setTextArea(textArea);
-        scene4.defineSound(trainningCenterAudio, MyJukeBox.LOOP);
+        scene4.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(4, scene4);
 
         //cena 5
@@ -339,7 +338,7 @@ public class Thorns extends Game {
         BaseImage tuliSc5 = new BaseImage(tuli, (int)((getWidth() / 2) - (tuli.getWidth()/2)), 0);
         BaseImage[] chars5 = {tuliSc5};
         scene5.setCharacters(chars5);
-        scene5.defineSound(trainningCenterAudio, MyJukeBox.LOOP);
+        scene5.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(5, scene5);
 
         //cena 6
@@ -351,7 +350,7 @@ public class Thorns extends Game {
         ImageEfx[] top6 = {bgSc6, roseSc6};
         FadeTopBottomScene scene6 = new FadeTopBottomScene(this, bottom6, top6, 7);
         scene6.setTextArea(textArea);
-        scene6.defineSound(trainningCenterAudio, MyJukeBox.LOOP);
+        scene6.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(6, scene6);
 
         //cena 7
@@ -360,25 +359,25 @@ public class Thorns extends Game {
         scene7.setDialog(txtScene7, fontDataBase, textArea, nameBg);
         BaseImage roseSc7 = new BaseImage(rose, getWidth() / 2 - rose.getWidth() / 2, 0);
         scene7.setCharacters(new BaseImage[]{roseSc7});
-        scene7.defineSound(trainningCenterAudio, MyJukeBox.LOOP);
+        scene7.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(7, scene7);
 
         //cena 8
         FadeScene scene8 = new FadeScene(this, new BaseImage[]{bgScene0, roseSc7}, fadeinFast, 9);
-        scene8.defineSound(trainningCenterAudio, MyJukeBox.LOOP);
+        scene8.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(8, scene8);
 
         //cena 9
         BaseImage livro1 = new BaseImage(livro1Buffered);
         FadeScene scene9 = new FadeScene(this, livro1, fadeoutFast, 10);
-        scene9.defineSound(trainningCenterAudio, MyJukeBox.LOOP);
+        scene9.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(9, scene9);
 
         //cena 10
         String txtScene10 = sentences.get(10);
         StandardScene scene10 = new StandardScene(this, livro1, setasAnim, 11);
         scene10.setDialog(txtScene10, fontDataBase, textArea, nameBg);
-        scene10.defineSound(trainningCenterAudio, MyJukeBox.LOOP);
+        scene10.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(10, scene10);
 
         //cena 11
@@ -386,7 +385,7 @@ public class Thorns extends Game {
         efxLivro2.setAlpha(ImageEfx.TRANSPARENT, 0.02f);
         EfxScene scene11 = new EfxScene(this, new ImageEfx[]{efxLivro2}, livro1, 12);
         //scene11.setTextArea(textArea);
-        scene11.defineSound(trainningCenterAudio, MyJukeBox.LOOP);
+        scene11.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(11, scene11);
 
         //cena 12
@@ -395,14 +394,14 @@ public class Thorns extends Game {
         BaseImage[] imagesSc12 = {livro1, livro2};
         StandardScene scene12 = new StandardScene(this, imagesSc12, setasAnim, 13);
         scene12.setDialog(txtScene12, fontDataBase, textArea, nameBg);
-        scene12.defineSound(trainningCenterAudio, MyJukeBox.LOOP);
+        scene12.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(12, scene12);
 
         //cena 13
         ImageEfx efxLivro3 = new ImageEfx(this, livro3Buffered, new Coordinates(0, 0));
         efxLivro3.setAlpha(ImageEfx.TRANSPARENT, 0.02f);
         EfxScene scene13 = new EfxScene(this, new ImageEfx[]{efxLivro3}, imagesSc12, 14);
-        scene13.defineSound(trainningCenterAudio, MyJukeBox.LOOP);
+        scene13.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(13, scene13);
 
         //cena 14
@@ -410,7 +409,7 @@ public class Thorns extends Game {
         BaseImage livro3 = new BaseImage(livro3Buffered);
         StandardScene scene14 = new StandardScene(this, new BaseImage[]{livro1, livro2, livro3}, setasAnim, 15);
         scene14.setDialog(txtScene14, fontDataBase, textArea, nameBg);
-        scene14.defineSound(trainningCenterAudio, MyJukeBox.LOOP);
+        scene14.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(14, scene14);
 
         //cena 15 - temp
@@ -418,7 +417,7 @@ public class Thorns extends Game {
         StandardScene scene15 = new StandardScene(this, bgScene0, setasAnim, 0);
         //scene15.setNextPack(0);
         scene15.setDialog(txtScene15, fontDataBase, textArea, nameBg);
-        scene15.defineSound(trainningCenterAudio, MyJukeBox.LOOP);
+        scene15.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(15, scene15);
 
     }
@@ -429,6 +428,7 @@ public class Thorns extends Game {
         down = false;
         left = false;
         right = false;
+        escape = false; //todo : ver.
         setClicked(false);
     }
 
