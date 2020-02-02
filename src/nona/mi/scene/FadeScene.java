@@ -32,9 +32,7 @@ public class FadeScene extends Scene {
     }
 
     @Override
-    public void update() {
-        super.update();
-
+    public void updateScene() {
         if (!fade.getEndAnimation()) {
             fade.update();
         } else {

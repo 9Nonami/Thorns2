@@ -1,5 +1,6 @@
 package nona.mi.main;
 
+import nona.mi.button.ButtonGroup;
 import nona.mi.jukebox.MyJukeBox;
 import nona.mi.save.Save;
 import nona.mi.scene.SaveMenuScene;
@@ -86,6 +87,9 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     //
     protected HashMap<Integer, BufferedImage> screenshots;
+
+    //
+    protected ButtonGroup yn;
 
 
 
@@ -563,5 +567,15 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     public HashMap<Integer, BufferedImage> getScreenshots() {
         return screenshots;
+    }
+
+    public ButtonGroup getYn() {
+        return yn;
+    }
+
+    //
+    public void returntoMainMenu() {
+        //nem precisa resetar, pois sempre que sair do mainMenu, os pack e scenes serao relidos
+        sceneBasis = mainMenu;
     }
 }

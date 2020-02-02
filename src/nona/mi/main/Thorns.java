@@ -54,6 +54,27 @@ public class Thorns extends Game {
         //STANDARD AUDIOS
         standardJukeBox.load("/res/audio/click.wav", audioClick);
 
+
+
+        //YN
+        BufferedImage uno = ImageLoader.loadImage("/res/buttons/uno.png");
+        BufferedImage dos = ImageLoader.loadImage("/res/buttons/dos.png");
+
+        //YES BUTTON
+        RectButton yesButton = new RectButton(this);
+        yesButton.setImages(uno, dos, 150, 50);
+        yesButton.setAudioName(audioClick);
+        yesButton.setId(SaveMenuScene.YES);
+
+        //NO BUTTON
+        RectButton noButton = new RectButton(this);
+        noButton.setImages(uno, dos, 350, 50);
+        noButton.setAudioName(audioClick);
+        noButton.setId(SaveMenuScene.NO);
+        yn = new ButtonGroup(new Button[]{yesButton, noButton});
+
+
+
         //FONTE DA VN
         fontDataBase = new FontDataBase("/res/font/myfont.png", "/res/font/text.txt");
         fontFocus = new FontDataBase("/res/font/myfontfocus.png", "/res/font/text.txt");
@@ -92,8 +113,7 @@ public class Thorns extends Game {
         loadScene = new LoadScene(this, new BaseImage(ImageLoader.loadImage("/res/bg/load.png"), 0, 0));
 
         //MAIN MENU SCENE
-        TestButtonScene testButtonScene = new TestButtonScene(this); //todo : tirar o 2
-        mainMenu = testButtonScene;
+        mainMenu = new TestButtonScene(this); //todo : tirar o 2
 
         //FADESCENE logo
         Fade fadeLogo = new Fade(this, Fade.SOLID, Fade.FAST);
@@ -218,7 +238,13 @@ public class Thorns extends Game {
         deleteButton.setAudioName(audioClick);
         deleteButton.setId(SaveMenuScene.DEL);
 
-        sceneMenu = new ButtonGroup(new Button[]{saveButton, loadButton, copyButton, deleteButton});
+        //
+        RectButton mainButton = new RectButton(this);
+        mainButton.setImages(ImageLoader.loadImage("/res/misc/main.png"), focusMisc, 100, 0);
+        mainButton.setAudioName(audioClick);
+        mainButton.setId(SaveMenuScene.MAIN);
+
+        sceneMenu = new ButtonGroup(new Button[]{saveButton, loadButton, copyButton, deleteButton, mainButton});
 
     }
 

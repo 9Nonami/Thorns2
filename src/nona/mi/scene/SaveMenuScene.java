@@ -42,6 +42,7 @@ public class SaveMenuScene extends Scene {
     public static final int LOAD = 6;
     public static final int COPY = 7;
     public static final int DEL = 8;
+    public static final int MAIN = 9;
 
     private boolean lockForSave;
     private boolean lockYnForSave;
@@ -325,8 +326,7 @@ public class SaveMenuScene extends Scene {
     //URR-----------------------------------------
 
     @Override
-    public void update() {
-        super.update();
+    public void updateScene() {
 
         if (type == SAVE) {
             updateSave();

@@ -75,8 +75,7 @@ public class ChoiceScene extends Scene {
     }
 
     @Override
-    public void update() {
-        super.update();
+    public void updateScene() {
         up = game.isUp();
         down = game.isDown();
         space = game.isSpace();

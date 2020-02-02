@@ -42,8 +42,7 @@ public class TestButtonScene2 extends Scene implements Runnable{
     }
 
     @Override
-    public void update() {
-        super.update();
+    public void updateScene() {
 
         if (!confirm) {
             rectButton.update();

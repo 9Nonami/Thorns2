@@ -24,11 +24,8 @@ public class TestButtonScene extends Scene {
     }
 
     @Override
-    public void update() {
-        super.update();
-
+    public void updateScene() {
         rectButton.update();
-
         if (rectButton.isClicked()) {
             nextScene = rectButton.getNextScene();
             game.nextScene();

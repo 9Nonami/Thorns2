@@ -1,5 +1,6 @@
 package nona.mi.scene;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import nona.mi.button.ButtonGroup;
@@ -21,6 +22,9 @@ public abstract class Scene {
 	public static final int LAST_SCENE = -99; //definir como last_scene significa que depois desta cena, outro pack eh carregado. NAO ESQUECER DE DEFINIR O PACK!
 	private ButtonGroup buttonGroup; //save, load, copy, del
 
+	private ButtonGroup yn; //confirma a ida para o main
+	private boolean esc;
+
 
 
 	//ESSENCIAL------------------------------------------------------
@@ -28,10 +32,12 @@ public abstract class Scene {
 	public Scene(Game game, int nextScene) {
 		this.game = game;
 		this.nextScene = nextScene;
+		yn = game.getYn();
 	}
 
 	public Scene(Game game) {
 		this.game = game;
+		yn = game.getYn();
 	}
 
 	//----------------------------------------------------------------
@@ -40,13 +46,24 @@ public abstract class Scene {
 	//UR--------------------------------------------------------------
 
 	public void update() {
-
-
-		updateAudio();
-		updateButtonGroup();
+		if (!esc) {
+			updateAudio();
+			updateButtonGroup();
+			if (!esc) { //precisa disso pois o metodo acima muda o status de esc
+				updateScene();
+			}
+		} else {
+			yn.update();
+			if (yn.getClickedButton() == SaveMenuScene.YES) {
+				game.returntoMainMenu();
+			} else if (yn.getClickedButton() == SaveMenuScene.NO) {
+				esc = false;
+				yn.reset();
+			}
+		}
 	}
 
-
+	public abstract void updateScene();
 
 	private void updateAudio() {
 		if	(!lock && soundName != null) {
@@ -87,19 +104,36 @@ public abstract class Scene {
 		if (buttonGroup != null) {
 			buttonGroup.update();
 			if (buttonGroup.getClickedButton() != ButtonGroup.NO_CLICK) {
-				game.getSaveMenuScene().setType(buttonGroup.getClickedButton());
-				game.getSaveMenuScene().setInfo(game.getPack(), game.getScene(), game.getFrame()); //soh save precisa disso, mas nao vou criar um if soh pra ele
-				game.setSceneBasisWithoutReset(game.getSaveMenuScene()); //para nao comecar a cena do 0 quando voltar
-				buttonGroup.reset();
-				game.setClicked(false);
+				if (buttonGroup.getClickedButton() == SaveMenuScene.MAIN) {
+					esc = true;
+				} else {
+					game.getSaveMenuScene().setType(buttonGroup.getClickedButton());
+					game.getSaveMenuScene().setInfo(game.getPack(), game.getScene(), game.getFrame()); //soh save precisa disso, mas nao vou criar um if soh pra ele
+					game.setSceneBasisWithoutReset(game.getSaveMenuScene()); //para nao comecar a cena do 0 quando voltar
+					buttonGroup.reset();
+					game.setClicked(false);
+				}
 			}
 		}
 	}
 
 	public void render(Graphics g) {
 		renderScene(g);
+		renderButtons(g);
+		renderYn(g);
+	}
+
+	private void renderButtons(Graphics g) {
 		if (buttonGroup != null) {
 			buttonGroup.render(g);
+		}
+	}
+
+	private void renderYn(Graphics g) {
+		if (esc) {
+			g.setColor(new Color(0, 0, 0, 150));
+			g.fillRect(0, 0, game.getWidth(), game.getHeight());
+			yn.render(g);
 		}
 	}
 
@@ -142,6 +176,8 @@ public abstract class Scene {
 		if (buttonGroup != null) {
 			buttonGroup.reset();
 		}
+		yn.reset();
+		esc = false;
 	}
 
 }

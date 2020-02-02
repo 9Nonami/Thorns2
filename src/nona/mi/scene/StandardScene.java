@@ -95,8 +95,7 @@ public class StandardScene extends Scene {
     }
 
     @Override
-    public void update() {
-        super.update();
+    public void updateScene() {
 
         dialogueBasis.update();
 

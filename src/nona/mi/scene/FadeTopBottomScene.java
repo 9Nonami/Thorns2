@@ -25,8 +25,7 @@ public class FadeTopBottomScene extends Scene {
     }
 
     @Override
-    public void update() {
-        super.update();
+    public void updateScene() {
         if (!top[0].getAllFinishedAnimations()) {
             for (int i = 0; i < top.length; i++) {
                 top[i].update();

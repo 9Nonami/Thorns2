@@ -27,8 +27,7 @@ public class EfxScene extends Scene {
     }
 
     @Override
-    public void update() {
-        super.update();
+    public void updateScene() {
         if (!endAnimation) {
             for (int i = 0; i < images.length; i++) {
                 images[i].update();
