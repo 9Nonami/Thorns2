@@ -289,13 +289,8 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
             public void run() {
                 packBasis = new ScenePackage();
 
-                //not sure if this is the best way to iterate and modify the hashmap contents
                 if (packJukebox != null) {
-                    for (Map.Entry<String, Clip> temp : packJukebox.getClips().entrySet()) {
-                        System.out.println("closing: " + temp.getKey());
-                        temp.getValue().close();
-                    }
-                    System.out.println("");
+                    closePackJukebox();
                 }
                 currentSound = null;
                 packJukebox = new MyJukeBox();
@@ -309,6 +304,18 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     }
 
     public abstract void initPacks();
+
+    private void closePackJukebox() {
+        //todo : ver se nao eh melhor colocar em uma thread
+        //not sure if this is the best way to iterate and modify the hashmap contents
+        for (Map.Entry<String, Clip> temp : packJukebox.getClips().entrySet()) {
+            System.out.println("closing: " + temp.getKey());
+            if (temp.getValue().isRunning()) {
+                temp.getValue().stop();
+            }
+            temp.getValue().close();
+        }
+    }
 
 
     //INPUT-----------------------------------------------------------------
@@ -577,5 +584,8 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     public void returntoMainMenu() {
         //nem precisa resetar, pois sempre que sair do mainMenu, os pack e scenes serao relidos
         sceneBasis = mainMenu;
+        closePackJukebox();
+        currentSound = null;
+        packJukebox = null;
     }
 }
