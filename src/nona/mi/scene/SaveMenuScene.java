@@ -118,9 +118,19 @@ public class SaveMenuScene extends Scene {
         buttonGroup.update();
         if (buttonGroup.getClickedButton() != ButtonGroup.NO_CLICK) {
             if (buttonGroup.getClickedButton() == RETURN_TO_LAST_SCENE) {
+
                 game.setSceneBasis(game.getPackBasis().get(game.getScene()));
+
                 reset();
+
+                //retoma uma fala caso tenha sido pausada
+                if (game.getPackBasis().get(saveScene) instanceof StandardScene) {
+                    StandardScene temp = (StandardScene) game.getPackBasis().get(saveScene);
+                    temp.resumeDialogAudio();
+                }
+
                 return true; //para nao atualizar os slots
+
             } else if (buttonGroup.getClickedButton() == PREVIOUS_SLOT_GROUP) {
                 if (slotGroup.getStartIncrement() > 0) { // 0 = first slot. there is nothing before it.
                     slotGroup.decrement();

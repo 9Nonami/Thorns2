@@ -48,7 +48,7 @@ public class Dialogue {
     //
     private boolean playFullAudio;
     private Game game;
-    private boolean pause;
+    private boolean audioPaused;
 
 
 
@@ -68,8 +68,6 @@ public class Dialogue {
         this.nameBg = nameBg;
 
         spacing = 5;
-
-        pause = false;
     }
 
     public void setAudio(String audioName, String audioPath) { //audioDelay in seconds
@@ -78,24 +76,15 @@ public class Dialogue {
         game.getPackJukebox().load(audioPath, this.audioName);
     }
 
-    public void update(boolean esc) {
-        updateAudio(esc);
+    public void update() {
+        updateAudio();
         updateText();
     }
 
-    private void updateAudio(boolean esc) {
-        if (!lockAudio) {
-            if (audioName != null) {
-                lockAudio = true;
-                game.getPackJukebox().play(audioName);
-            }
-        } else {
-            if (esc && !pause) {
-                pause = true;
-                game.getPackJukebox().stop(audioName);
-            } else if (pause && !esc) {
-                game.getPackJukebox().resume(audioName);
-            }
+    private void updateAudio() {
+        if (!lockAudio && audioName != null) {
+            lockAudio = true;
+            game.getPackJukebox().play(audioName);
         }
     }
 
@@ -175,13 +164,6 @@ public class Dialogue {
         initNameCoordinates();
     }
 
-    public void reset() {
-        endAnimation = false;
-        cont = 0;
-        lockAudio = false;
-        pause = false;
-    }
-
     public boolean getEndAnimation() {
         if  (playFullAudio && (audioName != null)){
             return endAnimation && !game.getPackJukebox().isPlaying(audioName);
@@ -212,6 +194,21 @@ public class Dialogue {
 
     public void setPlayFullAudio(boolean b) {
         playFullAudio = b;
+    }
+
+    public void setAudioPaused(boolean audioPaused) {
+        this.audioPaused = audioPaused;
+    }
+
+    public boolean isAudioPaused() {
+        return audioPaused;
+    }
+
+    public void reset() {
+        endAnimation = false;
+        cont = 0;
+        lockAudio = false;
+        audioPaused = false;
     }
 
 }

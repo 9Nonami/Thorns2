@@ -23,6 +23,8 @@ public class StandardScene extends Scene {
 
 
 
+    //ESSENCIAL--------------------------------------
+
     public StandardScene(Game game, BaseImage background, ImageEfx setasAnim, int nextScene) {
         super(game, nextScene);
         this.background = background;
@@ -35,6 +37,11 @@ public class StandardScene extends Scene {
         this.backgrounds = backgrounds;
         this.setasAnim = setasAnim;
     }
+
+    //-----------------------------------------------
+
+
+    //GS----------------------------------------------
 
     public void setDialog(String s, FontDataBase fdb, BaseImage textArea, BaseImage nameBg) {
 
@@ -92,10 +99,15 @@ public class StandardScene extends Scene {
         this.characters = characters;
     }
 
+    //------------------------------------------------
+
+
+    //UR----------------------------------------------
+
     @Override
     public void updateScene() {
 
-        dialogueBasis.update(esc);
+        dialogueBasis.update();
 
         space = game.isSpace();
         clicked = game.isClicked();
@@ -149,6 +161,31 @@ public class StandardScene extends Scene {
             setasAnim.render(g);
         }
     }
+
+    //------------------------------------------------
+
+
+    //OTHER-------------------------------------------
+
+    public void pauseDialogAudio() {
+        String audioName = dialogueBasis.getAudioName();
+        if (audioName != null) {
+            if (game.getPackJukebox().isPlaying(audioName)) {
+                game.getPackJukebox().stop(audioName);
+                dialogueBasis.setAudioPaused(true);
+            }
+        }
+    }
+
+    public void resumeDialogAudio() {
+        String audioName = dialogueBasis.getAudioName();
+        if (audioName != null && dialogueBasis.isAudioPaused()) {
+            game.getPackJukebox().resume(audioName);
+        }
+    }
+
+    //------------------------------------------------
+
 
     @Override
     public void reset(){

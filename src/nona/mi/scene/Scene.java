@@ -59,6 +59,12 @@ public abstract class Scene {
 			} else if (yn.getClickedButton() == SaveMenuScene.NO) {
 				esc = false;
 				yn.reset();
+
+				//retoma uma fala caso tenha sido pausada
+				if (game.getSceneBasis() instanceof StandardScene) {
+					StandardScene temp = (StandardScene) game.getSceneBasis();
+					temp.resumeDialogAudio();
+				}
 			}
 		}
 	}
@@ -104,6 +110,13 @@ public abstract class Scene {
 		if (buttonGroup != null) {
 			buttonGroup.update();
 			if (buttonGroup.getClickedButton() != ButtonGroup.NO_CLICK) {
+
+				//se estiver no meio do audio quando um botao for pressionado, pausa
+				if (game.getSceneBasis() instanceof StandardScene) {
+					StandardScene temp = (StandardScene) game.getSceneBasis();
+					temp.pauseDialogAudio();
+				}
+
 				if (buttonGroup.getClickedButton() == SaveMenuScene.MAIN) {
 					esc = true;
 				} else {

@@ -580,6 +580,10 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         return yn;
     }
 
+    public Scene getSceneBasis() {
+        return sceneBasis;
+    }
+
     //
     public void returntoMainMenu() {
         //nem precisa resetar, pois sempre que sair do mainMenu, os pack e scenes serao relidos

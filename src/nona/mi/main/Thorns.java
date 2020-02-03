@@ -310,7 +310,7 @@ public class Thorns extends Game {
         //----------------------------------------
 
         //cena 0
-        FadeScene scene0 = new FadeScene(this, bgScene0, fadeoutSlow, 1);
+        FadeScene scene0 = new FadeScene(this, bgScene0, fadeoutSlow, 99);
         scene0.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(0, scene0);
 
@@ -445,6 +445,14 @@ public class Thorns extends Game {
         scene15.setDialog(txtScene15, fontDataBase, textArea, nameBg);
         scene15.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(15, scene15);
+
+        //cena 99
+        String txtScene99 = sentences.get(99);
+        StandardScene scene99 = new StandardScene(this, bgScene0, setasAnim, 1);
+        scene99.setDialog(txtScene99, fontDataBase, textArea, nameBg);
+        scene99.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
+        scene99.setButtonGroup(sceneMenu);
+        packBasis.put(99, scene99);
 
     }
 
