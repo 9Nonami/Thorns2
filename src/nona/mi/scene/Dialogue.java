@@ -42,14 +42,14 @@ public class Dialogue {
     private int xname;
     private int yname;
 
-    private int timeCont;
-    private int audioDelay;
     private boolean lockAudio;
     private String audioName;
 
     //
     private boolean playFullAudio;
     private Game game;
+    private boolean pause;
+
 
 
     public Dialogue(Game game, FontDataBase fdb, int x, int y, BaseImage textArea, BaseImage nameBg) {
@@ -68,47 +68,38 @@ public class Dialogue {
         this.nameBg = nameBg;
 
         spacing = 5;
+
+        pause = false;
     }
 
-    //todo : ver se e necessario esse construtor
-    /*
-    public Dialogue(Thorns thorns, FontDataBase fdb, BaseImage textArea, BaseImage nameBg) {
-        this.thorns = thorns;
-        this.fdb = fdb;
-        fontHeight = fdb.getFontHeight();
-
-        x = 0;
-        y = 0;
-
-        cont = 0;
-        textSpeed = 1;
-
-        this.textArea = textArea;
-        this.nameBg = nameBg;
-
-        spacing = 5;
-    }
-    //*/
-
-    public void setAudio(float audioDelay, String audioName, String audioPath) { //audioDelay in seconds
-        this.audioDelay = (int) (audioDelay * game.getFps());
+    public void setAudio(String audioName, String audioPath) { //audioDelay in seconds
         this.audioName = audioName;
-        this.timeCont = 0;
-        this.lockAudio = false;
+        lockAudio = false;
         game.getPackJukebox().load(audioPath, this.audioName);
     }
 
-    public void update() {
+    public void update(boolean esc) {
+        updateAudio(esc);
+        updateText();
+    }
 
-        if (!lockAudio && audioName != null) {
-            timeCont++;
-            if (timeCont >= audioDelay) {
+    private void updateAudio(boolean esc) {
+        if (!lockAudio) {
+            if (audioName != null) {
                 lockAudio = true;
-                timeCont = 0;
-                game.getPackJukebox().play(this.audioName);
+                game.getPackJukebox().play(audioName);
+            }
+        } else {
+            if (esc && !pause) {
+                pause = true;
+                game.getPackJukebox().stop(audioName);
+            } else if (pause && !esc) {
+                game.getPackJukebox().resume(audioName);
             }
         }
+    }
 
+    private void updateText() {
         if (arr != null) {
             if (!endAnimation) {
                 cont += textSpeed;
@@ -187,8 +178,8 @@ public class Dialogue {
     public void reset() {
         endAnimation = false;
         cont = 0;
-        timeCont = 0;
         lockAudio = false;
+        pause = false;
     }
 
     public boolean getEndAnimation() {

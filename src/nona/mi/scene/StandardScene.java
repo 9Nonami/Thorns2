@@ -67,9 +67,7 @@ public class StandardScene extends Scene {
                     tempAudioName = tempAudioPath.substring(tempAudioPath.lastIndexOf("/") + 1, tempAudioPath.indexOf("."));
                 }
 
-                float delayInSeconds = 0f;
-
-                tempDialogues[i].setAudio(delayInSeconds, tempAudioName, tempAudioPath);
+                tempDialogues[i].setAudio(tempAudioName, tempAudioPath);
 
             } else {
                 dialog = splitedDialogues[i].substring(splitedDialogues[i].indexOf(":") + 1);
@@ -97,7 +95,7 @@ public class StandardScene extends Scene {
     @Override
     public void updateScene() {
 
-        dialogueBasis.update();
+        dialogueBasis.update(esc);
 
         space = game.isSpace();
         clicked = game.isClicked();

@@ -22,8 +22,8 @@ public abstract class Scene {
 	public static final int LAST_SCENE = -99; //definir como last_scene significa que depois desta cena, outro pack eh carregado. NAO ESQUECER DE DEFINIR O PACK!
 	private ButtonGroup buttonGroup; //save, load, copy, del
 
-	private ButtonGroup yn; //confirma a ida para o main
-	private boolean esc;
+	protected ButtonGroup yn; //confirma a ida para o main
+	protected boolean esc;
 
 
 
