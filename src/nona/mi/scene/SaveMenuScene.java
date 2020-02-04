@@ -208,7 +208,7 @@ public class SaveMenuScene extends Scene {
             }
             updateSlotsForPaste();
         } else if (!lockYnForCopy) {
-            updateYnForCopy();
+            updateYnForCopy(); //here
         }
     }
 
@@ -238,22 +238,26 @@ public class SaveMenuScene extends Scene {
         if (slotGroup.getClickedSlot() != SlotGroup.NO_CLICK) {
             if (slotGroup.getButtons()[slotGroup.getClickedSlot()].getStandardImage() == slotGroup.getStandardButtonImage()) {
                 //slot vazio
-                //save
                 pleaseWait = true;
-                lockForPaste = true;
-                save();
+                save(); //todo : ok ate aqui == ver reset do yn
             } else {
                 //slot com dados
+                lockYnForCopy = false;
             }
+            lockForPaste = true;
         }
     }
 
     private void updateYnForCopy() {
         yn.update();
         if (yn.getClickedButton() == YES) {
-            //
+            lockYnForCopy = true;
+            pleaseWait = true;
+            save();
         } else if (yn.getClickedButton() == NO) {
-            //
+            yn.reset();
+            lockForCopy = false;
+            lockYnForCopy = true;
         }
     }
 
@@ -303,6 +307,8 @@ public class SaveMenuScene extends Scene {
             @Override
             public void run() {
                 try {
+
+                    Thread.sleep(1000);
 
                     //obtem o caminho da imagem de acordo com o os
                     String tempPath = "";
@@ -414,9 +420,9 @@ public class SaveMenuScene extends Scene {
         if (type == SAVE) {
             updateSave();
         } else if (type == LOAD) {
-
+            //
         } else if (type == COPY) {
-
+            updateCopy();
         } else if (type == DEL) {
             updateDel();
         }
@@ -428,7 +434,7 @@ public class SaveMenuScene extends Scene {
         renderModes(g);
         slotGroup.render(g);
         buttonGroup.render(g);
-        if (!lockYnForSave || !lockYnForDel) {
+        if (!lockYnForSave || !lockYnForDel || !lockYnForCopy) {
             renderShadow(g);
             yn.render(g);
         }
@@ -448,6 +454,10 @@ public class SaveMenuScene extends Scene {
 
         lockForDel = false;
         lockYnForDel = true;
+
+        lockForCopy = false;
+        lockForPaste = true;
+        lockYnForCopy = true;
 
         pleaseWait = false;
 
