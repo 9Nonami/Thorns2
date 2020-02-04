@@ -45,12 +45,13 @@ public class Dialogue {
     private boolean lockAudio;
     private String audioName;
 
-    //
     private boolean playFullAudio;
     private Game game;
     private boolean audioPaused;
 
 
+
+    //ESSENCIAL------------------------------------------
 
     public Dialogue(Game game, FontDataBase fdb, int x, int y, BaseImage textArea, BaseImage nameBg) {
         this.game = game;
@@ -70,11 +71,65 @@ public class Dialogue {
         spacing = 5;
     }
 
-    public void setAudio(String audioName, String audioPath) { //audioDelay in seconds
+    //---------------------------------------------------
+
+
+    //GS-------------------------------------------------
+
+    public void setAudio(String audioName, String audioPath) {
         this.audioName = audioName;
         lockAudio = false;
         game.getPackJukebox().load(audioPath, this.audioName);
     }
+
+    public void setDialogue(char[] arr) {
+        this.arr = arr;
+    }
+
+    public void setName(char[] name) {
+        this.name = name;
+        initNameCoordinates();
+    }
+
+    public boolean getEndAnimation() {
+        if  (playFullAudio && (audioName != null)){
+            return endAnimation && !game.getPackJukebox().isPlaying(audioName);
+        }
+        return endAnimation;
+    }
+
+    private int getCenterY() {
+        return (int) ((nameBg.getY() + (nameBg.getHeight() / 2)) - (fdb.getFontHeight() / 2));
+    }
+
+    private int getCenterXOf(char[] c) {
+        int width = 0;
+        for (int i = 0; i < c.length; i++) {
+            width += fdb.get(c[i]).getWidth();
+        }
+        return (int) ((nameBg.getWidth() / 2) - (width / 2));
+    }
+
+    public String getAudioName() {
+        return audioName;
+    }
+
+    public void setPlayFullAudio(boolean b) {
+        playFullAudio = b;
+    }
+
+    public void setAudioPaused(boolean audioPaused) {
+        this.audioPaused = audioPaused;
+    }
+
+    public boolean isAudioPaused() {
+        return audioPaused;
+    }
+
+    //---------------------------------------------------
+
+
+    //UR-------------------------------------------------
 
     public void update() {
         updateAudio();
@@ -103,6 +158,17 @@ public class Dialogue {
             System.out.println("null dialogue");
             System.exit(0);
         }
+    }
+
+    public void render(Graphics g) {
+
+        textArea.render(g);
+
+        renderNameBg(g);
+
+        renderName(g);
+
+        renderDialogue(g);
     }
 
     private void renderNameBg(Graphics g) {
@@ -144,65 +210,18 @@ public class Dialogue {
         }
     }
 
-    public void render(Graphics g) {
+    //---------------------------------------------------
 
-        textArea.render(g);
 
-        renderNameBg(g);
-
-        renderName(g);
-
-        renderDialogue(g);
-    }
-
-    public void setDialogue(char[] arr) {
-        this.arr = arr;
-    }
-
-    public void setName(char[] name) {
-        this.name = name;
-        initNameCoordinates();
-    }
-
-    public boolean getEndAnimation() {
-        if  (playFullAudio && (audioName != null)){
-            return endAnimation && !game.getPackJukebox().isPlaying(audioName);
-        }
-        return endAnimation;
-    }
+    //OTHER----------------------------------------------
 
     public void initNameCoordinates() {
         xname = getCenterXOf(name);
         yname = getCenterY();
     }
 
-    private int getCenterY() {
-        return (int) ((nameBg.getY() + (nameBg.getHeight() / 2)) - (fdb.getFontHeight() / 2));
-    }
+    //---------------------------------------------------
 
-    private int getCenterXOf(char[] c) {
-        int width = 0;
-        for (int i = 0; i < c.length; i++) {
-            width += fdb.get(c[i]).getWidth();
-        }
-        return (int) ((nameBg.getWidth() / 2) - (width / 2));
-    }
-
-    public String getAudioName() {
-        return audioName;
-    }
-
-    public void setPlayFullAudio(boolean b) {
-        playFullAudio = b;
-    }
-
-    public void setAudioPaused(boolean audioPaused) {
-        this.audioPaused = audioPaused;
-    }
-
-    public boolean isAudioPaused() {
-        return audioPaused;
-    }
 
     public void reset() {
         endAnimation = false;

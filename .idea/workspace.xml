@@ -3,14 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="50053a92-1326-4f75-bf22-ca2e42361449" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/Dialogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/Dialogue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/SaveMenuScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/SaveMenuScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/Scene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/StandardScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/StandardScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/dialog/scene0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/dialog/scene0.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
