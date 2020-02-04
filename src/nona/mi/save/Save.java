@@ -107,4 +107,12 @@ public class Save {
     public String getOs() {
         return os;
     }
+
+    public int getPackOfSlot(int slot) {
+        return Integer.parseInt(slots[slot].split("-")[0]);
+    }
+
+    public int getSceneOfSlot(int slot) {
+        return Integer.parseInt(slots[slot].split("-")[1]);
+    }
 }

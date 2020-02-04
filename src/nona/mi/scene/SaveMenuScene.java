@@ -50,6 +50,10 @@ public class SaveMenuScene extends Scene {
     private boolean lockForDel;
     private boolean lockYnForDel;
 
+    private boolean lockForCopy;
+    private boolean lockForPaste;
+    private boolean lockYnForCopy;
+
     private boolean pleaseWait;
 
     private HashMap<Integer, BaseImage> modes;
@@ -68,6 +72,10 @@ public class SaveMenuScene extends Scene {
 
         lockForDel = false;
         lockYnForDel = true;
+
+        lockForCopy = false;
+        lockForPaste = true;
+        lockYnForCopy = true;
 
     }
 
@@ -153,7 +161,7 @@ public class SaveMenuScene extends Scene {
                 return; //se foi clicado no botao de return, nao atualiza os slots
             }
             updateSlotsForSave();
-        } else if (!lockYnForSave) {
+        } else if (!lockYnForSave) { //todo : ??? acho que bloqueia os dois para nao clicar durante a escrita dos dados
             updateYnForSave();
         }
     }
@@ -182,6 +190,70 @@ public class SaveMenuScene extends Scene {
             yn.reset();
             lockForSave = false;
             lockYnForSave = true;
+        }
+    }
+
+
+
+    //TYPE COPY
+    private void updateCopy() {
+        if (!lockForCopy) {
+            if (updateButtons()){
+                return;
+            }
+            updateSlotsForCopy();
+        } else if (!lockForPaste){
+            if (updateButtons()){
+                return;
+            }
+            updateSlotsForPaste();
+        } else if (!lockYnForCopy) {
+            updateYnForCopy();
+        }
+    }
+
+    private void updateSlotsForCopy() {
+        slotGroup.update();
+        if (slotGroup.getClickedSlot() != SlotGroup.NO_CLICK) {
+            if (!(slotGroup.getButtons()[slotGroup.getClickedSlot()].getStandardImage() == slotGroup.getStandardButtonImage())) {
+
+                //clicou no lugar certo, slot com progresso
+
+                lockForCopy = true;
+                lockForPaste = false;
+
+                //pega os dados do slot
+                int slotId = slotGroup.getClickedSlot();
+                savePack = save.getPackOfSlot(slotId);
+                saveScene = save.getSceneOfSlot(slotId);
+                screenshot = slotGroup.getButtons()[slotId].getStandardImage(); //TODO : ENCAPSULAR LINHAS COMO ESSA!!!
+
+                //todo : setText << deixar o padrao no reset
+            }
+        }
+    }
+
+    private void updateSlotsForPaste() {
+        slotGroup.update();
+        if (slotGroup.getClickedSlot() != SlotGroup.NO_CLICK) {
+            if (slotGroup.getButtons()[slotGroup.getClickedSlot()].getStandardImage() == slotGroup.getStandardButtonImage()) {
+                //slot vazio
+                //save
+                pleaseWait = true;
+                lockForPaste = true;
+                save();
+            } else {
+                //slot com dados
+            }
+        }
+    }
+
+    private void updateYnForCopy() {
+        yn.update();
+        if (yn.getClickedButton() == YES) {
+            //
+        } else if (yn.getClickedButton() == NO) {
+            //
         }
     }
 
@@ -260,6 +332,7 @@ public class SaveMenuScene extends Scene {
 
                 pleaseWait = false;
                 lockForSave = false;
+                lockForCopy = false;
             }
         });
         thread.start();

@@ -3,8 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="50053a92-1326-4f75-bf22-ca2e42361449" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/Dialogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/Dialogue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/save/Save.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/save/Save.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/Dialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/Dialogue.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/save/Save.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/save/Save.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/SaveMenuScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/SaveMenuScene.java" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,6 +65,18 @@
       <recent name="C:\Users\Mi\IdeaProjects\Thorns2\src\nona\mi\loader" />
       <recent name="C:\Users\Mi\IdeaProjects\Thorns2\src\res" />
     </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
