@@ -7,7 +7,7 @@ import nona.mi.scene.SaveMenuScene;
 import nona.mi.scene.Scene;
 import nona.mi.scene.ScenePackage;
 
-import javax.sound.sampled.Clip;
+import javax.sound.sampled.Clip; //todo : encapsular o close do audio
 import javax.swing.JFrame;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -72,7 +72,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     protected boolean lockSpace;
 
     //
-    protected  boolean escape;
+    protected  boolean escape; //todo : DEL
     protected boolean lockEscape;
 
     private BufferedImage frame;
@@ -308,12 +308,14 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     private void closePackJukebox() {
         //todo : ver se nao eh melhor colocar em uma thread
         //not sure if this is the best way to iterate and modify the hashmap contents
-        for (Map.Entry<String, Clip> temp : packJukebox.getClips().entrySet()) {
-            System.out.println("closing: " + temp.getKey());
-            if (temp.getValue().isRunning()) {
-                temp.getValue().stop();
+        if (packJukebox != null) {
+            for (Map.Entry<String, Clip> temp : packJukebox.getClips().entrySet()) {
+                System.out.println("closing: " + temp.getKey());
+                if (temp.getValue().isRunning()) {
+                    temp.getValue().stop();
+                }
+                temp.getValue().close();
             }
-            temp.getValue().close();
         }
     }
 
@@ -521,10 +523,14 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         return packBasis;
     }
 
-    public void setSceneBasis(Scene sceneBasis) {
-        //this.sceneBasis.reset(); //todo : achar onde isso aqui eh usado
+    public void setDirectScene(Scene sceneBasis) {
+        //metodo usado por datamanager para retornar para a cena a qual o chamou
+        this.sceneBasis.reset();
         this.sceneBasis = sceneBasis;
     }
+
+    //TODO : HERE
+
 
     public void setSceneBasisWithoutReset(Scene scene) {
         sceneBasis = scene;
@@ -536,6 +542,10 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     public int getScene() {
         return scene;
+    }
+
+    public Scene getSceneFromCurrentPack(int id) {
+        return packBasis.get(id);
     }
 
     public BufferedImage getFrame() {
@@ -586,7 +596,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     //
     public void returntoMainMenu() {
-        //nem precisa resetar, pois sempre que sair do mainMenu, os pack e scenes serao relidos
+        sceneBasis.reset();
         sceneBasis = mainMenu;
         closePackJukebox();
         currentSound = null;

@@ -1,6 +1,7 @@
 package nona.mi.main;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
@@ -22,10 +23,10 @@ import nona.mi.scene.EfxScene;
 import nona.mi.scene.FadeScene;
 import nona.mi.scene.FadeTopBottomScene;
 import nona.mi.scene.LoadScene;
+import nona.mi.scene.MainMenuScene;
 import nona.mi.scene.SaveMenuScene;
 import nona.mi.scene.Scene;
 import nona.mi.scene.StandardScene;
-import nona.mi.scene.TestButtonScene;
 
 //TODO : DAR UM JEITO DE CRIAR OS AUDIOS E BUTTONS TUDO AQUI. NADA DE FAZER ISSO DENTRO DAS CLASSES!
 //todo : ver. se eh interessante criar metodos para encapsular a criacao de qualquer objeto que use muitas linhas
@@ -113,7 +114,7 @@ public class Thorns extends Game {
         loadScene = new LoadScene(this, new BaseImage(ImageLoader.loadImage("/res/bg/load.png"), 0, 0));
 
         //MAIN MENU SCENE
-        mainMenu = new TestButtonScene(this); //todo : tirar o 2
+        createMainMenu(audioClick);
 
         //FADESCENE logo
         Fade fadeLogo = new Fade(this, Fade.SOLID, Fade.FAST);
@@ -246,6 +247,24 @@ public class Thorns extends Game {
 
         sceneMenu = new ButtonGroup(new Button[]{saveButton, loadButton, copyButton, deleteButton, mainButton});
 
+    }
+
+    private void createMainMenu(String audioClick) {
+
+        BufferedImage uno = ImageLoader.loadImage("/res/misc/save.png");
+        BufferedImage dos = ImageLoader.loadImage("/res/misc/focus.png");
+
+        RectButton newGame = new RectButton(this);
+        newGame.setImages(uno, dos, 10, 10);
+        newGame.setAudioName(audioClick);
+        newGame.setId(MainMenuScene.NEW_GAME);
+
+        RectButton loadGame = new RectButton(this);
+        loadGame.setImages(uno, dos, 10, 50);
+        loadGame.setAudioName(audioClick);
+        loadGame.setId(MainMenuScene.LOAD_GAME);
+
+        mainMenu = new MainMenuScene(this, new ButtonGroup(new Button[]{newGame, loadGame}));
     }
 
     @Override

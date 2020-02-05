@@ -47,6 +47,9 @@ public class SaveMenuScene extends Scene {
     private boolean lockForSave;
     private boolean lockYnForSave;
 
+    private boolean lockForLoad;
+    private boolean lockYnForLoad;
+
     private boolean lockForDel;
     private boolean lockYnForDel;
 
@@ -72,6 +75,9 @@ public class SaveMenuScene extends Scene {
 
         lockForDel = false;
         lockYnForDel = true;
+
+        lockForLoad = false;
+        lockYnForLoad = true;
 
         lockForCopy = false;
         lockForPaste = true;
@@ -111,6 +117,10 @@ public class SaveMenuScene extends Scene {
         this.screenshot = screenshot;
     }
 
+    public void setSaveScene(int saveScene) {
+        this.saveScene = saveScene;
+    }
+
     public void setType(int type) {
         this.type = type;
     }
@@ -127,14 +137,15 @@ public class SaveMenuScene extends Scene {
         if (buttonGroup.getClickedButton() != ButtonGroup.NO_CLICK) {
             if (buttonGroup.getClickedButton() == RETURN_TO_LAST_SCENE) {
 
-                game.setSceneBasis(game.getPackBasis().get(game.getScene()));
-
-                reset();
-
-                //retoma uma fala caso tenha sido pausada
-                if (game.getPackBasis().get(saveScene) instanceof StandardScene) {
-                    StandardScene temp = (StandardScene) game.getPackBasis().get(saveScene);
-                    temp.resumeDialogAudio();
+                if (saveScene == MainMenuScene.MAIN_MENU_ID) { //definir isso no main menu
+                    game.returntoMainMenu();
+                } else {
+                    game.setDirectScene(game.getSceneFromCurrentPack(saveScene));
+                    //retoma uma fala caso tenha sido pausada
+                    if (game.getPackBasis().get(saveScene) instanceof StandardScene) {
+                        StandardScene temp = (StandardScene) game.getPackBasis().get(saveScene);
+                        temp.resumeDialogAudio();
+                    }
                 }
 
                 return true; //para nao atualizar os slots
@@ -161,7 +172,7 @@ public class SaveMenuScene extends Scene {
                 return; //se foi clicado no botao de return, nao atualiza os slots
             }
             updateSlotsForSave();
-        } else if (!lockYnForSave) { //todo : ??? acho que bloqueia os dois para nao clicar durante a escrita dos dados
+        } else if (!lockYnForSave) { //todo : ??? acho que bloqueia os dois para nao clicar durante a escrita dos dados > bem isso
             updateYnForSave();
         }
     }
@@ -191,6 +202,37 @@ public class SaveMenuScene extends Scene {
             lockForSave = false;
             lockYnForSave = true;
         }
+    }
+
+
+
+    //TYPE LOAD
+    private void updateLoad() {
+        if (!lockForLoad) {
+            if (updateButtons()) {
+                return;
+            }
+            updateSlotsForLoad();
+        } else if (!lockYnForLoad) {
+            updateYnForLoad();
+        }
+    }
+
+    private void updateSlotsForLoad() {
+        slotGroup.update();
+        if ((slotGroup.getClickedSlot() != SlotGroup.NO_CLICK) && (slotGroup.getButtons()[slotGroup.getClickedSlot()].getStandardImage() != slotGroup.getStandardButtonImage())) {
+            //
+            //get data
+            //como deixar no esquema para que game de o load nos pirulei?
+            //ver se esta no mesmo pack --pro main isso nao funciona
+            lockForLoad = true;
+            lockYnForLoad = false;
+        }
+    }
+
+    private void updateYnForLoad() {
+        //data aqui para nao ter volta
+        //dar loadpack ja define a loadscene, o pack e scene ;)
     }
 
 
@@ -416,17 +458,15 @@ public class SaveMenuScene extends Scene {
 
     @Override
     public void updateScene() {
-
         if (type == SAVE) {
             updateSave();
         } else if (type == LOAD) {
-            //
+            updateLoad();
         } else if (type == COPY) {
             updateCopy();
         } else if (type == DEL) {
             updateDel();
         }
-
     }
 
     @Override
@@ -451,6 +491,9 @@ public class SaveMenuScene extends Scene {
 
         lockForSave = false;
         lockYnForSave = true;
+
+        lockForLoad = false;
+        lockYnForLoad = true;
 
         lockForDel = false;
         lockYnForDel = true;

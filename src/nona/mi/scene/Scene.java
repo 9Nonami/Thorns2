@@ -120,6 +120,7 @@ public abstract class Scene {
 				if (buttonGroup.getClickedButton() == SaveMenuScene.MAIN) {
 					esc = true;
 				} else {
+					//here
 					game.getSaveMenuScene().setType(buttonGroup.getClickedButton());
 					game.getSaveMenuScene().setInfo(game.getPack(), game.getScene(), game.getFrame()); //soh save precisa disso, mas nao vou criar um if soh pra ele
 					game.setSceneBasisWithoutReset(game.getSaveMenuScene()); //para nao comecar a cena do 0 quando voltar

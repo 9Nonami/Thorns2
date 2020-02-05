@@ -38,7 +38,7 @@ public class FadeScene extends Scene {
         } else {
 
             if (directScene != null) {
-                game.setSceneBasis(directScene);
+                game.setDirectScene(directScene);
             } else {
                 game.nextScene();
             }
