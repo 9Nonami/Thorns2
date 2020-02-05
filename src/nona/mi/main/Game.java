@@ -303,6 +303,30 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         thread.start();
     }
 
+    public void loadPack(int pack, int scene) {
+        sceneBasis.reset();
+        sceneBasis = loadScene;
+        this.pack = pack;
+        this.scene = scene;
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                packBasis = new ScenePackage();
+
+                if (packJukebox != null) {
+                    closePackJukebox();
+                }
+                currentSound = null;
+                packJukebox = new MyJukeBox();
+
+                initPacks();
+
+                sceneBasis = packBasis.get(scene);
+            }
+        });
+        thread.start();
+    }
+
     public abstract void initPacks();
 
     private void closePackJukebox() {
@@ -525,6 +549,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     public void setDirectScene(Scene sceneBasis) {
         //metodo usado por datamanager para retornar para a cena a qual o chamou
+        //pegar id da cena
         this.sceneBasis.reset();
         this.sceneBasis = sceneBasis;
     }
@@ -545,6 +570,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     }
 
     public Scene getSceneFromCurrentPack(int id) {
+        //isso resume o getpack.getscene
         return packBasis.get(id);
     }
 
@@ -601,5 +627,10 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         closePackJukebox();
         currentSound = null;
         packJukebox = null;
+    }
+
+
+    public void setScene(int scene) {
+        this.scene = scene;
     }
 }

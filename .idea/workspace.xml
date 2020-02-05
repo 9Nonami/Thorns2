@@ -2,19 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50053a92-1326-4f75-bf22-ca2e42361449" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/nona/mi/scene/MainMenuScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/META-INF/Thorns2.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/META-INF/Thorns2.kotlin_module" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/MainMenuScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/MainMenuScene.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/Scene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/Scene.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/FadeScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/FadeScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/MainMenuScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/MainMenuScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/SaveMenuScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/SaveMenuScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/Scene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/TestButtonScene2.java" beforeDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,6 +32,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/9Nonami/Thorns2.git" />
+      </set>
+    </option>
   </component>
   <component name="ProjectId" id="1SVQSEBaR4zZDPkRtRQIBLe3jyO" />
   <component name="ProjectLevelVcsManager">
@@ -66,18 +73,6 @@
       <recent name="C:\Users\Mi\IdeaProjects\Thorns2\src\nona\mi\loader" />
       <recent name="C:\Users\Mi\IdeaProjects\Thorns2\src\res" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -157,22 +152,22 @@
       <screen x="0" y="0" width="1024" height="728" />
     </state>
     <state x="292" y="118" key="FileChooserDialogImpl/0.0.1024.728@0.0.1024.728" timestamp="1576359340533" />
-    <state width="981" height="409" key="GridCell.Tab.0.bottom" timestamp="1580850875054">
+    <state width="981" height="508" key="GridCell.Tab.0.bottom" timestamp="1580944768992">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state width="981" height="409" key="GridCell.Tab.0.bottom/0.0.1024.728@0.0.1024.728" timestamp="1580850875054" />
-    <state width="981" height="409" key="GridCell.Tab.0.center" timestamp="1580850875054">
+    <state width="981" height="508" key="GridCell.Tab.0.bottom/0.0.1024.728@0.0.1024.728" timestamp="1580944768992" />
+    <state width="981" height="508" key="GridCell.Tab.0.center" timestamp="1580944768992">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state width="981" height="409" key="GridCell.Tab.0.center/0.0.1024.728@0.0.1024.728" timestamp="1580850875054" />
-    <state width="981" height="409" key="GridCell.Tab.0.left" timestamp="1580850875054">
+    <state width="981" height="508" key="GridCell.Tab.0.center/0.0.1024.728@0.0.1024.728" timestamp="1580944768992" />
+    <state width="981" height="508" key="GridCell.Tab.0.left" timestamp="1580944768992">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state width="981" height="409" key="GridCell.Tab.0.left/0.0.1024.728@0.0.1024.728" timestamp="1580850875054" />
-    <state width="981" height="409" key="GridCell.Tab.0.right" timestamp="1580850875054">
+    <state width="981" height="508" key="GridCell.Tab.0.left/0.0.1024.728@0.0.1024.728" timestamp="1580944768992" />
+    <state width="981" height="508" key="GridCell.Tab.0.right" timestamp="1580944768992">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state width="981" height="409" key="GridCell.Tab.0.right/0.0.1024.728@0.0.1024.728" timestamp="1580850875054" />
+    <state width="981" height="508" key="GridCell.Tab.0.right/0.0.1024.728@0.0.1024.728" timestamp="1580944768992" />
     <state width="981" height="221" key="GridCell.Tab.1.bottom" timestamp="1580816609883">
       <screen x="0" y="0" width="1024" height="728" />
     </state>

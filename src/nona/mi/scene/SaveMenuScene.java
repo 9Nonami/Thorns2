@@ -16,6 +16,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
 
+//TODO : !!!!!!!!!!!!!!!!!!! RESETAR A CENA DE ONDE SAIU !!!!!!!!!!!!!!!!!!!!!!!!!
+
+//todo : o botao de return esta funcionando. ele volta para a cena da qual veio
+
 //todo : DataManagerScene
 //todo : resetar a cena anterior se voltar para algum lugar que nao seja ela
 //todo : retornar para o main >> scene
@@ -60,6 +64,9 @@ public class SaveMenuScene extends Scene {
     private boolean pleaseWait;
 
     private HashMap<Integer, BaseImage> modes;
+
+    private int temPackForLoad;
+    private int tempSceneForLoad;
 
 
 
@@ -121,6 +128,10 @@ public class SaveMenuScene extends Scene {
         this.saveScene = saveScene;
     }
 
+    public void setSavePack(int savePack) {
+        this.savePack = savePack;
+    }
+
     public void setType(int type) {
         this.type = type;
     }
@@ -136,8 +147,7 @@ public class SaveMenuScene extends Scene {
         buttonGroup.update();
         if (buttonGroup.getClickedButton() != ButtonGroup.NO_CLICK) {
             if (buttonGroup.getClickedButton() == RETURN_TO_LAST_SCENE) {
-
-                if (saveScene == MainMenuScene.MAIN_MENU_ID) { //definir isso no main menu
+                if (saveScene == MainMenuScene.MAIN_MENU_ID) {
                     game.returntoMainMenu();
                 } else {
                     game.setDirectScene(game.getSceneFromCurrentPack(saveScene));
@@ -147,9 +157,7 @@ public class SaveMenuScene extends Scene {
                         temp.resumeDialogAudio();
                     }
                 }
-
                 return true; //para nao atualizar os slots
-
             } else if (buttonGroup.getClickedButton() == PREVIOUS_SLOT_GROUP) {
                 if (slotGroup.getStartIncrement() > 0) { // 0 = first slot. there is nothing before it.
                     slotGroup.decrement();
@@ -221,18 +229,50 @@ public class SaveMenuScene extends Scene {
     private void updateSlotsForLoad() {
         slotGroup.update();
         if ((slotGroup.getClickedSlot() != SlotGroup.NO_CLICK) && (slotGroup.getButtons()[slotGroup.getClickedSlot()].getStandardImage() != slotGroup.getStandardButtonImage())) {
-            //
-            //get data
-            //como deixar no esquema para que game de o load nos pirulei?
-            //ver se esta no mesmo pack --pro main isso nao funciona
+            int slotId = slotGroup.getClickedSlot();
+            temPackForLoad = save.getPackOfSlot(slotId);
+            tempSceneForLoad = save.getSceneOfSlot(slotId);
             lockForLoad = true;
             lockYnForLoad = false;
         }
     }
 
     private void updateYnForLoad() {
-        //data aqui para nao ter volta
         //dar loadpack ja define a loadscene, o pack e scene ;)
+        yn.update();
+        if (yn.getClickedButton() != ButtonGroup.NO_CLICK) { // TODO : FAZER ISSO EM TODOS, POUPA UPDATE NO IF
+            if (yn.getClickedButton() == YES) {
+
+                //resetar a cena que clicou em load
+
+                System.out.println("cena anterior: " + saveScene);
+                System.out.println("pack anterior: " + savePack);
+
+                System.out.println("lendo cena: " + tempSceneForLoad);
+
+                if (saveScene == MainMenuScene.MAIN_MENU_ID) {
+                    game.getMainMenu().reset();
+                    System.out.println("\u2588 tentando resetar MAIN MENU" + saveScene);
+                } else {
+                    game.getSceneFromCurrentPack(saveScene).reset();
+                    System.out.println("tentando resetar cena: " + saveScene);
+                }
+
+                if (savePack != temPackForLoad) { //nao esta lendo alguma cena do pack atual
+                    game.loadPack(temPackForLoad, tempSceneForLoad); //o metodo reseta esta cena
+                } else { // a cena do slot esta no pack atual
+                    //TODO : o problema esta aqui
+                    //a scene de game nao esta sendo atualizada
+                    game.setScene(tempSceneForLoad);
+                    game.setDirectScene(game.getSceneFromCurrentPack(tempSceneForLoad)); //reseta esta cena (datamanager)
+                }
+            } else if (yn.getClickedButton() == NO) {
+                yn.reset();
+                lockForLoad = false;
+                lockYnForLoad = true;
+            }
+        }
+
     }
 
 
@@ -474,7 +514,7 @@ public class SaveMenuScene extends Scene {
         renderModes(g);
         slotGroup.render(g);
         buttonGroup.render(g);
-        if (!lockYnForSave || !lockYnForDel || !lockYnForCopy) {
+        if (!lockYnForSave || !lockYnForDel || !lockYnForCopy || !lockYnForLoad) {
             renderShadow(g);
             yn.render(g);
         }

@@ -14,11 +14,13 @@ public class MainMenuScene extends Scene {
     public static final int NEW_GAME = -41; //TODO : VERIFICAR ESSAS CONSTANTES PARA NAO TER NENHUM IGUAL, OU CENTRALIZAR NUMA INTERFACE
     public static final int LOAD_GAME = -42;
 
+    public static final int PACK_FOR_NEW_GAME = 0;
+    public static final int PACK_FOR_LOAD_GAME = -44;
+
 
     public MainMenuScene(Game game, ButtonGroup buttonGroup) {
         super(game, Scene.LAST_SCENE);
         this.buttonGroup = buttonGroup;
-        nextPack = 0;
     }
 
     @Override
@@ -26,10 +28,12 @@ public class MainMenuScene extends Scene {
         buttonGroup.update();
         if (buttonGroup.getClickedButton() != ButtonGroup.NO_CLICK) {
             if (buttonGroup.getClickedButton() == MainMenuScene.NEW_GAME) {
-                game.nextScene(); //usa os parametros ja definidos no construtor
+                nextPack = PACK_FOR_NEW_GAME;
+                game.nextScene(); //usa a lastScene do construtor
             } else if (buttonGroup.getClickedButton() == MainMenuScene.LOAD_GAME) {
                 game.getSaveMenuScene().setType(SaveMenuScene.LOAD);
                 game.getSaveMenuScene().setSaveScene(MAIN_MENU_ID);
+                game.getSaveMenuScene().setSavePack(PACK_FOR_LOAD_GAME);
                 game.setDirectScene(game.getSaveMenuScene());
             }
         }
