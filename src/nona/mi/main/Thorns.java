@@ -280,7 +280,9 @@ public class Thorns extends Game {
 
         //DESENHA O NUMERO ATUAL DA CENA
         if (showScene) {
-            g.setColor(Color.WHITE);
+            g.setColor(Color.BLACK);
+            g.fillRect(0, 0, 70, 20);
+            g.setColor(Color.GREEN);
             g.drawString("scene: " + scene, 5, 15);
         }
     }

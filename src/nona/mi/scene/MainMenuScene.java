@@ -6,7 +6,7 @@ import nona.mi.main.Game;
 import java.awt.Color;
 import java.awt.Graphics;
 
-
+//TODO : COLOCAR O ID DESTA CENA EM SCENE:GAME
 public class MainMenuScene extends Scene {
 
     private ButtonGroup buttonGroup;
@@ -31,9 +31,12 @@ public class MainMenuScene extends Scene {
                 nextPack = PACK_FOR_NEW_GAME;
                 game.nextScene(); //usa a lastScene do construtor
             } else if (buttonGroup.getClickedButton() == MainMenuScene.LOAD_GAME) {
+                System.out.println("CLICANDO EM LOAD A PARTIR DO MAIN MENU");
                 game.getSaveMenuScene().setType(SaveMenuScene.LOAD);
                 game.getSaveMenuScene().setSaveScene(MAIN_MENU_ID);
+                System.out.println("Definindo cena: " + MAIN_MENU_ID);
                 game.getSaveMenuScene().setSavePack(PACK_FOR_LOAD_GAME);
+                System.out.println("Definindo pack: " + PACK_FOR_LOAD_GAME + "\n");
                 game.setDirectScene(game.getSaveMenuScene());
             }
         }

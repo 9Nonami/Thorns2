@@ -25,7 +25,7 @@ public abstract class Scene {
 	protected ButtonGroup yn; //confirma a ida para o main
 	protected boolean esc;
 
-
+	//TODO : CRAIR ID DA CENA E DO PACK
 
 	//ESSENCIAL------------------------------------------------------
 
@@ -106,7 +106,7 @@ public abstract class Scene {
 		}
 	}
 
-	private void updateButtonGroup() { //todo : parar o audio?? > se pah nao > se for fala, sim; talvez o bg nao, mas se pah sim. > scene nao toca falas
+	private void updateButtonGroup() {
 		if (buttonGroup != null) {
 			buttonGroup.update();
 			if (buttonGroup.getClickedButton() != ButtonGroup.NO_CLICK) {
@@ -120,10 +120,7 @@ public abstract class Scene {
 				if (buttonGroup.getClickedButton() == SaveMenuScene.MAIN) {
 					esc = true;
 				} else {
-					System.out.println("CLICANDO NO MENU");
 					game.getSaveMenuScene().setType(buttonGroup.getClickedButton());
-					System.out.println("definindo saveScene: " + game.getScene());
-					System.out.println("definindo savePack: " + game.getPack());
 					game.getSaveMenuScene().setInfo(game.getPack(), game.getScene(), game.getFrame()); //soh save precisa disso, mas nao vou criar um if soh pra ele
 					game.setSceneBasisWithoutReset(game.getSaveMenuScene()); //para nao comecar a cena do 0 quando voltar
 					buttonGroup.reset();

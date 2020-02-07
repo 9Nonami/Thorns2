@@ -150,7 +150,7 @@ public class SaveMenuScene extends Scene {
                 if (saveScene == MainMenuScene.MAIN_MENU_ID) {
                     game.returntoMainMenu();
                 } else {
-                    game.setDirectScene(game.getSceneFromCurrentPack(saveScene));
+                    game.setDirectScene(saveScene);
                     //retoma uma fala caso tenha sido pausada
                     if (game.getPackBasis().get(saveScene) instanceof StandardScene) {
                         StandardScene temp = (StandardScene) game.getPackBasis().get(saveScene);
@@ -248,23 +248,27 @@ public class SaveMenuScene extends Scene {
                 System.out.println("cena anterior: " + saveScene);
                 System.out.println("pack anterior: " + savePack);
 
-                System.out.println("lendo cena: " + tempSceneForLoad);
-
                 if (saveScene == MainMenuScene.MAIN_MENU_ID) {
-                    game.getMainMenu().reset();
-                    System.out.println("\u2588 tentando resetar MAIN MENU" + saveScene);
+                    //nao precisa resetar o main por que quando ele vai para
+                    //loadscene ela ja é resetado no setDirectScene
+                    //game.getMainMenu().reset();
+                    //System.out.println("\u2588 tentando resetar MAIN MENU" + saveScene);
+                    //todo : resetar só esta cena > DMS > o que acontece nos metodos abaixo
                 } else {
                     game.getSceneFromCurrentPack(saveScene).reset();
                     System.out.println("tentando resetar cena: " + saveScene);
                 }
+
+                //--------------------------------------------------------------------------------------
 
                 if (savePack != temPackForLoad) { //nao esta lendo alguma cena do pack atual
                     game.loadPack(temPackForLoad, tempSceneForLoad); //o metodo reseta esta cena
                 } else { // a cena do slot esta no pack atual
                     //TODO : o problema esta aqui
                     //a scene de game nao esta sendo atualizada
-                    game.setScene(tempSceneForLoad);
-                    game.setDirectScene(game.getSceneFromCurrentPack(tempSceneForLoad)); //reseta esta cena (datamanager)
+                    //game.setScene(tempSceneForLoad);
+                    //game.setDirectScene(game.getSceneFromCurrentPack(tempSceneForLoad)); //reseta esta cena (datamanager)
+                    game.setDirectScene(tempSceneForLoad);
                 }
             } else if (yn.getClickedButton() == NO) {
                 yn.reset();

@@ -304,10 +304,10 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     }
 
     public void loadPack(int pack, int scene) {
-        sceneBasis.reset();
-        sceneBasis = loadScene;
         this.pack = pack;
         this.scene = scene;
+        sceneBasis.reset();
+        sceneBasis = loadScene;
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -554,7 +554,12 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         this.sceneBasis = sceneBasis;
     }
 
-    //TODO : HERE
+    //TODO : DEIXAR PERTO DO NEXT SCENE
+    public void setDirectScene(int id) {
+        scene = id;
+        sceneBasis.reset();
+        sceneBasis = getSceneFromCurrentPack(id);
+    }
 
 
     public void setSceneBasisWithoutReset(Scene scene) {
