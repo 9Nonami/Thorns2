@@ -579,6 +579,10 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         return packBasis.get(id);
     }
 
+    public void resetSceneFromCurrentPack(int id) {
+        packBasis.get(id).reset();
+    }
+
     public BufferedImage getFrame() {
         return frame;
     }

@@ -201,14 +201,16 @@ public class SaveMenuScene extends Scene {
 
     private void updateYnForSave() {
         yn.update();
-        if (yn.getClickedButton() == YES) {
-            lockYnForSave = true;
-            pleaseWait = true;
-            save();
-        } else if (yn.getClickedButton() == NO) {
-            yn.reset();
-            lockForSave = false;
-            lockYnForSave = true;
+        if (yn.getClickedButton() != ButtonGroup.NO_CLICK) {
+            if (yn.getClickedButton() == YES) {
+                lockYnForSave = true;
+                pleaseWait = true;
+                save();
+            } else if (yn.getClickedButton() == NO) {
+                yn.reset();
+                lockForSave = false;
+                lockYnForSave = true;
+            }
         }
     }
 
@@ -238,37 +240,24 @@ public class SaveMenuScene extends Scene {
     }
 
     private void updateYnForLoad() {
-        //dar loadpack ja define a loadscene, o pack e scene ;)
         yn.update();
-        if (yn.getClickedButton() != ButtonGroup.NO_CLICK) { // TODO : FAZER ISSO EM TODOS, POUPA UPDATE NO IF
+        if (yn.getClickedButton() != ButtonGroup.NO_CLICK) {
             if (yn.getClickedButton() == YES) {
-
-                //resetar a cena que clicou em load
-
-                System.out.println("cena anterior: " + saveScene);
-                System.out.println("pack anterior: " + savePack);
-
-                if (saveScene == MainMenuScene.MAIN_MENU_ID) {
-                    //nao precisa resetar o main por que quando ele vai para
-                    //loadscene ela ja é resetado no setDirectScene
-                    //game.getMainMenu().reset();
-                    //System.out.println("\u2588 tentando resetar MAIN MENU" + saveScene);
-                    //todo : resetar só esta cena > DMS > o que acontece nos metodos abaixo
+                if (savePack != temPackForLoad) {
+                    //nao esta lendo alguma cena do pack atual
+                    game.loadPack(temPackForLoad, tempSceneForLoad); // < reseta esta cena (dms)
                 } else {
-                    game.getSceneFromCurrentPack(saveScene).reset();
-                    System.out.println("tentando resetar cena: " + saveScene);
-                }
+                    //a cena do slot esta no pack atual
 
-                //--------------------------------------------------------------------------------------
+                    //RESETA A CENA ANTERIOR (VINDA DE STANDARDSCENE, POR EXEMPLO)
+                    //SE A CENA ANTERIOR FOR O MAINMENU NAO PRECISA RESETAR, POIS
+                    //ISSO EH FEITO QUANDO O MAIN VEM PARA A TELA DE LOAD
+                    if (saveScene != MainMenuScene.MAIN_MENU_ID) {
+                        game.resetSceneFromCurrentPack(saveScene);
+                    }
 
-                if (savePack != temPackForLoad) { //nao esta lendo alguma cena do pack atual
-                    game.loadPack(temPackForLoad, tempSceneForLoad); //o metodo reseta esta cena
-                } else { // a cena do slot esta no pack atual
-                    //TODO : o problema esta aqui
-                    //a scene de game nao esta sendo atualizada
-                    //game.setScene(tempSceneForLoad);
-                    //game.setDirectScene(game.getSceneFromCurrentPack(tempSceneForLoad)); //reseta esta cena (datamanager)
-                    game.setDirectScene(tempSceneForLoad);
+                    //coloca a cena em sceneBasis
+                    game.setDirectScene(tempSceneForLoad); // < reseta esta cena (dms)
                 }
             } else if (yn.getClickedButton() == NO) {
                 yn.reset();
@@ -336,14 +325,16 @@ public class SaveMenuScene extends Scene {
 
     private void updateYnForCopy() {
         yn.update();
-        if (yn.getClickedButton() == YES) {
-            lockYnForCopy = true;
-            pleaseWait = true;
-            save();
-        } else if (yn.getClickedButton() == NO) {
-            yn.reset();
-            lockForCopy = false;
-            lockYnForCopy = true;
+        if (yn.getClickedButton() != ButtonGroup.NO_CLICK) {
+            if (yn.getClickedButton() == YES) {
+                lockYnForCopy = true;
+                pleaseWait = true;
+                save();
+            } else if (yn.getClickedButton() == NO) {
+                yn.reset();
+                lockForCopy = false;
+                lockYnForCopy = true;
+            }
         }
     }
 
@@ -371,14 +362,16 @@ public class SaveMenuScene extends Scene {
 
     private void updateYnForDel() {
         yn.update();
-        if (yn.getClickedButton() == YES) {
-            lockYnForDel = true; //nao deixa o infeliz iniciar mais de 1 thread
-            pleaseWait = true;
-            del();
-        } else if (yn.getClickedButton() == NO) {
-            yn.reset();
-            lockForDel = false;
-            lockYnForDel = true;
+        if (yn.getClickedButton() != ButtonGroup.NO_CLICK) {
+            if (yn.getClickedButton() == YES) {
+                lockYnForDel = true; //nao deixa o infeliz iniciar mais de 1 thread
+                pleaseWait = true;
+                del();
+            } else if (yn.getClickedButton() == NO) {
+                yn.reset();
+                lockForDel = false;
+                lockYnForDel = true;
+            }
         }
     }
 
