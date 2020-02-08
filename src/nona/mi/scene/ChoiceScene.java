@@ -40,8 +40,8 @@ public class ChoiceScene extends Scene {
 
 
 
-    public ChoiceScene(Game game, BaseImage background, String texts, int nextSceneOp1, int nextSceneOp2) {
-        super(game, nextSceneOp1);
+    public ChoiceScene(Game game, int sceneId, BaseImage background, String texts, int nextSceneOp1, int nextSceneOp2) {
+        super(game, nextSceneOp1, sceneId);
         this.background = background;
         this.nextSceneOp1 = nextSceneOp1;
         this.nextSceneOp2 = nextSceneOp2;

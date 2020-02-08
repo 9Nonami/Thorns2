@@ -25,18 +25,23 @@ public abstract class Scene {
 	protected ButtonGroup yn; //confirma a ida para o main
 	protected boolean esc;
 
-	//TODO : CRAIR ID DA CENA E DO PACK
+	protected int sceneId;
+	protected int packId;
+
+
 
 	//ESSENCIAL------------------------------------------------------
 
-	public Scene(Game game, int nextScene) {
+	public Scene(Game game, int nextScene, int sceneId) {
 		this.game = game;
 		this.nextScene = nextScene;
+		this.sceneId = sceneId;
 		yn = game.getYn();
 	}
 
-	public Scene(Game game) {
+	public Scene(Game game, int sceneId) {
 		this.game = game;
+		this.sceneId = sceneId;
 		yn = game.getYn();
 	}
 
@@ -54,16 +59,18 @@ public abstract class Scene {
 			}
 		} else {
 			yn.update();
-			if (yn.getClickedButton() == SaveMenuScene.YES) {
-				game.returntoMainMenu();
-			} else if (yn.getClickedButton() == SaveMenuScene.NO) {
-				esc = false;
-				yn.reset();
+			if (yn.getClickedButton() != ButtonGroup.NO_CLICK) {
+				if (yn.getClickedButton() == SaveMenuScene.YES) {
+					game.returntoMainMenu();
+				} else if (yn.getClickedButton() == SaveMenuScene.NO) {
+					esc = false;
+					yn.reset();
 
-				//retoma uma fala caso tenha sido pausada
-				if (game.getSceneBasis() instanceof StandardScene) {
-					StandardScene temp = (StandardScene) game.getSceneBasis();
-					temp.resumeDialogAudio();
+					//retoma uma fala caso tenha sido pausada
+					if (game.getSceneBasis() instanceof StandardScene) {
+						StandardScene temp = (StandardScene) game.getSceneBasis();
+						temp.resumeDialogAudio();
+					}
 				}
 			}
 		}
@@ -180,6 +187,18 @@ public abstract class Scene {
 
 	public void setButtonGroup(ButtonGroup buttonGroup) {
 		this.buttonGroup = buttonGroup;
+	}
+
+	public int getSceneId() {
+		return sceneId;
+	}
+
+	public int getPackId() {
+		return packId;
+	}
+
+	public void setPackId(int packId) {
+		this.packId = packId;
 	}
 
 	//----------------------------------------------------------------

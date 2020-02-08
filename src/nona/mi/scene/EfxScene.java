@@ -14,14 +14,14 @@ public class EfxScene extends Scene {
     private BaseImage textArea;
     private boolean endAnimation;
 
-    public EfxScene(Game game, ImageEfx[] images, BaseImage background, int nextScene) {
-        super(game, nextScene);
+    public EfxScene(Game game, ImageEfx[] images, BaseImage background, int nextScene, int sceneId) {
+        super(game, nextScene, sceneId);
         this.images = images;
         this.background = background;
     }
 
-    public EfxScene(Game game, ImageEfx[] images, BaseImage[] backgrounds, int nextScene) {
-        super(game, nextScene);
+    public EfxScene(Game game, ImageEfx[] images, BaseImage[] backgrounds, int nextScene, int sceneId) {
+        super(game, nextScene, sceneId);
         this.images = images;
         this.backgrounds = backgrounds;
     }

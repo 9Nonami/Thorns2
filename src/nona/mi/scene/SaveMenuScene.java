@@ -72,8 +72,8 @@ public class SaveMenuScene extends Scene {
 
     //ESSENCIAL-------------------------------------
 
-    public SaveMenuScene(Game game, Save save, int buttonsToShow) {
-        super(game);
+    public SaveMenuScene(Game game, int sceneId, Save save, int buttonsToShow) {
+        super(game, sceneId);
         this.save = save;
         slotGroup = new SlotGroup(game, buttonsToShow);
 

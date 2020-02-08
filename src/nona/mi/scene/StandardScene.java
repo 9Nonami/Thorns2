@@ -25,15 +25,15 @@ public class StandardScene extends Scene {
 
     //ESSENCIAL--------------------------------------
 
-    public StandardScene(Game game, BaseImage background, ImageEfx setasAnim, int nextScene) {
-        super(game, nextScene);
+    public StandardScene(Game game, BaseImage background, ImageEfx setasAnim, int nextScene, int sceneId) {
+        super(game, nextScene, sceneId);
         this.background = background;
         this.setasAnim = setasAnim;
     }
 
     //para o caso de mais uma imagem como BG
-    public StandardScene(Game game, BaseImage[] backgrounds, ImageEfx setasAnim, int nextScene) {
-        super(game, nextScene);
+    public StandardScene(Game game, BaseImage[] backgrounds, ImageEfx setasAnim, int nextScene, int sceneId) {
+        super(game, nextScene, sceneId);
         this.backgrounds = backgrounds;
         this.setasAnim = setasAnim;
     }

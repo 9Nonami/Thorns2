@@ -14,8 +14,8 @@ public class FadeTopBottomScene extends Scene {
 
 
 
-    public FadeTopBottomScene(Game game, BaseImage[] bottom, ImageEfx[] top, int nextScene) {
-        super(game, nextScene);
+    public FadeTopBottomScene(Game game, BaseImage[] bottom, ImageEfx[] top, int nextScene, int sceneId) {
+        super(game, nextScene, sceneId);
         this.bottom = bottom;
         this.top = top;
     }

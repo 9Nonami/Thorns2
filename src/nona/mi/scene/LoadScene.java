@@ -9,8 +9,8 @@ public class LoadScene extends Scene {
 
     private BaseImage background;
 
-    public LoadScene(Game game, BaseImage background) {
-        super(game);
+    public LoadScene(Game game, int sceneId, BaseImage background) {
+        super(game, sceneId);
         this.background = background;
     }
 

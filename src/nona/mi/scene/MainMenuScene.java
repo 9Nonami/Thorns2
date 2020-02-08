@@ -18,8 +18,8 @@ public class MainMenuScene extends Scene {
     public static final int PACK_FOR_LOAD_GAME = -44;
 
 
-    public MainMenuScene(Game game, ButtonGroup buttonGroup) {
-        super(game, Scene.LAST_SCENE);
+    public MainMenuScene(Game game, int sceneId, ButtonGroup buttonGroup) {
+        super(game, Scene.LAST_SCENE, sceneId);
         this.buttonGroup = buttonGroup;
     }
 

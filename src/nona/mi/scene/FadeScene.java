@@ -2,6 +2,7 @@ package nona.mi.scene;
 
 import java.awt.Graphics;
 
+import nona.mi.constant.ID;
 import nona.mi.efx.Fade;
 import nona.mi.image.BaseImage;
 import nona.mi.main.Game;
@@ -11,23 +12,25 @@ public class FadeScene extends Scene {
     private Fade fade;
     private BaseImage background;
     private BaseImage[] backgrounds;
-    private Scene directScene;
+    private int directScene;
 
 
 
-    public FadeScene(Game game, BaseImage[] backgrounds, Fade fade, int nextScene) {
-        super(game, nextScene);
+    public FadeScene(Game game, BaseImage[] backgrounds, Fade fade, int nextScene, int sceneId) {
+        super(game, nextScene, sceneId);
         this.backgrounds = backgrounds;
         this.fade = fade;
+        directScene = ID.NO_SCENE;
     }
 
-    public FadeScene(Game game, BaseImage background, Fade fade, int nextScene) {
-        super(game, nextScene);
+    public FadeScene(Game game, BaseImage background, Fade fade, int nextScene, int sceneId) {
+        super(game, nextScene, sceneId);
         this.background = background;
         this.fade = fade;
+        directScene = ID.NO_SCENE;
     }
 
-    public void setDirectScene(Scene directScene) {
+    public void setDirectScene(int directScene) {
         this.directScene = directScene;
     }
 
@@ -36,9 +39,9 @@ public class FadeScene extends Scene {
         if (!fade.getEndAnimation()) {
             fade.update();
         } else {
-
-            if (directScene != null) {
-                game.setDirectScene(directScene);
+            if (directScene != ID.NO_SCENE) { //todo : se der erro eh aqui
+                //game.setDirectScene(directScene); //todo : public pack. do jeito que esta vai dar erro
+                game.setDirecSceneFromPublicScenes(directScene);
             } else {
                 game.nextScene();
             }

@@ -81,8 +81,12 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     protected Scene loadScene;
     protected Scene mainMenu;
-    protected SaveMenuScene saveMenuScene;
+    protected SaveMenuScene saveMenuScene; //dms
     //todo : colocar no hashmap
+
+    protected HashMap<Integer, Scene> publicScenes;
+
+
 
 
     //
@@ -92,7 +96,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     protected ButtonGroup yn;
 
 
-
+    //----------------------------------------------------------------------------------------
     public Game(int width, int height, String title, int gameLoopStyle) {
 
         this.width = width;
@@ -552,6 +556,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         //pegar id da cena
         this.sceneBasis.reset();
         this.sceneBasis = sceneBasis;
+        scene = this.sceneBasis.getSceneId();
     }
 
     //TODO : DEIXAR PERTO DO NEXT SCENE
@@ -560,6 +565,19 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         sceneBasis.reset();
         sceneBasis = getSceneFromCurrentPack(id);
     }
+
+    public void setDirecSceneFromPublicScenes(int id) {
+        scene = id;
+        sceneBasis.reset();
+        sceneBasis = getSceneFromPublicScenes(id);
+    }
+
+    private Scene getSceneFromPublicScenes(int id) {
+        return publicScenes.get(id);
+    }
+
+
+    //TODO : criar um hash map com as cenas publicas; esse hash ser acessado por setDirectSceneDromPublicPack
 
 
     public void setSceneBasisWithoutReset(Scene scene) {
@@ -631,6 +649,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     //
     public void returntoMainMenu() {
+        //TODO : COLOCAR O ID DA CENA
         sceneBasis.reset();
         sceneBasis = mainMenu;
         closePackJukebox();
