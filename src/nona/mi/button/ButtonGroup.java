@@ -12,13 +12,14 @@
 
 package nona.mi.button;
 
+import nona.mi.constant.ID;
+
 import java.awt.Graphics;
 
 public class ButtonGroup {
 
     private Button[] buttons;
     private int clickedButton;
-    public static final int NO_CLICK = -97; //todo : deixar soh 1. SlotGroup tem o mesmo --deixar em button?? > pode ser
 
 
 
@@ -27,7 +28,7 @@ public class ButtonGroup {
     }
 
     public void update() {
-        clickedButton = NO_CLICK;
+        clickedButton = ID.NO_CLICK;
         for (Button temp : buttons) {
             temp.update();
             if (temp.isClicked()) {

@@ -2,33 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50053a92-1326-4f75-bf22-ca2e42361449" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/nona/mi/constant/ID.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/META-INF/Thorns2.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/META-INF/Thorns2.kotlin_module" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/ButtonGroup.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/ButtonGroup.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/SlotGroup.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/SlotGroup.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/constant/ID.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/constant/ID.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/ChoiceScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/ChoiceScene.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/EfxScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/EfxScene.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/FadeScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/FadeScene.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/FadeTopBottomScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/FadeTopBottomScene.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/LoadScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/LoadScene.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/MainMenuScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/MainMenuScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/Scene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/Scene.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/StandardScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/StandardScene.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/TestButtonScene.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/button/ButtonGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/ButtonGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/button/SlotGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/SlotGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/constant/ID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/constant/ID.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/ChoiceScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/ChoiceScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/EfxScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/EfxScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/FadeScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/FadeScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/FadeTopBottomScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/FadeTopBottomScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/LoadScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/LoadScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/MainMenuScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/MainMenuScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/SaveMenuScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/SaveMenuScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/Scene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/StandardScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/StandardScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/TestButtonScene.java" beforeDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,6 +84,18 @@
       <recent name="C:\Users\Mi\IdeaProjects\Thorns2\src\nona\mi\loader" />
       <recent name="C:\Users\Mi\IdeaProjects\Thorns2\src\res" />
     </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">

@@ -1,6 +1,7 @@
 package nona.mi.main;
 
 import nona.mi.button.ButtonGroup;
+import nona.mi.constant.ID;
 import nona.mi.jukebox.MyJukeBox;
 import nona.mi.save.Save;
 import nona.mi.scene.SaveMenuScene;
@@ -79,21 +80,15 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     protected Save save;
 
-    protected Scene loadScene;
-    protected Scene mainMenu;
-    protected SaveMenuScene saveMenuScene; //dms
-    //todo : colocar no hashmap
-
     protected HashMap<Integer, Scene> publicScenes;
 
 
-
-
-    //
+    // todo : ver se nao esta inutil
     protected HashMap<Integer, BufferedImage> screenshots;
 
     //
     protected ButtonGroup yn;
+
 
 
     //----------------------------------------------------------------------------------------
@@ -277,7 +272,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
             pack = sceneBasis.getNextPack();
             scene = 0;
             sceneBasis.reset();
-            sceneBasis = loadScene;
+            sceneBasis = getSceneFromPublicScenes(ID.LOAD_SCENE);
             loadPack();
         } else {
             scene = sceneBasis.getNextScene();
@@ -287,7 +282,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     }
 
     public void loadPack() {
-        sceneBasis = loadScene;
+        sceneBasis = getSceneFromPublicScenes(ID.LOAD_SCENE);
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -311,7 +306,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         this.pack = pack;
         this.scene = scene;
         sceneBasis.reset();
-        sceneBasis = loadScene;
+        sceneBasis = getSceneFromPublicScenes(ID.LOAD_SCENE);
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -572,17 +567,17 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         sceneBasis = getSceneFromPublicScenes(id);
     }
 
-    private Scene getSceneFromPublicScenes(int id) {
+    public Scene getSceneFromPublicScenes(int id) {
         return publicScenes.get(id);
     }
 
-
-    //TODO : criar um hash map com as cenas publicas; esse hash ser acessado por setDirectSceneDromPublicPack
-
-
-    public void setSceneBasisWithoutReset(Scene scene) {
-        sceneBasis = scene;
+    public void setSceneBasisWithoutReset(int id) {
+        sceneBasis = getSceneFromPublicScenes(id);
+        scene = sceneBasis.getSceneId();
+        //todo : pack id
     }
+
+
 
     public int getPack() {
         return pack;
@@ -605,35 +600,6 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         return frame;
     }
 
-    public Save getSave() {
-        return save;
-    }
-
-    public void setSave(Save save) {
-        this.save = save;
-    }
-
-
-
-
-
-
-
-
-
-
-    //todo : temp : so testando a mudanca de cena. APAGAR!
-    public Scene getLoadScene() {
-        return loadScene;
-    }
-
-    public Scene getMainMenu() {
-        return mainMenu;
-    }
-
-    public SaveMenuScene getSaveMenuScene() {
-        return saveMenuScene;
-    }
 
     public HashMap<Integer, BufferedImage> getScreenshots() {
         return screenshots;
@@ -649,9 +615,9 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     //
     public void returntoMainMenu() {
-        //TODO : COLOCAR O ID DA CENA
         sceneBasis.reset();
-        sceneBasis = mainMenu;
+        sceneBasis = getSceneFromPublicScenes(ID.MAIN_MENU_SCENE);
+        scene = sceneBasis.getSceneId();
         closePackJukebox();
         currentSound = null;
         packJukebox = null;

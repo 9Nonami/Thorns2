@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import nona.mi.button.ButtonGroup;
+import nona.mi.constant.ID;
 import nona.mi.jukebox.MyJukeBox;
 import nona.mi.main.Game;
 
@@ -59,10 +60,10 @@ public abstract class Scene {
 			}
 		} else {
 			yn.update();
-			if (yn.getClickedButton() != ButtonGroup.NO_CLICK) {
-				if (yn.getClickedButton() == SaveMenuScene.YES) {
+			if (yn.getClickedButton() != ID.NO_CLICK) {
+				if (yn.getClickedButton() == ID.YES) {
 					game.returntoMainMenu();
-				} else if (yn.getClickedButton() == SaveMenuScene.NO) {
+				} else if (yn.getClickedButton() == ID.NO) {
 					esc = false;
 					yn.reset();
 
@@ -116,7 +117,7 @@ public abstract class Scene {
 	private void updateButtonGroup() {
 		if (buttonGroup != null) {
 			buttonGroup.update();
-			if (buttonGroup.getClickedButton() != ButtonGroup.NO_CLICK) {
+			if (buttonGroup.getClickedButton() != ID.NO_CLICK) {
 
 				//se estiver no meio do audio quando um botao for pressionado, pausa
 				if (game.getSceneBasis() instanceof StandardScene) {
@@ -124,12 +125,14 @@ public abstract class Scene {
 					temp.pauseDialogAudio();
 				}
 
-				if (buttonGroup.getClickedButton() == SaveMenuScene.MAIN) {
+				if (buttonGroup.getClickedButton() == ID.MAIN) {
 					esc = true;
 				} else {
-					game.getSaveMenuScene().setType(buttonGroup.getClickedButton());
-					game.getSaveMenuScene().setInfo(game.getPack(), game.getScene(), game.getFrame()); //soh save precisa disso, mas nao vou criar um if soh pra ele
-					game.setSceneBasisWithoutReset(game.getSaveMenuScene()); //para nao comecar a cena do 0 quando voltar
+
+					SaveMenuScene tempSaveMenuScene = (SaveMenuScene) game.getSceneFromPublicScenes(ID.DMS_SCENE);
+					tempSaveMenuScene.setType(buttonGroup.getClickedButton());
+					tempSaveMenuScene.setInfo(game.getPack(), game.getScene(), game.getFrame()); // nao vou passar packId e sceneId para saber se scene:game esta atualizando certinho
+					game.setSceneBasisWithoutReset(ID.DMS_SCENE); //para nao resetar a cena
 					buttonGroup.reset();
 					game.setClicked(false);
 				}
