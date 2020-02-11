@@ -2,7 +2,6 @@ package nona.mi.scene;
 
 import java.awt.Graphics;
 
-import nona.mi.constant.ID;
 import nona.mi.efx.Fade;
 import nona.mi.image.BaseImage;
 import nona.mi.main.Game;
@@ -20,14 +19,14 @@ public class FadeScene extends Scene {
         super(game, nextScene, sceneId);
         this.backgrounds = backgrounds;
         this.fade = fade;
-        directScene = ID.NO_SCENE;
+        directScene = Scene.NO_SCENE;
     }
 
     public FadeScene(Game game, BaseImage background, Fade fade, int nextScene, int sceneId) {
         super(game, nextScene, sceneId);
         this.background = background;
         this.fade = fade;
-        directScene = ID.NO_SCENE;
+        directScene = Scene.NO_SCENE;
     }
 
     public void setDirectScene(int directScene) {
@@ -39,7 +38,7 @@ public class FadeScene extends Scene {
         if (!fade.getEndAnimation()) {
             fade.update();
         } else {
-            if (directScene != ID.NO_SCENE) { //todo : se der erro eh aqui
+            if (directScene != Scene.NO_SCENE) { //todo : se der erro eh aqui
                 game.setDirectSceneFromPublicScenes(directScene);
             } else {
                 game.nextScene();

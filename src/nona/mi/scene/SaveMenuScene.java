@@ -3,7 +3,6 @@ package nona.mi.scene;
 import nona.mi.button.Button;
 import nona.mi.button.ButtonGroup;
 import nona.mi.button.SlotGroup;
-import nona.mi.constant.ID;
 import nona.mi.image.BaseImage;
 import nona.mi.main.Game;
 import nona.mi.save.Save;
@@ -53,6 +52,17 @@ public class SaveMenuScene extends Scene {
 
     private int temPackForLoad;
     private int tempSceneForLoad;
+
+    public static final int RETURN_TO_LAST_SCENE = -74;
+    public static final int PREVIOUS_SLOT_GROUP = -73;
+    public static final int NEXT_SLOT_GROUP = -72;
+    public static final int YES = -71;
+    public static final int NO = -70;
+    public static final int SAVE = -69;
+    public static final int LOAD = -68;
+    public static final int COPY = -67;
+    public static final int DEL = -66;
+    public static final int MAIN = -65;
 
 
 
@@ -131,9 +141,9 @@ public class SaveMenuScene extends Scene {
     //update do return, prev e next
     private boolean updateButtons() {
         buttonGroup.update();
-        if (buttonGroup.getClickedButton() != ID.NO_CLICK) {
-            if (buttonGroup.getClickedButton() == ID.RETURN_TO_LAST_SCENE) {
-                if (saveScene == ID.MAIN_MENU_SCENE) {
+        if (buttonGroup.getClickedButton() != Button.NO_CLICK) {
+            if (buttonGroup.getClickedButton() == RETURN_TO_LAST_SCENE) {
+                if (saveScene == Scene.MAIN_MENU_SCENE) {
                     System.out.println(saveScene);
                     System.out.println("");
                     game.returnToMainMenu();
@@ -146,11 +156,11 @@ public class SaveMenuScene extends Scene {
                     }
                 }
                 return true; //para nao atualizar os slots
-            } else if (buttonGroup.getClickedButton() == ID.PREVIOUS_SLOT_GROUP) {
+            } else if (buttonGroup.getClickedButton() == PREVIOUS_SLOT_GROUP) {
                 if (slotGroup.getStartIncrement() > 0) { // 0 = first slot. there is nothing before it.
                     slotGroup.decrement();
                 }
-            } else if (buttonGroup.getClickedButton() == ID.NEXT_SLOT_GROUP) { //12 - 6
+            } else if (buttonGroup.getClickedButton() == NEXT_SLOT_GROUP) { //12 - 6
                 if (slotGroup.getStartIncrement() < slotGroup.getTotalButtons() - slotGroup.getButtonsToShow()) {
                     slotGroup.increment();
                 }
@@ -175,7 +185,7 @@ public class SaveMenuScene extends Scene {
 
     private void updateSlotsForSave() {
         slotGroup.update();
-        if (slotGroup.getClickedSlot() != ID.NO_CLICK) {
+        if (slotGroup.getClickedSlot() != Button.NO_CLICK) {
             lockForSave = true;
             if (slotGroup.getButtons()[slotGroup.getClickedSlot()].getStandardImage() == slotGroup.getStandardButtonImage()) {
                 pleaseWait = true;
@@ -189,12 +199,12 @@ public class SaveMenuScene extends Scene {
 
     private void updateYnForSave() {
         yn.update();
-        if (yn.getClickedButton() != ID.NO_CLICK) {
-            if (yn.getClickedButton() == ID.YES) {
+        if (yn.getClickedButton() != Button.NO_CLICK) {
+            if (yn.getClickedButton() == YES) {
                 lockYnForSave = true;
                 pleaseWait = true;
                 save();
-            } else if (yn.getClickedButton() == ID.NO) {
+            } else if (yn.getClickedButton() == NO) {
                 yn.reset();
                 lockForSave = false;
                 lockYnForSave = true;
@@ -218,7 +228,7 @@ public class SaveMenuScene extends Scene {
 
     private void updateSlotsForLoad() {
         slotGroup.update();
-        if ((slotGroup.getClickedSlot() != ID.NO_CLICK) && (slotGroup.getButtons()[slotGroup.getClickedSlot()].getStandardImage() != slotGroup.getStandardButtonImage())) {
+        if ((slotGroup.getClickedSlot() != Button.NO_CLICK) && (slotGroup.getButtons()[slotGroup.getClickedSlot()].getStandardImage() != slotGroup.getStandardButtonImage())) {
             int slotId = slotGroup.getClickedSlot();
             temPackForLoad = save.getPackOfSlot(slotId);
             tempSceneForLoad = save.getSceneOfSlot(slotId);
@@ -229,8 +239,8 @@ public class SaveMenuScene extends Scene {
 
     private void updateYnForLoad() {
         yn.update();
-        if (yn.getClickedButton() != ID.NO_CLICK) {
-            if (yn.getClickedButton() == ID.YES) {
+        if (yn.getClickedButton() != Button.NO_CLICK) {
+            if (yn.getClickedButton() == YES) {
                 if (savePack != temPackForLoad) {
                     //nao esta lendo alguma cena do pack atual
                     game.loadPack(temPackForLoad, tempSceneForLoad); // < reseta esta cena (dms)
@@ -240,14 +250,14 @@ public class SaveMenuScene extends Scene {
                     //RESETA A CENA ANTERIOR (VINDA DE STANDARDSCENE, POR EXEMPLO)
                     //SE A CENA ANTERIOR FOR O MAINMENU NAO PRECISA RESETAR, POIS
                     //ISSO EH FEITO QUANDO O MAIN VEM PARA A TELA DE LOAD
-                    if (saveScene != ID.MAIN_MENU_SCENE) {
+                    if (saveScene != Scene.MAIN_MENU_SCENE) {
                         game.getSceneFromCurrentPack(saveScene).reset();
                     }
 
                     //coloca a cena em sceneBasis
                     game.setDirectScene(tempSceneForLoad); // < reseta esta cena (dms)
                 }
-            } else if (yn.getClickedButton() == ID.NO) {
+            } else if (yn.getClickedButton() == NO) {
                 yn.reset();
                 lockForLoad = false;
                 lockYnForLoad = true;
@@ -277,7 +287,7 @@ public class SaveMenuScene extends Scene {
 
     private void updateSlotsForCopy() {
         slotGroup.update();
-        if (slotGroup.getClickedSlot() != ID.NO_CLICK) {
+        if (slotGroup.getClickedSlot() != Button.NO_CLICK) {
             if (!(slotGroup.getButtons()[slotGroup.getClickedSlot()].getStandardImage() == slotGroup.getStandardButtonImage())) {
 
                 //clicou no lugar certo, slot com progresso
@@ -298,7 +308,7 @@ public class SaveMenuScene extends Scene {
 
     private void updateSlotsForPaste() {
         slotGroup.update();
-        if (slotGroup.getClickedSlot() != ID.NO_CLICK) {
+        if (slotGroup.getClickedSlot() != Button.NO_CLICK) {
             if (slotGroup.getButtons()[slotGroup.getClickedSlot()].getStandardImage() == slotGroup.getStandardButtonImage()) {
                 //slot vazio
                 pleaseWait = true;
@@ -313,12 +323,12 @@ public class SaveMenuScene extends Scene {
 
     private void updateYnForCopy() {
         yn.update();
-        if (yn.getClickedButton() != ID.NO_CLICK) {
-            if (yn.getClickedButton() == ID.YES) {
+        if (yn.getClickedButton() != Button.NO_CLICK) {
+            if (yn.getClickedButton() == YES) {
                 lockYnForCopy = true;
                 pleaseWait = true;
                 save();
-            } else if (yn.getClickedButton() == ID.NO) {
+            } else if (yn.getClickedButton() == NO) {
                 yn.reset();
                 lockForCopy = false;
                 lockYnForCopy = true;
@@ -342,7 +352,7 @@ public class SaveMenuScene extends Scene {
 
     private void updateSlotsForDel() {
         slotGroup.update();
-        if ((slotGroup.getClickedSlot() != ID.NO_CLICK) && (slotGroup.getButtons()[slotGroup.getClickedSlot()].getStandardImage() != slotGroup.getStandardButtonImage())) {
+        if ((slotGroup.getClickedSlot() != Button.NO_CLICK) && (slotGroup.getButtons()[slotGroup.getClickedSlot()].getStandardImage() != slotGroup.getStandardButtonImage())) {
             lockForDel = true;
             lockYnForDel = false;
         }
@@ -350,12 +360,12 @@ public class SaveMenuScene extends Scene {
 
     private void updateYnForDel() {
         yn.update();
-        if (yn.getClickedButton() != ID.NO_CLICK) {
-            if (yn.getClickedButton() == ID.YES) {
+        if (yn.getClickedButton() != Button.NO_CLICK) {
+            if (yn.getClickedButton() == YES) {
                 lockYnForDel = true; //nao deixa o infeliz iniciar mais de 1 thread
                 pleaseWait = true;
                 del();
-            } else if (yn.getClickedButton() == ID.NO) {
+            } else if (yn.getClickedButton() == NO) {
                 yn.reset();
                 lockForDel = false;
                 lockYnForDel = true;
@@ -483,13 +493,13 @@ public class SaveMenuScene extends Scene {
 
     @Override
     public void updateScene() {
-        if (type == ID.SAVE) {
+        if (type == SAVE) {
             updateSave();
-        } else if (type == ID.LOAD) {
+        } else if (type == LOAD) {
             updateLoad();
-        } else if (type == ID.COPY) {
+        } else if (type == COPY) {
             updateCopy();
-        } else if (type == ID.DEL) {
+        } else if (type == DEL) {
             updateDel();
         }
     }

@@ -20,6 +20,8 @@ public abstract class Button {
     protected boolean lockAudio;
     protected int id;
 
+    public static final int NO_CLICK = -64;
+
 
 
     public Button(Game game) {

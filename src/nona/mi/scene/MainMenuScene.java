@@ -1,7 +1,7 @@
 package nona.mi.scene;
 
+import nona.mi.button.Button;
 import nona.mi.button.ButtonGroup;
-import nona.mi.constant.ID;
 import nona.mi.main.Game;
 
 import java.awt.Color;
@@ -13,6 +13,9 @@ public class MainMenuScene extends Scene {
 
     private ButtonGroup buttonGroup;
 
+    public static final int NEW_GAME = -76;
+    public static final int LOAD_GAME = -75;
+
 
 
     public MainMenuScene(Game game, int sceneId, ButtonGroup buttonGroup) {
@@ -23,15 +26,15 @@ public class MainMenuScene extends Scene {
     @Override
     public void updateScene() {
         buttonGroup.update();
-        if (buttonGroup.getClickedButton() != ID.NO_CLICK) {
-            if (buttonGroup.getClickedButton() == ID.NEW_GAME) {
+        if (buttonGroup.getClickedButton() != Button.NO_CLICK) {
+            if (buttonGroup.getClickedButton() == NEW_GAME) {
                 nextPack = 0;
                 game.nextScene(); //usa a lastScene do construtor
-            } else if (buttonGroup.getClickedButton() == ID.LOAD_GAME) {
+            } else if (buttonGroup.getClickedButton() == LOAD_GAME) {
 
                 //pega a dms do hashmap em game
-                SaveMenuScene tempSaveMenuScene = (SaveMenuScene) game.getSceneFromPublicScenes(ID.DMS_SCENE);
-                tempSaveMenuScene.setType(ID.LOAD);
+                SaveMenuScene tempSaveMenuScene = (SaveMenuScene) game.getSceneFromPublicScenes(Scene.DMS_SCENE);
+                tempSaveMenuScene.setType(SaveMenuScene.LOAD);
 
                 tempSaveMenuScene.setSaveScene(sceneId);
                 //game.getSaveMenuScene().setSaveScene(MAIN_MENU_ID);
@@ -39,7 +42,7 @@ public class MainMenuScene extends Scene {
                 tempSaveMenuScene.setSavePack(packId);
                 //game.getSaveMenuScene().setSavePack(PACK_FOR_LOAD_GAME);
 
-                game.setDirectSceneFromPublicScenes(ID.DMS_SCENE);
+                game.setDirectSceneFromPublicScenes(Scene.DMS_SCENE);
             }
         }
     }

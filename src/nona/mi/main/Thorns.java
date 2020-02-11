@@ -8,7 +8,6 @@ import java.util.HashMap;
 import nona.mi.button.Button;
 import nona.mi.button.ButtonGroup;
 import nona.mi.button.RectButton;
-import nona.mi.constant.ID;
 import nona.mi.db.FontDataBase;
 import nona.mi.image.BaseImage;
 import nona.mi.image.Coordinates;
@@ -30,7 +29,6 @@ import nona.mi.scene.Scene;
 import nona.mi.scene.StandardScene;
 
 //TODO : DAR UM JEITO DE CRIAR OS AUDIOS E BUTTONS TUDO AQUI. NADA DE FAZER ISSO DENTRO DAS CLASSES!
-//todo : ver. se eh interessante criar metodos para encapsular a criacao de qualquer objeto que use muitas linhas
 //todo : deixar ao maximo tudo quanto eh load de imagem aqui!
 public class Thorns extends Game {
 
@@ -68,13 +66,13 @@ public class Thorns extends Game {
         RectButton yesButton = new RectButton(this);
         yesButton.setImages(uno, dos, 150, 50);
         yesButton.setAudioName(audioClick);
-        yesButton.setId(ID.YES);
+        yesButton.setId(SaveMenuScene.YES);
 
         //NO BUTTON
         RectButton noButton = new RectButton(this);
         noButton.setImages(uno, dos, 350, 50);
         noButton.setAudioName(audioClick);
-        noButton.setId(ID.NO);
+        noButton.setId(SaveMenuScene.NO);
         yn = new ButtonGroup(new Button[]{yesButton, noButton});
 
 
@@ -154,19 +152,19 @@ public class Thorns extends Game {
         RectButton returnButton = new RectButton(this);
         returnButton.setImages(returnImage, focusMisc, 50, 390);
         returnButton.setAudioName(audioClick);
-        returnButton.setId(ID.RETURN_TO_LAST_SCENE);
+        returnButton.setId(SaveMenuScene.RETURN_TO_LAST_SCENE);
 
         //PREV BUTTON
         RectButton previousButton = new RectButton(this);
         previousButton.setImages(uno, dos, 250, 390);
         previousButton.setAudioName(audioClick);
-        previousButton.setId(ID.PREVIOUS_SLOT_GROUP);
+        previousButton.setId(SaveMenuScene.PREVIOUS_SLOT_GROUP);
 
         //NEXT BUTTON
         RectButton nextButton = new RectButton(this);
         nextButton.setImages(uno, dos, 400, 390);
         nextButton.setAudioName(audioClick);
-        nextButton.setId(ID.NEXT_SLOT_GROUP);
+        nextButton.setId(SaveMenuScene.NEXT_SLOT_GROUP);
 
 
 
@@ -174,13 +172,13 @@ public class Thorns extends Game {
         RectButton yesButton = new RectButton(this);
         yesButton.setImages(uno, dos, 150, 50);
         yesButton.setAudioName(audioClick);
-        yesButton.setId(ID.YES);
+        yesButton.setId(SaveMenuScene.YES);
 
         //NO BUTTON
         RectButton noButton = new RectButton(this);
         noButton.setImages(uno, dos, 350, 50);
         noButton.setAudioName(audioClick);
-        noButton.setId(ID.NO);
+        noButton.setId(SaveMenuScene.NO);
 
 
 
@@ -192,20 +190,20 @@ public class Thorns extends Game {
         BaseImage copyMode = new BaseImage(ImageLoader.loadImage("/res/misc/copy-mode.png"), modeX, modeY);
         BaseImage deleteMode = new BaseImage(ImageLoader.loadImage("/res/misc/delete-mode.png"), modeX, modeY);
         HashMap<Integer, BaseImage> modes = new HashMap<Integer, BaseImage>();
-        modes.put(ID.SAVE, saveMode);
-        modes.put(ID.LOAD, loadMode);
-        modes.put(ID.COPY, copyMode);
-        modes.put(ID.DEL, deleteMode);
+        modes.put(SaveMenuScene.SAVE, saveMode);
+        modes.put(SaveMenuScene.LOAD, loadMode);
+        modes.put(SaveMenuScene.COPY, copyMode);
+        modes.put(SaveMenuScene.DEL, deleteMode);
 
 
 
-        SaveMenuScene tempSaveMenuScene = new SaveMenuScene(this, ID.DMS_SCENE, save, 6);
+        SaveMenuScene tempSaveMenuScene = new SaveMenuScene(this, Scene.DMS_SCENE, save, 6);
         tempSaveMenuScene.createSlotImages(ImageLoader.loadImage("/res/buttons/empty-slot.png"), ImageLoader.loadImage("/res/buttons/focused-slot.png"));
         tempSaveMenuScene.createSlots(12, 2, 3, 44, 44, 31);
         tempSaveMenuScene.createMiscButtons(new Button[]{returnButton, previousButton, nextButton});
         tempSaveMenuScene.createYn(new Button[]{yesButton, noButton});
         tempSaveMenuScene.createModes(modes);
-        tempSaveMenuScene.setPackId(ID.NO_PACK);
+        tempSaveMenuScene.setPackId(Scene.NO_PACK);
         publicScenes.put(tempSaveMenuScene.getSceneId(), tempSaveMenuScene);
     }
 
@@ -217,35 +215,35 @@ public class Thorns extends Game {
         RectButton newGame = new RectButton(this);
         newGame.setImages(uno, dos, 10, 10);
         newGame.setAudioName(audioClick);
-        newGame.setId(ID.NEW_GAME);
+        newGame.setId(MainMenuScene.NEW_GAME);
 
         RectButton loadGame = new RectButton(this);
         loadGame.setImages(uno, dos, 10, 50);
         loadGame.setAudioName(audioClick);
-        loadGame.setId(ID.LOAD_GAME);
+        loadGame.setId(MainMenuScene.LOAD_GAME);
 
-        MainMenuScene tempMainMenu = new MainMenuScene(this, ID.MAIN_MENU_SCENE, new ButtonGroup(new Button[]{newGame, loadGame}));
-        tempMainMenu.setPackId(ID.NO_PACK);
+        MainMenuScene tempMainMenu = new MainMenuScene(this, Scene.MAIN_MENU_SCENE, new ButtonGroup(new Button[]{newGame, loadGame}));
+        tempMainMenu.setPackId(Scene.NO_PACK);
         publicScenes.put(tempMainMenu.getSceneId(), tempMainMenu);
     }
 
     private void createLoadScene() {
-        LoadScene tempLoadScene = new LoadScene(this, ID.LOAD_SCENE, new BaseImage(ImageLoader.loadImage("/res/bg/load.png"), 0, 0));
-        tempLoadScene.setPackId(ID.NO_PACK);
+        LoadScene tempLoadScene = new LoadScene(this, Scene.LOAD_SCENE, new BaseImage(ImageLoader.loadImage("/res/bg/load.png"), 0, 0));
+        tempLoadScene.setPackId(Scene.NO_PACK);
         publicScenes.put(tempLoadScene.getSceneId(), tempLoadScene);
     }
 
     private void createFadeLogoScene() {
         Fade fadeLogo = new Fade(this, Fade.SOLID, Fade.FAST);
         fadeLogo.setFadeOutIn(true);
-        FadeScene fs = new FadeScene(this, new BaseImage(ImageLoader.loadImage("/res/menu/logo.png"), 0, 0), fadeLogo, Scene.LAST_SCENE, ID.FADE_SCENE_LOGO);
-        fs.setDirectScene(ID.MAIN_MENU_SCENE); //a cena para a qual irah
-        fs.setPackId(ID.NO_PACK);
+        FadeScene fs = new FadeScene(this, new BaseImage(ImageLoader.loadImage("/res/menu/logo.png"), 0, 0), fadeLogo, Scene.LAST_SCENE, Scene.FADE_SCENE_LOGO);
+        fs.setDirectScene(Scene.MAIN_MENU_SCENE); //a cena para a qual irah
+        fs.setPackId(Scene.NO_PACK);
         publicScenes.put(fs.getSceneId(), fs);
     }
 
     private void defineFirstScene() {
-        sceneBasis = getSceneFromPublicScenes(ID.FADE_SCENE_LOGO); //nao uso setdirec... por que ele vai tentar resetar, mas nao ha o que resetar, esta null
+        sceneBasis = getSceneFromPublicScenes(Scene.FADE_SCENE_LOGO); //nao uso setdirec... por que ele vai tentar resetar, mas nao ha o que resetar, esta null
     }
 
     private void createSceneMenu(BufferedImage focusMisc, String audioClick, BufferedImage tempTextArea) {
@@ -260,28 +258,28 @@ public class Thorns extends Game {
         RectButton saveButton = new RectButton(this);
         saveButton.setImages(saveImage, focusMisc, (textArea.getX() + tempTextArea.getWidth() + spacing), textArea.getY());
         saveButton.setAudioName(audioClick);
-        saveButton.setId(ID.SAVE);
+        saveButton.setId(SaveMenuScene.SAVE);
 
         RectButton loadButton = new RectButton(this);
         loadButton.setImages(loadImage, focusMisc, saveButton.getX(), (saveButton.getY() + saveButton.getHeight() + spacing));
         loadButton.setAudioName(audioClick);
-        loadButton.setId(ID.LOAD);
+        loadButton.setId(SaveMenuScene.LOAD);
 
         RectButton copyButton = new RectButton(this);
         copyButton.setImages(copyImage, focusMisc, loadButton.getX(), (loadButton.getY() + loadButton.getHeight() + spacing));
         copyButton.setAudioName(audioClick);
-        copyButton.setId(ID.COPY);
+        copyButton.setId(SaveMenuScene.COPY);
 
         RectButton deleteButton = new RectButton(this);
         deleteButton.setImages(deleteImage, focusMisc, copyButton.getX(), (copyButton.getY() + copyButton.getHeight() + spacing));
         deleteButton.setAudioName(audioClick);
-        deleteButton.setId(ID.DEL);
+        deleteButton.setId(SaveMenuScene.DEL);
 
         //
         RectButton mainButton = new RectButton(this);
         mainButton.setImages(ImageLoader.loadImage("/res/misc/main.png"), focusMisc, 100, 0);
         mainButton.setAudioName(audioClick);
-        mainButton.setId(ID.MAIN);
+        mainButton.setId(SaveMenuScene.MAIN);
 
         sceneMenu = new ButtonGroup(new Button[]{saveButton, loadButton, copyButton, deleteButton, mainButton});
 

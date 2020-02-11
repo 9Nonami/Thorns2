@@ -3,8 +3,8 @@ package nona.mi.scene;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import nona.mi.button.Button;
 import nona.mi.button.ButtonGroup;
-import nona.mi.constant.ID;
 import nona.mi.jukebox.MyJukeBox;
 import nona.mi.main.Game;
 
@@ -28,6 +28,14 @@ public abstract class Scene {
 
 	protected int sceneId;
 	protected int packId;
+
+	public static final int LOAD_SCENE = -80;
+	public static final int FADE_SCENE_LOGO = -79;
+	public static final int DMS_SCENE = -78;
+	public static final int MAIN_MENU_SCENE = -77;
+
+	public static final int NO_SCENE = 0;
+	public static final int NO_PACK = -1;
 
 
 
@@ -60,10 +68,10 @@ public abstract class Scene {
 			}
 		} else {
 			yn.update();
-			if (yn.getClickedButton() != ID.NO_CLICK) {
-				if (yn.getClickedButton() == ID.YES) {
+			if (yn.getClickedButton() != Button.NO_CLICK) {
+				if (yn.getClickedButton() == SaveMenuScene.YES) {
 					game.returnToMainMenu();
-				} else if (yn.getClickedButton() == ID.NO) {
+				} else if (yn.getClickedButton() == SaveMenuScene.NO) {
 					esc = false;
 					yn.reset();
 
@@ -117,7 +125,7 @@ public abstract class Scene {
 	private void updateButtonGroup() {
 		if (buttonGroup != null) {
 			buttonGroup.update();
-			if (buttonGroup.getClickedButton() != ID.NO_CLICK) {
+			if (buttonGroup.getClickedButton() != Button.NO_CLICK) {
 
 				//se estiver no meio do audio quando um botao for pressionado, pausa
 				if (game.getSceneBasis() instanceof StandardScene) {
@@ -125,13 +133,13 @@ public abstract class Scene {
 					temp.pauseDialogAudio();
 				}
 
-				if (buttonGroup.getClickedButton() == ID.MAIN) {
+				if (buttonGroup.getClickedButton() == SaveMenuScene.MAIN) {
 					esc = true;
 				} else {
-					SaveMenuScene tempSaveMenuScene = (SaveMenuScene) game.getSceneFromPublicScenes(ID.DMS_SCENE);
+					SaveMenuScene tempSaveMenuScene = (SaveMenuScene) game.getSceneFromPublicScenes(DMS_SCENE);
 					tempSaveMenuScene.setType(buttonGroup.getClickedButton());
 					tempSaveMenuScene.setInfo(game.getSceneBasis().getPackId(), game.getSceneBasis().getSceneId(), game.getFrame());
-					game.setSceneBasisFromPublicScenesWithoutReset(ID.DMS_SCENE); //para nao resetar a cena
+					game.setSceneBasisFromPublicScenesWithoutReset(DMS_SCENE); //para nao resetar a cena
 					buttonGroup.reset();
 					game.setClicked(false);
 				}

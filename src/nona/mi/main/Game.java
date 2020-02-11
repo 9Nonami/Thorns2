@@ -1,7 +1,6 @@
 package nona.mi.main;
 
 import nona.mi.button.ButtonGroup;
-import nona.mi.constant.ID;
 import nona.mi.jukebox.MyJukeBox;
 import nona.mi.save.Save;
 import nona.mi.scene.Scene;
@@ -314,7 +313,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     public void loadPack(int tempNextPack, int tempNextScene) {
 
         sceneBasis.reset();
-        sceneBasis = getSceneFromPublicScenes(ID.LOAD_SCENE);
+        sceneBasis = getSceneFromPublicScenes(Scene.LOAD_SCENE);
 
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -368,7 +367,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     public void returnToMainMenu() {
         sceneBasis.reset();
-        sceneBasis = getSceneFromPublicScenes(ID.MAIN_MENU_SCENE);
+        sceneBasis = getSceneFromPublicScenes(Scene.MAIN_MENU_SCENE);
         closePackJukebox();
         currentSound = null;
         packJukebox = null;

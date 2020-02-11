@@ -12,8 +12,6 @@
 
 package nona.mi.button;
 
-import nona.mi.constant.ID;
-
 import java.awt.Graphics;
 
 public class ButtonGroup {
@@ -28,7 +26,7 @@ public class ButtonGroup {
     }
 
     public void update() {
-        clickedButton = ID.NO_CLICK;
+        clickedButton = Button.NO_CLICK;
         for (Button temp : buttons) {
             temp.update();
             if (temp.isClicked()) {

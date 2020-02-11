@@ -1,6 +1,5 @@
 package nona.mi.button;
 
-import nona.mi.constant.ID;
 import nona.mi.main.Game;
 
 import java.awt.Graphics;
@@ -96,7 +95,7 @@ public class SlotGroup {
     }
 
     public void update() {
-        clickedSlot = ID.NO_CLICK;
+        clickedSlot = Button.NO_CLICK;
         for (int i = startButtonID + startIncrement; i < buttonsToShow * showIncrement; i++) {
             buttons[i].update();
             if (buttons[i].isClicked()) {
@@ -154,7 +153,7 @@ public class SlotGroup {
         for (Button button : buttons) {
             button.reset();
         }
-        clickedSlot = ID.NO_CLICK;
+        clickedSlot = Button.NO_CLICK;
     }
 
 }
