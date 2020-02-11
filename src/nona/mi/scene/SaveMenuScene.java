@@ -136,12 +136,12 @@ public class SaveMenuScene extends Scene {
                 if (saveScene == ID.MAIN_MENU_SCENE) {
                     System.out.println(saveScene);
                     System.out.println("");
-                    game.returntoMainMenu();
+                    game.returnToMainMenu();
                 } else {
                     game.setDirectScene(saveScene);
                     //retoma uma fala caso tenha sido pausada
-                    if (game.getPackBasis().get(saveScene) instanceof StandardScene) {
-                        StandardScene temp = (StandardScene) game.getPackBasis().get(saveScene);
+                    if (game.getSceneFromCurrentPack(saveScene) instanceof StandardScene) {
+                        StandardScene temp = (StandardScene) game.getSceneFromCurrentPack(saveScene);
                         temp.resumeDialogAudio();
                     }
                 }
@@ -241,7 +241,7 @@ public class SaveMenuScene extends Scene {
                     //SE A CENA ANTERIOR FOR O MAINMENU NAO PRECISA RESETAR, POIS
                     //ISSO EH FEITO QUANDO O MAIN VEM PARA A TELA DE LOAD
                     if (saveScene != ID.MAIN_MENU_SCENE) {
-                        game.resetSceneFromCurrentPack(saveScene);
+                        game.getSceneFromCurrentPack(saveScene).reset();
                     }
 
                     //coloca a cena em sceneBasis

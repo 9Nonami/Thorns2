@@ -109,10 +109,6 @@ public class Thorns extends Game {
         Coordinates setasCoord = new Coordinates(getWidth() - s1.getWidth(), getHeight() - s1.getHeight());
         setasAnim = new ImageEfx(this, setas, setasCoord, 0.25f , ImageEfx.LOOP); //0.15f
 
-        //PACK E SCENE
-        scene = 0;
-        pack = 0;
-
         //LOAD SCENE
         createLoadScene();
 
@@ -121,7 +117,6 @@ public class Thorns extends Game {
 
         //FADESCENE logo
         createFadeLogoScene();
-        //todo : nao precisa que as cenas publicas estejam salvas em variaveis, para acessa-las sera pelo hashmap
 
         //PRIMEIRA CENA (fadelogo)
         defineFirstScene();
@@ -251,8 +246,6 @@ public class Thorns extends Game {
 
     private void defineFirstScene() {
         sceneBasis = getSceneFromPublicScenes(ID.FADE_SCENE_LOGO); //nao uso setdirec... por que ele vai tentar resetar, mas nao ha o que resetar, esta null
-        scene = sceneBasis.getSceneId();
-        //todo : definir pack
     }
 
     private void createSceneMenu(BufferedImage focusMisc, String audioClick, BufferedImage tempTextArea) {
@@ -303,20 +296,20 @@ public class Thorns extends Game {
     @Override
     public void renderClass(Graphics g) {
         testFill(g);
-        sceneBasis.render(g);//todo
+        sceneBasis.render(g);
 
         //DESENHA O NUMERO ATUAL DA CENA
         if (showScene) {
             g.setColor(Color.BLACK);
-            g.fillRect(0, 0, 70, 20);
+            g.fillRect(0, 0, 130, 20);
             g.setColor(Color.GREEN);
-            g.drawString("scene: " + scene, 5, 15);
+            g.drawString("PACK: " + sceneBasis.getPackId() + " | SCENE: " + sceneBasis.getSceneId(), 5, 15);
         }
     }
 
     @Override
-    public synchronized void initPacks() {
-        if (pack == 0) {
+    public synchronized void initPacks(int tempNextPack) {
+        if (tempNextPack == 0) {
             initPack0();
         }
     }
@@ -330,7 +323,7 @@ public class Thorns extends Game {
         BaseImage bgScene0 = new BaseImage(imgScene0, 0, 0);
 
         //FADES
-        Fade fadeoutSlow = new Fade(this, Fade.SOLID, Fade.DEMONIAC); //TODO : SLOW
+        Fade fadeoutSlow = new Fade(this, Fade.SOLID, Fade.SLOW); //TODO : SLOW
         Fade fadeoutFast = new Fade(this, Fade.SOLID, Fade.FAST);
         Fade fadeinFast = new Fade(this, Fade.TRANSPARENT, Fade.FAST);
 
@@ -508,20 +501,12 @@ public class Thorns extends Game {
         space = false;
         up = false;
         down = false;
-        left = false;
-        right = false;
-        escape = false; //todo : ver.
         setClicked(false);
     }
 
     public void setShowScene(boolean showScene) {
         this.showScene = showScene;
     }
-
-    public int getScene() {
-        return scene;
-    }
-
 
     // todo : imageEfx e Stan, com os arrays estao ok, nao quero alterar
     // todo : definir som para cada cena no construtor - isso evita dar load numa cena e vir sem som (o qual so inicia em outra cena especifica)

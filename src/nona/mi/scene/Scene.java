@@ -62,7 +62,7 @@ public abstract class Scene {
 			yn.update();
 			if (yn.getClickedButton() != ID.NO_CLICK) {
 				if (yn.getClickedButton() == ID.YES) {
-					game.returntoMainMenu();
+					game.returnToMainMenu();
 				} else if (yn.getClickedButton() == ID.NO) {
 					esc = false;
 					yn.reset();
@@ -128,11 +128,10 @@ public abstract class Scene {
 				if (buttonGroup.getClickedButton() == ID.MAIN) {
 					esc = true;
 				} else {
-
 					SaveMenuScene tempSaveMenuScene = (SaveMenuScene) game.getSceneFromPublicScenes(ID.DMS_SCENE);
 					tempSaveMenuScene.setType(buttonGroup.getClickedButton());
-					tempSaveMenuScene.setInfo(game.getPack(), game.getScene(), game.getFrame()); // nao vou passar packId e sceneId para saber se scene:game esta atualizando certinho
-					game.setSceneBasisWithoutReset(ID.DMS_SCENE); //para nao resetar a cena
+					tempSaveMenuScene.setInfo(game.getSceneBasis().getPackId(), game.getSceneBasis().getSceneId(), game.getFrame());
+					game.setSceneBasisFromPublicScenesWithoutReset(ID.DMS_SCENE); //para nao resetar a cena
 					buttonGroup.reset();
 					game.setClicked(false);
 				}

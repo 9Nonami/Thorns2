@@ -39,7 +39,7 @@ public class MainMenuScene extends Scene {
                 tempSaveMenuScene.setSavePack(packId);
                 //game.getSaveMenuScene().setSavePack(PACK_FOR_LOAD_GAME);
 
-                game.setDirecSceneFromPublicScenes(ID.DMS_SCENE);
+                game.setDirectSceneFromPublicScenes(ID.DMS_SCENE);
             }
         }
     }

@@ -4,7 +4,6 @@ import nona.mi.button.ButtonGroup;
 import nona.mi.constant.ID;
 import nona.mi.jukebox.MyJukeBox;
 import nona.mi.save.Save;
-import nona.mi.scene.SaveMenuScene;
 import nona.mi.scene.Scene;
 import nona.mi.scene.ScenePackage;
 
@@ -52,8 +51,6 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     private int mouseY;
 
     protected MyJukeBox standardJukeBox;
-    protected int scene;
-    protected int pack;
 
     protected MyJukeBox packJukebox;
     private String currentSound;
@@ -65,16 +62,8 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     protected boolean lockUp;
     protected boolean down;
     protected boolean lockDown;
-    protected boolean left;
-    protected boolean lockLeft;
-    protected boolean right;
-    protected boolean lockRight;
     protected boolean space;
     protected boolean lockSpace;
-
-    //
-    protected  boolean escape; //todo : DEL
-    protected boolean lockEscape;
 
     private BufferedImage frame;
 
@@ -91,7 +80,8 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
 
 
-    //----------------------------------------------------------------------------------------
+    //ESSENCIAL-------------------------------------------------------------------------------
+
     public Game(int width, int height, String title, int gameLoopStyle) {
 
         this.width = width;
@@ -148,13 +138,27 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         t.start();
     }
 
+    @Override
+    public void run() {
+        if (gameLoopStyle == HARD_GAME_LOOP) {
+            hardGameLoop();
+        } else {
+            smoothGameLoop();
+        }
+    }
+
+    //----------------------------------------------------------------------------------------
+
+
+
+    //UR--------------------------------------------------------------------------------------
+
     private void update() {
         updateClass();
     }
 
     public abstract void updateClass();
 
-    //*
     private void render() {
         bs = canvas.getBufferStrategy();
 
@@ -173,29 +177,19 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
         bs.show();
     }
-    //*/
-
-    /*
-    private void render() {
-        bs = canvas.getBufferStrategy();
-        g = bs.getDrawGraphics();
-        g.clearRect(0, 0, width, height);
-        renderClass(g);
-        g.dispose();
-        bs.show();
-    }
-    //*/
 
     public abstract void renderClass(Graphics g);
 
-    @Override
-    public void run() {
-        if (gameLoopStyle == HARD_GAME_LOOP) {
-            hardGameLoop();
-        } else {
-            smoothGameLoop();
-        }
+    public void testFill(Graphics g) {
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, width, height);
     }
+
+    //----------------------------------------------------------------------------------------
+
+
+
+    //GAME LOOP-------------------------------------------------------------------------------
 
     public void hardGameLoop() {
         double ini = 0;
@@ -217,7 +211,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
                     }
                     Thread.sleep((long) wait);
                 } catch (Exception ex) {
-
+                    ex.printStackTrace();
                 }
             } else {
                 if (showLoopLog) {
@@ -267,66 +261,11 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 		}
 	}
 
-    public void nextScene() {
-        if (sceneBasis.getNextScene() == Scene.LAST_SCENE) {
-            pack = sceneBasis.getNextPack();
-            scene = 0;
-            sceneBasis.reset();
-            sceneBasis = getSceneFromPublicScenes(ID.LOAD_SCENE);
-            loadPack();
-        } else {
-            scene = sceneBasis.getNextScene();
-            sceneBasis.reset();
-            sceneBasis = packBasis.get(scene);
-        }
-    }
+    //----------------------------------------------------------------------------------------
 
-    public void loadPack() {
-        sceneBasis = getSceneFromPublicScenes(ID.LOAD_SCENE);
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                packBasis = new ScenePackage();
 
-                if (packJukebox != null) {
-                    closePackJukebox();
-                }
-                currentSound = null;
-                packJukebox = new MyJukeBox();
 
-                initPacks();
-
-                sceneBasis = packBasis.get(scene);
-            }
-        });
-        thread.start();
-    }
-
-    public void loadPack(int pack, int scene) {
-        this.pack = pack;
-        this.scene = scene;
-        sceneBasis.reset();
-        sceneBasis = getSceneFromPublicScenes(ID.LOAD_SCENE);
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                packBasis = new ScenePackage();
-
-                if (packJukebox != null) {
-                    closePackJukebox();
-                }
-                currentSound = null;
-                packJukebox = new MyJukeBox();
-
-                initPacks();
-
-                sceneBasis = packBasis.get(scene);
-            }
-        });
-        thread.start();
-    }
-
-    public abstract void initPacks();
+    //ESPECIFICO------------------------------------------------------------------------------
 
     private void closePackJukebox() {
         //todo : ver se nao eh melhor colocar em uma thread
@@ -342,8 +281,104 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         }
     }
 
+    //----------------------------------------------------------------------------------------
 
-    //INPUT-----------------------------------------------------------------
+
+
+    //MUDANCA DE CENA-------------------------------------------------------------------------
+
+    public void nextScene() {
+
+        int tempNextPack;
+        int tempNextScene;
+
+        if (sceneBasis.getNextScene() == Scene.LAST_SCENE) {
+
+            tempNextPack = sceneBasis.getNextPack();
+            tempNextScene = 0;
+
+            loadPack(tempNextPack, tempNextScene);
+
+        } else {
+            tempNextScene = sceneBasis.getNextScene();
+            sceneBasis.reset();
+            sceneBasis = getSceneFromCurrentPack(tempNextScene);
+        }
+
+    }
+
+    public Scene getSceneFromCurrentPack(int id) {
+        return packBasis.get(id);
+    }
+
+    public void loadPack(int tempNextPack, int tempNextScene) {
+
+        sceneBasis.reset();
+        sceneBasis = getSceneFromPublicScenes(ID.LOAD_SCENE);
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                //todo : apagar
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+                packBasis = new ScenePackage();
+
+                if (packJukebox != null) {
+                    closePackJukebox();
+                }
+                currentSound = null;
+                packJukebox = new MyJukeBox();
+
+                initPacks(tempNextPack);
+
+                //ateh o momento, loadScene nao tem nada para ser resetado
+                sceneBasis.reset();
+
+                sceneBasis = getSceneFromCurrentPack(tempNextScene);
+            }
+        });
+        thread.start();
+    }
+
+    public abstract void initPacks(int tempNextPack);
+
+    public Scene getSceneFromPublicScenes(int id) {
+        return publicScenes.get(id);
+    }
+
+    public void setDirectScene(int id) {
+        sceneBasis.reset();
+        sceneBasis = getSceneFromCurrentPack(id);
+    }
+
+    public void setDirectSceneFromPublicScenes(int id) {
+        sceneBasis.reset();
+        sceneBasis = getSceneFromPublicScenes(id);
+    }
+
+    public void setSceneBasisFromPublicScenesWithoutReset(int id) {
+        sceneBasis = getSceneFromPublicScenes(id);
+    }
+
+    public void returnToMainMenu() {
+        sceneBasis.reset();
+        sceneBasis = getSceneFromPublicScenes(ID.MAIN_MENU_SCENE);
+        closePackJukebox();
+        currentSound = null;
+        packJukebox = null;
+    }
+
+    //----------------------------------------------------------------------------------------
+
+
+
+    //INPUT-----------------------------------------------------------------------------------
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -359,28 +394,10 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
                 down = true;
             }
         }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            if (!lockLeft) {
-                lockLeft = true;
-                left = true;
-            }
-        }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            if (!lockRight) {
-                lockRight = true;
-                right = true;
-            }
-        }
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             if (!lockSpace) {
                 lockSpace = true;
                 space = true;
-            }
-        }
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            if (!lockEscape) {
-                lockEscape = true;
-                escape = true;
             }
         }
     }
@@ -395,21 +412,9 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
             lockDown = false;
             down = false;
         }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            lockLeft = false;
-            left = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            lockRight = false;
-            right = false;
-        }
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             lockSpace = false;
             space = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            lockEscape = false;
-            escape = false;
         }
     }
 
@@ -455,15 +460,13 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         mouseY = mouseEvent.getY();
     }
 
-    //----------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------
 
 
 
-    public void testFill(Graphics g) {
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, width, height);
-    }
+    //GS--------------------------------------------------------------------------------------
 
+    //TELA
     public int getWidth() {
         return width;
     }
@@ -472,18 +475,28 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         return height;
     }
 
-    public void setShowLoopLog(boolean showLoopLog) {
-        this.showLoopLog = showLoopLog;
+    public BufferedImage getFrame() {
+        return frame;
     }
 
-    public int getFps() {
-        return fps;
+    public HashMap<Integer, BufferedImage> getScreenshots() {
+        return screenshots;
     }
 
     public float getSpeedAdjust() {
         return speedAdjust;
     }
 
+    public int getFps() {
+        return fps;
+    }
+
+    public void setShowLoopLog(boolean showLoopLog) {
+        this.showLoopLog = showLoopLog;
+    }
+
+
+    //INPUTS
     public boolean isClicked() {
         return clicked;
     }
@@ -500,8 +513,30 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         return mouseY;
     }
 
+    public boolean isUp() {
+        return up;
+    }
+
+    public boolean isDown() {
+        return down;
+    }
+
+    public boolean isSpace() {
+        return space;
+    }
+
+    public ButtonGroup getYn() {
+        return yn;
+    }
+
+
+    //JUKEBOX
     public MyJukeBox getStandardJukeBox() {
         return standardJukeBox;
+    }
+
+    public MyJukeBox getPackJukebox() {
+        return packJukebox;
     }
 
     public String getCurrentSound() {
@@ -512,119 +547,12 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         this.currentSound = currentSound;
     }
 
-    public MyJukeBox getPackJukebox() {
-        return packJukebox;
-    }
 
-
-    public boolean isUp() {
-        return up;
-    }
-
-    public boolean isDown() {
-        return down;
-    }
-
-    public boolean isLeft() {
-        return left;
-    }
-
-    public boolean isRight() {
-        return right;
-    }
-
-    public boolean isSpace() {
-        return space;
-    }
-
-    public boolean isEscape() {
-        return escape;
-    }
-
-
-    public ScenePackage getPackBasis() {
-        return packBasis;
-    }
-
-    public void setDirectScene(Scene sceneBasis) {
-        //metodo usado por datamanager para retornar para a cena a qual o chamou
-        //pegar id da cena
-        this.sceneBasis.reset();
-        this.sceneBasis = sceneBasis;
-        scene = this.sceneBasis.getSceneId();
-    }
-
-    //TODO : DEIXAR PERTO DO NEXT SCENE
-    public void setDirectScene(int id) {
-        scene = id;
-        sceneBasis.reset();
-        sceneBasis = getSceneFromCurrentPack(id);
-    }
-
-    public void setDirecSceneFromPublicScenes(int id) {
-        scene = id;
-        sceneBasis.reset();
-        sceneBasis = getSceneFromPublicScenes(id);
-    }
-
-    public Scene getSceneFromPublicScenes(int id) {
-        return publicScenes.get(id);
-    }
-
-    public void setSceneBasisWithoutReset(int id) {
-        sceneBasis = getSceneFromPublicScenes(id);
-        scene = sceneBasis.getSceneId();
-        //todo : pack id
-    }
-
-
-
-    public int getPack() {
-        return pack;
-    }
-
-    public int getScene() {
-        return scene;
-    }
-
-    public Scene getSceneFromCurrentPack(int id) {
-        //isso resume o getpack.getscene
-        return packBasis.get(id);
-    }
-
-    public void resetSceneFromCurrentPack(int id) {
-        packBasis.get(id).reset();
-    }
-
-    public BufferedImage getFrame() {
-        return frame;
-    }
-
-
-    public HashMap<Integer, BufferedImage> getScreenshots() {
-        return screenshots;
-    }
-
-    public ButtonGroup getYn() {
-        return yn;
-    }
-
+    //SCENEBASIS
     public Scene getSceneBasis() {
         return sceneBasis;
     }
 
-    //
-    public void returntoMainMenu() {
-        sceneBasis.reset();
-        sceneBasis = getSceneFromPublicScenes(ID.MAIN_MENU_SCENE);
-        scene = sceneBasis.getSceneId();
-        closePackJukebox();
-        currentSound = null;
-        packJukebox = null;
-    }
+    //----------------------------------------------------------------------------------------
 
-
-    public void setScene(int scene) {
-        this.scene = scene;
-    }
 }

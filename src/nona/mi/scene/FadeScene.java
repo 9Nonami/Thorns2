@@ -40,8 +40,7 @@ public class FadeScene extends Scene {
             fade.update();
         } else {
             if (directScene != ID.NO_SCENE) { //todo : se der erro eh aqui
-                //game.setDirectScene(directScene); //todo : public pack. do jeito que esta vai dar erro
-                game.setDirecSceneFromPublicScenes(directScene);
+                game.setDirectSceneFromPublicScenes(directScene);
             } else {
                 game.nextScene();
             }
