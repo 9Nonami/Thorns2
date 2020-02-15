@@ -300,7 +300,7 @@ public class Thorns extends Game {
         BaseImage bgScene0 = new BaseImage(imgScene0, 0, 0);
 
         //FADES
-        Fade fadeoutSlow = new Fade(this, Fade.SOLID, Fade.SLOW); //TODO : SLOW
+        Fade fadeoutSlow = new Fade(this, Fade.SOLID, Fade.DEMONIAC); //TODO : SLOW
         Fade fadeoutFast = new Fade(this, Fade.SOLID, Fade.FAST);
         Fade fadeinFast = new Fade(this, Fade.TRANSPARENT, Fade.FAST);
 

@@ -112,6 +112,16 @@ public class StandardScene extends Scene {
         space = game.isSpace();
         clicked = game.isClicked();
 
+        //termina o audio e a animacao do texto
+        if (clicked && !(dialogueBasis.getEndAnimation())) {
+            dialogueBasis.completeDialogue();
+            clicked = false;
+            space = false;
+            if(dialogueBasis.getAudioName() != null && game.getPackJukebox().isPlaying(dialogueBasis.getAudioName())) {
+                game.getPackJukebox().stop(dialogueBasis.getAudioName());
+            }
+        }
+
         if (dialogueBasis.getEndAnimation()){
             setasAnim.update();
         }
@@ -142,16 +152,16 @@ public class StandardScene extends Scene {
     public void renderScene(Graphics g) {
 
         if (backgrounds != null) {
-            for (int i = 0; i < backgrounds.length; i++) {
-                backgrounds[i].render(g);
+            for (BaseImage baseImage : backgrounds) {
+                baseImage.render(g);
             }
         } else {
             background.render(g);
         }
 
         if (characters != null) {
-            for (int i = 0; i < characters.length; i++) {
-                characters[i].render(g);
+            for (BaseImage character : characters) {
+                character.render(g);
             }
         }
 

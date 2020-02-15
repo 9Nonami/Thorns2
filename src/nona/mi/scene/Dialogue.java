@@ -220,6 +220,11 @@ public class Dialogue {
         yname = getCenterY();
     }
 
+    public void completeDialogue() {
+        cont = arr.length;
+        endAnimation = true;
+    }
+
     //---------------------------------------------------
 
 
