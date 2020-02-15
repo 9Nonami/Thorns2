@@ -27,7 +27,7 @@ public class FontGenerator {
 	public static HashMap<Character, BufferedImage> generateFont(String imagePath, String keysPath) {
 		
 		BufferedImage image = ImageLoader.loadImage(imagePath);
-		char[] c = TextLoader.load(keysPath).toCharArray();
+		String allCharacters = TextLoader.load(keysPath);
 	
 		ArrayList<Integer> listWidth = new ArrayList<Integer>();		
 		ArrayList<Integer> listX = new ArrayList<Integer>();
@@ -71,12 +71,10 @@ public class FontGenerator {
 		HashMap<Character, BufferedImage> map = new HashMap<Character, BufferedImage>();
 
 		for (int id = 0; id < listX.size(); id++) {
-			map.put(c[id], image.getSubimage(listX.get(id), 0, listWidth.get(id), image.getHeight()));			
+			map.put(allCharacters.charAt(id), image.getSubimage(listX.get(id), 0, listWidth.get(id), image.getHeight()));
 		}
 
 		return map;
-
-
 	}
 
 }

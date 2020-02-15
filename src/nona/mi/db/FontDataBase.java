@@ -28,11 +28,12 @@ public class FontDataBase{
 		if (map.containsKey(key)) {
 			return map.get(key);
 		} else {
-			System.out.println("Can not find " + key);
+			System.out.println("Can not find character" + key);
+			System.out.println(getClass().getName());
 			System.exit(0);
 		}
 		
-		return null; //retornar um '?'
+		return null;
 	}
 
 }

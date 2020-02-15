@@ -39,7 +39,6 @@ public class Thorns extends Game {
     private BufferedImage choicebg;
     private BufferedImage pointer;
     private ImageEfx setasAnim;
-    private boolean showScene;
     private ButtonGroup sceneMenu; //save, load, copy, del
 
 
@@ -286,26 +285,6 @@ public class Thorns extends Game {
     }
 
     @Override
-    public void updateClass() {
-        sceneBasis.update();
-        resetKeys();
-    }
-
-    @Override
-    public void renderClass(Graphics g) {
-        testFill(g);
-        sceneBasis.render(g);
-
-        //DESENHA O NUMERO ATUAL DA CENA
-        if (showScene) {
-            g.setColor(Color.BLACK);
-            g.fillRect(0, 0, 130, 20);
-            g.setColor(Color.GREEN);
-            g.drawString("PACK: " + sceneBasis.getPackId() + " | SCENE: " + sceneBasis.getSceneId(), 5, 15);
-        }
-    }
-
-    @Override
     public synchronized void initPacks(int tempNextPack) {
         if (tempNextPack == 0) {
             initPack0();
@@ -495,16 +474,6 @@ public class Thorns extends Game {
 
     }
 
-    private void resetKeys() {
-        space = false;
-        up = false;
-        down = false;
-        setClicked(false);
-    }
-
-    public void setShowScene(boolean showScene) {
-        this.showScene = showScene;
-    }
 
     // todo : imageEfx e Stan, com os arrays estao ok, nao quero alterar
     // todo : definir som para cada cena no construtor - isso evita dar load numa cena e vir sem som (o qual so inicia em outra cena especifica)

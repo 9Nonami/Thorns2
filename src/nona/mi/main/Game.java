@@ -77,6 +77,8 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     //
     protected ButtonGroup yn;
 
+    private boolean showScene;
+
 
 
     //ESSENCIAL-------------------------------------------------------------------------------
@@ -153,10 +155,9 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     //UR--------------------------------------------------------------------------------------
 
     private void update() {
-        updateClass();
+        sceneBasis.update();
+        resetKeys();
     }
-
-    public abstract void updateClass();
 
     private void render() {
         bs = canvas.getBufferStrategy();
@@ -166,7 +167,17 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         frame = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics g = frame.getGraphics();
         g.clearRect(0, 0, width, height);
-        renderClass(g);
+
+        testFill(g);
+        sceneBasis.render(g);
+
+        //DESENHA O NUMERO ATUAL DA CENA
+        if (showScene) {
+            g.setColor(Color.BLACK);
+            g.fillRect(0, 0, 130, 20);
+            g.setColor(Color.GREEN);
+            g.drawString("PACK: " + sceneBasis.getPackId() + " | SCENE: " + sceneBasis.getSceneId(), 5, 15);
+        }
 
         this.g = bs.getDrawGraphics();
         this.g.drawImage(frame, 0, 0, null);
@@ -176,8 +187,6 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
         bs.show();
     }
-
-    public abstract void renderClass(Graphics g);
 
     public void testFill(Graphics g) {
         g.setColor(Color.BLACK);
@@ -379,6 +388,13 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     //INPUT-----------------------------------------------------------------------------------
 
+    private void resetKeys() {
+        space = false;
+        up = false;
+        down = false;
+        setClicked(false);
+    }
+
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP) {
@@ -466,6 +482,10 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     //GS--------------------------------------------------------------------------------------
 
     //TELA
+    public void setShowScene(boolean showScene) {
+        this.showScene = showScene;
+    }
+
     public int getWidth() {
         return width;
     }

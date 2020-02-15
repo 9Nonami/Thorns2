@@ -1,0 +1,2 @@
+Main-Class: nona.mi.main.Main
+Class-Path: .
