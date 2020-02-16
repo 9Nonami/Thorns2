@@ -12,7 +12,7 @@ public class TextLoader {
 	    String stringao = "";
         String read = "";
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(TextLoader.class.getResourceAsStream(path)))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(TextLoader.class.getResourceAsStream(path), "UTF-8"))) {
 
             while (((read = br.readLine()) != null)) {
                 stringao += read;

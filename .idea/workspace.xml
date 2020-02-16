@@ -7,11 +7,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50053a92-1326-4f75-bf22-ca2e42361449" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/res/font/old2/myfont.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/res/font/old2/myfontfocus.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/res/font/old2/text.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/manifest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/manifest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/loader/TextLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/loader/TextLoader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/res/dialog/scene0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/res/dialog/scene0.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/res/font/myfont.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/res/font/myfont.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/res/font/myfontfocus.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/res/font/myfontfocus.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/res/font/text.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/res/font/text.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/thorns.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/thorns.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/loader/TextLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/loader/TextLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/Dialogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/Dialogue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/StandardScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/StandardScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/res/dialog/scene0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/dialog/scene0.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/font/myfont.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/font/myfont.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/font/myfontfocus.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/font/myfontfocus.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/font/text.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/font/text.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,22 +181,22 @@
       <screen x="0" y="0" width="1024" height="728" />
     </state>
     <state x="292" y="118" key="FileChooserDialogImpl/0.0.1024.728@0.0.1024.728" timestamp="1581682413261" />
-    <state width="980" height="366" key="GridCell.Tab.0.bottom" timestamp="1581794112148">
+    <state width="981" height="233" key="GridCell.Tab.0.bottom" timestamp="1581890411759">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state width="980" height="366" key="GridCell.Tab.0.bottom/0.0.1024.728@0.0.1024.728" timestamp="1581794112148" />
-    <state width="980" height="366" key="GridCell.Tab.0.center" timestamp="1581794112148">
+    <state width="981" height="233" key="GridCell.Tab.0.bottom/0.0.1024.728@0.0.1024.728" timestamp="1581890411759" />
+    <state width="981" height="233" key="GridCell.Tab.0.center" timestamp="1581890411759">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state width="980" height="366" key="GridCell.Tab.0.center/0.0.1024.728@0.0.1024.728" timestamp="1581794112148" />
-    <state width="980" height="366" key="GridCell.Tab.0.left" timestamp="1581794112148">
+    <state width="981" height="233" key="GridCell.Tab.0.center/0.0.1024.728@0.0.1024.728" timestamp="1581890411759" />
+    <state width="981" height="233" key="GridCell.Tab.0.left" timestamp="1581890411759">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state width="980" height="366" key="GridCell.Tab.0.left/0.0.1024.728@0.0.1024.728" timestamp="1581794112148" />
-    <state width="980" height="366" key="GridCell.Tab.0.right" timestamp="1581794112148">
+    <state width="981" height="233" key="GridCell.Tab.0.left/0.0.1024.728@0.0.1024.728" timestamp="1581890411759" />
+    <state width="981" height="233" key="GridCell.Tab.0.right" timestamp="1581890411759">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state width="980" height="366" key="GridCell.Tab.0.right/0.0.1024.728@0.0.1024.728" timestamp="1581794112148" />
+    <state width="981" height="233" key="GridCell.Tab.0.right/0.0.1024.728@0.0.1024.728" timestamp="1581890411759" />
     <state width="981" height="221" key="GridCell.Tab.1.bottom" timestamp="1580816609883">
       <screen x="0" y="0" width="1024" height="728" />
     </state>

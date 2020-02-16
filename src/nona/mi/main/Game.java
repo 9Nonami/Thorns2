@@ -8,17 +8,13 @@ import nona.mi.scene.ScenePackage;
 
 import javax.sound.sampled.Clip; //todo : encapsular o close do audio
 import javax.swing.JFrame;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferStrategy;
-import java.awt.Canvas;
-import java.awt.Dimension;
-import java.awt.Color;
-import java.awt.BorderLayout;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
@@ -186,6 +182,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         this.g.dispose();
 
         bs.show();
+        Toolkit.getDefaultToolkit().sync();
     }
 
     public void testFill(Graphics g) {
