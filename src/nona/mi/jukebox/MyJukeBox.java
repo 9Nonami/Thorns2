@@ -3,6 +3,7 @@ package nona.mi.jukebox;
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -116,6 +117,7 @@ public class MyJukeBox {
     }
 
     public int getFrames(String s) { return clips.get(s).getFrameLength(); }
+
     public int getPosition(String s) { return clips.get(s).getFramePosition(); }
 
     public void close(String s) {
@@ -137,6 +139,16 @@ public class MyJukeBox {
         Clip c = clips.get(s);
         if(c == null) return false;
         return c.isRunning();
+    }
+
+    public void closeAllClips() {
+        for (Map.Entry<String, Clip> temp : clips.entrySet()) {
+            System.out.println("closing: " + temp.getKey());
+            if (temp.getValue().isRunning()) {
+                temp.getValue().stop();
+            }
+            temp.getValue().close();
+        }
     }
 
 }

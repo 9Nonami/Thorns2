@@ -88,7 +88,6 @@ public class Thorns extends Game {
 
         //BACKGROUND PARA OS TEXTOS DE CHOICE
         choicebg = ImageLoader.loadImage("/res/font/choice2.png");
-        //todo : criar uma imagem para o menu principal -- nova fonte tambem
 
         //POINTER
         pointer = ImageLoader.loadImage("/res/font/pointer.png");
@@ -118,11 +117,6 @@ public class Thorns extends Game {
 
         //SAVE
         save = new Save(12);
-
-        //SCREENSHOTS
-        screenshots = ScreenshotLoader.loadScreenshots(save);
-
-
 
         //IMAGEM DE FOCO PARA SAVE, LOAD...
         BufferedImage focusMisc = ImageLoader.loadImage("/res/misc/focus.png");
@@ -298,7 +292,7 @@ public class Thorns extends Game {
         BaseImage bgScene0 = new BaseImage(imgScene0, 0, 0);
 
         //FADES
-        Fade fadeoutSlow = new Fade(this, Fade.SOLID, Fade.DEMONIAC); //TODO : SLOW
+        Fade fadeoutSlow = new Fade(this, Fade.SOLID, Fade.SLOW);
         Fade fadeoutFast = new Fade(this, Fade.SOLID, Fade.FAST);
         Fade fadeinFast = new Fade(this, Fade.TRANSPARENT, Fade.FAST);
 
@@ -474,5 +468,4 @@ public class Thorns extends Game {
 
 
     // todo : imageEfx e Stan, com os arrays estao ok, nao quero alterar
-    // todo : definir som para cada cena no construtor - isso evita dar load numa cena e vir sem som (o qual so inicia em outra cena especifica)
 }

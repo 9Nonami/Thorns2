@@ -4,6 +4,7 @@ import nona.mi.button.Button;
 import nona.mi.button.ButtonGroup;
 import nona.mi.button.SlotGroup;
 import nona.mi.image.BaseImage;
+import nona.mi.loader.ScreenshotLoader;
 import nona.mi.main.Game;
 import nona.mi.save.Save;
 
@@ -101,7 +102,7 @@ public class SaveMenuScene extends Scene {
     }
 
     public void createSlots(int totalButtons, int row, int column, int x, int y, int spacing) {
-        slotGroup.createButtons(totalButtons, row, column, x, y, spacing, game.getScreenshots());
+        slotGroup.createButtons(totalButtons, row, column, x, y, spacing, ScreenshotLoader.loadScreenshots(save));
     }
 
     public void createModes(HashMap<Integer, BaseImage> modes) {
@@ -178,7 +179,7 @@ public class SaveMenuScene extends Scene {
                 return; //se foi clicado no botao de return, nao atualiza os slots
             }
             updateSlotsForSave();
-        } else if (!lockYnForSave) { //todo : ??? acho que bloqueia os dois para nao clicar durante a escrita dos dados > bem isso
+        } else if (!lockYnForSave) { // para nao clicar durante a escrita dos dados
             updateYnForSave();
         }
     }
@@ -299,9 +300,7 @@ public class SaveMenuScene extends Scene {
                 int slotId = slotGroup.getClickedSlot();
                 savePack = save.getPackOfSlot(slotId);
                 saveScene = save.getSceneOfSlot(slotId);
-                screenshot = slotGroup.getButtons()[slotId].getStandardImage(); //TODO : ENCAPSULAR LINHAS COMO ESSA!!!
-
-                //todo : setText << deixar o padrao no reset
+                screenshot = slotGroup.getSlotImage(slotId);
             }
         }
     }
@@ -312,7 +311,7 @@ public class SaveMenuScene extends Scene {
             if (slotGroup.getButtons()[slotGroup.getClickedSlot()].getStandardImage() == slotGroup.getStandardButtonImage()) {
                 //slot vazio
                 pleaseWait = true;
-                save(); //todo : ok ate aqui == ver reset do yn
+                save();
             } else {
                 //slot com dados
                 lockYnForCopy = false;

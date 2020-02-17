@@ -38,7 +38,7 @@ public class FadeScene extends Scene {
         if (!fade.getEndAnimation()) {
             fade.update();
         } else {
-            if (directScene != Scene.NO_SCENE) { //todo : se der erro eh aqui
+            if (directScene != Scene.NO_SCENE) {
                 game.setDirectSceneFromPublicScenes(directScene);
             } else {
                 game.nextScene();

@@ -33,7 +33,7 @@ public class Save {
         } else if (os.startsWith("w")) {
             folderStr = home + "\\thorns";
             folderPath = new File(folderStr);
-            saveFileStr = folderStr + "\\save.9"; //todo : dava pra deixar em 1 linha
+            saveFileStr = folderStr + "\\save.9";
             savePath = new File(saveFileStr);
         } else {
             System.out.println("I guess you're not using Linux or Windows. The save file for this system was not implemented yet. Please see the Save.class to adjust it.");

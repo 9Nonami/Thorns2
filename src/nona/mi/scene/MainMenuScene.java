@@ -55,7 +55,7 @@ public class MainMenuScene extends Scene {
     }
 
     @Override
-    public void reset() { //todo : se pah fazer a mesma coisa e criar um abstract resetScene
+    public void reset() {
         super.reset();
         buttonGroup.reset();
     }

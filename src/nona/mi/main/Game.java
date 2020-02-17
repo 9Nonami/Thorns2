@@ -6,9 +6,13 @@ import nona.mi.save.Save;
 import nona.mi.scene.Scene;
 import nona.mi.scene.ScenePackage;
 
-import javax.sound.sampled.Clip; //todo : encapsular o close do audio
 import javax.swing.JFrame;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -17,8 +21,11 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
-import java.util.Map;
 
+//todo : esconder fala ao apertar h
+//todo : controle de audio
+//todo : cena com falas ja exibidas
+//todo : coloca identificado nos slots [1, 2, 3...]
 public abstract class Game implements Runnable, KeyListener, MouseListener, MouseMotionListener {
 
     private JFrame jframe;
@@ -65,10 +72,6 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     protected Save save;
 
     protected HashMap<Integer, Scene> publicScenes;
-
-
-    // todo : ver se nao esta inutil
-    protected HashMap<Integer, BufferedImage> screenshots;
 
     //
     protected ButtonGroup yn;
@@ -273,16 +276,8 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     //ESPECIFICO------------------------------------------------------------------------------
 
     private void closePackJukebox() {
-        //todo : ver se nao eh melhor colocar em uma thread
-        //not sure if this is the best way to iterate and modify the hashmap contents
         if (packJukebox != null) {
-            for (Map.Entry<String, Clip> temp : packJukebox.getClips().entrySet()) {
-                System.out.println("closing: " + temp.getKey());
-                if (temp.getValue().isRunning()) {
-                    temp.getValue().stop();
-                }
-                temp.getValue().close();
-            }
+            packJukebox.closeAllClips();
         }
     }
 
@@ -324,13 +319,6 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-
-                //todo : apagar
-                try {
-                    Thread.sleep(1000);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
 
                 packBasis = new ScenePackage();
 
@@ -493,10 +481,6 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     public BufferedImage getFrame() {
         return frame;
-    }
-
-    public HashMap<Integer, BufferedImage> getScreenshots() {
-        return screenshots;
     }
 
     public float getSpeedAdjust() {

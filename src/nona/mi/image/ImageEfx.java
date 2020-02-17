@@ -59,7 +59,7 @@ public class ImageEfx extends BaseImage {
         this.game = game;
         this.images = images;
         this.coordinates = coordinates;
-        this.delay = delay * game.getSpeedAdjust(); //todo : se der erro, eh aqui
+        this.delay = delay * game.getSpeedAdjust();
         this.style = style;
         this.animatedImage = true;
         this.id = 0;
@@ -75,7 +75,7 @@ public class ImageEfx extends BaseImage {
         this.destinationX = destinationX;
         this.destinationY = destinationY;
 
-        this.speedX = speedX * game.getSpeedAdjust(); //todo : se der erro, eh aqui
+        this.speedX = speedX * game.getSpeedAdjust();
         this.speedY = speedY * game.getSpeedAdjust();
         
         baseEndMx = false;
@@ -102,7 +102,7 @@ public class ImageEfx extends BaseImage {
         this.endAlphaAnimation = false;
         this.aspect = aspect;
         this.aspectBase = aspect;
-        this.speedAlpha = speedAlpha * game.getSpeedAdjust(); //todo : se der erro, eh aqui
+        this.speedAlpha = speedAlpha * game.getSpeedAdjust();
 
         if (aspect == SOLID) {
             this.speedAlpha *= -1;

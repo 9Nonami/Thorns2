@@ -140,7 +140,7 @@ public class StandardScene extends Scene {
             if (dialogueID == dialogues.length) {
                 dialogueID = 0;
                 dialogueBasis = dialogues[dialogueID];
-                game.nextScene(); //todo : se der erro, ver. aqui
+                game.nextScene();
                 return;
             }
 
