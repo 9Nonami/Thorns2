@@ -17,14 +17,7 @@ import nona.mi.image.ImageEfx;
 import nona.mi.loader.ScreenshotLoader;
 import nona.mi.loader.TextLoader;
 import nona.mi.save.Save;
-import nona.mi.scene.EfxScene;
-import nona.mi.scene.FadeScene;
-import nona.mi.scene.FadeTopBottomScene;
-import nona.mi.scene.LoadScene;
-import nona.mi.scene.MainMenuScene;
-import nona.mi.scene.SaveMenuScene;
-import nona.mi.scene.Scene;
-import nona.mi.scene.StandardScene;
+import nona.mi.scene.*;
 
 //TODO : DAR UM JEITO DE CRIAR OS AUDIOS E BUTTONS TUDO AQUI. NADA DE FAZER ISSO DENTRO DAS CLASSES!
 //todo : deixar ao maximo tudo quanto eh load de imagem aqui!
@@ -174,7 +167,7 @@ public class Thorns extends Game {
 
 
         //MODOS
-        int modeX = 0;
+        int modeX = 200;
         int modeY = 0;
         BaseImage saveMode = new BaseImage(ImageLoader.loadImage("/res/misc/save-mode.png"), modeX, modeY);
         BaseImage loadMode = new BaseImage(ImageLoader.loadImage("/res/misc/load-mode.png"), modeX, modeY);
@@ -292,7 +285,7 @@ public class Thorns extends Game {
         BaseImage bgScene0 = new BaseImage(imgScene0, 0, 0);
 
         //FADES
-        Fade fadeoutSlow = new Fade(this, Fade.SOLID, Fade.SLOW);
+        Fade fadeoutSlow = new Fade(this, Fade.SOLID, Fade.DEMONIAC); //slow
         Fade fadeoutFast = new Fade(this, Fade.SOLID, Fade.FAST);
         Fade fadeinFast = new Fade(this, Fade.TRANSPARENT, Fade.FAST);
 
@@ -320,7 +313,7 @@ public class Thorns extends Game {
         //----------------------------------------
 
         //cena 0
-        FadeScene scene0 = new FadeScene(this, bgScene0, fadeoutSlow, 99, 0);
+        FadeScene scene0 = new FadeScene(this, bgScene0, fadeoutSlow, 66, 0);
         scene0.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(0, scene0);
 
@@ -463,6 +456,11 @@ public class Thorns extends Game {
         scene99.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         scene99.setButtonGroup(sceneMenu);
         packBasis.put(99, scene99);
+
+        //cena 66 - temp
+        VolumeScene volumeScene = new VolumeScene(this, 66);
+        packBasis.put(volumeScene.getSceneId(), volumeScene);
+
 
     }
 

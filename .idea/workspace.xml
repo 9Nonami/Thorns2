@@ -8,26 +8,11 @@
   <component name="ChangeListManager">
     <list default="true" id="50053a92-1326-4f75-bf22-ca2e42361449" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/SlotGroup.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/SlotGroup.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/jukebox/MyJukeBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/jukebox/MyJukeBox.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/button/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/Button.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/button/SlotGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/SlotGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/image/ImageEfx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/image/ImageEfx.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/jukebox/MyJukeBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/jukebox/MyJukeBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/button/VolumeButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/VolumeButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/button/VolumeGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/VolumeGroup.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/save/Save.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/save/Save.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/FadeScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/FadeScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/MainMenuScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/MainMenuScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/SaveMenuScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/SaveMenuScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/StandardScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/StandardScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/VolumeScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/VolumeScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +53,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="full.screen.before.presentation.mode" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../cmd4" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/nona/mi/button" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -85,6 +70,7 @@
       <recent name="nona.mi.animatedcomponent" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Mi\IdeaProjects\Thorns2\src\nona\mi\button" />
       <recent name="C:\Users\Mi\IdeaProjects\Thorns2\src\res\misc" />
       <recent name="C:\Users\Mi\IdeaProjects\Thorns2\src\res\audio" />
       <recent name="C:\Users\Mi\IdeaProjects\Thorns2\src\nona\mi\loader" />
@@ -149,10 +135,10 @@
       <screen x="0" y="0" width="1024" height="728" />
     </state>
     <state x="261" y="221" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1024.728@0.0.1024.728" timestamp="1581680113336" />
-    <state x="317" y="93" key="#com.intellij.ide.util.MemberChooser" timestamp="1576356452448">
+    <state x="317" y="93" key="#com.intellij.ide.util.MemberChooser" timestamp="1582901804565">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state x="317" y="93" key="#com.intellij.ide.util.MemberChooser/0.0.1024.728@0.0.1024.728" timestamp="1576356452448" />
+    <state x="317" y="93" key="#com.intellij.ide.util.MemberChooser/0.0.1024.728@0.0.1024.728" timestamp="1582901804565" />
     <state x="242" y="149" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1581774770141">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
@@ -177,26 +163,26 @@
       <screen x="0" y="0" width="1024" height="728" />
     </state>
     <state x="242" y="132" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1024.728@0.0.1024.728" timestamp="1581775248392" />
-    <state x="292" y="118" key="FileChooserDialogImpl" timestamp="1581951252162">
+    <state x="292" y="118" key="FileChooserDialogImpl" timestamp="1582928360536">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state x="292" y="118" key="FileChooserDialogImpl/0.0.1024.728@0.0.1024.728" timestamp="1581951252162" />
-    <state width="981" height="232" key="GridCell.Tab.0.bottom" timestamp="1581959315571">
+    <state x="292" y="118" key="FileChooserDialogImpl/0.0.1024.728@0.0.1024.728" timestamp="1582928360536" />
+    <state width="980" height="330" key="GridCell.Tab.0.bottom" timestamp="1582931868805">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state width="981" height="232" key="GridCell.Tab.0.bottom/0.0.1024.728@0.0.1024.728" timestamp="1581959315571" />
-    <state width="981" height="232" key="GridCell.Tab.0.center" timestamp="1581959315571">
+    <state width="980" height="330" key="GridCell.Tab.0.bottom/0.0.1024.728@0.0.1024.728" timestamp="1582931868805" />
+    <state width="980" height="330" key="GridCell.Tab.0.center" timestamp="1582931868805">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state width="981" height="232" key="GridCell.Tab.0.center/0.0.1024.728@0.0.1024.728" timestamp="1581959315571" />
-    <state width="981" height="232" key="GridCell.Tab.0.left" timestamp="1581959315571">
+    <state width="980" height="330" key="GridCell.Tab.0.center/0.0.1024.728@0.0.1024.728" timestamp="1582931868805" />
+    <state width="980" height="330" key="GridCell.Tab.0.left" timestamp="1582931868805">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state width="981" height="232" key="GridCell.Tab.0.left/0.0.1024.728@0.0.1024.728" timestamp="1581959315571" />
-    <state width="981" height="232" key="GridCell.Tab.0.right" timestamp="1581959315571">
+    <state width="980" height="330" key="GridCell.Tab.0.left/0.0.1024.728@0.0.1024.728" timestamp="1582931868805" />
+    <state width="980" height="330" key="GridCell.Tab.0.right" timestamp="1582931868805">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state width="981" height="232" key="GridCell.Tab.0.right/0.0.1024.728@0.0.1024.728" timestamp="1581959315571" />
+    <state width="980" height="330" key="GridCell.Tab.0.right/0.0.1024.728@0.0.1024.728" timestamp="1582931868805" />
     <state width="981" height="221" key="GridCell.Tab.1.bottom" timestamp="1580816609883">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
@@ -233,9 +219,9 @@
       <screen x="0" y="0" width="1024" height="728" />
     </state>
     <state x="176" y="176" key="run.anything.popup/0.0.1024.728@0.0.1024.728" timestamp="1576756657364" />
-    <state x="175" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1580669646856">
+    <state x="175" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1582194490651">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
-    <state x="175" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1024.728@0.0.1024.728" timestamp="1580669646856" />
+    <state x="175" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1024.728@0.0.1024.728" timestamp="1582194490651" />
   </component>
 </project>

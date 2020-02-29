@@ -52,6 +52,11 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     private int mouseX;
     private int mouseY;
 
+    private boolean dragged;
+    private boolean lockDragged;
+
+
+
     protected MyJukeBox standardJukeBox;
 
     protected MyJukeBox packJukebox;
@@ -445,13 +450,20 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
-
+        if (lockDragged) {
+            lockDragged = false;
+            dragged = false;
+        }
     }
 
     @Override
     public void mouseDragged(MouseEvent mouseEvent) {
         mouseX = mouseEvent.getX();
         mouseY = mouseEvent.getY();
+        if (!lockDragged) {
+            lockDragged = true;
+            dragged = true;
+        }
     }
 
     @Override
@@ -523,6 +535,14 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     public boolean isSpace() {
         return space;
+    }
+
+    public boolean isDragged() {
+        return dragged;
+    }
+
+    public void setDragged(boolean dragged) {
+        this.dragged = dragged;
     }
 
     public ButtonGroup getYn() {

@@ -1,6 +1,9 @@
-import java.awt.*;
+package nona.mi.button;
 
-public class Volume {
+import java.awt.Color;
+import java.awt.Graphics;
+
+public class VolumeButton {
 
 	private int gaugeX;
 	private int gaugeY;
@@ -120,7 +123,7 @@ public class Volume {
 	}
 
 	private void renderValue(Graphics g) {
-		g.setColor(Color.BLACK);
+		g.setColor(Color.WHITE);
 		g.drawString("Value: " + (int)(value), valueX, valueY);
 	}
 
