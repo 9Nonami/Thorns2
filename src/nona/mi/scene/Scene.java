@@ -38,6 +38,7 @@ public abstract class Scene {
 	public static final int NO_PACK = -1;
 
 	protected boolean hide;
+	private boolean lockHConfig;
 
 
 
@@ -62,6 +63,7 @@ public abstract class Scene {
 	//UR--------------------------------------------------------------
 
 	public void update() {
+		resetHStuff(); //executa soh uma vez, no primeiro update da cena
 		hide = game.ishKey();
 		if (!esc) {
 			updateAudio();
@@ -126,7 +128,7 @@ public abstract class Scene {
 	}
 
 	private void updateButtonGroup() {
-		if (buttonGroup != null) {
+		if (buttonGroup != null && !hide) {
 			buttonGroup.update();
 			if (buttonGroup.getClickedButton() != Button.NO_CLICK) {
 
@@ -157,7 +159,7 @@ public abstract class Scene {
 	}
 
 	private void renderButtons(Graphics g) {
-		if (buttonGroup != null) {
+		if (buttonGroup != null && !hide) {
 			buttonGroup.render(g);
 		}
 	}
@@ -214,6 +216,10 @@ public abstract class Scene {
 		this.packId = packId;
 	}
 
+	public void setLockHConfig(boolean lockHConfig) {
+		this.lockHConfig = lockHConfig;
+	}
+
 	//----------------------------------------------------------------
 
 	public void reset() {
@@ -224,6 +230,14 @@ public abstract class Scene {
 		yn.reset();
 		esc = false;
 		hide = false;
+		lockHConfig = false;
+	}
+
+	private void resetHStuff() {
+		if (!lockHConfig) {
+			lockHConfig = true;
+			game.resetHStuff();
+		}
 	}
 
 }

@@ -22,10 +22,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
-//todo : esconder fala ao apertar h
-//todo : controle de audio
 //todo : cena com falas ja exibidas
-//todo : coloca identificado nos slots [1, 2, 3...]
 public abstract class Game implements Runnable, KeyListener, MouseListener, MouseMotionListener {
 
     private JFrame jframe;

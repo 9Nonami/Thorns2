@@ -21,8 +21,6 @@ public class StandardScene extends Scene {
 
     private ImageEfx setasAnim; //resets
 
-    private boolean lockHConfig;
-
 
 
     //ESSENCIAL--------------------------------------
@@ -108,14 +106,6 @@ public class StandardScene extends Scene {
 
     @Override
     public void updateScene() {
-
-        //esse lock garante que se o player tiver apertado H
-        //em um cena que nao seja stan, nao chegue aqui como true
-        if (!lockHConfig) {
-            lockHConfig = true;
-            game.resetHStuff();
-            hide = false;
-        }
 
         //nao faz sentido atualizar se nao estiver visivel
         if (!hide) {
@@ -225,7 +215,6 @@ public class StandardScene extends Scene {
             dialogues[i].reset();
         }
         setasAnim.reset();
-        lockHConfig = false;
     }
 
 }
