@@ -28,7 +28,13 @@ public class VolumeButton {
 	private int valueX;
 	private int valueY;
 
-	
+	private int id;
+
+
+
+	public VolumeButton(int id) {
+		this.id = id;
+	}
 
 	public void definePointer(int pointerX, int pointerY, int pointerWidth, int pointerHeight) {
 		this.pointerX = pointerX;
@@ -98,6 +104,10 @@ public class VolumeButton {
 
 	public int getPointerX() {
 		return pointerX;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public void render(Graphics g) {

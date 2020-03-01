@@ -55,8 +55,6 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     private boolean dragged;
     private boolean lockDragged;
 
-
-
     protected MyJukeBox standardJukeBox;
 
     protected MyJukeBox packJukebox;
@@ -71,6 +69,11 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     protected boolean lockDown;
     protected boolean space;
     protected boolean lockSpace;
+
+    protected boolean hKey;
+    protected int timesPressed;
+    protected boolean hReleased;
+    protected boolean lockAll;
 
     private BufferedImage frame;
 
@@ -382,7 +385,15 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         space = false;
         up = false;
         down = false;
+        //hKey = false;
         setClicked(false);
+    }
+
+    public void resetHStuff() {
+        hKey = false;
+        timesPressed = 0;
+        hReleased = false;
+        lockAll = false;
     }
 
     @Override
@@ -405,7 +416,22 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
                 space = true;
             }
         }
+        if (e.getKeyCode() == KeyEvent.VK_H) {
+            if (!lockAll) {
+                if (timesPressed == 0) {
+                    timesPressed++;
+                    hKey = true;
+                } else if (hReleased) {
+                    hReleased = false;
+                    timesPressed++;
+                    lockAll = true;
+                    hKey = false;
+                }
+            }
+        }
     }
+
+    // TODO : NEM ESTA MAIS USANDO U/D
 
     @Override
     public void keyReleased(KeyEvent e) {
@@ -421,6 +447,15 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
             lockSpace = false;
             space = false;
         }
+        if (e.getKeyCode() == KeyEvent.VK_H) {
+            if (timesPressed == 1) {
+                hReleased = true;
+            } else if (timesPressed == 2) {
+                lockAll = false;
+                timesPressed = 0;
+            }
+        }
+        //TODO : ELSE
     }
 
     @Override
@@ -447,6 +482,8 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     public void mousePressed(MouseEvent mouseEvent) {
         clicked = true;
     }
+
+    //TODO : TIRAR O DRAGGED SE NAO FOR USAR O VOLUME
 
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
@@ -543,6 +580,10 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     public void setDragged(boolean dragged) {
         this.dragged = dragged;
+    }
+
+    public boolean ishKey() {
+        return hKey;
     }
 
     public ButtonGroup getYn() {

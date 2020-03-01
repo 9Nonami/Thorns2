@@ -129,6 +129,9 @@ public class MyJukeBox {
         Clip c = clips.get(s);
         if(c == null) return;
         FloatControl vol = (FloatControl) c.getControl(FloatControl.Type.MASTER_GAIN);
+        if (vol.getValue() == f) {
+            return;
+        }
         vol.setValue(f);
     }
 

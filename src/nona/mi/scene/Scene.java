@@ -37,6 +37,8 @@ public abstract class Scene {
 	public static final int NO_SCENE = 0;
 	public static final int NO_PACK = -1;
 
+	protected boolean hide;
+
 
 
 	//ESSENCIAL------------------------------------------------------
@@ -60,6 +62,7 @@ public abstract class Scene {
 	//UR--------------------------------------------------------------
 
 	public void update() {
+		hide = game.ishKey();
 		if (!esc) {
 			updateAudio();
 			updateButtonGroup();
@@ -220,6 +223,7 @@ public abstract class Scene {
 		}
 		yn.reset();
 		esc = false;
+		hide = false;
 	}
 
 }

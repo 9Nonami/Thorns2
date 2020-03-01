@@ -21,6 +21,8 @@ public class StandardScene extends Scene {
 
     private ImageEfx setasAnim; //resets
 
+    private boolean lockHConfig;
+
 
 
     //ESSENCIAL--------------------------------------
@@ -107,10 +109,20 @@ public class StandardScene extends Scene {
     @Override
     public void updateScene() {
 
-        dialogueBasis.update();
+        //esse lock garante que se o player tiver apertado H
+        //em um cena que nao seja stan, nao chegue aqui como true
+        if (!lockHConfig) {
+            lockHConfig = true;
+            game.resetHStuff();
+            hide = false;
+        }
 
-        space = game.isSpace();
-        clicked = game.isClicked();
+        //nao faz sentido atualizar se nao estiver visivel
+        if (!hide) {
+            dialogueBasis.update();
+            space = game.isSpace();
+            clicked = game.isClicked();
+        }
 
         //termina o audio e a animacao do texto
         if (clicked && !(dialogueBasis.getEndAnimation())) {
@@ -122,10 +134,12 @@ public class StandardScene extends Scene {
             }
         }
 
+        //update das setas
         if (dialogueBasis.getEndAnimation()){
             setasAnim.update();
         }
 
+        //proximo dialogo ou cena
         if (dialogueBasis.getEndAnimation() && (space || clicked)) {
 
             if(dialogueBasis.getAudioName() != null && game.getPackJukebox().isPlaying(dialogueBasis.getAudioName())) {
@@ -165,10 +179,11 @@ public class StandardScene extends Scene {
             }
         }
 
-        dialogueBasis.render(g);
-
-        if  (dialogueBasis.getEndAnimation()){
-            setasAnim.render(g);
+        if (!hide) {
+            dialogueBasis.render(g);
+            if (dialogueBasis.getEndAnimation()) {
+                setasAnim.render(g);
+            }
         }
     }
 
@@ -210,6 +225,7 @@ public class StandardScene extends Scene {
             dialogues[i].reset();
         }
         setasAnim.reset();
+        lockHConfig = false;
     }
 
 }
