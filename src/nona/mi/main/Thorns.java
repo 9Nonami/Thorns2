@@ -290,14 +290,13 @@ public class Thorns extends Game {
         //cena 0
         FadeScene scene0 = new FadeScene(this, bgScene0, fadeoutSlow, 99, 0);
         scene0.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
-        packBasis.put(0, scene0);
+        packBasis.put(scene0);
 
         //cena 1
-        String txtScene1 = sentences.get(1);
-        StandardScene scene1 = new StandardScene(this, bgScene0, setasAnim, 2, 1);
-        scene1.setDialog(txtScene1, fontDataBase, textArea, nameBg);
+        StandardScene scene1 = new StandardScene(this, bgScene0, 2, 1);
+        scene1.setDialog(sentences.get(scene1.getSceneId()));
         scene1.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
-        packBasis.put(1, scene1);
+        packBasis.put(scene1);
 
         //cena 2
         ImageEfx efxRose = new ImageEfx(this, rose, roseCoordScene2);
@@ -309,18 +308,17 @@ public class Thorns extends Game {
         ImageEfx[] images = {efxRose, efxTuli};
         EfxScene scene2 = new EfxScene(this, images, bgScene0, 3, 2);
         scene2.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
-        packBasis.put(2, scene2);
+        packBasis.put(scene2);
 
         //cena 3
         BaseImage roseSc3 = new BaseImage(rose, 0, 0);
         BaseImage tuliSc3 = new BaseImage(tuli, 400, 0);
         BaseImage[] characters = {roseSc3, tuliSc3};
-        String txtScene3 = sentences.get(3);
-        StandardScene scene3 = new StandardScene(this, bgScene0, setasAnim, 4, 3);
-        scene3.setDialog(txtScene3, fontDataBase, textArea, nameBg);
+        StandardScene scene3 = new StandardScene(this, bgScene0, 4, 3);
+        scene3.setDialog(sentences.get(scene3.getSceneId()));
         scene3.setCharacters(characters);
         scene3.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
-        packBasis.put(3, scene3);
+        packBasis.put(scene3);
 
         //cena 4 //0.05f old speed
         BaseImage[] bottom4 = {bgScene0, roseSc3, tuliSc3};
@@ -330,19 +328,16 @@ public class Thorns extends Game {
         tuliSc4.setAlpha(ImageEfx.TRANSPARENT, 0.025f);
         ImageEfx[] top4 = {bgSc4, tuliSc4};
         FadeTopBottomScene scene4 = new FadeTopBottomScene(this, bottom4, top4, 5, 4);
-        scene4.setTextArea(textArea);
         scene4.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
-        packBasis.put(4, scene4);
+        packBasis.put(scene4);
 
         //cena 5
-        String txtScene5 = sentences.get(5);
-        StandardScene scene5 = new StandardScene(this, bgScene0, setasAnim, 6, 5);
-        scene5.setDialog(txtScene5, fontDataBase, textArea, nameBg);
+        StandardScene scene5 = new StandardScene(this, bgScene0, 6, 5);
+        scene5.setDialog(sentences.get(scene5.getSceneId()));
         BaseImage tuliSc5 = new BaseImage(tuli, (int)((getWidth() / 2) - (tuli.getWidth()/2)), 0);
-        BaseImage[] chars5 = {tuliSc5};
-        scene5.setCharacters(chars5);
+        scene5.setCharacters(new BaseImage[]{tuliSc5});
         scene5.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
-        packBasis.put(5, scene5);
+        packBasis.put(scene5);
 
         //cena 6
         BaseImage[] bottom6 = {bgScene0, tuliSc5};
@@ -352,83 +347,74 @@ public class Thorns extends Game {
         roseSc6.setAlpha(ImageEfx.TRANSPARENT, 0.01f);
         ImageEfx[] top6 = {bgSc6, roseSc6};
         FadeTopBottomScene scene6 = new FadeTopBottomScene(this, bottom6, top6, 7, 6);
-        scene6.setTextArea(textArea);
         scene6.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
-        packBasis.put(6, scene6);
+        packBasis.put(scene6);
 
         //cena 7
-        String txtScene7 = sentences.get(7);
-        StandardScene scene7 = new StandardScene(this, bgScene0, setasAnim, 8, 7);
-        scene7.setDialog(txtScene7, fontDataBase, textArea, nameBg);
+        StandardScene scene7 = new StandardScene(this, bgScene0, 8, 7);
+        scene7.setDialog(sentences.get(scene7.getSceneId()));
         BaseImage roseSc7 = new BaseImage(rose, getWidth() / 2 - rose.getWidth() / 2, 0);
         scene7.setCharacters(new BaseImage[]{roseSc7});
         scene7.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
-        packBasis.put(7, scene7);
+        packBasis.put(scene7);
 
         //cena 8
         FadeScene scene8 = new FadeScene(this, new BaseImage[]{bgScene0, roseSc7}, fadeinFast, 9, 8);
         scene8.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
-        packBasis.put(8, scene8);
+        packBasis.put(scene8);
 
         //cena 9
         BaseImage livro1 = new BaseImage(livro1Buffered);
         FadeScene scene9 = new FadeScene(this, livro1, fadeoutFast, 10, 9);
         scene9.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
-        packBasis.put(9, scene9);
+        packBasis.put(scene9);
 
         //cena 10
-        String txtScene10 = sentences.get(10);
-        StandardScene scene10 = new StandardScene(this, livro1, setasAnim, 11, 10);
-        scene10.setDialog(txtScene10, fontDataBase, textArea, nameBg);
+        StandardScene scene10 = new StandardScene(this, livro1, 11, 10);
+        scene10.setDialog(sentences.get(scene10.getSceneId()));
         scene10.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
-        packBasis.put(10, scene10);
+        packBasis.put(scene10);
 
         //cena 11
         ImageEfx efxLivro2 = new ImageEfx(this, livro2Buffered, new Coordinates(0, 0));
         efxLivro2.setAlpha(ImageEfx.TRANSPARENT, 0.02f);
         EfxScene scene11 = new EfxScene(this, new ImageEfx[]{efxLivro2}, livro1, 12, 11);
-        //scene11.setTextArea(textArea);
         scene11.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
-        packBasis.put(11, scene11);
+        packBasis.put(scene11);
 
         //cena 12
-        String txtScene12 = sentences.get(12);
         BaseImage livro2 = new BaseImage(livro2Buffered);
         BaseImage[] imagesSc12 = {livro1, livro2};
-        StandardScene scene12 = new StandardScene(this, imagesSc12, setasAnim, 13, 12);
-        scene12.setDialog(txtScene12, fontDataBase, textArea, nameBg);
+        StandardScene scene12 = new StandardScene(this, imagesSc12, 13, 12);
+        scene12.setDialog(sentences.get(scene12.getSceneId()));
         scene12.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
-        packBasis.put(12, scene12);
+        packBasis.put(scene12);
 
         //cena 13
         ImageEfx efxLivro3 = new ImageEfx(this, livro3Buffered, new Coordinates(0, 0));
         efxLivro3.setAlpha(ImageEfx.TRANSPARENT, 0.02f);
         EfxScene scene13 = new EfxScene(this, new ImageEfx[]{efxLivro3}, imagesSc12, 14, 13);
         scene13.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
-        packBasis.put(13, scene13);
+        packBasis.put(scene13);
 
         //cena 14
-        String txtScene14 = sentences.get(14);
         BaseImage livro3 = new BaseImage(livro3Buffered);
-        StandardScene scene14 = new StandardScene(this, new BaseImage[]{livro1, livro2, livro3}, setasAnim, 15, 14);
-        scene14.setDialog(txtScene14, fontDataBase, textArea, nameBg);
+        StandardScene scene14 = new StandardScene(this, new BaseImage[]{livro1, livro2, livro3}, 15, 14);
+        scene14.setDialog(sentences.get(scene14.getSceneId()));
         scene14.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
-        packBasis.put(14, scene14);
+        packBasis.put(scene14);
 
         //cena 15 - temp
-        String txtScene15 = sentences.get(15);
-        StandardScene scene15 = new StandardScene(this, bgScene0, setasAnim, 0, 15);
-        //scene15.setNextPack(0);
-        scene15.setDialog(txtScene15, fontDataBase, textArea, nameBg);
+        StandardScene scene15 = new StandardScene(this, bgScene0, 0, 15);
+        scene15.setDialog(sentences.get(scene15.getSceneId()));
         scene15.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
-        packBasis.put(15, scene15);
+        packBasis.put(scene15);
 
         //cena 99
-        String txtScene99 = sentences.get(99);
-        StandardScene scene99 = new StandardScene(this, bgScene0, setasAnim, 1, 99);
-        scene99.setDialog(txtScene99, fontDataBase, textArea, nameBg);
+        StandardScene scene99 = new StandardScene(this, bgScene0, 1, 99);
+        scene99.setDialog(sentences.get(scene99.getSceneId()));
         scene99.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
-        packBasis.put(99, scene99);
+        packBasis.put(scene99);
 
     }
 

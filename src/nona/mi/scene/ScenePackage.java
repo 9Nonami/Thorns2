@@ -10,8 +10,8 @@ public class ScenePackage {
 		map = new HashMap<Integer, Scene>();
 	}
 
-	public void put(int key, Scene value) {
-		map.put(key, value);
+	public void put(Scene scene) {
+		map.put(scene.getSceneId(), scene);
 	}
 
 	public Scene get(int key) {

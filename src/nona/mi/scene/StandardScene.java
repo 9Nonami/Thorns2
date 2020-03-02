@@ -25,18 +25,18 @@ public class StandardScene extends Scene {
 
     //ESSENCIAL--------------------------------------
 
-    public StandardScene(Game game, BaseImage background, ImageEfx setasAnim, int nextScene, int sceneId) {
+    public StandardScene(Game game, BaseImage background, int nextScene, int sceneId) {
         super(game, nextScene, sceneId);
         this.background = background;
-        this.setasAnim = setasAnim;
+        setasAnim = game.getSetasAnim();
         buttonGroup = game.getSceneMenu();
     }
 
     //para o caso de mais uma imagem como BG
-    public StandardScene(Game game, BaseImage[] backgrounds, ImageEfx setasAnim, int nextScene, int sceneId) {
+    public StandardScene(Game game, BaseImage[] backgrounds, int nextScene, int sceneId) {
         super(game, nextScene, sceneId);
         this.backgrounds = backgrounds;
-        this.setasAnim = setasAnim;
+        setasAnim = game.getSetasAnim();
         buttonGroup = game.getSceneMenu();
     }
 
@@ -45,7 +45,7 @@ public class StandardScene extends Scene {
 
     //GS----------------------------------------------
 
-    public void setDialog(String s, FontDataBase fdb, BaseImage textArea, BaseImage nameBg) {
+    public void setDialog(String s) {
 
         //-Rose:asd@zxc#/res/audio/wht.wav_-:qwe
 
@@ -53,11 +53,11 @@ public class StandardScene extends Scene {
         Dialogue[] tempDialogues = new Dialogue[splitedDialogues.length];
 
         int xx = 10;
-        int yy = (int) (textArea.getY() + xx); //+ xx para espacamento
+        int yy = (int) (game.getTextArea().getY() + xx); //+ xx para espacamento
 
         for (int i = 0; i < tempDialogues.length; i++) {
             //CRIA O DIALOG
-            tempDialogues[i] = new Dialogue(game, fdb, xx, yy, textArea, nameBg);
+            tempDialogues[i] = new Dialogue(game, game.getFontDataBase(), xx, yy, game.getTextArea(), game.getNameBg());
 
             //DEFINE O TEXTO E O AUDIO, CASO HAJA
             String dialog;

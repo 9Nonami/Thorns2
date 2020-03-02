@@ -514,6 +514,39 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         return sceneMenu;
     }
 
+    public ImageEfx getSetasAnim() {
+        return setasAnim;
+    }
+
+    public FontDataBase getFontDataBase() {
+        return fontDataBase;
+    }
+
+    public BaseImage getTextArea() {
+        return textArea;
+    }
+
+    public BaseImage getNameBg() {
+        return nameBg;
+    }
+
+
+
+
+
+
+
+
+
+
+    ///
+
+
+
+
+
+
+
 
     //INPUTS
     public boolean isClicked() {
