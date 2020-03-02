@@ -74,9 +74,9 @@ public abstract class Scene {
 		} else {
 			yn.update();
 			if (yn.getClickedButton() != Button.NO_CLICK) {
-				if (yn.getClickedButton() == SaveMenuScene.YES) {
+				if (yn.getClickedButton() == DataManagerScene.YES) {
 					game.returnToMainMenu();
-				} else if (yn.getClickedButton() == SaveMenuScene.NO) {
+				} else if (yn.getClickedButton() == DataManagerScene.NO) {
 					esc = false;
 					yn.reset();
 
@@ -138,12 +138,12 @@ public abstract class Scene {
 					temp.pauseDialogAudio();
 				}
 
-				if (buttonGroup.getClickedButton() == SaveMenuScene.MAIN) {
+				if (buttonGroup.getClickedButton() == DataManagerScene.MAIN) {
 					esc = true;
 				} else {
-					SaveMenuScene tempSaveMenuScene = (SaveMenuScene) game.getSceneFromPublicScenes(DMS_SCENE);
-					tempSaveMenuScene.setType(buttonGroup.getClickedButton());
-					tempSaveMenuScene.setInfo(game.getSceneBasis().getPackId(), game.getSceneBasis().getSceneId(), game.getFrame());
+					DataManagerScene tempDataManagerScene = (DataManagerScene) game.getSceneFromPublicScenes(DMS_SCENE);
+					tempDataManagerScene.setType(buttonGroup.getClickedButton());
+					tempDataManagerScene.setInfo(game.getSceneBasis().getPackId(), game.getSceneBasis().getSceneId(), game.getFrame());
 					game.setSceneBasisFromPublicScenesWithoutReset(DMS_SCENE); //para nao resetar a cena
 					buttonGroup.reset();
 					game.setClicked(false);

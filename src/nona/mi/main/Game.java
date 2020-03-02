@@ -49,9 +49,6 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     private int mouseX;
     private int mouseY;
 
-    private boolean dragged;
-    private boolean lockDragged;
-
     protected MyJukeBox standardJukeBox;
 
     protected MyJukeBox packJukebox;
@@ -60,10 +57,6 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     protected ScenePackage packBasis;
     protected Scene sceneBasis;
 
-    protected boolean up;
-    protected boolean lockUp;
-    protected boolean down;
-    protected boolean lockDown;
     protected boolean space;
     protected boolean lockSpace;
 
@@ -78,7 +71,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     protected HashMap<Integer, Scene> publicScenes;
 
-    //
+    //todo : ver se tem coisa para otimizar
     protected ButtonGroup yn;
 
     private boolean showScene;
@@ -380,9 +373,6 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     private void resetKeys() {
         space = false;
-        up = false;
-        down = false;
-        //hKey = false;
         setClicked(false);
     }
 
@@ -395,25 +385,12 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
-            if (!lockUp) {
-                lockUp = true;
-                up = true;
-            }
-        }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            if (!lockDown) {
-                lockDown = true;
-                down = true;
-            }
-        }
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             if (!lockSpace) {
                 lockSpace = true;
                 space = true;
             }
-        }
-        if (e.getKeyCode() == KeyEvent.VK_H) {
+        } else if (e.getKeyCode() == KeyEvent.VK_H) {
             if (!lockAll) {
                 if (timesPressed == 0) {
                     timesPressed++;
@@ -428,23 +405,12 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         }
     }
 
-    // TODO : NEM ESTA MAIS USANDO U/D
-
     @Override
     public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
-            lockUp = false;
-            up = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            lockDown = false;
-            down = false;
-        }
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             lockSpace = false;
             space = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_H) {
+        } else if (e.getKeyCode() == KeyEvent.VK_H) {
             if (timesPressed == 1) {
                 hReleased = true;
             } else if (timesPressed == 2) {
@@ -452,7 +418,6 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
                 timesPressed = 0;
             }
         }
-        //TODO : ELSE
     }
 
     @Override
@@ -480,24 +445,16 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         clicked = true;
     }
 
-    //TODO : TIRAR O DRAGGED SE NAO FOR USAR O VOLUME
-
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
-        if (lockDragged) {
-            lockDragged = false;
-            dragged = false;
-        }
+
     }
 
     @Override
     public void mouseDragged(MouseEvent mouseEvent) {
         mouseX = mouseEvent.getX();
         mouseY = mouseEvent.getY();
-        if (!lockDragged) {
-            lockDragged = true;
-            dragged = true;
-        }
+
     }
 
     @Override
@@ -559,24 +516,8 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         return mouseY;
     }
 
-    public boolean isUp() {
-        return up;
-    }
-
-    public boolean isDown() {
-        return down;
-    }
-
     public boolean isSpace() {
         return space;
-    }
-
-    public boolean isDragged() {
-        return dragged;
-    }
-
-    public void setDragged(boolean dragged) {
-        this.dragged = dragged;
     }
 
     public boolean ishKey() {

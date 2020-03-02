@@ -33,13 +33,13 @@ public class MainMenuScene extends Scene {
             } else if (buttonGroup.getClickedButton() == LOAD_GAME) {
 
                 //pega a dms do hashmap em game
-                SaveMenuScene tempSaveMenuScene = (SaveMenuScene) game.getSceneFromPublicScenes(Scene.DMS_SCENE);
-                tempSaveMenuScene.setType(SaveMenuScene.LOAD);
+                DataManagerScene tempDataManagerScene = (DataManagerScene) game.getSceneFromPublicScenes(Scene.DMS_SCENE);
+                tempDataManagerScene.setType(DataManagerScene.LOAD);
 
-                tempSaveMenuScene.setSaveScene(sceneId);
+                tempDataManagerScene.setSaveScene(sceneId);
                 //game.getSaveMenuScene().setSaveScene(MAIN_MENU_ID);
 
-                tempSaveMenuScene.setSavePack(packId);
+                tempDataManagerScene.setSavePack(packId);
                 //game.getSaveMenuScene().setSavePack(PACK_FOR_LOAD_GAME);
 
                 game.setDirectSceneFromPublicScenes(Scene.DMS_SCENE);
