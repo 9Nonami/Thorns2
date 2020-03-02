@@ -29,6 +29,7 @@ public class StandardScene extends Scene {
         super(game, nextScene, sceneId);
         this.background = background;
         this.setasAnim = setasAnim;
+        buttonGroup = game.getSceneMenu();
     }
 
     //para o caso de mais uma imagem como BG
@@ -36,6 +37,7 @@ public class StandardScene extends Scene {
         super(game, nextScene, sceneId);
         this.backgrounds = backgrounds;
         this.setasAnim = setasAnim;
+        buttonGroup = game.getSceneMenu();
     }
 
     //-----------------------------------------------

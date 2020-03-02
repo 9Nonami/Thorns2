@@ -1,6 +1,9 @@
 package nona.mi.main;
 
 import nona.mi.button.ButtonGroup;
+import nona.mi.db.FontDataBase;
+import nona.mi.image.BaseImage;
+import nona.mi.image.ImageEfx;
 import nona.mi.jukebox.MyJukeBox;
 import nona.mi.save.Save;
 import nona.mi.scene.Scene;
@@ -71,10 +74,19 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     protected HashMap<Integer, Scene> publicScenes;
 
-    //todo : ver se tem coisa para otimizar
     protected ButtonGroup yn;
 
     private boolean showScene;
+
+    protected ButtonGroup sceneMenu; //save, load, copy, del, main
+
+    protected FontDataBase fontDataBase;
+    protected FontDataBase fontFocus;
+    protected BaseImage nameBg;
+    protected BaseImage textArea;
+    protected BufferedImage choicebg;
+    protected BufferedImage pointer;
+    protected ImageEfx setasAnim;
 
 
 
@@ -496,6 +508,10 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     public void setShowLoopLog(boolean showLoopLog) {
         this.showLoopLog = showLoopLog;
+    }
+
+    public ButtonGroup getSceneMenu() {
+        return sceneMenu;
     }
 
 

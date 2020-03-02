@@ -31,7 +31,6 @@ public class DataManagerScene extends Scene {
 
     private SlotGroup slotGroup;
     private ButtonGroup buttonGroup;
-    private ButtonGroup yn;
 
     private boolean lockForSave;
     private boolean lockYnForSave;
@@ -90,10 +89,6 @@ public class DataManagerScene extends Scene {
 
     public void createMiscButtons(Button[] miscButtons) {
         buttonGroup = new ButtonGroup(miscButtons);
-    }
-
-    public void createYn(Button[] ynButtons) {
-        yn = new ButtonGroup(ynButtons);
     }
 
     public void createSlotImages(BufferedImage standard, BufferedImage focus) {

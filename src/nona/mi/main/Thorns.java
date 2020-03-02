@@ -25,18 +25,7 @@ import nona.mi.scene.DataManagerScene;
 import nona.mi.scene.Scene;
 import nona.mi.scene.StandardScene;
 
-//TODO : DAR UM JEITO DE CRIAR OS AUDIOS E BUTTONS TUDO AQUI. NADA DE FAZER ISSO DENTRO DAS CLASSES!
-//todo : deixar ao maximo tudo quanto eh load de imagem aqui!
 public class Thorns extends Game {
-
-    private FontDataBase fontDataBase;
-    private FontDataBase fontFocus;
-    private BaseImage nameBg;
-    private BaseImage textArea;
-    private BufferedImage choicebg;
-    private BufferedImage pointer;
-    private ImageEfx setasAnim;
-    private ButtonGroup sceneMenu; //save, load, copy, del
 
 
 
@@ -69,7 +58,7 @@ public class Thorns extends Game {
         noButton.setImages(uno, dos, 350, 50);
         noButton.setAudioName(audioClick);
         noButton.setId(DataManagerScene.NO);
-        yn = new ButtonGroup(new Button[]{yesButton, noButton});
+        yn = new ButtonGroup(new Button[]{yesButton, noButton}); //buttonGroup de Game
 
 
 
@@ -120,7 +109,7 @@ public class Thorns extends Game {
         //IMAGEM DE FOCO PARA SAVE, LOAD...
         BufferedImage focusMisc = ImageLoader.loadImage("/res/misc/focus.png");
 
-        //MENU COM SAVE, LOAD, COPY E DEL
+        //MENU COM SAVE, LOAD, COPY, DEL E MAIN
         createSceneMenu(focusMisc, audioClick, tempTextArea);
 
         //DATA MANAGER SCENE
@@ -134,9 +123,6 @@ public class Thorns extends Game {
         BufferedImage dos = ImageLoader.loadImage("/res/buttons/dos.png");
 
         BufferedImage returnImage = ImageLoader.loadImage("/res/misc/return.png");
-        //BufferedImage prevImage = ImageLoader.loadImage("/res/buttons/uno.png");
-        //BufferedImage nextImage = ImageLoader.loadImage("/res/buttons/uno.png");
-        //BufferedImage pnFocus = ImageLoader.loadImage("/res/buttons/dos.png");
 
         //RETURN BUTTON
         RectButton returnButton = new RectButton(this);
@@ -156,22 +142,6 @@ public class Thorns extends Game {
         nextButton.setAudioName(audioClick);
         nextButton.setId(DataManagerScene.NEXT_SLOT_GROUP);
 
-
-
-        //YES BUTTON
-        RectButton yesButton = new RectButton(this);
-        yesButton.setImages(uno, dos, 150, 50);
-        yesButton.setAudioName(audioClick);
-        yesButton.setId(DataManagerScene.YES);
-
-        //NO BUTTON
-        RectButton noButton = new RectButton(this);
-        noButton.setImages(uno, dos, 350, 50);
-        noButton.setAudioName(audioClick);
-        noButton.setId(DataManagerScene.NO);
-
-
-
         //MODOS
         int modeX = 200;
         int modeY = 0;
@@ -186,12 +156,10 @@ public class Thorns extends Game {
         modes.put(DataManagerScene.DEL, deleteMode);
 
 
-
         DataManagerScene tempDataManagerScene = new DataManagerScene(this, Scene.DMS_SCENE, save, 6);
         tempDataManagerScene.createSlotImages(ImageLoader.loadImage("/res/buttons/empty-slot.png"), ImageLoader.loadImage("/res/buttons/focused-slot.png"));
         tempDataManagerScene.createSlots(12, 2, 3, 44, 44, 31);
         tempDataManagerScene.createMiscButtons(new Button[]{returnButton, previousButton, nextButton});
-        tempDataManagerScene.createYn(new Button[]{yesButton, noButton});
         tempDataManagerScene.createModes(modes);
         tempDataManagerScene.setPackId(Scene.NO_PACK);
         publicScenes.put(tempDataManagerScene.getSceneId(), tempDataManagerScene);
@@ -238,6 +206,8 @@ public class Thorns extends Game {
 
     private void createSceneMenu(BufferedImage focusMisc, String audioClick, BufferedImage tempTextArea) {
 
+        //BOTOES DE SAVE, LOAD, COPY, DEL, MAIN
+
         BufferedImage saveImage = ImageLoader.loadImage("/res/misc/save.png");
         BufferedImage loadImage = ImageLoader.loadImage("/res/misc/load.png");
         BufferedImage copyImage = ImageLoader.loadImage("/res/misc/copy.png");
@@ -265,7 +235,6 @@ public class Thorns extends Game {
         deleteButton.setAudioName(audioClick);
         deleteButton.setId(DataManagerScene.DEL);
 
-        //
         RectButton mainButton = new RectButton(this);
         mainButton.setImages(ImageLoader.loadImage("/res/misc/main.png"), focusMisc, 100, 0);
         mainButton.setAudioName(audioClick);
@@ -328,7 +297,6 @@ public class Thorns extends Game {
         StandardScene scene1 = new StandardScene(this, bgScene0, setasAnim, 2, 1);
         scene1.setDialog(txtScene1, fontDataBase, textArea, nameBg);
         scene1.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
-        scene1.setButtonGroup(sceneMenu);
         packBasis.put(1, scene1);
 
         //cena 2
@@ -460,11 +428,10 @@ public class Thorns extends Game {
         StandardScene scene99 = new StandardScene(this, bgScene0, setasAnim, 1, 99);
         scene99.setDialog(txtScene99, fontDataBase, textArea, nameBg);
         scene99.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
-        scene99.setButtonGroup(sceneMenu);
         packBasis.put(99, scene99);
 
     }
 
 
-    // todo : imageEfx e Stan, com os arrays estao ok, nao quero alterar
+    //imageEfx e Stan, com os arrays estao ok, nao quero alterar
 }

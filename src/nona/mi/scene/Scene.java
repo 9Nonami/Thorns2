@@ -21,10 +21,10 @@ public abstract class Scene {
 	protected int soundStyle; //loop ou once
 	protected boolean lock; //faz com que o codigo do updateAudio so execute uma vez
 	public static final int LAST_SCENE = -99; //definir como last_scene significa que depois desta cena, outro pack eh carregado. NAO ESQUECER DE DEFINIR O PACK!
-	private ButtonGroup buttonGroup; //save, load, copy, del
+	protected ButtonGroup buttonGroup; //save, load, copy, del, main (vem de Game)
 
 	protected ButtonGroup yn; //confirma a ida para o main
-	protected boolean esc;
+	protected boolean esc; //ativado quando o botao Main (contido no buttonGroup) eh clicado > desencadeia a visualizacao de yn
 
 	protected int sceneId;
 	protected int packId;
@@ -198,10 +198,6 @@ public abstract class Scene {
 
 	public int getNextScene() {
 		return nextScene;
-	}
-
-	public void setButtonGroup(ButtonGroup buttonGroup) {
-		this.buttonGroup = buttonGroup;
 	}
 
 	public int getSceneId() {
