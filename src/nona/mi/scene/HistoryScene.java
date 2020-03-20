@@ -109,12 +109,12 @@ public class HistoryScene extends Scene {
             } else if (btns.getClickedButton() == NEXT) {
                 if (tracerId != Tracer.TOTAL_TRACES) { //entra no metodo se trace nao for vazio
                     //verifica os dialogos ateh chegar ao ultimo id do array
-                    if (dialogId < dialogues.length - 1) {
+                    if (dialogId < dialogues.length - 1) { //entra se for o penultimo dialogo (ou < ultimo) e muda para o ultimo. sendo o ultimo, nao mais entra aqui
                         dialogId++; //se ainda nao eh o ultimo dialogo, prepara o id do proximo
                         configDialog(); //coloca o dialogo especificado pelo id na cena
                     } else {
                         //quando chegar ao ultimo dialogo, verifica se ha mais cenas
-                        if (tracerId < Tracer.TOTAL_TRACES - 1) {
+                        if (tracerId < Tracer.TOTAL_TRACES - 1) { //entra se for a penultima cena (ou < ultima) e muda para a ultima. sendo a ultima, nao mais entra aqui
                             tracerId++; //se ainda nao eh a ultimo cena, prepara o id da proxima
                             configScene(); //pega os dialogos da cena
                             dialogId = 0; //como NEXT eh de ordem crescente, define o primeiro dialogo da nova cena
@@ -150,8 +150,8 @@ public class HistoryScene extends Scene {
                 System.out.println("tentando resetar dialogo da cena: " + tempIdfromTracer);
                 StandardScene tempStan = (StandardScene) game.getSceneFromCurrentPack(tempIdfromTracer);
                 Dialogue[] tempDialoguesForReset = tempStan.getDialogues();
-                for (int j = 0; j < tempDialoguesForReset.length; j++) {
-                    tempDialoguesForReset[j].reset();
+                for (Dialogue value : tempDialoguesForReset) {
+                    value.reset();
                 }
             }
         }
