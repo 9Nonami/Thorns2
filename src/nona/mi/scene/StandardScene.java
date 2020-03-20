@@ -3,7 +3,6 @@ package nona.mi.scene;
 import java.awt.Graphics;
 
 import nona.mi.image.BaseImage;
-import nona.mi.db.FontDataBase;
 import nona.mi.image.ImageEfx;
 import nona.mi.main.Game;
 
@@ -44,6 +43,13 @@ public class StandardScene extends Scene {
 
 
     //GS----------------------------------------------
+
+    public Dialogue[] getDialogues() {
+        if (dialogues == null) {
+            System.exit(0);
+        }
+        return dialogues;
+    }
 
     public void setDialog(String s) {
 
@@ -146,6 +152,7 @@ public class StandardScene extends Scene {
             if (dialogueID == dialogues.length) {
                 dialogueID = 0;
                 dialogueBasis = dialogues[dialogueID];
+                game.getSave().getTracer().add(sceneId);
                 game.nextScene();
                 return;
             }

@@ -33,8 +33,9 @@ public abstract class Scene {
 	public static final int FADE_SCENE_LOGO = -79;
 	public static final int DMS_SCENE = -78;
 	public static final int MAIN_MENU_SCENE = -77;
+	public static final int HISTORY_SCENE = -43;
 
-	public static final int NO_SCENE = 0;
+	public static final int NO_SCENE = -2;
 	public static final int NO_PACK = -1;
 
 	protected boolean hide;
@@ -140,6 +141,14 @@ public abstract class Scene {
 
 				if (buttonGroup.getClickedButton() == DataManagerScene.MAIN) {
 					esc = true;
+				} else if (buttonGroup.getClickedButton() == HISTORY_SCENE) {
+					HistoryScene tempHistoryScene = (HistoryScene) game.getSceneFromPublicScenes(HISTORY_SCENE);
+					tempHistoryScene.setSceneToReturn(sceneId);
+					System.out.println("retornarah para: " + sceneId);
+					tempHistoryScene.checkInitialId();
+					game.setSceneBasisFromPublicScenesWithoutReset(HISTORY_SCENE);
+					buttonGroup.reset();
+					game.setClicked(false);
 				} else {
 					DataManagerScene tempDataManagerScene = (DataManagerScene) game.getSceneFromPublicScenes(DMS_SCENE);
 					tempDataManagerScene.setType(buttonGroup.getClickedButton());

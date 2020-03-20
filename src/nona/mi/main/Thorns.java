@@ -16,12 +16,13 @@ import nona.mi.efx.Fade;
 import nona.mi.image.ImageEfx;
 import nona.mi.loader.TextLoader;
 import nona.mi.save.Save;
+import nona.mi.scene.DataManagerScene;
 import nona.mi.scene.EfxScene;
 import nona.mi.scene.FadeScene;
 import nona.mi.scene.FadeTopBottomScene;
+import nona.mi.scene.HistoryScene;
 import nona.mi.scene.LoadScene;
 import nona.mi.scene.MainMenuScene;
-import nona.mi.scene.DataManagerScene;
 import nona.mi.scene.Scene;
 import nona.mi.scene.StandardScene;
 
@@ -110,10 +111,13 @@ public class Thorns extends Game {
         BufferedImage focusMisc = ImageLoader.loadImage("/res/misc/focus.png");
 
         //MENU COM SAVE, LOAD, COPY, DEL E MAIN
-        createSceneMenu(focusMisc, audioClick, tempTextArea);
+        createButtonsMenu(focusMisc, audioClick, tempTextArea);
 
         //DATA MANAGER SCENE
         createDataManagerScene(focusMisc, audioClick);
+
+        //HISTORY SCENE
+        createHistoryScene();
 
     }
 
@@ -185,6 +189,41 @@ public class Thorns extends Game {
         publicScenes.put(tempMainMenu.getSceneId(), tempMainMenu);
     }
 
+    private void createHistoryScene() {
+
+        //criar botoes
+        String audioClick = "click";
+        BufferedImage uno = ImageLoader.loadImage("/res/buttons/uno.png");
+        BufferedImage dos = ImageLoader.loadImage("/res/buttons/dos.png");
+
+        BufferedImage returnImage = ImageLoader.loadImage("/res/misc/return.png");
+
+        BufferedImage focusMisc = ImageLoader.loadImage("/res/misc/focus.png");
+
+        //RETURN BUTTON
+        RectButton returnButton = new RectButton(this);
+        returnButton.setImages(returnImage, focusMisc, 50, 390);
+        returnButton.setAudioName(audioClick);
+        returnButton.setId(HistoryScene.RETURN);
+
+        //PREV BUTTON
+        RectButton previousButton = new RectButton(this);
+        previousButton.setImages(uno, dos, 250, 390);
+        previousButton.setAudioName(audioClick);
+        previousButton.setId(HistoryScene.PREV);
+
+        //NEXT BUTTON
+        RectButton nextButton = new RectButton(this);
+        nextButton.setImages(uno, dos, 400, 390);
+        nextButton.setAudioName(audioClick);
+        nextButton.setId(HistoryScene.NEXT);
+
+        HistoryScene hs = new HistoryScene(this, Scene.HISTORY_SCENE);
+        hs.setBtns(new ButtonGroup(new Button[]{returnButton, previousButton, nextButton}));
+        publicScenes.put(hs.getSceneId(), hs);
+
+    }
+
     private void createLoadScene() {
         LoadScene tempLoadScene = new LoadScene(this, Scene.LOAD_SCENE, new BaseImage(ImageLoader.loadImage("/res/bg/load.png"), 0, 0));
         tempLoadScene.setPackId(Scene.NO_PACK);
@@ -204,7 +243,7 @@ public class Thorns extends Game {
         sceneBasis = getSceneFromPublicScenes(Scene.FADE_SCENE_LOGO); //nao uso setdirec... por que ele vai tentar resetar, mas nao ha o que resetar, esta null
     }
 
-    private void createSceneMenu(BufferedImage focusMisc, String audioClick, BufferedImage tempTextArea) {
+    private void createButtonsMenu(BufferedImage focusMisc, String audioClick, BufferedImage tempTextArea) {
 
         //BOTOES DE SAVE, LOAD, COPY, DEL, MAIN
 
@@ -240,7 +279,12 @@ public class Thorns extends Game {
         mainButton.setAudioName(audioClick);
         mainButton.setId(DataManagerScene.MAIN);
 
-        sceneMenu = new ButtonGroup(new Button[]{saveButton, loadButton, copyButton, deleteButton, mainButton});
+        RectButton historyButton = new RectButton(this);
+        historyButton.setImages(ImageLoader.loadImage("/res/misc/main.png"), focusMisc, 300, 0);
+        historyButton.setAudioName(audioClick);
+        historyButton.setId(Scene.HISTORY_SCENE);
+
+        sceneMenu = new ButtonGroup(new Button[]{saveButton, loadButton, copyButton, deleteButton, mainButton, historyButton});
 
     }
 
@@ -288,7 +332,7 @@ public class Thorns extends Game {
         //----------------------------------------
 
         //cena 0
-        FadeScene scene0 = new FadeScene(this, bgScene0, fadeoutSlow, 99, 0);
+        FadeScene scene0 = new FadeScene(this, bgScene0, fadeoutSlow, 1, 0);
         scene0.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(scene0);
 
@@ -404,17 +448,12 @@ public class Thorns extends Game {
         scene14.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(scene14);
 
-        //cena 15 - temp
+        //cena 15 - teste de fala
         StandardScene scene15 = new StandardScene(this, bgScene0, 0, 15);
         scene15.setDialog(sentences.get(scene15.getSceneId()));
         scene15.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(scene15);
 
-        //cena 99
-        StandardScene scene99 = new StandardScene(this, bgScene0, 1, 99);
-        scene99.setDialog(sentences.get(scene99.getSceneId()));
-        scene99.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
-        packBasis.put(scene99);
 
     }
 

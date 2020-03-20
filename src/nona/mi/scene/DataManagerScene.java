@@ -63,6 +63,8 @@ public class DataManagerScene extends Scene {
     public static final int DEL = -66;
     public static final int MAIN = -65;
 
+    private int tempChosenSlot;
+
 
 
     //ESSENCIAL-------------------------------------
@@ -225,9 +227,9 @@ public class DataManagerScene extends Scene {
     private void updateSlotsForLoad() {
         slotGroup.update();
         if ((slotGroup.getClickedSlot() != Button.NO_CLICK) && (slotGroup.getButtons()[slotGroup.getClickedSlot()].getStandardImage() != slotGroup.getStandardButtonImage())) {
-            int slotId = slotGroup.getClickedSlot();
-            temPackForLoad = save.getPackOfSlot(slotId);
-            tempSceneForLoad = save.getSceneOfSlot(slotId);
+            tempChosenSlot = slotGroup.getClickedSlot();
+            temPackForLoad = save.getPackOfSlot(tempChosenSlot);
+            tempSceneForLoad = save.getSceneOfSlot(tempChosenSlot);
             lockForLoad = true;
             lockYnForLoad = false;
         }
@@ -253,6 +255,8 @@ public class DataManagerScene extends Scene {
                     //coloca a cena em sceneBasis
                     game.setDirectScene(tempSceneForLoad); // < reseta esta cena (dms)
                 }
+                //preenche o tracer com os dados do slot especifico
+                game.getSave().initTracer(tempChosenSlot);
             } else if (yn.getClickedButton() == NO) {
                 yn.reset();
                 lockForLoad = false;

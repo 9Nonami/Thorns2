@@ -531,23 +531,6 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     }
 
 
-
-
-
-
-
-
-
-
-    ///
-
-
-
-
-
-
-
-
     //INPUTS
     public boolean isClicked() {
         return clicked;
@@ -599,6 +582,10 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     //SCENEBASIS
     public Scene getSceneBasis() {
         return sceneBasis;
+    }
+
+    public Save getSave() {
+        return save;
     }
 
     //----------------------------------------------------------------------------------------

@@ -225,6 +225,10 @@ public class Dialogue {
         endAnimation = true;
     }
 
+    public void defineCompleteDialogue() {
+        cont = arr.length;
+    }
+
     //---------------------------------------------------
 
 

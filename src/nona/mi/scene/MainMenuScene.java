@@ -29,6 +29,7 @@ public class MainMenuScene extends Scene {
         if (buttonGroup.getClickedButton() != Button.NO_CLICK) {
             if (buttonGroup.getClickedButton() == NEW_GAME) {
                 nextPack = 0;
+                game.getSave().getTracer().setEmptyTraces();
                 game.nextScene(); //usa a lastScene do construtor
             } else if (buttonGroup.getClickedButton() == LOAD_GAME) {
 
