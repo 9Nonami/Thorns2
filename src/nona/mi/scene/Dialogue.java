@@ -21,6 +21,7 @@ import nona.mi.image.BaseImage;
 import nona.mi.main.Game;
 
 
+
 public class Dialogue {
 
     private FontDataBase fdb;
@@ -29,18 +30,14 @@ public class Dialogue {
     private char[] name;
     private double cont;
 
-    private int x;
-    private int y;
-    private int spacing;
-
     private float textSpeed;
 
     private int fontHeight;
 
-    private BaseImage textArea;
+    private BaseImage textArea; //todo : game.getTextArea
+    private boolean renderTextArea;
+
     private BaseImage nameBg;
-    private int xname;
-    private int yname;
 
     private boolean lockAudio;
     private String audioName;
@@ -49,17 +46,23 @@ public class Dialogue {
     private Game game;
     private boolean audioPaused;
 
+    private boolean historyConfiguration;
+    public static final int X = 10;
+    public static final int Y = 351;
+    public static final int X_NAME = 50;
+    public static final int Y_NAME = 50;
+    public static final int X_NAME_BG = 50;
+    public static final int Y_NAME_BG = 50;
+    public static final int SPACING = 5;
+
 
 
     //ESSENCIAL------------------------------------------
 
-    public Dialogue(Game game, FontDataBase fdb, int x, int y, BaseImage textArea, BaseImage nameBg) {
+    public Dialogue(Game game, FontDataBase fdb, BaseImage textArea, BaseImage nameBg) {
         this.game = game;
         this.fdb = fdb;
         fontHeight = fdb.getFontHeight();
-
-        this.x = x;
-        this.y = y;
 
         cont = 0;
         textSpeed = 2 * game.getSpeedAdjust();
@@ -68,7 +71,7 @@ public class Dialogue {
         this.textArea = textArea;
         this.nameBg = nameBg;
 
-        spacing = 5;
+        renderTextArea = true;
     }
 
     //---------------------------------------------------
@@ -88,7 +91,6 @@ public class Dialogue {
 
     public void setName(char[] name) {
         this.name = name;
-        initNameCoordinates();
     }
 
     public boolean getEndAnimation() {
@@ -96,18 +98,6 @@ public class Dialogue {
             return endAnimation && !game.getPackJukebox().isPlaying(audioName);
         }
         return endAnimation;
-    }
-
-    private int getCenterY() {
-        return (int) ((nameBg.getY() + (nameBg.getHeight() / 2)) - (fdb.getFontHeight() / 2));
-    }
-
-    private int getCenterXOf(char[] c) {
-        int width = 0;
-        for (int i = 0; i < c.length; i++) {
-            width += fdb.get(c[i]).getWidth();
-        }
-        return (int) ((nameBg.getWidth() / 2) - (width / 2));
     }
 
     public String getAudioName() {
@@ -124,6 +114,14 @@ public class Dialogue {
 
     public boolean isAudioPaused() {
         return audioPaused;
+    }
+
+    public void setRenderTextArea(boolean renderTextArea) { //todo : history acessa
+        this.renderTextArea = renderTextArea;
+    }
+
+    public void setHistoryConfiguration(boolean historyConfiguration) {
+        this.historyConfiguration = historyConfiguration;
     }
 
     //---------------------------------------------------
@@ -161,14 +159,16 @@ public class Dialogue {
     }
 
     public void render(Graphics g) {
-
-        textArea.render(g);
-
+        renderTextArea(g);
         renderNameBg(g);
-
         renderName(g);
-
         renderDialogue(g);
+    }
+
+    private void renderTextArea(Graphics g) {
+        if (renderTextArea) {
+            textArea.render(g);
+        }
     }
 
     private void renderNameBg(Graphics g) {
@@ -178,35 +178,42 @@ public class Dialogue {
     }
 
     private void renderName(Graphics g) {
-
-        int tempxname = xname;
-        int tempyname = yname;
-
+        int tempxname;
+        if (!historyConfiguration) {
+            tempxname = X_NAME;
+        } else {
+            tempxname = HistoryScene.NEW_NAME_X;
+        }
         if (name != null) {
-            for (int i = 0; i < name.length; i++) {
-                g.drawImage(fdb.get(name[i]), tempxname, tempyname, null);
-                tempxname += fdb.get(name[i]).getWidth();
+            for (char c : name) {
+                g.drawImage(fdb.get(c), tempxname, Y_NAME, null);
+                tempxname += fdb.get(c).getWidth();
             }
         }
     }
 
     private void renderDialogue(Graphics g) {
-
-        int tempx = x;
-        int tempy = y;
-
+        int tempx;
+        int tempy;
+        if (!historyConfiguration) {
+            tempx = X;
+            tempy = Y;
+        } else {
+            tempx = HistoryScene.NEW_DIALOG_X;
+            tempy = HistoryScene.NEW_DIALOG_Y;
+        }
         for (int id = 0; id < (int) cont; id++) {
-
             if (arr[id] == '@') {
-                tempy += fontHeight + spacing;
-                tempx = x;
+                tempy += fontHeight + SPACING;
+                if (!historyConfiguration) {
+                    tempx = X;
+                } else {
+                    tempx = HistoryScene.NEW_DIALOG_X;
+                }
                 continue;
             }
-
             g.drawImage(fdb.get(arr[id]), tempx, tempy, null);
-
             tempx += fdb.get(arr[id]).getWidth();
-
         }
     }
 
@@ -214,11 +221,6 @@ public class Dialogue {
 
 
     //OTHER----------------------------------------------
-
-    public void initNameCoordinates() {
-        xname = getCenterXOf(name);
-        yname = getCenterY();
-    }
 
     public void completeDialogue() {
         cont = arr.length;
@@ -237,6 +239,8 @@ public class Dialogue {
         cont = 0;
         lockAudio = false;
         audioPaused = false;
+        historyConfiguration = false;
+        renderTextArea = true;
     }
 
 }

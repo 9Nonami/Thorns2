@@ -58,12 +58,13 @@ public class StandardScene extends Scene {
         String[] splitedDialogues = s.split("_");
         Dialogue[] tempDialogues = new Dialogue[splitedDialogues.length];
 
-        int xx = 10;
+        int xx = 10; //todo : del
         int yy = (int) (game.getTextArea().getY() + xx); //+ xx para espacamento
+
 
         for (int i = 0; i < tempDialogues.length; i++) {
             //CRIA O DIALOG
-            tempDialogues[i] = new Dialogue(game, game.getFontDataBase(), xx, yy, game.getTextArea(), game.getNameBg());
+            tempDialogues[i] = new Dialogue(game, game.getFontDataBase(), game.getTextArea(), game.getNameBg());
 
             //DEFINE O TEXTO E O AUDIO, CASO HAJA
             String dialog;

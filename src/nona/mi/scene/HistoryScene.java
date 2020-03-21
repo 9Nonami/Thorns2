@@ -23,8 +23,14 @@ public class HistoryScene extends Scene {
     public static final int NEXT = 1; //id para a criacao dos botoes
     public static final int RETURN = 2; //id para a criacao dos botoes
 
+    public static final int NEW_DIALOG_X = 50; //nova posicao do dialogo
+    public static final int NEW_DIALOG_Y = 100; //nova posicao do dialogo
+    public static final int NEW_NAME_X = 50; //nova posicao do nome
+    public static final int NEW_NAME_Y = 50; //nova posicao do nome
 
 
+
+    //todo : nopack
     public HistoryScene(Game game, int nextScene, int sceneId) {
         super(game, nextScene, sceneId);
     }
@@ -74,6 +80,8 @@ public class HistoryScene extends Scene {
         //define o dialogo a ser renderizado
         dialogue = dialogues[dialogId];
         dialogue.defineCompleteDialogue();
+        dialogue.setHistoryConfiguration(true);
+        dialogue.setRenderTextArea(false);
     }
 
     @Override

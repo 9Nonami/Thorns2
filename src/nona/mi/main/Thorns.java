@@ -16,15 +16,7 @@ import nona.mi.efx.Fade;
 import nona.mi.image.ImageEfx;
 import nona.mi.loader.TextLoader;
 import nona.mi.save.Save;
-import nona.mi.scene.DataManagerScene;
-import nona.mi.scene.EfxScene;
-import nona.mi.scene.FadeScene;
-import nona.mi.scene.FadeTopBottomScene;
-import nona.mi.scene.HistoryScene;
-import nona.mi.scene.LoadScene;
-import nona.mi.scene.MainMenuScene;
-import nona.mi.scene.Scene;
-import nona.mi.scene.StandardScene;
+import nona.mi.scene.*;
 
 public class Thorns extends Game {
 
@@ -73,7 +65,8 @@ public class Thorns extends Game {
 
         //BACKGROUND PARA TODOS OS NOMES
         BufferedImage tempNameBg = ImageLoader.loadImage("/res/font/nameBg.png");
-        nameBg = new BaseImage(tempNameBg, 0, getHeight() - tempTextArea.getHeight() - tempNameBg.getHeight());
+        //nameBg = new BaseImage(tempNameBg, 0, getHeight() - tempTextArea.getHeight() - tempNameBg.getHeight());
+        nameBg = new BaseImage(tempNameBg, Dialogue.X_NAME_BG, Dialogue.Y_NAME_BG);
 
         //BACKGROUND PARA OS TEXTOS DE CHOICE
         choicebg = ImageLoader.loadImage("/res/font/choice2.png");
