@@ -24,36 +24,32 @@ import nona.mi.main.Game;
 
 public class Dialogue {
 
-    private FontDataBase fdb;
-    private boolean endAnimation;
-    private char[] arr;
-    private char[] name;
-    private double cont;
+    private FontDataBase fdb; //fonte deste dialogo
+    private boolean endAnimation; //estado da animacao
+    private char[] arr; //dialogo a ser renderizado
+    private char[] name; //recebe de NameDataBase
+    private double cont; //todo : objeto
 
-    private float textSpeed;
+    private BaseImage textArea; //area retangular onde o texto eh 'centralizado'.
+    private boolean renderTextArea; //controla quando a textArea deve ser exibida. Ex.: historyScene nao usa a area
 
-    private int fontHeight;
+    private BaseImage nameBg; //imagem onde o nome do personagem eh 'centralizado'
 
-    private BaseImage textArea; //todo : game.getTextArea
-    private boolean renderTextArea;
+    private boolean lockAudio; //bloqueia o audio apos ser executado uma vez
+    private String audioName; //id para resgatar uma fala em packjuke. eh definido no txt de dialogos
 
-    private BaseImage nameBg;
+    private boolean playFullAudio; //permite que o usuario seja obrigado a escutar a fala por inteiro
+    private Game game; //ref de game
+    private boolean audioPaused; //para controle da fala
 
-    private boolean lockAudio;
-    private String audioName;
-
-    private boolean playFullAudio;
-    private Game game;
-    private boolean audioPaused;
-
-    private boolean historyConfiguration;
-    public static final int X = 10;
-    public static final int Y = 351;
-    public static final int X_NAME = 50;
-    public static final int Y_NAME = 50;
-    public static final int X_NAME_BG = 50;
-    public static final int Y_NAME_BG = 50;
-    public static final int SPACING = 5;
+    private boolean historyConfiguration; //identifica que esta sendo renderizado em historyScene
+    public static final int X = 10; //base x
+    public static final int Y = 351; // base y
+    public static final int X_NAME = 50; //base x do nome
+    public static final int Y_NAME = 50; //base y do nome
+    public static final int X_NAME_BG = 50; //base x do retangulo do nome
+    public static final int Y_NAME_BG = 50; //base y do retangulo do nome
+    public static final int SPACING = 5; //espacamento entre os caracteres em y
 
 
 
@@ -62,15 +58,9 @@ public class Dialogue {
     public Dialogue(Game game, FontDataBase fdb, BaseImage textArea, BaseImage nameBg) {
         this.game = game;
         this.fdb = fdb;
-        fontHeight = fdb.getFontHeight();
-
         cont = 0;
-        textSpeed = 2 * game.getSpeedAdjust();
-        //textSpeed = thorns.getSpeedAdjust();
-
         this.textArea = textArea;
-        this.nameBg = nameBg;
-
+        this.nameBg = nameBg; //todo : pegar de um mapa de acordo com o nome
         renderTextArea = true;
     }
 
@@ -144,7 +134,7 @@ public class Dialogue {
     private void updateText() {
         if (arr != null) {
             if (!endAnimation) {
-                cont += textSpeed;
+                cont += game.getSpeedAdjust();
                 if (cont >= arr.length) {
                     if (cont > arr.length) {
                         cont = arr.length;
@@ -204,7 +194,7 @@ public class Dialogue {
         }
         for (int id = 0; id < (int) cont; id++) {
             if (arr[id] == '@') {
-                tempy += fontHeight + SPACING;
+                tempy += fdb.getFontHeight() + SPACING;
                 if (!historyConfiguration) {
                     tempx = X;
                 } else {

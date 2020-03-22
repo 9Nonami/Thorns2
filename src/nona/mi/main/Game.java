@@ -2,6 +2,7 @@ package nona.mi.main;
 
 import nona.mi.button.ButtonGroup;
 import nona.mi.db.FontDataBase;
+import nona.mi.db.NameDataBase;
 import nona.mi.image.BaseImage;
 import nona.mi.image.ImageEfx;
 import nona.mi.jukebox.MyJukeBox;
@@ -87,6 +88,8 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     protected BufferedImage choicebg;
     protected BufferedImage pointer;
     protected ImageEfx setasAnim;
+
+    protected NameDataBase nameDataBase;
 
 
 
@@ -499,7 +502,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     }
 
     public float getSpeedAdjust() {
-        return speedAdjust;
+        return 2 * speedAdjust;
     }
 
     public int getFps() {
@@ -586,6 +589,10 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     public Save getSave() {
         return save;
+    }
+
+    public char[] getCharacterNameFromDB(String name) {
+        return nameDataBase.get(name);
     }
 
     //----------------------------------------------------------------------------------------

@@ -7,6 +7,7 @@ import nona.mi.button.Button;
 import nona.mi.button.ButtonGroup;
 import nona.mi.button.RectButton;
 import nona.mi.db.FontDataBase;
+import nona.mi.db.NameDataBase;
 import nona.mi.image.BaseImage;
 import nona.mi.image.Coordinates;
 import nona.mi.loader.DialogLoader;
@@ -16,7 +17,18 @@ import nona.mi.efx.Fade;
 import nona.mi.image.ImageEfx;
 import nona.mi.loader.TextLoader;
 import nona.mi.save.Save;
-import nona.mi.scene.*;
+import nona.mi.scene.DataManagerScene;
+import nona.mi.scene.Dialogue;
+import nona.mi.scene.EfxScene;
+import nona.mi.scene.FadeScene;
+import nona.mi.scene.FadeTopBottomScene;
+import nona.mi.scene.HistoryScene;
+import nona.mi.scene.LoadScene;
+import nona.mi.scene.MainMenuScene;
+import nona.mi.scene.Scene;
+import nona.mi.scene.StandardScene;
+
+
 
 public class Thorns extends Game {
 
@@ -25,6 +37,9 @@ public class Thorns extends Game {
     public Thorns(int width, int height, String title, int gameLoopStyle) {
 
         super(width, height, title, gameLoopStyle);
+
+        //HASHMAP DOS NOMES DOS PERSONAGENS
+        nameDataBase = new NameDataBase();
 
         //SOM BOTOES
         String audioClick = "click";

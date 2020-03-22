@@ -7,13 +7,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50053a92-1326-4f75-bf22-ca2e42361449" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/nona/mi/db/NameDataBase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/Dialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/Dialogue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/HistoryScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/HistoryScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/META-INF/Thorns2.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/manifest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/ChoiceScene.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/MenuBasis.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/SaveMenuScene.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/StandardScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/StandardScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/thorns.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/Dialogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/Dialogue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/HistoryScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/HistoryScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/StandardScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/StandardScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -165,21 +174,25 @@
       <screen x="0" y="0" width="1024" height="728" />
     </state>
     <state x="292" y="118" key="FileChooserDialogImpl/0.0.1024.728@0.0.1024.728" timestamp="1584525108011" />
-    <state width="980" height="266" key="GridCell.Tab.0.bottom" timestamp="1584749009845">
-      <screen x="0" y="0" width="1024" height="728" />
+    <state width="978" height="388" key="GridCell.Tab.0.bottom" timestamp="1584845493689">
+      <screen x="0" y="0" width="1024" height="568" />
     </state>
+    <state width="978" height="388" key="GridCell.Tab.0.bottom/0.0.1024.568@0.0.1024.568" timestamp="1584845493689" />
     <state width="980" height="266" key="GridCell.Tab.0.bottom/0.0.1024.728@0.0.1024.728" timestamp="1584749009845" />
-    <state width="980" height="266" key="GridCell.Tab.0.center" timestamp="1584749009845">
-      <screen x="0" y="0" width="1024" height="728" />
+    <state width="978" height="388" key="GridCell.Tab.0.center" timestamp="1584845493686">
+      <screen x="0" y="0" width="1024" height="568" />
     </state>
+    <state width="978" height="388" key="GridCell.Tab.0.center/0.0.1024.568@0.0.1024.568" timestamp="1584845493686" />
     <state width="980" height="266" key="GridCell.Tab.0.center/0.0.1024.728@0.0.1024.728" timestamp="1584749009845" />
-    <state width="980" height="266" key="GridCell.Tab.0.left" timestamp="1584749009845">
-      <screen x="0" y="0" width="1024" height="728" />
+    <state width="978" height="388" key="GridCell.Tab.0.left" timestamp="1584845493685">
+      <screen x="0" y="0" width="1024" height="568" />
     </state>
+    <state width="978" height="388" key="GridCell.Tab.0.left/0.0.1024.568@0.0.1024.568" timestamp="1584845493685" />
     <state width="980" height="266" key="GridCell.Tab.0.left/0.0.1024.728@0.0.1024.728" timestamp="1584749009845" />
-    <state width="980" height="266" key="GridCell.Tab.0.right" timestamp="1584749009845">
-      <screen x="0" y="0" width="1024" height="728" />
+    <state width="978" height="388" key="GridCell.Tab.0.right" timestamp="1584845493687">
+      <screen x="0" y="0" width="1024" height="568" />
     </state>
+    <state width="978" height="388" key="GridCell.Tab.0.right/0.0.1024.568@0.0.1024.568" timestamp="1584845493687" />
     <state width="980" height="266" key="GridCell.Tab.0.right/0.0.1024.728@0.0.1024.728" timestamp="1584749009845" />
     <state width="980" height="248" key="GridCell.Tab.1.bottom" timestamp="1584749009845">
       <screen x="0" y="0" width="1024" height="728" />

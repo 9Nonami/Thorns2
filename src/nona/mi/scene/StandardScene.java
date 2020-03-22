@@ -94,8 +94,8 @@ public class StandardScene extends Scene {
 
             //DEFINE O NOME, SE HOUVER
             String name = splitedDialogues[i].substring((splitedDialogues[i].indexOf("-") + 1), (splitedDialogues[i].indexOf(":")));
-            if (name != null && !(name.equals(""))) {
-                tempDialogues[i].setName(name.toCharArray());
+            if (!(name.equals(""))) {
+                tempDialogues[i].setName(game.getCharacterNameFromDB(name));
             }
         }
 
