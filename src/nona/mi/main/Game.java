@@ -1,6 +1,7 @@
 package nona.mi.main;
 
 import nona.mi.button.ButtonGroup;
+import nona.mi.cont.Cont;
 import nona.mi.db.FontDataBase;
 import nona.mi.db.NameDataBase;
 import nona.mi.image.BaseImage;
@@ -26,7 +27,8 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
-//todo : cena com falas ja exibidas
+
+
 public abstract class Game implements Runnable, KeyListener, MouseListener, MouseMotionListener {
 
     private JFrame jframe;
@@ -42,7 +44,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     private double limit;
     private int fps;
-    private float speedAdjust;
+    private int speedAdjust;
 
     public static final int HARD_GAME_LOOP = 0;
     public static final int SMOOTH_GAME_LOOP = 1;
@@ -91,6 +93,8 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     protected NameDataBase nameDataBase;
 
+    protected Cont contForStan;
+
 
 
     //ESSENCIAL-------------------------------------------------------------------------------
@@ -112,9 +116,9 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         //se for 30fps, roda com os valores definidos
         //se for 60fps, nao deixa ser o dobro da velocidade
         if (gameLoopStyle == HARD_GAME_LOOP){
-            speedAdjust = 1;
+            speedAdjust = 2;
         } else {
-            speedAdjust = 0.5f;
+            speedAdjust = 1;
         }
 
         jframe = new JFrame(title);
@@ -501,8 +505,8 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         return frame;
     }
 
-    public float getSpeedAdjust() {
-        return 2 * speedAdjust;
+    public int getSpeedAdjust() {
+        return speedAdjust;
     }
 
     public int getFps() {
@@ -593,6 +597,10 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     public char[] getCharacterNameFromDB(String name) {
         return nameDataBase.get(name);
+    }
+
+    public Cont getContForStan() {
+        return contForStan;
     }
 
     //----------------------------------------------------------------------------------------

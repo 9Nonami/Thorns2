@@ -79,9 +79,9 @@ public class HistoryScene extends Scene {
     private void configDialog() {
         //define o dialogo a ser renderizado
         dialogue = dialogues[dialogId];
-        dialogue.defineCompleteDialogue();
         dialogue.setHistoryConfiguration(true);
         dialogue.setRenderTextArea(false);
+        dialogue.setRenderNameBg(false);
     }
 
     @Override

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import nona.mi.button.Button;
 import nona.mi.button.ButtonGroup;
 import nona.mi.button.RectButton;
+import nona.mi.cont.Cont;
 import nona.mi.db.FontDataBase;
 import nona.mi.db.NameDataBase;
 import nona.mi.image.BaseImage;
@@ -40,6 +41,9 @@ public class Thorns extends Game {
 
         //HASHMAP DOS NOMES DOS PERSONAGENS
         nameDataBase = new NameDataBase();
+
+        //CONTADOR PARA O DIALOG
+        contForStan = new Cont();
 
         //SOM BOTOES
         String audioClick = "click";

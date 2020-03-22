@@ -28,12 +28,12 @@ public class Dialogue {
     private boolean endAnimation; //estado da animacao
     private char[] arr; //dialogo a ser renderizado
     private char[] name; //recebe de NameDataBase
-    private double cont; //todo : objeto
 
     private BaseImage textArea; //area retangular onde o texto eh 'centralizado'.
     private boolean renderTextArea; //controla quando a textArea deve ser exibida. Ex.: historyScene nao usa a area
 
     private BaseImage nameBg; //imagem onde o nome do personagem eh 'centralizado'
+    private boolean renderNameBg; //controla a exibicao da imagem atras do nome do char
 
     private boolean lockAudio; //bloqueia o audio apos ser executado uma vez
     private String audioName; //id para resgatar uma fala em packjuke. eh definido no txt de dialogos
@@ -58,10 +58,10 @@ public class Dialogue {
     public Dialogue(Game game, FontDataBase fdb, BaseImage textArea, BaseImage nameBg) {
         this.game = game;
         this.fdb = fdb;
-        cont = 0;
-        this.textArea = textArea;
+        this.textArea = textArea; //todo : game.getStandardTextArea();
         this.nameBg = nameBg; //todo : pegar de um mapa de acordo com o nome
         renderTextArea = true;
+        renderNameBg = true;
     }
 
     //---------------------------------------------------
@@ -73,21 +73,6 @@ public class Dialogue {
         this.audioName = audioName;
         lockAudio = false;
         game.getPackJukebox().load(audioPath, this.audioName);
-    }
-
-    public void setDialogue(char[] arr) {
-        this.arr = arr;
-    }
-
-    public void setName(char[] name) {
-        this.name = name;
-    }
-
-    public boolean getEndAnimation() {
-        if  (playFullAudio && (audioName != null)){
-            return endAnimation && !game.getPackJukebox().isPlaying(audioName);
-        }
-        return endAnimation;
     }
 
     public String getAudioName() {
@@ -106,9 +91,32 @@ public class Dialogue {
         return audioPaused;
     }
 
-    public void setRenderTextArea(boolean renderTextArea) { //todo : history acessa
+
+    public void setDialogue(char[] arr) {
+        this.arr = arr;
+    }
+
+    public void setName(char[] name) {
+        this.name = name;
+    }
+
+
+    public boolean getEndAnimation() {
+        if  (playFullAudio && (audioName != null)){
+            return endAnimation && !game.getPackJukebox().isPlaying(audioName);
+        }
+        return endAnimation;
+    }
+
+
+    public void setRenderTextArea(boolean renderTextArea) {
         this.renderTextArea = renderTextArea;
     }
+
+    public void setRenderNameBg(boolean renderNameBg) {
+        this.renderNameBg = renderNameBg;
+    }
+
 
     public void setHistoryConfiguration(boolean historyConfiguration) {
         this.historyConfiguration = historyConfiguration;
@@ -134,10 +142,10 @@ public class Dialogue {
     private void updateText() {
         if (arr != null) {
             if (!endAnimation) {
-                cont += game.getSpeedAdjust();
-                if (cont >= arr.length) {
-                    if (cont > arr.length) {
-                        cont = arr.length;
+                game.getContForStan().update(game.getSpeedAdjust());
+                if (game.getContForStan().getValue() >= arr.length) {
+                    if (game.getContForStan().getValue() > arr.length) {
+                        game.getContForStan().setValue(arr.length);
                     }
                     endAnimation = true;
                 }
@@ -162,48 +170,56 @@ public class Dialogue {
     }
 
     private void renderNameBg(Graphics g) {
-        if (name != null) {
+        if (name != null && renderNameBg) {
             nameBg.render(g);
         }
     }
 
     private void renderName(Graphics g) {
-        int tempxname;
-        if (!historyConfiguration) {
-            tempxname = X_NAME;
-        } else {
-            tempxname = HistoryScene.NEW_NAME_X;
-        }
         if (name != null) {
+            int tempXName;
+            int tempYName;
+            if (!historyConfiguration) {
+                tempXName = X_NAME;
+                tempYName = Y_NAME;
+            } else {
+                tempXName = HistoryScene.NEW_NAME_X;
+                tempYName = HistoryScene.NEW_NAME_Y;
+            }
             for (char c : name) {
-                g.drawImage(fdb.get(c), tempxname, Y_NAME, null);
-                tempxname += fdb.get(c).getWidth();
+                g.drawImage(fdb.get(c), tempXName, tempYName, null);
+                tempXName += fdb.get(c).getWidth();
             }
         }
     }
 
     private void renderDialogue(Graphics g) {
-        int tempx;
-        int tempy;
         if (!historyConfiguration) {
-            tempx = X;
-            tempy = Y;
-        } else {
-            tempx = HistoryScene.NEW_DIALOG_X;
-            tempy = HistoryScene.NEW_DIALOG_Y;
-        }
-        for (int id = 0; id < (int) cont; id++) {
-            if (arr[id] == '@') {
-                tempy += fdb.getFontHeight() + SPACING;
-                if (!historyConfiguration) {
-                    tempx = X;
-                } else {
-                    tempx = HistoryScene.NEW_DIALOG_X;
+            //renderiza para stan
+            int tempX = X;
+            int tempY = Y;
+            for (int id = 0; id < (int) game.getContForStan().getValue(); id++) {
+                if (arr[id] == '@') {
+                    tempY += fdb.getFontHeight() + SPACING;
+                    tempX = X;
+                    continue;
                 }
-                continue;
+                g.drawImage(fdb.get(arr[id]), tempX, tempY, null);
+                tempX += fdb.get(arr[id]).getWidth();
             }
-            g.drawImage(fdb.get(arr[id]), tempx, tempy, null);
-            tempx += fdb.get(arr[id]).getWidth();
+        } else {
+            //renderiza para history
+            int tempX = HistoryScene.NEW_DIALOG_X;
+            int tempY = HistoryScene.NEW_DIALOG_Y;
+            for (char c : arr) {
+                if (c == '@') {
+                    tempY += fdb.getFontHeight() + SPACING;
+                    tempX = HistoryScene.NEW_DIALOG_X;
+                    continue;
+                }
+                g.drawImage(fdb.get(c), tempX, tempY, null);
+                tempX += fdb.get(c).getWidth();
+            }
         }
     }
 
@@ -213,12 +229,8 @@ public class Dialogue {
     //OTHER----------------------------------------------
 
     public void completeDialogue() {
-        cont = arr.length;
+        game.getContForStan().setValue(arr.length);
         endAnimation = true;
-    }
-
-    public void defineCompleteDialogue() {
-        cont = arr.length;
     }
 
     //---------------------------------------------------
@@ -226,11 +238,11 @@ public class Dialogue {
 
     public void reset() {
         endAnimation = false;
-        cont = 0;
         lockAudio = false;
         audioPaused = false;
         historyConfiguration = false;
         renderTextArea = true;
+        renderNameBg = true;
     }
 
 }

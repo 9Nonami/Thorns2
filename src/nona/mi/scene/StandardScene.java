@@ -58,9 +58,6 @@ public class StandardScene extends Scene {
         String[] splitedDialogues = s.split("_");
         Dialogue[] tempDialogues = new Dialogue[splitedDialogues.length];
 
-        int xx = 10; //todo : del
-        int yy = (int) (game.getTextArea().getY() + xx); //+ xx para espacamento
-
 
         for (int i = 0; i < tempDialogues.length; i++) {
             //CRIA O DIALOG
@@ -97,6 +94,7 @@ public class StandardScene extends Scene {
             if (!(name.equals(""))) {
                 tempDialogues[i].setName(game.getCharacterNameFromDB(name));
             }
+
         }
 
         dialogues = tempDialogues;
@@ -118,48 +116,52 @@ public class StandardScene extends Scene {
 
         //nao faz sentido atualizar se nao estiver visivel
         if (!hide) {
+
             dialogueBasis.update();
             space = game.isSpace();
             clicked = game.isClicked();
-        }
 
-        //termina o audio e a animacao do texto
-        if (clicked && !(dialogueBasis.getEndAnimation())) {
-            dialogueBasis.completeDialogue();
-            clicked = false;
-            space = false;
-            if(dialogueBasis.getAudioName() != null && game.getPackJukebox().isPlaying(dialogueBasis.getAudioName())) {
-                game.getPackJukebox().stop(dialogueBasis.getAudioName());
-            }
-        }
-
-        //update das setas
-        if (dialogueBasis.getEndAnimation()){
-            setasAnim.update();
-        }
-
-        //proximo dialogo ou cena
-        if (dialogueBasis.getEndAnimation() && (space || clicked)) {
-
-            if(dialogueBasis.getAudioName() != null && game.getPackJukebox().isPlaying(dialogueBasis.getAudioName())) {
-                game.getPackJukebox().stop(dialogueBasis.getAudioName());
+            //termina o audio e a animacao do texto
+            if ((clicked || space) && !(dialogueBasis.getEndAnimation())) {
+                dialogueBasis.completeDialogue();
+                clicked = false;
+                space = false;
+                if(dialogueBasis.getAudioName() != null && game.getPackJukebox().isPlaying(dialogueBasis.getAudioName())) {
+                    game.getPackJukebox().stop(dialogueBasis.getAudioName());
+                }
             }
 
-            dialogueBasis.reset();
-            setasAnim.reset(); //I don't think it is really necessary, but ok
+            //update das setas
+            if (dialogueBasis.getEndAnimation()){
+                setasAnim.update();
+            }
 
-            dialogueID++;
+            //proximo dialogo ou cena
+            if (dialogueBasis.getEndAnimation() && (space || clicked)) {
 
-            if (dialogueID == dialogues.length) {
-                dialogueID = 0;
+                if (dialogueBasis.getAudioName() != null && game.getPackJukebox().isPlaying(dialogueBasis.getAudioName())) {
+                    game.getPackJukebox().stop(dialogueBasis.getAudioName());
+                }
+
+                dialogueBasis.reset();
+                game.getContForStan().reset();
+                setasAnim.reset();
+
+                dialogueID++;
+
+                //vai para a proxima cena pois cheguou ao final dos dialogos
+                if (dialogueID == dialogues.length) {
+                    dialogueID = 0;
+                    dialogueBasis = dialogues[dialogueID];
+                    game.getSave().getTracer().add(sceneId);
+                    game.nextScene();
+                    return;
+                }
+
                 dialogueBasis = dialogues[dialogueID];
-                game.getSave().getTracer().add(sceneId);
-                game.nextScene();
-                return;
             }
-
-            dialogueBasis = dialogues[dialogueID];
         }
+
     }
 
     @Override
@@ -224,6 +226,7 @@ public class StandardScene extends Scene {
         for (int i = 0; i < dialogues.length; i++) {
             dialogues[i].reset();
         }
+        game.getContForStan().reset();
         setasAnim.reset();
     }
 
