@@ -4,21 +4,27 @@ import java.util.HashMap;
 
 public class NameDataBase {
 
+    public static final String MARISA = "Marisa";
+
     private HashMap<String, char[]> map;
-    private static final char[] NONAME = "NONAME".toCharArray();
 
     public NameDataBase() {
         map = new HashMap<String, char[]>();
-        map.put("Rose", "Rose".toCharArray());
-        map.put("Tulip", "Tulip".toCharArray());
-        map.put("Marisa", "Marisa".toCharArray());
+        map.put(MARISA, MARISA.toCharArray());
     }
 
     public char[] get(String name) {
         if (map.containsKey(name)) {
             return map.get(name);
         }
-        return NONAME;
+        System.out.println(NameDataBase.class.getName());
+        System.out.println(name + " not found!");
+        System.exit(0);
+        return null;
     }
+
+
+
+
 
 }

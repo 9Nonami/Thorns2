@@ -8,6 +8,7 @@ import nona.mi.button.ButtonGroup;
 import nona.mi.button.RectButton;
 import nona.mi.cont.Cont;
 import nona.mi.db.FontDataBase;
+import nona.mi.db.NameBgDataBase;
 import nona.mi.db.NameDataBase;
 import nona.mi.image.BaseImage;
 import nona.mi.image.Coordinates;
@@ -39,8 +40,6 @@ public class Thorns extends Game {
 
         super(width, height, title, gameLoopStyle);
 
-        //HASHMAP DOS NOMES DOS PERSONAGENS
-        nameDataBase = new NameDataBase();
 
         //CONTADOR PARA O DIALOG
         contForStan = new Cont();
@@ -78,14 +77,16 @@ public class Thorns extends Game {
         fontDataBase = new FontDataBase("/res/font/myfont.png", "/res/font/text.txt");
         fontFocus = new FontDataBase("/res/font/myfontfocus.png", "/res/font/text.txt");
 
-        //AREA DO DIALOGO
+        //TEXT AREA
         BufferedImage tempTextArea = ImageLoader.loadImage("/res/misc/textarea.png");// /res/font/txtarea.png
         textArea = new BaseImage(tempTextArea, 10, (int)(getHeight() - tempTextArea.getHeight() - 10));
 
-        //BACKGROUND PARA TODOS OS NOMES
-        BufferedImage tempNameBg = ImageLoader.loadImage("/res/font/nameBg.png");
-        //nameBg = new BaseImage(tempNameBg, 0, getHeight() - tempTextArea.getHeight() - tempNameBg.getHeight());
-        nameBg = new BaseImage(tempNameBg, Dialogue.X_NAME_BG, Dialogue.Y_NAME_BG);
+        //NAMES DATA BASE
+        nameDataBase = new NameDataBase();
+
+        //NAME BG DATA BASE //todo : futuramente deixar dentro do pack para nao precisar ler todos
+        nameBgDataBase = new NameBgDataBase();
+        nameBgDataBase.put(nameDataBase.get(NameDataBase.MARISA), ImageLoader.loadImage("/res/font/nameBg.png"));
 
         //BACKGROUND PARA OS TEXTOS DE CHOICE
         choicebg = ImageLoader.loadImage("/res/font/choice2.png");

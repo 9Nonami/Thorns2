@@ -17,7 +17,6 @@ package nona.mi.scene;
 import java.awt.Graphics;
 
 import nona.mi.db.FontDataBase;
-import nona.mi.image.BaseImage;
 import nona.mi.main.Game;
 
 
@@ -29,10 +28,8 @@ public class Dialogue {
     private char[] arr; //dialogo a ser renderizado
     private char[] name; //recebe de NameDataBase
 
-    private BaseImage textArea; //area retangular onde o texto eh 'centralizado'.
     private boolean renderTextArea; //controla quando a textArea deve ser exibida. Ex.: historyScene nao usa a area
 
-    private BaseImage nameBg; //imagem onde o nome do personagem eh 'centralizado'
     private boolean renderNameBg; //controla a exibicao da imagem atras do nome do char
 
     private boolean lockAudio; //bloqueia o audio apos ser executado uma vez
@@ -55,11 +52,9 @@ public class Dialogue {
 
     //ESSENCIAL------------------------------------------
 
-    public Dialogue(Game game, FontDataBase fdb, BaseImage textArea, BaseImage nameBg) {
+    public Dialogue(Game game, FontDataBase fdb) {
         this.game = game;
         this.fdb = fdb;
-        this.textArea = textArea; //todo : game.getStandardTextArea();
-        this.nameBg = nameBg; //todo : pegar de um mapa de acordo com o nome
         renderTextArea = true;
         renderNameBg = true;
     }
@@ -165,13 +160,13 @@ public class Dialogue {
 
     private void renderTextArea(Graphics g) {
         if (renderTextArea) {
-            textArea.render(g);
+            game.getTextArea().render(g);
         }
     }
 
     private void renderNameBg(Graphics g) {
         if (name != null && renderNameBg) {
-            nameBg.render(g);
+            g.drawImage(game.getNameBgDataBase().get(name), X_NAME_BG, Y_NAME_BG, null);
         }
     }
 

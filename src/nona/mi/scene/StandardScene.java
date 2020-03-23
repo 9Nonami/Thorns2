@@ -61,7 +61,7 @@ public class StandardScene extends Scene {
 
         for (int i = 0; i < tempDialogues.length; i++) {
             //CRIA O DIALOG
-            tempDialogues[i] = new Dialogue(game, game.getFontDataBase(), game.getTextArea(), game.getNameBg());
+            tempDialogues[i] = new Dialogue(game, game.getFontDataBase());
 
             //DEFINE O TEXTO E O AUDIO, CASO HAJA
             String dialog;
@@ -92,7 +92,7 @@ public class StandardScene extends Scene {
             //DEFINE O NOME, SE HOUVER
             String name = splitedDialogues[i].substring((splitedDialogues[i].indexOf("-") + 1), (splitedDialogues[i].indexOf(":")));
             if (!(name.equals(""))) {
-                tempDialogues[i].setName(game.getCharacterNameFromDB(name));
+                tempDialogues[i].setName(game.getNameDataBase().get(name));
             }
 
         }

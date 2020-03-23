@@ -3,6 +3,7 @@ package nona.mi.main;
 import nona.mi.button.ButtonGroup;
 import nona.mi.cont.Cont;
 import nona.mi.db.FontDataBase;
+import nona.mi.db.NameBgDataBase;
 import nona.mi.db.NameDataBase;
 import nona.mi.image.BaseImage;
 import nona.mi.image.ImageEfx;
@@ -85,15 +86,15 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     protected FontDataBase fontDataBase;
     protected FontDataBase fontFocus;
-    protected BaseImage nameBg;
     protected BaseImage textArea;
     protected BufferedImage choicebg;
     protected BufferedImage pointer;
     protected ImageEfx setasAnim;
 
-    protected NameDataBase nameDataBase;
-
     protected Cont contForStan;
+
+    protected NameDataBase nameDataBase;
+    protected NameBgDataBase nameBgDataBase;
 
 
 
@@ -533,10 +534,6 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         return textArea;
     }
 
-    public BaseImage getNameBg() {
-        return nameBg;
-    }
-
 
     //INPUTS
     public boolean isClicked() {
@@ -595,12 +592,16 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         return save;
     }
 
-    public char[] getCharacterNameFromDB(String name) {
-        return nameDataBase.get(name);
-    }
-
     public Cont getContForStan() {
         return contForStan;
+    }
+
+    public NameDataBase getNameDataBase() {
+        return nameDataBase;
+    }
+
+    public NameBgDataBase getNameBgDataBase() {
+        return nameBgDataBase;
     }
 
     //----------------------------------------------------------------------------------------
