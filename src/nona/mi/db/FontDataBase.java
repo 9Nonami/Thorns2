@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.awt.image.BufferedImage;
 
 import nona.mi.loader.FontGenerator;
+import nona.mi.loader.ImageLoader;
 
 public class FontDataBase{
 
@@ -16,8 +17,9 @@ public class FontDataBase{
 	private int fontHeight;
 
 	public FontDataBase(String imagePath, String textPath) {
-		map = FontGenerator.generateFont(imagePath, textPath);
-		fontHeight = FontGenerator.getHeight(imagePath);
+		BufferedImage image = ImageLoader.loadImage(imagePath);
+		fontHeight = image.getHeight();
+		map = FontGenerator.generateFont(image, textPath);
 	}
 
 	public int getFontHeight() {

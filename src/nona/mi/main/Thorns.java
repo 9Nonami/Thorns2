@@ -173,7 +173,7 @@ public class Thorns extends Game {
 
         DataManagerScene tempDataManagerScene = new DataManagerScene(this, Scene.DMS_SCENE, 6);
         tempDataManagerScene.createSlotImages(ImageLoader.loadImage("/res/buttons/empty-slot.png"), ImageLoader.loadImage("/res/buttons/focused-slot.png"));
-        tempDataManagerScene.createSlots(12, 2, 3, 44, 44, 31);
+        tempDataManagerScene.createSlots(12, 2, 3, 44, 44, 31, NameDataBase.STANDARD_CLICK);
         tempDataManagerScene.createMiscButtons(new Button[]{returnButton, previousButton, nextButton});
         tempDataManagerScene.createModes(modes);
         tempDataManagerScene.setPackId(Scene.NO_PACK);

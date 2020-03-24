@@ -19,14 +19,8 @@ import java.util.HashMap;
 
 public class FontGenerator {
 
-	public static int getHeight(String imagePath) {
-		BufferedImage temp = ImageLoader.loadImage(imagePath);
-		return temp.getHeight();
-	}
+	public static HashMap<Character, BufferedImage> generateFont(BufferedImage image, String keysPath) {
 
-	public static HashMap<Character, BufferedImage> generateFont(String imagePath, String keysPath) {
-		
-		BufferedImage image = ImageLoader.loadImage(imagePath);
 		String allCharacters = TextLoader.load(keysPath);
 	
 		ArrayList<Integer> listWidth = new ArrayList<Integer>();		

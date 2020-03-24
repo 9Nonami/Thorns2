@@ -93,8 +93,8 @@ public class DataManagerScene extends Scene {
         slotGroup.setImages(standard, focus);
     }
 
-    public void createSlots(int totalButtons, int row, int column, int x, int y, int spacing) {
-        slotGroup.createButtons(totalButtons, row, column, x, y, spacing, ScreenshotLoader.loadScreenshots(game.getSave()));
+    public void createSlots(int totalButtons, int row, int column, int x, int y, int spacing, String audioName) {
+        slotGroup.createButtons(totalButtons, row, column, x, y, spacing, ScreenshotLoader.loadScreenshots(game.getSave()), audioName);
     }
 
     public void createModes(HashMap<Integer, BaseImage> modes) {

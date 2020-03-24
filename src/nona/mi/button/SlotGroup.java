@@ -35,8 +35,6 @@ public class SlotGroup {
         this.focusedButtonImage = focusedButtonImage;
     }
 
-
-
     public void saveImage(BufferedImage image) {
         buttons[clickedSlot].setStandardImage(image);
     }
@@ -45,7 +43,7 @@ public class SlotGroup {
         buttons[clickedSlot].setStandardImage(standardButtonImage);
     }
 
-    public void createButtons(int totalButtons, int row, int column, int x, int y, int spacing, HashMap<Integer, BufferedImage> screenshots) {
+    public void createButtons(int totalButtons, int row, int column, int x, int y, int spacing, HashMap<Integer, BufferedImage> screenshots, String audioName) {
 
         this.totalButtons = totalButtons;
 
@@ -54,7 +52,7 @@ public class SlotGroup {
         for (int i = 0; i < totalButtons; i++) {
             buttons[i] = new RectButton(game);
             buttons[i].setId(i);
-            buttons[i].setAudioName("click");
+            buttons[i].setAudioName(audioName);
         }
 
         //tamanho padrao das imagens

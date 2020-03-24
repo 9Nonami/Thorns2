@@ -8,15 +8,23 @@
   <component name="ChangeListManager">
     <list default="true" id="50053a92-1326-4f75-bf22-ca2e42361449" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/AnimatedRectButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/AnimatedRectButton.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/Button.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/Button.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/RectButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/RectButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/PolygonalButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/PolygonalButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/SlotGroup.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/SlotGroup.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/db/FontDataBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/db/FontDataBase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/db/NameDataBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/db/NameDataBase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/loader/FontGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/loader/FontGenerator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/button/AnimatedRectButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/AnimatedRectButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/button/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/Button.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/button/PolygonalButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/PolygonalButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/button/RectButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/RectButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/DataManagerScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/DataManagerScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/button/SlotGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/SlotGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/db/FontDataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/db/FontDataBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/db/NameDataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/db/NameDataBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/loader/FontGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/loader/FontGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/DataManagerScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/DataManagerScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,26 +175,26 @@
       <screen x="0" y="0" width="1024" height="728" />
     </state>
     <state x="292" y="118" key="FileChooserDialogImpl/0.0.1024.728@0.0.1024.728" timestamp="1584525108011" />
-    <state width="980" height="265" key="GridCell.Tab.0.bottom" timestamp="1585055050149">
+    <state width="981" height="235" key="GridCell.Tab.0.bottom" timestamp="1585057927780">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
     <state width="1024" height="247" key="GridCell.Tab.0.bottom/0.0.1024.568@0.0.1024.568" timestamp="1584887047542" />
-    <state width="980" height="265" key="GridCell.Tab.0.bottom/0.0.1024.728@0.0.1024.728" timestamp="1585055050149" />
-    <state width="980" height="265" key="GridCell.Tab.0.center" timestamp="1585055050149">
+    <state width="981" height="235" key="GridCell.Tab.0.bottom/0.0.1024.728@0.0.1024.728" timestamp="1585057927780" />
+    <state width="981" height="235" key="GridCell.Tab.0.center" timestamp="1585057927780">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
     <state width="1024" height="247" key="GridCell.Tab.0.center/0.0.1024.568@0.0.1024.568" timestamp="1584887047539" />
-    <state width="980" height="265" key="GridCell.Tab.0.center/0.0.1024.728@0.0.1024.728" timestamp="1585055050149" />
-    <state width="980" height="265" key="GridCell.Tab.0.left" timestamp="1585055050149">
+    <state width="981" height="235" key="GridCell.Tab.0.center/0.0.1024.728@0.0.1024.728" timestamp="1585057927780" />
+    <state width="981" height="235" key="GridCell.Tab.0.left" timestamp="1585057927780">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
     <state width="1024" height="247" key="GridCell.Tab.0.left/0.0.1024.568@0.0.1024.568" timestamp="1584887047538" />
-    <state width="980" height="265" key="GridCell.Tab.0.left/0.0.1024.728@0.0.1024.728" timestamp="1585055050149" />
-    <state width="980" height="265" key="GridCell.Tab.0.right" timestamp="1585055050149">
+    <state width="981" height="235" key="GridCell.Tab.0.left/0.0.1024.728@0.0.1024.728" timestamp="1585057927780" />
+    <state width="981" height="235" key="GridCell.Tab.0.right" timestamp="1585057927780">
       <screen x="0" y="0" width="1024" height="728" />
     </state>
     <state width="1024" height="247" key="GridCell.Tab.0.right/0.0.1024.568@0.0.1024.568" timestamp="1584887047541" />
-    <state width="980" height="265" key="GridCell.Tab.0.right/0.0.1024.728@0.0.1024.728" timestamp="1585055050149" />
+    <state width="981" height="235" key="GridCell.Tab.0.right/0.0.1024.728@0.0.1024.728" timestamp="1585057927780" />
     <state width="980" height="248" key="GridCell.Tab.1.bottom" timestamp="1584749009845">
       <screen x="0" y="0" width="1024" height="728" />
     </state>

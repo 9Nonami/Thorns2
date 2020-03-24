@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 public class NameDataBase {
 
+    public static final String STANDARD_CLICK = "click";
     public static final String MARISA = "Marisa";
 
     private HashMap<String, char[]> map;
