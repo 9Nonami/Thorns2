@@ -15,20 +15,16 @@ import nona.mi.main.Game;
 public abstract class Scene {
 
 	protected Game game;
-	protected int nextPack;
+	protected int sceneId;
+	protected int packId;
+	protected int nextPack; //a maioria das cenas vai ter isso indefinido
 	protected int nextScene;
 	protected String soundName; //background sound
 	protected int soundStyle; //loop ou once
-	protected boolean lock; //faz com que o codigo do updateAudio so execute uma vez
+
+	protected ButtonGroup buttonGroup; //save, load, copy, del, main (vem de Game) -- soh cenas que podem ser salvas vao usar
+
 	public static final int LAST_SCENE = -99; //definir como last_scene significa que depois desta cena, outro pack eh carregado. NAO ESQUECER DE DEFINIR O PACK!
-	protected ButtonGroup buttonGroup; //save, load, copy, del, main (vem de Game)
-
-	protected ButtonGroup yn; //confirma a ida para o main
-	protected boolean esc; //ativado quando o botao Main (contido no buttonGroup) eh clicado > desencadeia a visualizacao de yn
-
-	protected int sceneId;
-	protected int packId;
-
 	public static final int LOAD_SCENE = -80;
 	public static final int FADE_SCENE_LOGO = -79;
 	public static final int DMS_SCENE = -78;
@@ -38,8 +34,10 @@ public abstract class Scene {
 	public static final int NO_SCENE = -2;
 	public static final int NO_PACK = -1;
 
-	protected boolean hide;
+	protected boolean hide; //esconde os botoes e os dialogos, deixando soh o bg
 	private boolean lockHConfig;
+	protected boolean lock; //faz com que o codigo do updateAudio so execute uma vez
+	protected boolean esc; //ativado quando o botao Main (contido no buttonGroup) eh clicado > desencadeia a visualizacao de yn
 
 
 
@@ -49,13 +47,11 @@ public abstract class Scene {
 		this.game = game;
 		this.nextScene = nextScene;
 		this.sceneId = sceneId;
-		yn = game.getYn();
 	}
 
 	public Scene(Game game, int sceneId) {
 		this.game = game;
 		this.sceneId = sceneId;
-		yn = game.getYn();
 	}
 
 	//----------------------------------------------------------------
@@ -73,13 +69,13 @@ public abstract class Scene {
 				updateScene();
 			}
 		} else {
-			yn.update();
-			if (yn.getClickedButton() != Button.NO_CLICK) {
-				if (yn.getClickedButton() == DataManagerScene.YES) {
+			game.getYn().update();
+			if (game.getYn().getClickedButton() != Button.NO_CLICK) {
+				if (game.getYn().getClickedButton() == DataManagerScene.YES) {
 					game.returnToMainMenu();
-				} else if (yn.getClickedButton() == DataManagerScene.NO) {
+				} else if (game.getYn().getClickedButton() == DataManagerScene.NO) {
 					esc = false;
-					yn.reset();
+					game.getYn().reset();
 
 					//retoma uma fala caso tenha sido pausada
 					if (game.getSceneBasis() instanceof StandardScene) {
@@ -177,7 +173,7 @@ public abstract class Scene {
 		if (esc) {
 			g.setColor(new Color(0, 0, 0, 150));
 			g.fillRect(0, 0, game.getWidth(), game.getHeight());
-			yn.render(g);
+			game.getYn().render(g);
 		}
 	}
 
@@ -232,7 +228,7 @@ public abstract class Scene {
 		if (buttonGroup != null) {
 			buttonGroup.reset();
 		}
-		yn.reset();
+		game.getYn().reset();
 		esc = false;
 		hide = false;
 		lockHConfig = false;

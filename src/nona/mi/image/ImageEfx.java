@@ -7,7 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.AlphaComposite;
 import java.awt.image.BufferedImage;
 
-public class ImageEfx extends BaseImage {
+public class ImageEfx {
     
     private Coordinates coordinates;
     
@@ -28,7 +28,8 @@ public class ImageEfx extends BaseImage {
     private boolean endAlphaAnimation; //<<<<<<<
     private float aspect;
     private float aspectBase;
-    
+
+    private BufferedImage image;
     private BufferedImage[] images;
     private float delay;
     private boolean animatedImage;
@@ -45,7 +46,7 @@ public class ImageEfx extends BaseImage {
     private Game game;
 
     public ImageEfx(Game game, BufferedImage image, Coordinates coordinates) {
-        super(image);
+        this.image = image;
         this.game = game;
         this.coordinates = coordinates;
         
@@ -55,7 +56,6 @@ public class ImageEfx extends BaseImage {
     }
     
     public ImageEfx(Game game, BufferedImage[] images, Coordinates coordinates, float delay, int style) {
-        super(null);
         this.game = game;
         this.images = images;
         this.coordinates = coordinates;
@@ -111,8 +111,7 @@ public class ImageEfx extends BaseImage {
             endAlphaAnimation = true;
         }
     }
-    
-    @Override
+
     public void update() {
         if (animatedImage) {
             //System.out.println("updating images");
@@ -171,8 +170,7 @@ public class ImageEfx extends BaseImage {
         //System.out.println("anima: " + endAnimatedImageAnimation);
         //System.out.println("");
     }
-    
-    @Override
+
     public void render(Graphics g) {
         Graphics2D g2d = (Graphics2D) g.create();
         if (alpha) {

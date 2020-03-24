@@ -10,7 +10,6 @@ public class FadeTopBottomScene extends Scene {
 
     private BaseImage[] bottom;
     private ImageEfx[] top;
-    private BaseImage textArea;
 
 
 
@@ -20,15 +19,11 @@ public class FadeTopBottomScene extends Scene {
         this.top = top;
     }
 
-    public void setTextArea(BaseImage textArea) {
-        this.textArea = textArea;
-    }
-
     @Override
     public void updateScene() {
         if (!top[0].getAllFinishedAnimations()) {
-            for (int i = 0; i < top.length; i++) {
-                top[i].update();
+            for (ImageEfx imageEfx : top) {
+                imageEfx.update();
             }
         } else {
             game.nextScene();
@@ -38,22 +33,19 @@ public class FadeTopBottomScene extends Scene {
 
     @Override
     public void renderScene(Graphics g) {
-        for (int i = 0; i < bottom.length; i++) {
-            bottom[i].render(g);
+        for (BaseImage baseImage : bottom) {
+            baseImage.render(g);
         }
-        for (int i = 0; i < top.length; i++) {
-            top[i].render(g);
-        }
-        if (textArea != null) {
-            textArea.render(g);
+        for (ImageEfx imageEfx : top) {
+            imageEfx.render(g);
         }
     }
 
     @Override
     public void reset() {
         super.reset();
-        for (int i = 0; i < top.length; i++) {
-            top[i].reset();
+        for (ImageEfx imageEfx : top) {
+            imageEfx.reset();
         }
     }
 

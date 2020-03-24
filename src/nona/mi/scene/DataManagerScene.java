@@ -194,14 +194,14 @@ public class DataManagerScene extends Scene {
     }
 
     private void updateYnForSave() {
-        yn.update();
-        if (yn.getClickedButton() != Button.NO_CLICK) {
-            if (yn.getClickedButton() == YES) {
+        game.getYn().update();
+        if (game.getYn().getClickedButton() != Button.NO_CLICK) {
+            if (game.getYn().getClickedButton() == YES) {
                 lockYnForSave = true;
                 pleaseWait = true;
                 save();
-            } else if (yn.getClickedButton() == NO) {
-                yn.reset();
+            } else if (game.getYn().getClickedButton() == NO) {
+                game.getYn().reset();
                 lockForSave = false;
                 lockYnForSave = true;
             }
@@ -234,9 +234,9 @@ public class DataManagerScene extends Scene {
     }
 
     private void updateYnForLoad() {
-        yn.update();
-        if (yn.getClickedButton() != Button.NO_CLICK) {
-            if (yn.getClickedButton() == YES) {
+        game.getYn().update();
+        if (game.getYn().getClickedButton() != Button.NO_CLICK) {
+            if (game.getYn().getClickedButton() == YES) {
                 if (packToReturn != tempPack) {
                     //nao esta lendo alguma cena do pack atual
                     game.loadPack(tempPack, tempScene); // < reseta esta cena (dms)
@@ -255,8 +255,8 @@ public class DataManagerScene extends Scene {
                 }
                 //preenche o tracer com os dados do slot especifico
                 game.getSave().initTracer(tempChosenSlot);
-            } else if (yn.getClickedButton() == NO) {
-                yn.reset();
+            } else if (game.getYn().getClickedButton() == NO) {
+                game.getYn().reset();
                 lockForLoad = false;
                 lockYnForLoad = true;
             }
@@ -318,14 +318,14 @@ public class DataManagerScene extends Scene {
     }
 
     private void updateYnForCopy() {
-        yn.update();
-        if (yn.getClickedButton() != Button.NO_CLICK) {
-            if (yn.getClickedButton() == YES) {
+        game.getYn().update();
+        if (game.getYn().getClickedButton() != Button.NO_CLICK) {
+            if (game.getYn().getClickedButton() == YES) {
                 lockYnForCopy = true;
                 pleaseWait = true;
                 save();
-            } else if (yn.getClickedButton() == NO) {
-                yn.reset();
+            } else if (game.getYn().getClickedButton() == NO) {
+                game.getYn().reset();
                 lockForCopy = false;
                 lockYnForCopy = true;
             }
@@ -355,14 +355,14 @@ public class DataManagerScene extends Scene {
     }
 
     private void updateYnForDel() {
-        yn.update();
-        if (yn.getClickedButton() != Button.NO_CLICK) {
-            if (yn.getClickedButton() == YES) {
+        game.getYn().update();
+        if (game.getYn().getClickedButton() != Button.NO_CLICK) {
+            if (game.getYn().getClickedButton() == YES) {
                 lockYnForDel = true; //nao deixa o infeliz iniciar mais de 1 thread
                 pleaseWait = true;
                 del();
-            } else if (yn.getClickedButton() == NO) {
-                yn.reset();
+            } else if (game.getYn().getClickedButton() == NO) {
+                game.getYn().reset();
                 lockForDel = false;
                 lockYnForDel = true;
             }
@@ -505,7 +505,7 @@ public class DataManagerScene extends Scene {
         buttonGroup.render(g);
         if (!lockYnForSave || !lockYnForDel || !lockYnForCopy || !lockYnForLoad) {
             renderShadow(g);
-            yn.render(g);
+            game.getYn().render(g);
         }
         if (pleaseWait) {
             renderShadow(g);
@@ -534,7 +534,7 @@ public class DataManagerScene extends Scene {
         pleaseWait = false;
 
         buttonGroup.reset();
-        yn.reset();
+        game.getYn().reset();
     }
 
     //--------------------------------------------

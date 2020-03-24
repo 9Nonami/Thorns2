@@ -5,4 +5,4 @@
 10=-:Uma vez nascida na cidade a flor tem seu registro criado e armazenado@em livros. Coisas como parentes, carreira e data de morte, tudo fica@registrado la._-:Por serem de origem publica, toda e qualquer flor pode ter acesso a eles,@bastando apenas ir a biblioteca, localizada ao lado do Congresso das@Flores, no centro da cidade._-:Rose ganhou certa fama no meio bibliotecario, pois vasculhou@incansavelmente todos os possiveis registros proximos a data de seu@nascimento, o que nem mesmo ela sabia com exatidao.%
 12=-:E nao foram poucos, de acordo com a idade de Rose, ela nascera muito@provavelmente ha nove anos, justamente quando a guerra chegou a@CrossedPetal._-:Naquele tempo as flores escrivas tiveram seus dias mais trabalhosos.@Nomes e mais nomes chegavam informando as baixas da cidade.%
 14=-:Desde entao uma variedade de flores nunca mais teve seus registros@escritos ali. Especies inteiras que compunham grande parte da sociedade@foram extintas nas primeiras semanas de combate.%
-15=-Marisa:I will hop to it.#/res/audio/map.wav%
+15=-Marisa:I will áÁ hop to it.#/res/audio/map.wav%

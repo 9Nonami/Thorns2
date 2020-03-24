@@ -11,8 +11,9 @@ public class EfxScene extends Scene {
     private ImageEfx[] images;
     private BaseImage background;
     private BaseImage[] backgrounds;
-    private BaseImage textArea;
     private boolean endAnimation;
+
+
 
     public EfxScene(Game game, ImageEfx[] images, BaseImage background, int nextScene, int sceneId) {
         super(game, nextScene, sceneId);
@@ -65,18 +66,10 @@ public class EfxScene extends Scene {
         for (int i = 0; i < images.length; i++) {
             images[i].render(g);
         }
-
-        if (textArea != null) {
-            textArea.render(g);
-        }
     }
 
     public boolean getEndAnimation() {
         return endAnimation;
-    }
-
-    public void setTextArea(BaseImage textArea) {
-        this.textArea = textArea;
     }
 
     @Override

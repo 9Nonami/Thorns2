@@ -12,7 +12,7 @@ public class ImageLoader {
 		BufferedImage temp = null;
 		InputStream is = null;
 
-		try{
+		try {
 			is = ImageLoader.class.getResourceAsStream(path); 
 			temp = ImageIO.read(is);
 		} catch (Exception ex){
@@ -20,7 +20,7 @@ public class ImageLoader {
 			System.out.println("image loading error");
 			System.exit(0);
 		} finally {
-			try{
+			try {
 				is.close();
 			} catch (Exception ex){
 				ex.printStackTrace();
@@ -37,7 +37,7 @@ public class ImageLoader {
 		File file = new File(path);
 		BufferedImage temp = null;
 
-		try{
+		try {
 			temp = ImageIO.read(file);
 		} catch (Exception ex){
 			ex.printStackTrace();

@@ -9,13 +9,13 @@ public class TextLoader {
 
 	public static String load(String path) {
 
-	    String stringao = "";
+	    StringBuilder stringao = new StringBuilder();
         String read = "";
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(TextLoader.class.getResourceAsStream(path), "UTF-8"))) {
 
             while (((read = br.readLine()) != null)) {
-                stringao += read;
+                stringao.append(read);
             }
 
         } catch (Exception ex) {
@@ -24,18 +24,18 @@ public class TextLoader {
             System.exit(0);
         }
 
-        return stringao;
+        return stringao.toString();
     }
 
     public static String loadFromDisk(File file) {
 
-        String stringao = "";
+        StringBuilder stringao = new StringBuilder();
         String read = "";
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 
             while (((read = br.readLine()) != null)) {
-                stringao += read;
+                stringao.append(read);
             }
 
         } catch (Exception ex) {
@@ -44,7 +44,7 @@ public class TextLoader {
             System.exit(0);
         }
 
-        return stringao;
+        return stringao.toString();
     }
 
 

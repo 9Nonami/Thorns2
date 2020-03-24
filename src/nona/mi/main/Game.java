@@ -33,10 +33,8 @@ import java.util.HashMap;
 public abstract class Game implements Runnable, KeyListener, MouseListener, MouseMotionListener {
 
     private JFrame jframe;
-    private BufferStrategy bs;
     private Canvas canvas;
 
-    private Graphics g;
     private boolean running;
     private Thread t;
 
@@ -177,7 +175,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     }
 
     private void render() {
-        bs = canvas.getBufferStrategy();
+        BufferStrategy bs = canvas.getBufferStrategy();
 
         //tendo que usar uma imagem para ter o screenshot da tela.
         //pelo que vi, reduziu +-200 fps
@@ -196,11 +194,11 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
             g.drawString("PACK: " + sceneBasis.getPackId() + " | SCENE: " + sceneBasis.getSceneId(), 5, 15);
         }
 
-        this.g = bs.getDrawGraphics();
-        this.g.drawImage(frame, 0, 0, null);
+        Graphics g1 = bs.getDrawGraphics();
+        g1.drawImage(frame, 0, 0, null);
 
         g.dispose();
-        this.g.dispose();
+        g1.dispose();
 
         bs.show();
         Toolkit.getDefaultToolkit().sync();
@@ -306,23 +304,14 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     //MUDANCA DE CENA-------------------------------------------------------------------------
 
     public void nextScene() {
-
-        int tempNextPack;
-        int tempNextScene;
-
         if (sceneBasis.getNextScene() == Scene.LAST_SCENE) {
-
-            tempNextPack = sceneBasis.getNextPack();
-            tempNextScene = 0;
-
-            loadPack(tempNextPack, tempNextScene);
-
+            int tempNextPack = sceneBasis.getNextPack();
+            loadPack(tempNextPack, 0); // 0 = primeira cena do novo pack
         } else {
-            tempNextScene = sceneBasis.getNextScene();
+            int tempNextScene = sceneBasis.getNextScene();
             sceneBasis.reset();
             sceneBasis = getSceneFromCurrentPack(tempNextScene);
         }
-
     }
 
     public Scene getSceneFromCurrentPack(int id) {
