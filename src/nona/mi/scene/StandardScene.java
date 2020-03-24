@@ -3,22 +3,19 @@ package nona.mi.scene;
 import java.awt.Graphics;
 
 import nona.mi.image.BaseImage;
-import nona.mi.image.ImageEfx;
 import nona.mi.main.Game;
 
 public class StandardScene extends Scene {
 
     private BaseImage background;
     private BaseImage[] backgrounds;
+
     private BaseImage[] characters;
 
-    private Dialogue[] dialogues; //resets
-    private int dialogueID;
+    private Dialogue[] dialogues;
     private Dialogue dialogueBasis;
-    private boolean space;
-    private boolean clicked;
+    private int dialogueID;
 
-    private ImageEfx setasAnim; //resets
 
 
 
@@ -27,7 +24,6 @@ public class StandardScene extends Scene {
     public StandardScene(Game game, BaseImage background, int nextScene, int sceneId) {
         super(game, nextScene, sceneId);
         this.background = background;
-        setasAnim = game.getSetasAnim();
         buttonGroup = game.getSceneMenu();
     }
 
@@ -35,7 +31,6 @@ public class StandardScene extends Scene {
     public StandardScene(Game game, BaseImage[] backgrounds, int nextScene, int sceneId) {
         super(game, nextScene, sceneId);
         this.backgrounds = backgrounds;
-        setasAnim = game.getSetasAnim();
         buttonGroup = game.getSceneMenu();
     }
 
@@ -118,8 +113,8 @@ public class StandardScene extends Scene {
         if (!hide) {
 
             dialogueBasis.update();
-            space = game.isSpace();
-            clicked = game.isClicked();
+            boolean space = game.isSpace();
+            boolean clicked = game.isClicked();
 
             //termina o audio e a animacao do texto
             if ((clicked || space) && !(dialogueBasis.getEndAnimation())) {
@@ -133,7 +128,7 @@ public class StandardScene extends Scene {
 
             //update das setas
             if (dialogueBasis.getEndAnimation()){
-                setasAnim.update();
+                game.getSetasAnim().update();
             }
 
             //proximo dialogo ou cena
@@ -145,7 +140,7 @@ public class StandardScene extends Scene {
 
                 dialogueBasis.reset();
                 game.getContForStan().reset();
-                setasAnim.reset();
+                game.getSetasAnim().reset();
 
                 dialogueID++;
 
@@ -184,7 +179,7 @@ public class StandardScene extends Scene {
         if (!hide) {
             dialogueBasis.render(g);
             if (dialogueBasis.getEndAnimation()) {
-                setasAnim.render(g);
+                game.getSetasAnim().render(g);
             }
         }
     }
@@ -223,11 +218,11 @@ public class StandardScene extends Scene {
         //forca o reset, mesmo que ja esteja resetado
         dialogueID = 0;
         dialogueBasis = dialogues[dialogueID];
-        for (int i = 0; i < dialogues.length; i++) {
-            dialogues[i].reset();
+        for (Dialogue dialogue : dialogues) {
+            dialogue.reset();
         }
         game.getContForStan().reset();
-        setasAnim.reset();
+        game.getSetasAnim().reset();
     }
 
 }

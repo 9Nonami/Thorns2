@@ -103,7 +103,7 @@ public class Thorns extends Game {
 
         BufferedImage[] setas = {s1, s2, s3, s4, s5};
         Coordinates setasCoord = new Coordinates(getWidth() - s1.getWidth(), getHeight() - s1.getHeight());
-        setasAnim = new ImageEfx(this, setas, setasCoord, 0.25f , ImageEfx.LOOP); //0.15f
+        setasAnim = new ImageEfx(this, setas, setasCoord, 0.15f , ImageEfx.LOOP); //0.15f
 
         //LOAD SCENE
         createLoadScene();
@@ -173,7 +173,7 @@ public class Thorns extends Game {
         modes.put(DataManagerScene.DEL, deleteMode);
 
 
-        DataManagerScene tempDataManagerScene = new DataManagerScene(this, Scene.DMS_SCENE, save, 6);
+        DataManagerScene tempDataManagerScene = new DataManagerScene(this, Scene.DMS_SCENE, 6);
         tempDataManagerScene.createSlotImages(ImageLoader.loadImage("/res/buttons/empty-slot.png"), ImageLoader.loadImage("/res/buttons/focused-slot.png"));
         tempDataManagerScene.createSlots(12, 2, 3, 44, 44, 31);
         tempDataManagerScene.createMiscButtons(new Button[]{returnButton, previousButton, nextButton});

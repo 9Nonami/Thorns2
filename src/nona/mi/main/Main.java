@@ -1,8 +1,5 @@
 package nona.mi.main;
 
-import java.util.Arrays;
-import java.util.HashMap;
-
 public class Main{
 
 	public static void main(String[] args) {
@@ -13,6 +10,8 @@ public class Main{
 		thorns.setShowScene(true);
 		//thorns.setShowLoopLog(true);
 		thorns.start();
+
+
 
 
 

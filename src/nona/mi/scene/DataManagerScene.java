@@ -6,7 +6,6 @@ import nona.mi.button.SlotGroup;
 import nona.mi.image.BaseImage;
 import nona.mi.loader.ScreenshotLoader;
 import nona.mi.main.Game;
-import nona.mi.save.Save;
 
 import javax.imageio.ImageIO;
 import java.awt.Color;
@@ -21,16 +20,17 @@ import java.util.HashMap;
 
 public class DataManagerScene extends Scene {
 
-    private int saveScene;
-    private int savePack;
-    private BufferedImage screenshot;
+    private int sceneToReturn; //armazena o id da cena para a qual retornar
+    private int packToReturn; //armazena o id do pack para o qual retornar
+    private BufferedImage screenshot; //miniatura da cena anterior
 
-    private Save save;
+    private int tempPack; //armazena o pack para slcd
+    private int tempScene; //armazena a cena para slcd
 
-    private int type;
+    private int type; //controla se eh slcd
 
-    private SlotGroup slotGroup;
-    private ButtonGroup buttonGroup;
+    private SlotGroup slotGroup; //slots
+    private ButtonGroup buttonGroup; //prev, next, return
 
     private boolean lockForSave;
     private boolean lockYnForSave;
@@ -47,10 +47,7 @@ public class DataManagerScene extends Scene {
 
     private boolean pleaseWait;
 
-    private HashMap<Integer, BaseImage> modes;
-
-    private int temPackForLoad;
-    private int tempSceneForLoad;
+    private HashMap<Integer, BaseImage> modes; //imagens as quais identificam qual cena o player estah (slcd)
 
     public static final int RETURN_TO_LAST_SCENE = -74;
     public static final int PREVIOUS_SLOT_GROUP = -73;
@@ -63,15 +60,14 @@ public class DataManagerScene extends Scene {
     public static final int DEL = -66;
     public static final int MAIN = -65;
 
-    private int tempChosenSlot;
+    private int tempChosenSlot; //id do slot clicado
 
 
 
     //ESSENCIAL-------------------------------------
 
-    public DataManagerScene(Game game, int sceneId, Save save, int buttonsToShow) {
+    public DataManagerScene(Game game, int sceneId, int buttonsToShow) {
         super(game, sceneId);
-        this.save = save;
         slotGroup = new SlotGroup(game, buttonsToShow);
 
         lockForSave = false;
@@ -98,7 +94,7 @@ public class DataManagerScene extends Scene {
     }
 
     public void createSlots(int totalButtons, int row, int column, int x, int y, int spacing) {
-        slotGroup.createButtons(totalButtons, row, column, x, y, spacing, ScreenshotLoader.loadScreenshots(save));
+        slotGroup.createButtons(totalButtons, row, column, x, y, spacing, ScreenshotLoader.loadScreenshots(game.getSave()));
     }
 
     public void createModes(HashMap<Integer, BaseImage> modes) {
@@ -111,18 +107,20 @@ public class DataManagerScene extends Scene {
 
     //GS---------------------------------------------
 
-    public void setInfo(int savePack, int saveScene, BufferedImage screenshot) {
-        this.savePack = savePack;
-        this.saveScene = saveScene;
+    public void setInfo(int packToReturn, int sceneToReturn, BufferedImage screenshot) {
+        this.packToReturn = packToReturn;
+        tempPack = packToReturn;
+        this.sceneToReturn = sceneToReturn;
+        tempScene = sceneToReturn;
         this.screenshot = screenshot;
     }
 
-    public void setSaveScene(int saveScene) {
-        this.saveScene = saveScene;
+    public void setSceneToReturn(int sceneToReturn) {
+        this.sceneToReturn = sceneToReturn;
     }
 
-    public void setSavePack(int savePack) {
-        this.savePack = savePack;
+    public void setPackToReturn(int packToReturn) {
+        this.packToReturn = packToReturn;
     }
 
     public void setType(int type) {
@@ -140,15 +138,15 @@ public class DataManagerScene extends Scene {
         buttonGroup.update();
         if (buttonGroup.getClickedButton() != Button.NO_CLICK) {
             if (buttonGroup.getClickedButton() == RETURN_TO_LAST_SCENE) {
-                if (saveScene == Scene.MAIN_MENU_SCENE) {
-                    System.out.println(saveScene);
+                if (sceneToReturn == Scene.MAIN_MENU_SCENE) {
+                    System.out.println(sceneToReturn);
                     System.out.println("");
                     game.returnToMainMenu();
                 } else {
-                    game.setDirectScene(saveScene);
+                    game.setDirectScene(sceneToReturn);
                     //retoma uma fala caso tenha sido pausada
-                    if (game.getSceneFromCurrentPack(saveScene) instanceof StandardScene) {
-                        StandardScene temp = (StandardScene) game.getSceneFromCurrentPack(saveScene);
+                    if (game.getSceneFromCurrentPack(sceneToReturn) instanceof StandardScene) {
+                        StandardScene temp = (StandardScene) game.getSceneFromCurrentPack(sceneToReturn);
                         temp.resumeDialogAudio();
                         temp.setLockHConfig(false); //caso tenha apertado h, não volta para stan com dialog escondido
                     }
@@ -228,8 +226,8 @@ public class DataManagerScene extends Scene {
         slotGroup.update();
         if ((slotGroup.getClickedSlot() != Button.NO_CLICK) && (slotGroup.getButtons()[slotGroup.getClickedSlot()].getStandardImage() != slotGroup.getStandardButtonImage())) {
             tempChosenSlot = slotGroup.getClickedSlot();
-            temPackForLoad = save.getPackOfSlot(tempChosenSlot);
-            tempSceneForLoad = save.getSceneOfSlot(tempChosenSlot);
+            tempPack = game.getSave().getPackOfSlot(tempChosenSlot);
+            tempScene = game.getSave().getSceneOfSlot(tempChosenSlot);
             lockForLoad = true;
             lockYnForLoad = false;
         }
@@ -239,21 +237,21 @@ public class DataManagerScene extends Scene {
         yn.update();
         if (yn.getClickedButton() != Button.NO_CLICK) {
             if (yn.getClickedButton() == YES) {
-                if (savePack != temPackForLoad) {
+                if (packToReturn != tempPack) {
                     //nao esta lendo alguma cena do pack atual
-                    game.loadPack(temPackForLoad, tempSceneForLoad); // < reseta esta cena (dms)
+                    game.loadPack(tempPack, tempScene); // < reseta esta cena (dms)
                 } else {
                     //a cena do slot esta no pack atual
 
                     //RESETA A CENA ANTERIOR (VINDA DE STANDARDSCENE, POR EXEMPLO)
                     //SE A CENA ANTERIOR FOR O MAINMENU NAO PRECISA RESETAR, POIS
                     //ISSO EH FEITO QUANDO O MAIN VEM PARA A TELA DE LOAD
-                    if (saveScene != Scene.MAIN_MENU_SCENE) {
-                        game.getSceneFromCurrentPack(saveScene).reset();
+                    if (sceneToReturn != Scene.MAIN_MENU_SCENE) {
+                        game.getSceneFromCurrentPack(sceneToReturn).reset();
                     }
 
                     //coloca a cena em sceneBasis
-                    game.setDirectScene(tempSceneForLoad); // < reseta esta cena (dms)
+                    game.setDirectScene(tempScene); // < reseta esta cena (dms)
                 }
                 //preenche o tracer com os dados do slot especifico
                 game.getSave().initTracer(tempChosenSlot);
@@ -297,8 +295,8 @@ public class DataManagerScene extends Scene {
 
                 //pega os dados do slot
                 int slotId = slotGroup.getClickedSlot();
-                savePack = save.getPackOfSlot(slotId);
-                saveScene = save.getSceneOfSlot(slotId);
+                tempPack = game.getSave().getPackOfSlot(slotId);
+                tempScene = game.getSave().getSceneOfSlot(slotId);
                 screenshot = slotGroup.getSlotImage(slotId);
             }
         }
@@ -383,14 +381,14 @@ public class DataManagerScene extends Scene {
             public void run() {
                 try {
 
-                    Thread.sleep(1000);
+                    //Thread.sleep(1000);
 
                     //obtem o caminho da imagem de acordo com o os
-                    String tempPath = "";
-                    if (save.getOs().startsWith("w")) {
-                        tempPath = save.getFolderPath() + "\\" + slotGroup.getClickedSlot() + ".png";
-                    } else if (save.getOs().startsWith("l")) {
-                        tempPath = save.getFolderPath() + "/" + slotGroup.getClickedSlot() + ".png";
+                    String tempPath = ""; //todo atomic ref.
+                    if (game.getSave().getOs().startsWith("w")) {
+                        tempPath = game.getSave().getFolderPath() + "\\" + slotGroup.getClickedSlot() + ".png";
+                    } else if (game.getSave().getOs().startsWith("l")) {
+                        tempPath = game.getSave().getFolderPath() + "/" + slotGroup.getClickedSlot() + ".png";
                     }
 
                     //cria e salva a imagem no disco
@@ -405,7 +403,7 @@ public class DataManagerScene extends Scene {
                     slotGroup.saveImage(resized);
 
                     //salva no .9
-                    save.save(slotGroup.getClickedSlot(), savePack, saveScene);
+                    game.getSave().save(slotGroup.getClickedSlot(), tempPack, tempScene);
 
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -434,10 +432,10 @@ public class DataManagerScene extends Scene {
 
                     //obtem o caminho da imagem de acordo com o os
                     String tempPath = "";
-                    if (save.getOs().startsWith("w")) {
-                        tempPath = save.getFolderPath() + "\\" + slotGroup.getClickedSlot() + ".png";
-                    } else if (save.getOs().startsWith("l")) {
-                        tempPath = save.getFolderPath() + "/" + slotGroup.getClickedSlot() + ".png";
+                    if (game.getSave().getOs().startsWith("w")) {
+                        tempPath = game.getSave().getFolderPath() + "\\" + slotGroup.getClickedSlot() + ".png";
+                    } else if (game.getSave().getOs().startsWith("l")) {
+                        tempPath = game.getSave().getFolderPath() + "/" + slotGroup.getClickedSlot() + ".png";
                     }
 
                     //deleta a imagem
@@ -454,7 +452,7 @@ public class DataManagerScene extends Scene {
                 }
 
                 //deleta os dados do .9
-                save.delete(slotGroup.getClickedSlot());
+                game.getSave().delete(slotGroup.getClickedSlot());
 
                 //tira a mensagem de wait
                 pleaseWait = false;
@@ -473,10 +471,8 @@ public class DataManagerScene extends Scene {
     }
 
     private void renderPleaseWait(Graphics g) {
-        if (pleaseWait) {
-            g.setColor(Color.RED);
-            g.drawString("PLEASE WAIT", 50, 50);
-        }
+        g.setColor(Color.RED);
+        g.drawString("PLEASE WAIT", 50, 50);
     }
 
     private void renderModes(Graphics g) {

@@ -37,10 +37,10 @@ public class MainMenuScene extends Scene {
                 DataManagerScene tempDataManagerScene = (DataManagerScene) game.getSceneFromPublicScenes(Scene.DMS_SCENE);
                 tempDataManagerScene.setType(DataManagerScene.LOAD);
 
-                tempDataManagerScene.setSaveScene(sceneId);
+                tempDataManagerScene.setSceneToReturn(sceneId);
                 //game.getSaveMenuScene().setSaveScene(MAIN_MENU_ID);
 
-                tempDataManagerScene.setSavePack(packId);
+                tempDataManagerScene.setPackToReturn(packId);
                 //game.getSaveMenuScene().setSavePack(PACK_FOR_LOAD_GAME);
 
                 game.setDirectSceneFromPublicScenes(Scene.DMS_SCENE);
