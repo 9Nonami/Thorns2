@@ -17,10 +17,6 @@ public class RectButton extends Button {
         super(game);
     }
 
-    public RectButton(Game game, int nextScene) {
-        super(game, nextScene);
-    }
-
     @Override
     public void setImages(BufferedImage standardImage, BufferedImage focusedImage, int imageX, int imageY) {
         super.setImages(standardImage, focusedImage, imageX, imageY);

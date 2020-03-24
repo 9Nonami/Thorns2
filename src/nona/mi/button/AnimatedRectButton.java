@@ -19,8 +19,8 @@ public class AnimatedRectButton extends Button {
     private float id;
     private float speed;
 
-    public AnimatedRectButton(Game game, int nextScene) {
-        super(game, nextScene);
+    public AnimatedRectButton(Game game) {
+        super(game);
         id = 0;
     }
 

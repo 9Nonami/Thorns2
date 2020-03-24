@@ -13,8 +13,8 @@ public class PolygonalButton extends Button {
     private final int MOUSE_MASK = 6;
 
 
-    public PolygonalButton(Game game, int nextScene, int[] x, int[] y) {
-        super(game, nextScene);
+    public PolygonalButton(Game game, int[] x, int[] y) {
+        super(game);
         polygon = new Polygon(x, y, x.length);
     }
 

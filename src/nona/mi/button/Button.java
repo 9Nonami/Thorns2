@@ -11,7 +11,6 @@ public abstract class Button {
     protected boolean showMask;
     protected boolean clicked;
     protected boolean focused;
-    protected int nextScene;
     protected BufferedImage standardImage;
     protected BufferedImage focusedImage;
     protected int imageX;
@@ -26,11 +25,6 @@ public abstract class Button {
 
     public Button(Game game) {
         this.game = game;
-    }
-
-    public Button(Game game, int nextScene) {
-        this.game = game;
-        this.nextScene = nextScene;
     }
 
     public void setImages(BufferedImage standardImage, BufferedImage focusedImage, int imageX, int imageY) {
@@ -81,9 +75,6 @@ public abstract class Button {
         focused = false;
     }
 
-    public int getNextScene() {
-        return nextScene;
-    }
 
     public void defineAudio(String audioPath, String audioName) {
         this.audioName = audioName;

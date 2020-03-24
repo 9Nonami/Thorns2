@@ -20,7 +20,6 @@ import nona.mi.image.ImageEfx;
 import nona.mi.loader.TextLoader;
 import nona.mi.save.Save;
 import nona.mi.scene.DataManagerScene;
-import nona.mi.scene.Dialogue;
 import nona.mi.scene.EfxScene;
 import nona.mi.scene.FadeScene;
 import nona.mi.scene.FadeTopBottomScene;
@@ -29,7 +28,6 @@ import nona.mi.scene.LoadScene;
 import nona.mi.scene.MainMenuScene;
 import nona.mi.scene.Scene;
 import nona.mi.scene.StandardScene;
-
 
 
 public class Thorns extends Game {
