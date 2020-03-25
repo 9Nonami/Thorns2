@@ -1,9 +1,13 @@
 package nona.mi.scene;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
+import nona.mi.button.Button;
 import nona.mi.image.BaseImage;
 import nona.mi.main.Game;
+
+
 
 public class StandardScene extends Scene {
 
@@ -16,6 +20,9 @@ public class StandardScene extends Scene {
     private Dialogue dialogueBasis;
     private int dialogueID;
 
+    private boolean mainClicked;
+    private boolean hide;
+    private boolean lockHCheck;
 
 
 
@@ -24,14 +31,12 @@ public class StandardScene extends Scene {
     public StandardScene(Game game, BaseImage background, int nextScene, int sceneId) {
         super(game, nextScene, sceneId);
         this.background = background;
-        buttonGroup = game.getSceneMenu();
     }
 
     //para o caso de mais uma imagem como BG
     public StandardScene(Game game, BaseImage[] backgrounds, int nextScene, int sceneId) {
         super(game, nextScene, sceneId);
         this.backgrounds = backgrounds;
-        buttonGroup = game.getSceneMenu();
     }
 
     //-----------------------------------------------
@@ -101,6 +106,12 @@ public class StandardScene extends Scene {
         this.characters = characters;
     }
 
+    public void setLockHCheck(boolean lockHCheck) {
+        //se for apertado 'h' em outra cena, elas usam
+        //este metodo para resetar a var antes de voltar para cah
+        this.lockHCheck = lockHCheck;
+    }
+
     //------------------------------------------------
 
 
@@ -108,79 +119,172 @@ public class StandardScene extends Scene {
 
     @Override
     public void updateScene() {
+        //o audio eh iniciado em Scene
 
-        //nao faz sentido atualizar se nao estiver visivel
+        resetHStuff(); //se antes de chegar a esta cena 'h' foi pressionado, reseta para nao comecar com o dialogo escondido - soh executa uma vez
+
+        if (!mainClicked) {
+            hide = game.ishKey();
+        }
+
         if (!hide) {
-
-            dialogueBasis.update();
-            boolean space = game.isSpace();
-            boolean clicked = game.isClicked();
-
-            //termina o audio e a animacao do texto
-            if ((clicked || space) && !(dialogueBasis.getEndAnimation())) {
-                dialogueBasis.completeDialogue();
-                clicked = false;
-                space = false;
-                if(dialogueBasis.getAudioName() != null && game.getPackJukebox().isPlaying(dialogueBasis.getAudioName())) {
-                    game.getPackJukebox().stop(dialogueBasis.getAudioName());
+            if (!mainClicked) {
+                updateButtonGroup();
+                if (game.getSlcd().getClickedButton() == Button.NO_CLICK) {
+                    updateDialog();
                 }
-            }
-
-            //update das setas
-            if (dialogueBasis.getEndAnimation()){
-                game.getSetasAnim().update();
-            }
-
-            //proximo dialogo ou cena
-            if (dialogueBasis.getEndAnimation() && (space || clicked)) {
-
-                if (dialogueBasis.getAudioName() != null && game.getPackJukebox().isPlaying(dialogueBasis.getAudioName())) {
-                    game.getPackJukebox().stop(dialogueBasis.getAudioName());
-                }
-
-                dialogueBasis.reset();
-                game.getContForStan().reset();
-                game.getSetasAnim().reset();
-
-                dialogueID++;
-
-                //vai para a proxima cena pois cheguou ao final dos dialogos
-                if (dialogueID == dialogues.length) {
-                    dialogueID = 0;
-                    dialogueBasis = dialogues[dialogueID];
-                    game.getSave().getTracer().add(sceneId);
-                    game.nextScene();
-                    return;
-                }
-
-                dialogueBasis = dialogues[dialogueID];
+            } else {
+                updateYn();
             }
         }
 
     }
 
+    private void updateButtonGroup() {
+        game.getSlcd().update();
+        if (game.getSlcd().getClickedButton() != Button.NO_CLICK) {
+
+            //se estiver no meio do audio quando um botao for pressionado, o pausa
+            pauseDialogAudio();
+
+            if (game.getSlcd().getClickedButton() == DataManagerScene.MAIN) {
+                mainClicked = true;
+            } else if (game.getSlcd().getClickedButton() == HISTORY_SCENE) {
+                HistoryScene tempHistoryScene = (HistoryScene) game.getSceneFromPublicScenes(HISTORY_SCENE);
+                tempHistoryScene.setSceneToReturn(sceneId);
+                System.out.println("retornarah para: " + sceneId);
+                tempHistoryScene.checkInitialId();
+                game.setSceneBasisFromPublicScenesWithoutReset(HISTORY_SCENE);
+                game.getSlcd().reset();
+                game.setClicked(false);
+            } else {
+                DataManagerScene tempDataManagerScene = (DataManagerScene) game.getSceneFromPublicScenes(DMS_SCENE);
+                tempDataManagerScene.setType(game.getSlcd().getClickedButton());
+                tempDataManagerScene.setInfo(game.getSceneBasis().getPackId(), game.getSceneBasis().getSceneId(), game.getFrame());
+                game.setSceneBasisFromPublicScenesWithoutReset(DMS_SCENE); //para nao resetar a cena
+                game.getSlcd().reset();
+                game.setClicked(false);
+            }
+        }
+    }
+
+    private void updateDialog() {
+
+        dialogueBasis.update();
+
+        boolean clicked = game.isClicked();
+        boolean space = game.isSpace();
+
+        //termina o audio e a animacao do texto
+        if ((clicked || space) && !(dialogueBasis.getEndAnimation())) {
+            dialogueBasis.completeDialogue();
+            clicked = false;
+            space = false;
+            if(dialogueBasis.getAudioName() != null && game.getPackJukebox().isPlaying(dialogueBasis.getAudioName())) {
+                game.getPackJukebox().stop(dialogueBasis.getAudioName());
+            }
+        }
+
+        //update das setas
+        if (dialogueBasis.getEndAnimation()){
+            game.getSetasAnim().update();
+        }
+
+        //proximo dialogo ou cena
+        if (dialogueBasis.getEndAnimation() && (space || clicked)) {
+
+            if (dialogueBasis.getAudioName() != null && game.getPackJukebox().isPlaying(dialogueBasis.getAudioName())) {
+                game.getPackJukebox().stop(dialogueBasis.getAudioName());
+            }
+
+            dialogueBasis.reset();
+            game.getContForStan().reset();
+            game.getSetasAnim().reset();
+
+            dialogueID++;
+
+            //vai para a proxima cena pois cheguou ao final dos dialogos
+            if (dialogueID == dialogues.length) {
+                dialogueID = 0;
+                dialogueBasis = dialogues[dialogueID];
+                game.getSave().getTracer().add(sceneId);
+                game.nextScene();
+                return;
+            }
+
+            dialogueBasis = dialogues[dialogueID];
+        }
+
+    }
+
+    private void updateYn() {
+        game.getYn().update();
+        if (game.getYn().getClickedButton() != Button.NO_CLICK) {
+            if (game.getYn().getClickedButton() == DataManagerScene.YES) {
+                game.returnToMainMenu(); //reseta esta cena
+            } else if (game.getYn().getClickedButton() == DataManagerScene.NO) {
+                mainClicked = false;
+                game.getYn().reset();
+                //para o caso de hide ser ativado
+                lockHCheck = false;
+                resetHStuff();
+                hide = false;
+                //retoma uma fala caso tenha sido pausada
+                resumeDialogAudio();
+            }
+        }
+    }
+
+
     @Override
     public void renderScene(Graphics g) {
+        renderBackground(g);
+        renderCharacters(g);
+        renderDialog(g);
+        renderSlcd(g);
+        renderYn(g);
+    }
 
+    private void renderBackground(Graphics g) {
         if (backgrounds != null) {
             for (BaseImage baseImage : backgrounds) {
                 baseImage.render(g);
             }
         } else {
-            background.render(g);
+            if (background != null) {
+                background.render(g);
+            }
         }
+    }
 
+    private void renderCharacters(Graphics g) {
         if (characters != null) {
             for (BaseImage character : characters) {
                 character.render(g);
             }
         }
+    }
 
+    private void renderDialog(Graphics g) {
         if (!hide) {
             dialogueBasis.render(g);
             if (dialogueBasis.getEndAnimation()) {
                 game.getSetasAnim().render(g);
             }
+        }
+    }
+
+    private void renderSlcd(Graphics g) {
+        if (!hide) {
+            game.getSlcd().render(g);
+        }
+    }
+
+    private void renderYn(Graphics g) {
+        if (mainClicked) {
+            g.setColor(new Color(0, 0, 0, 150));
+            g.fillRect(0, 0, game.getWidth(), game.getHeight());
+            game.getYn().render(g);
         }
     }
 
@@ -223,6 +327,20 @@ public class StandardScene extends Scene {
         }
         game.getContForStan().reset();
         game.getSetasAnim().reset();
+
+        game.getYn().reset();
+        game.getSlcd().reset();
+
+        lockHCheck = false;
+        mainClicked = false;
+
+    }
+
+    private void resetHStuff() {
+        if (!lockHCheck) {
+            lockHCheck = true;
+            game.resetHStuff();
+        }
     }
 
 }

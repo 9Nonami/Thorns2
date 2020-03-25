@@ -465,7 +465,7 @@ public class Thorns extends Game {
         scene15.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(scene15);
 
-
+        //todo : parece que as cenas estao sem packid
     }
 
 

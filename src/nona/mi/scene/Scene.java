@@ -1,10 +1,7 @@
 package nona.mi.scene;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
-import nona.mi.button.Button;
-import nona.mi.button.ButtonGroup;
 import nona.mi.jukebox.MyJukeBox;
 import nona.mi.main.Game;
 
@@ -22,8 +19,6 @@ public abstract class Scene {
 	protected String soundName; //background sound
 	protected int soundStyle; //loop ou once
 
-	protected ButtonGroup buttonGroup; //save, load, copy, del, main (vem de Game) -- soh cenas que podem ser salvas vao usar
-
 	public static final int LAST_SCENE = -99; //definir como last_scene significa que depois desta cena, outro pack eh carregado. NAO ESQUECER DE DEFINIR O PACK!
 	public static final int LOAD_SCENE = -80;
 	public static final int FADE_SCENE_LOGO = -79;
@@ -34,10 +29,7 @@ public abstract class Scene {
 	public static final int NO_SCENE = -2;
 	public static final int NO_PACK = -1;
 
-	protected boolean hide; //esconde os botoes e os dialogos, deixando soh o bg
-	private boolean lockHConfig;
-	protected boolean lock; //faz com que o codigo do updateAudio so execute uma vez
-	protected boolean esc; //ativado quando o botao Main (contido no buttonGroup) eh clicado > desencadeia a visualizacao de yn
+	protected boolean lockAudio; //faz com que o codigo do updateAudio so execute uma vez
 
 
 
@@ -60,37 +52,12 @@ public abstract class Scene {
 	//UR--------------------------------------------------------------
 
 	public void update() {
-		resetHStuff(); //executa soh uma vez, no primeiro update da cena
-		hide = game.ishKey();
-		if (!esc) {
-			updateAudio();
-			updateButtonGroup();
-			if (!esc) { //precisa disso pois o metodo acima muda o status de esc
-				updateScene();
-			}
-		} else {
-			game.getYn().update();
-			if (game.getYn().getClickedButton() != Button.NO_CLICK) {
-				if (game.getYn().getClickedButton() == DataManagerScene.YES) {
-					game.returnToMainMenu();
-				} else if (game.getYn().getClickedButton() == DataManagerScene.NO) {
-					esc = false;
-					game.getYn().reset();
-
-					//retoma uma fala caso tenha sido pausada
-					if (game.getSceneBasis() instanceof StandardScene) {
-						StandardScene temp = (StandardScene) game.getSceneBasis();
-						temp.resumeDialogAudio();
-					}
-				}
-			}
-		}
+		updateAudio();
+		updateScene();
 	}
 
-	public abstract void updateScene();
-
 	private void updateAudio() {
-		if	(!lock && soundName != null) {
+		if	(!lockAudio && soundName != null) {
 
 			String temp = game.getCurrentSound();
 			System.out.println("audio atual: " + temp);
@@ -99,7 +66,7 @@ public abstract class Scene {
 			if (temp != null) {
 				if (temp.equals(soundName) && game.getPackJukebox().isPlaying(temp)) {
 					System.out.println("RETORNANDO! mesmo audio!" + "\n");
-					lock = true;
+					lockAudio = true;
 					return;
 				}
 			}
@@ -120,61 +87,15 @@ public abstract class Scene {
 				game.getPackJukebox().loop(this.soundName);
 			}
 
-			lock = true;
+			lockAudio = true;
 		}
 	}
 
-	private void updateButtonGroup() {
-		if (buttonGroup != null && !hide) {
-			buttonGroup.update();
-			if (buttonGroup.getClickedButton() != Button.NO_CLICK) {
+	public abstract void updateScene();
 
-				//se estiver no meio do audio quando um botao for pressionado, pausa
-				if (game.getSceneBasis() instanceof StandardScene) {
-					StandardScene temp = (StandardScene) game.getSceneBasis();
-					temp.pauseDialogAudio();
-				}
-
-				if (buttonGroup.getClickedButton() == DataManagerScene.MAIN) {
-					esc = true;
-				} else if (buttonGroup.getClickedButton() == HISTORY_SCENE) {
-					HistoryScene tempHistoryScene = (HistoryScene) game.getSceneFromPublicScenes(HISTORY_SCENE);
-					tempHistoryScene.setSceneToReturn(sceneId);
-					System.out.println("retornarah para: " + sceneId);
-					tempHistoryScene.checkInitialId();
-					game.setSceneBasisFromPublicScenesWithoutReset(HISTORY_SCENE);
-					buttonGroup.reset();
-					game.setClicked(false);
-				} else {
-					DataManagerScene tempDataManagerScene = (DataManagerScene) game.getSceneFromPublicScenes(DMS_SCENE);
-					tempDataManagerScene.setType(buttonGroup.getClickedButton());
-					tempDataManagerScene.setInfo(game.getSceneBasis().getPackId(), game.getSceneBasis().getSceneId(), game.getFrame());
-					game.setSceneBasisFromPublicScenesWithoutReset(DMS_SCENE); //para nao resetar a cena
-					buttonGroup.reset();
-					game.setClicked(false);
-				}
-			}
-		}
-	}
 
 	public void render(Graphics g) {
 		renderScene(g);
-		renderButtons(g);
-		renderYn(g);
-	}
-
-	private void renderButtons(Graphics g) {
-		if (buttonGroup != null && !hide) {
-			buttonGroup.render(g);
-		}
-	}
-
-	private void renderYn(Graphics g) {
-		if (esc) {
-			g.setColor(new Color(0, 0, 0, 150));
-			g.fillRect(0, 0, game.getWidth(), game.getHeight());
-			game.getYn().render(g);
-		}
 	}
 
 	public abstract void renderScene(Graphics g);
@@ -217,28 +138,10 @@ public abstract class Scene {
 		this.packId = packId;
 	}
 
-	public void setLockHConfig(boolean lockHConfig) {
-		this.lockHConfig = lockHConfig;
-	}
-
 	//----------------------------------------------------------------
 
 	public void reset() {
-		lock = false;
-		if (buttonGroup != null) {
-			buttonGroup.reset();
-		}
-		game.getYn().reset();
-		esc = false;
-		hide = false;
-		lockHConfig = false;
-	}
-
-	private void resetHStuff() {
-		if (!lockHConfig) {
-			lockHConfig = true;
-			game.resetHStuff();
-		}
+		lockAudio = false;
 	}
 
 }

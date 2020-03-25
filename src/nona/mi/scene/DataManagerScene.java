@@ -148,7 +148,7 @@ public class DataManagerScene extends Scene {
                     if (game.getSceneFromCurrentPack(sceneToReturn) instanceof StandardScene) {
                         StandardScene temp = (StandardScene) game.getSceneFromCurrentPack(sceneToReturn);
                         temp.resumeDialogAudio();
-                        temp.setLockHConfig(false); //caso tenha apertado h, não volta para stan com dialog escondido
+                        temp.setLockHCheck(false); //caso tenha apertado h, não volta para stan com dialog escondido
                     }
                 }
                 return true; //para nao atualizar os slots

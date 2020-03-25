@@ -507,7 +507,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         this.showLoopLog = showLoopLog;
     }
 
-    public ButtonGroup getSceneMenu() {
+    public ButtonGroup getSlcd() {
         return sceneMenu;
     }
 

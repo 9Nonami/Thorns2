@@ -98,7 +98,7 @@ public class HistoryScene extends Scene {
                 if (game.getSceneFromCurrentPack(sceneToReturn) instanceof StandardScene) {
                     StandardScene temp = (StandardScene) game.getSceneFromCurrentPack(sceneToReturn);
                     temp.resumeDialogAudio();
-                    temp.setLockHConfig(false); //caso tenha apertado h, não volta para stan com dialog escondido
+                    temp.setLockHCheck(false); //caso tenha apertado h, não volta para stan com dialog escondido
                 }
             } else if (btns.getClickedButton() == PREV) {
                 if (tracerId != Tracer.TOTAL_TRACES) {
