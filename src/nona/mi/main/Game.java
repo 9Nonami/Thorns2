@@ -12,7 +12,6 @@ import nona.mi.save.Save;
 import nona.mi.scene.Scene;
 import nona.mi.scene.ScenePackage;
 
-import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
@@ -94,7 +93,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     protected Cont contForStan;
 
     protected NameDataBase nameDataBase;
-    protected NameBgDataBase nameBgDataBase;
+    protected NameBgDataBase nameBgDataBaseBasis;
 
 
 
@@ -330,6 +329,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
             public void run() {
 
                 packBasis = new ScenePackage();
+                nameBgDataBaseBasis = new NameBgDataBase();
 
                 if (packJukebox != null) {
                     closePackJukebox();
@@ -599,8 +599,8 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         return nameDataBase;
     }
 
-    public NameBgDataBase getNameBgDataBase() {
-        return nameBgDataBase;
+    public NameBgDataBase getNameBgDataBaseBasis() {
+        return nameBgDataBaseBasis;
     }
 
     //----------------------------------------------------------------------------------------

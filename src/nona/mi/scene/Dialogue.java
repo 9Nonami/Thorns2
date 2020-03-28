@@ -166,7 +166,7 @@ public class Dialogue {
 
     private void renderNameBg(Graphics g) {
         if (name != null && renderNameBg) {
-            g.drawImage(game.getNameBgDataBase().get(name), X_NAME_BG, Y_NAME_BG, null);
+            g.drawImage(game.getNameBgDataBaseBasis().get(name), X_NAME_BG, Y_NAME_BG, null);
         }
     }
 

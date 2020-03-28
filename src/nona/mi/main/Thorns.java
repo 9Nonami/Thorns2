@@ -8,7 +8,6 @@ import nona.mi.button.ButtonGroup;
 import nona.mi.button.RectButton;
 import nona.mi.cont.Cont;
 import nona.mi.db.FontDataBase;
-import nona.mi.db.NameBgDataBase;
 import nona.mi.db.NameDataBase;
 import nona.mi.image.BaseImage;
 import nona.mi.image.Coordinates;
@@ -160,10 +159,6 @@ public class Thorns extends Game {
         //NAMES DATA BASE
         nameDataBase = new NameDataBase();
 
-        //NAME BG DATA BASE //todo : futuramente deixar dentro do pack para nao precisar ler todos
-        nameBgDataBase = new NameBgDataBase();
-        nameBgDataBase.put(nameDataBase.get(NameDataBase.MARISA), ImageLoader.loadImage("/res/font/nameBg.png"));
-
         //BACKGROUND PARA OS TEXTOS DE CHOICE
         choicebg = ImageLoader.loadImage("/res/font/choice2.png");
 
@@ -303,6 +298,9 @@ public class Thorns extends Game {
         //BACKGROUND AUDIO
         String trainningCenterAudio = "trainningCenterAudio";
         packJukebox.load("/res/audio/scene0.wav", trainningCenterAudio);
+
+        //BACKGROUND DOS NOMES
+        nameBgDataBaseBasis.put(nameDataBase.get(NameDataBase.MARISA), ImageLoader.loadImage("/res/font/nameBg.png"));
 
 
         //----------------------------------------
