@@ -1,7 +1,6 @@
 package nona.mi.scene;
 
 import nona.mi.button.Button;
-import nona.mi.button.ButtonGroup;
 import nona.mi.main.Game;
 
 import java.awt.Color;
@@ -11,37 +10,27 @@ import java.awt.Graphics;
 
 public class MainMenuScene extends Scene {
 
-    private ButtonGroup buttonGroup;
-
-    public static final int NEW_GAME = -76;
-    public static final int LOAD_GAME = -75;
-
-
-
-    public MainMenuScene(Game game, int sceneId, ButtonGroup buttonGroup) {
+    public MainMenuScene(Game game, int sceneId) {
         super(game, Scene.LAST_SCENE, sceneId);
-        this.buttonGroup = buttonGroup;
     }
 
     @Override
     public void updateScene() {
-        buttonGroup.update();
-        if (buttonGroup.getClickedButton() != Button.NO_CLICK) {
-            if (buttonGroup.getClickedButton() == NEW_GAME) {
+        game.getMainButtonGroup().update();
+        if (game.getMainButtonGroup().getClickedButton() != Button.NO_CLICK) {
+            if (game.getMainButtonGroup().getClickedButton() == Button.START) {
                 nextPack = 0;
                 game.getSave().getTracer().setEmptyTraces();
                 game.nextScene(); //usa a lastScene do construtor
-            } else if (buttonGroup.getClickedButton() == LOAD_GAME) {
+            } else if (game.getMainButtonGroup().getClickedButton() == Button.LOAD) {
 
                 //pega a dms do hashmap em game
                 DataManagerScene tempDataManagerScene = (DataManagerScene) game.getSceneFromPublicScenes(Scene.DMS_SCENE);
-                tempDataManagerScene.setType(DataManagerScene.LOAD);
+                tempDataManagerScene.setType(Button.LOAD);
 
                 tempDataManagerScene.setSceneToReturn(sceneId);
-                //game.getSaveMenuScene().setSaveScene(MAIN_MENU_ID);
 
                 tempDataManagerScene.setPackToReturn(packId);
-                //game.getSaveMenuScene().setSavePack(PACK_FOR_LOAD_GAME);
 
                 game.setDirectSceneFromPublicScenes(Scene.DMS_SCENE);
             }
@@ -52,13 +41,13 @@ public class MainMenuScene extends Scene {
     public void renderScene(Graphics g) {
         g.setColor(Color.DARK_GRAY);
         g.fillRect(0, 0, game.getWidth(), game.getHeight());
-        buttonGroup.render(g);
+        game.getMainButtonGroup().render(g);
     }
 
     @Override
     public void reset() {
         super.reset();
-        buttonGroup.reset();
+        game.getMainButtonGroup().reset();
     }
 
 }

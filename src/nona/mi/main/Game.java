@@ -12,6 +12,7 @@ import nona.mi.save.Save;
 import nona.mi.scene.Scene;
 import nona.mi.scene.ScenePackage;
 
+import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
@@ -27,7 +28,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
-
+import java.util.Map;
 
 
 public abstract class Game implements Runnable, KeyListener, MouseListener, MouseMotionListener {
@@ -77,10 +78,11 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     protected HashMap<Integer, Scene> publicScenes;
 
     protected ButtonGroup yn;
+    protected ButtonGroup navigationButtonGroup;
+    protected ButtonGroup stanButtonGroup;
+    protected ButtonGroup mainButtonGroup;
 
     private boolean showScene;
-
-    protected ButtonGroup sceneMenu; //save, load, copy, del, main
 
     protected FontDataBase fontDataBase;
     protected FontDataBase fontFocus;
@@ -507,10 +509,6 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         this.showLoopLog = showLoopLog;
     }
 
-    public ButtonGroup getSlcd() {
-        return sceneMenu;
-    }
-
     public ImageEfx getSetasAnim() {
         return setasAnim;
     }
@@ -551,6 +549,18 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     public ButtonGroup getYn() {
         return yn;
+    }
+
+    public ButtonGroup getNavigationButtonGroup() {
+        return navigationButtonGroup;
+    }
+
+    public ButtonGroup getStanButtonGroup() {
+        return stanButtonGroup;
+    }
+
+    public ButtonGroup getMainButtonGroup() {
+        return mainButtonGroup;
     }
 
 
@@ -594,5 +604,14 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     }
 
     //----------------------------------------------------------------------------------------
+
+    public void setPackIdToScenes(int packId) {
+        HashMap<Integer, Scene> tempMap = packBasis.getMap();
+
+        for (Map.Entry<Integer, Scene> tmp : tempMap.entrySet()) {
+            tmp.getValue().setPackId(packId);
+        }
+    }
+
 
 }

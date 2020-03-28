@@ -130,7 +130,7 @@ public class StandardScene extends Scene {
         if (!hide) {
             if (!mainClicked) {
                 updateButtonGroup();
-                if (game.getSlcd().getClickedButton() == Button.NO_CLICK) {
+                if (game.getStanButtonGroup().getClickedButton() == Button.NO_CLICK) {
                     updateDialog();
                 }
             } else {
@@ -141,28 +141,28 @@ public class StandardScene extends Scene {
     }
 
     private void updateButtonGroup() {
-        game.getSlcd().update();
-        if (game.getSlcd().getClickedButton() != Button.NO_CLICK) {
+        game.getStanButtonGroup().update();
+        if (game.getStanButtonGroup().getClickedButton() != Button.NO_CLICK) {
 
             //se estiver no meio do audio quando um botao for pressionado, o pausa
             pauseDialogAudio();
 
-            if (game.getSlcd().getClickedButton() == DataManagerScene.MAIN) {
+            if (game.getStanButtonGroup().getClickedButton() == Button.MAIN) {
                 mainClicked = true;
-            } else if (game.getSlcd().getClickedButton() == HISTORY_SCENE) {
+            } else if (game.getStanButtonGroup().getClickedButton() == Button.HISTORY) {
                 HistoryScene tempHistoryScene = (HistoryScene) game.getSceneFromPublicScenes(HISTORY_SCENE);
                 tempHistoryScene.setSceneToReturn(sceneId);
                 System.out.println("retornarah para: " + sceneId);
                 tempHistoryScene.checkInitialId();
                 game.setSceneBasisFromPublicScenesWithoutReset(HISTORY_SCENE);
-                game.getSlcd().reset();
+                game.getStanButtonGroup().reset();
                 game.setClicked(false);
             } else {
                 DataManagerScene tempDataManagerScene = (DataManagerScene) game.getSceneFromPublicScenes(DMS_SCENE);
-                tempDataManagerScene.setType(game.getSlcd().getClickedButton());
+                tempDataManagerScene.setType(game.getStanButtonGroup().getClickedButton());
                 tempDataManagerScene.setInfo(game.getSceneBasis().getPackId(), game.getSceneBasis().getSceneId(), game.getFrame());
                 game.setSceneBasisFromPublicScenesWithoutReset(DMS_SCENE); //para nao resetar a cena
-                game.getSlcd().reset();
+                game.getStanButtonGroup().reset();
                 game.setClicked(false);
             }
         }
@@ -220,9 +220,9 @@ public class StandardScene extends Scene {
     private void updateYn() {
         game.getYn().update();
         if (game.getYn().getClickedButton() != Button.NO_CLICK) {
-            if (game.getYn().getClickedButton() == DataManagerScene.YES) {
+            if (game.getYn().getClickedButton() == Button.YES) {
                 game.returnToMainMenu(); //reseta esta cena
-            } else if (game.getYn().getClickedButton() == DataManagerScene.NO) {
+            } else if (game.getYn().getClickedButton() == Button.NO) {
                 mainClicked = false;
                 game.getYn().reset();
                 //para o caso de hide ser ativado
@@ -276,7 +276,7 @@ public class StandardScene extends Scene {
 
     private void renderSlcd(Graphics g) {
         if (!hide) {
-            game.getSlcd().render(g);
+            game.getStanButtonGroup().render(g);
         }
     }
 
@@ -329,7 +329,7 @@ public class StandardScene extends Scene {
         game.getSetasAnim().reset();
 
         game.getYn().reset();
-        game.getSlcd().reset();
+        game.getStanButtonGroup().reset();
 
         lockHCheck = false;
         mainClicked = false;

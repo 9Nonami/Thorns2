@@ -30,7 +30,6 @@ public class DataManagerScene extends Scene {
     private int type; //controla se eh slcd
 
     private SlotGroup slotGroup; //slots
-    private ButtonGroup buttonGroup; //prev, next, return
 
     private boolean lockForSave;
     private boolean lockYnForSave;
@@ -48,17 +47,6 @@ public class DataManagerScene extends Scene {
     private boolean pleaseWait;
 
     private HashMap<Integer, BaseImage> modes; //imagens as quais identificam qual cena o player estah (slcd)
-
-    public static final int RETURN_TO_LAST_SCENE = -74;
-    public static final int PREVIOUS_SLOT_GROUP = -73;
-    public static final int NEXT_SLOT_GROUP = -72;
-    public static final int YES = -71;
-    public static final int NO = -70;
-    public static final int SAVE = -69;
-    public static final int LOAD = -68;
-    public static final int COPY = -67;
-    public static final int DEL = -66;
-    public static final int MAIN = -65;
 
     private int tempChosenSlot; //id do slot clicado
 
@@ -83,10 +71,6 @@ public class DataManagerScene extends Scene {
         lockForPaste = true;
         lockYnForCopy = true;
 
-    }
-
-    public void createMiscButtons(Button[] miscButtons) {
-        buttonGroup = new ButtonGroup(miscButtons);
     }
 
     public void createSlotImages(BufferedImage standard, BufferedImage focus) {
@@ -135,9 +119,9 @@ public class DataManagerScene extends Scene {
 
     //update do return, prev e next
     private boolean updateButtons() {
-        buttonGroup.update();
-        if (buttonGroup.getClickedButton() != Button.NO_CLICK) {
-            if (buttonGroup.getClickedButton() == RETURN_TO_LAST_SCENE) {
+        game.getNavigationButtonGroup().update();
+        if (game.getNavigationButtonGroup().getClickedButton() != Button.NO_CLICK) {
+            if (game.getNavigationButtonGroup().getClickedButton() == Button.RETURN) {
                 if (sceneToReturn == Scene.MAIN_MENU_SCENE) {
                     System.out.println(sceneToReturn);
                     System.out.println("");
@@ -152,11 +136,11 @@ public class DataManagerScene extends Scene {
                     }
                 }
                 return true; //para nao atualizar os slots
-            } else if (buttonGroup.getClickedButton() == PREVIOUS_SLOT_GROUP) {
+            } else if (game.getNavigationButtonGroup().getClickedButton() == Button.PREV) {
                 if (slotGroup.getStartIncrement() > 0) { // 0 = first slot. there is nothing before it.
                     slotGroup.decrement();
                 }
-            } else if (buttonGroup.getClickedButton() == NEXT_SLOT_GROUP) { //12 - 6
+            } else if (game.getNavigationButtonGroup().getClickedButton() == Button.NEXT) { //12 - 6
                 if (slotGroup.getStartIncrement() < slotGroup.getTotalButtons() - slotGroup.getButtonsToShow()) {
                     slotGroup.increment();
                 }
@@ -196,11 +180,11 @@ public class DataManagerScene extends Scene {
     private void updateYnForSave() {
         game.getYn().update();
         if (game.getYn().getClickedButton() != Button.NO_CLICK) {
-            if (game.getYn().getClickedButton() == YES) {
+            if (game.getYn().getClickedButton() == Button.YES) {
                 lockYnForSave = true;
                 pleaseWait = true;
                 save();
-            } else if (game.getYn().getClickedButton() == NO) {
+            } else if (game.getYn().getClickedButton() == Button.NO) {
                 game.getYn().reset();
                 lockForSave = false;
                 lockYnForSave = true;
@@ -236,7 +220,7 @@ public class DataManagerScene extends Scene {
     private void updateYnForLoad() {
         game.getYn().update();
         if (game.getYn().getClickedButton() != Button.NO_CLICK) {
-            if (game.getYn().getClickedButton() == YES) {
+            if (game.getYn().getClickedButton() == Button.YES) {
                 if (packToReturn != tempPack) {
                     //nao esta lendo alguma cena do pack atual
                     game.loadPack(tempPack, tempScene); // < reseta esta cena (dms)
@@ -255,7 +239,7 @@ public class DataManagerScene extends Scene {
                 }
                 //preenche o tracer com os dados do slot especifico
                 game.getSave().initTracer(tempChosenSlot);
-            } else if (game.getYn().getClickedButton() == NO) {
+            } else if (game.getYn().getClickedButton() == Button.NO) {
                 game.getYn().reset();
                 lockForLoad = false;
                 lockYnForLoad = true;
@@ -320,11 +304,11 @@ public class DataManagerScene extends Scene {
     private void updateYnForCopy() {
         game.getYn().update();
         if (game.getYn().getClickedButton() != Button.NO_CLICK) {
-            if (game.getYn().getClickedButton() == YES) {
+            if (game.getYn().getClickedButton() == Button.YES) {
                 lockYnForCopy = true;
                 pleaseWait = true;
                 save();
-            } else if (game.getYn().getClickedButton() == NO) {
+            } else if (game.getYn().getClickedButton() == Button.NO) {
                 game.getYn().reset();
                 lockForCopy = false;
                 lockYnForCopy = true;
@@ -357,11 +341,11 @@ public class DataManagerScene extends Scene {
     private void updateYnForDel() {
         game.getYn().update();
         if (game.getYn().getClickedButton() != Button.NO_CLICK) {
-            if (game.getYn().getClickedButton() == YES) {
+            if (game.getYn().getClickedButton() == Button.YES) {
                 lockYnForDel = true; //nao deixa o infeliz iniciar mais de 1 thread
                 pleaseWait = true;
                 del();
-            } else if (game.getYn().getClickedButton() == NO) {
+            } else if (game.getYn().getClickedButton() == Button.NO) {
                 game.getYn().reset();
                 lockForDel = false;
                 lockYnForDel = true;
@@ -384,7 +368,7 @@ public class DataManagerScene extends Scene {
                     //Thread.sleep(1000);
 
                     //obtem o caminho da imagem de acordo com o os
-                    String tempPath = ""; //todo atomic ref.
+                    String tempPath = "";
                     if (game.getSave().getOs().startsWith("w")) {
                         tempPath = game.getSave().getFolderPath() + "\\" + slotGroup.getClickedSlot() + ".png";
                     } else if (game.getSave().getOs().startsWith("l")) {
@@ -487,13 +471,13 @@ public class DataManagerScene extends Scene {
 
     @Override
     public void updateScene() {
-        if (type == SAVE) {
+        if (type == Button.SAVE) {
             updateSave();
-        } else if (type == LOAD) {
+        } else if (type == Button.LOAD) {
             updateLoad();
-        } else if (type == COPY) {
+        } else if (type == Button.COPY) {
             updateCopy();
-        } else if (type == DEL) {
+        } else if (type == Button.DEL) {
             updateDel();
         }
     }
@@ -502,7 +486,7 @@ public class DataManagerScene extends Scene {
     public void renderScene(Graphics g) {
         renderModes(g);
         slotGroup.render(g);
-        buttonGroup.render(g);
+        game.getNavigationButtonGroup().render(g);
         if (!lockYnForSave || !lockYnForDel || !lockYnForCopy || !lockYnForLoad) {
             renderShadow(g);
             game.getYn().render(g);
@@ -533,7 +517,7 @@ public class DataManagerScene extends Scene {
 
         pleaseWait = false;
 
-        buttonGroup.reset();
+        game.getNavigationButtonGroup().reset();
         game.getYn().reset();
     }
 

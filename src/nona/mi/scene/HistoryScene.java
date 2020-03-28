@@ -1,7 +1,6 @@
 package nona.mi.scene;
 
 import nona.mi.button.Button;
-import nona.mi.button.ButtonGroup;
 import nona.mi.main.Game;
 import nona.mi.save.Tracer;
 
@@ -18,10 +17,6 @@ public class HistoryScene extends Scene {
 
     private Dialogue[] dialogues; //container para os dialogos da cena resgatada
     private Dialogue dialogue; //dialogo container
-    private ButtonGroup btns; //armazena os botoes desta cena
-    public static final int PREV = 0; //id para a criacao dos botoes
-    public static final int NEXT = 1; //id para a criacao dos botoes
-    public static final int RETURN = 2; //id para a criacao dos botoes
 
     public static final int NEW_DIALOG_X = 50; //nova posicao do dialogo
     public static final int NEW_DIALOG_Y = 100; //nova posicao do dialogo
@@ -30,17 +25,8 @@ public class HistoryScene extends Scene {
 
 
 
-    //todo : nopack
-    public HistoryScene(Game game, int nextScene, int sceneId) {
-        super(game, nextScene, sceneId);
-    }
-
     public HistoryScene(Game game, int sceneId) {
         super(game, sceneId);
-    }
-
-    public void setBtns(ButtonGroup btns) {
-        this.btns = btns;
     }
 
     public void setSceneToReturn(int sceneToReturn) {
@@ -90,17 +76,17 @@ public class HistoryScene extends Scene {
     }
 
     private void updateButtons() {
-        btns.update();
-        if (btns.getClickedButton() != Button.NO_CLICK) {
-            if (btns.getClickedButton() == RETURN) {
-                game.setDirectScene(sceneToReturn);
+        game.getNavigationButtonGroup().update();
+        if (game.getNavigationButtonGroup().getClickedButton() != Button.NO_CLICK) {
+            if (game.getNavigationButtonGroup().getClickedButton() == Button.RETURN) {
                 //retoma uma fala caso tenha sido pausada
                 if (game.getSceneFromCurrentPack(sceneToReturn) instanceof StandardScene) {
                     StandardScene temp = (StandardScene) game.getSceneFromCurrentPack(sceneToReturn);
                     temp.resumeDialogAudio();
                     temp.setLockHCheck(false); //caso tenha apertado h, não volta para stan com dialog escondido
                 }
-            } else if (btns.getClickedButton() == PREV) {
+                game.setDirectScene(sceneToReturn);
+            } else if (game.getNavigationButtonGroup().getClickedButton() == Button.PREV) {
                 if (tracerId != Tracer.TOTAL_TRACES) {
                     if (dialogId > 0) {
                         dialogId--;
@@ -114,7 +100,7 @@ public class HistoryScene extends Scene {
                         }
                     }
                 }
-            } else if (btns.getClickedButton() == NEXT) {
+            } else if (game.getNavigationButtonGroup().getClickedButton() == Button.NEXT) {
                 if (tracerId != Tracer.TOTAL_TRACES) { //entra no metodo se trace nao for vazio
                     //verifica os dialogos ateh chegar ao ultimo id do array
                     if (dialogId < dialogues.length - 1) { //entra se for o penultimo dialogo (ou < ultimo) e muda para o ultimo. sendo o ultimo, nao mais entra aqui
@@ -136,7 +122,7 @@ public class HistoryScene extends Scene {
 
     @Override
     public void renderScene(Graphics g) {
-        btns.render(g);
+        game.getNavigationButtonGroup().render(g);
         if (tracerId != Tracer.TOTAL_TRACES) {
             dialogue.render(g);
         } else {
@@ -149,7 +135,7 @@ public class HistoryScene extends Scene {
     public void reset() {
 
         super.reset();
-        btns.reset();
+        game.getNavigationButtonGroup().reset();
 
         if (initialTracerId != Tracer.TOTAL_TRACES) {
 

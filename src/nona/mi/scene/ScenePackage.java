@@ -21,4 +21,7 @@ public class ScenePackage {
 		return null;
 	}
 
+	public HashMap<Integer, Scene> getMap() {
+		return map;
+	}
 }

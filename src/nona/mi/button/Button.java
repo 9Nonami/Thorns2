@@ -19,7 +19,23 @@ public abstract class Button {
     protected boolean lockAudio;
     protected int id;
 
-    public static final int NO_CLICK = -64;
+    public static final int NO_CLICK = -9;
+
+    public static final int YES = -10;
+    public static final int NO = -11;
+
+    public static final int START = -12;
+
+    public static final int RETURN = -13;
+    public static final int PREV = -14;
+    public static final int NEXT = -15;
+
+    public static final int SAVE = -16;
+    public static final int LOAD = -17;
+    public static final int COPY = -18;
+    public static final int DEL = -19;
+    public static final int HISTORY = -20;
+    public static final int MAIN = -21;
 
 
 

@@ -174,7 +174,7 @@ public class ImageEfx {
     public void render(Graphics g) {
         Graphics2D g2d = (Graphics2D) g.create();
         if (alpha) {
-            g2d.setComposite(AlphaComposite.SrcOver.derive((float)aspect));
+            g2d.setComposite(AlphaComposite.SrcOver.derive(aspect));
         }
         if (images != null) {
             g2d.drawImage(images[(int) id], (int) this.coordinates.getX(), (int) this.coordinates.getY(), null);
