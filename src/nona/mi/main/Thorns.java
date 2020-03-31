@@ -18,16 +18,7 @@ import nona.mi.efx.Fade;
 import nona.mi.image.ImageEfx;
 import nona.mi.loader.TextLoader;
 import nona.mi.save.Save;
-import nona.mi.scene.DataManagerScene;
-import nona.mi.scene.EfxScene;
-import nona.mi.scene.FadeScene;
-import nona.mi.scene.FadeTopBottomScene;
-import nona.mi.scene.HistoryScene;
-import nona.mi.scene.LoadScene;
-import nona.mi.scene.MainMenuScene;
-import nona.mi.scene.Scene;
-import nona.mi.scene.StandardScene;
-
+import nona.mi.scene.*;
 
 
 public class Thorns extends Game {
@@ -423,10 +414,17 @@ public class Thorns extends Game {
         packBasis.put(scene14);
 
         //cena 15 - teste de fala
-        StandardScene scene15 = new StandardScene(this, bgScene0, 0, 15);
+        StandardScene scene15 = new StandardScene(this, bgScene0, 16, 15); //nx = 0
         scene15.setDialog(sentences.get(scene15.getSceneId()));
         scene15.setBackgroundAudio(trainningCenterAudio, MyJukeBox.LOOP);
         packBasis.put(scene15);
+
+        //cena 16 - teste de choice
+        String asd = "FOLLOW ROSE@";
+        String zxc = "FOLLOW AKHNAHRR@";
+        String qwe = "UNO DOS TRES@DE OLIVEIRA QUATRO@HURR DURR@";
+        ChoiceScene scene16 = new ChoiceScene(this, 16, new String[]{asd, zxc, qwe});
+        packBasis.put(scene16);
 
     }
 

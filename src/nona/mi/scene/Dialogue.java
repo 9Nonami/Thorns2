@@ -48,6 +48,8 @@ public class Dialogue {
     public static final int Y_NAME_BG = 50; //base y do retangulo do nome
     public static final int SPACING = 5; //espacamento entre os caracteres em y
 
+    public static final char BREAK_LINE = '@';
+
 
 
     //ESSENCIAL------------------------------------------
@@ -194,7 +196,7 @@ public class Dialogue {
             int tempX = X;
             int tempY = Y;
             for (int id = 0; id < (int) game.getContForStan().getValue(); id++) {
-                if (arr[id] == '@') {
+                if (arr[id] == BREAK_LINE) {
                     tempY += fdb.getFontHeight() + SPACING;
                     tempX = X;
                     continue;
@@ -207,7 +209,7 @@ public class Dialogue {
             int tempX = HistoryScene.NEW_DIALOG_X;
             int tempY = HistoryScene.NEW_DIALOG_Y;
             for (char c : arr) {
-                if (c == '@') {
+                if (c == BREAK_LINE) {
                     tempY += fdb.getFontHeight() + SPACING;
                     tempX = HistoryScene.NEW_DIALOG_X;
                     continue;

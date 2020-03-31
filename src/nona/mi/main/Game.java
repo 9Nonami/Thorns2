@@ -517,6 +517,10 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         return fontDataBase;
     }
 
+    public FontDataBase getFontFocus() {
+        return fontFocus;
+    }
+
     public BaseImage getTextArea() {
         return textArea;
     }
