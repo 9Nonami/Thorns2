@@ -9,9 +9,16 @@ public class LoadScene extends Scene {
 
     private BaseImage background;
 
+    public static final int SCENE_TYPE = 6;
+
     public LoadScene(Game game, int sceneId, BaseImage background) {
         super(game, sceneId);
         this.background = background;
+    }
+
+    @Override
+    public int getSceneType() {
+        return SCENE_TYPE;
     }
 
     @Override

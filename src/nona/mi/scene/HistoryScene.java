@@ -23,10 +23,17 @@ public class HistoryScene extends Scene {
     public static final int NEW_NAME_X = 50; //nova posicao do nome
     public static final int NEW_NAME_Y = 50; //nova posicao do nome
 
+    public static final int SCENE_TYPE = 5;
+
 
 
     public HistoryScene(Game game, int sceneId) {
         super(game, sceneId);
+    }
+
+    @Override
+    public int getSceneType() {
+        return SCENE_TYPE;
     }
 
     public void setSceneToReturn(int sceneToReturn) {

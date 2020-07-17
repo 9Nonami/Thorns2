@@ -6,6 +6,7 @@ public class NameDataBase {
 
     public static final String STANDARD_CLICK = "click";
     public static final String MARISA = "Marisa";
+    public static final String TRAINNING_CENTER_AUDIO = "tca";
 
     private HashMap<String, char[]> map;
 

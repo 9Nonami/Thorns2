@@ -7,22 +7,63 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50053a92-1326-4f75-bf22-ca2e42361449" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/nona/mi/rectangle/Rectangle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/nona/mi/scene/ChoiceScene.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/nona/mi/button/ButtonOrganizer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/META-INF/Thorns2.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/Button.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/Button.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/RectButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/RectButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/SlotGroup.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/button/SlotGroup.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/db/NameDataBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/db/NameDataBase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Game.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/main/Thorns.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/Dialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/Dialogue.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/ChoiceScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/ChoiceScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/DataManagerScene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/DataManagerScene$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/DataManagerScene$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/DataManagerScene$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/DataManagerScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/DataManagerScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/EfxScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/EfxScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/FadeScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/FadeScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/FadeTopBottomScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/FadeTopBottomScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/HistoryScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/HistoryScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/LoadScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/LoadScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/MainMenuScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/MainMenuScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/Scene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/Scene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/StandardScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/nona/mi/scene/StandardScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/res/misc/copy.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/res/misc/copy.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/res/misc/delete.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/res/misc/delete.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/res/misc/history.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/res/misc/history.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/res/misc/load.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/res/misc/load.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/res/misc/main.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/res/misc/main.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/res/misc/save.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/res/misc/save.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thorns2/res/misc/start.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thorns2/res/misc/start.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/button/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/Button.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/button/RectButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/RectButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/button/SlotGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/button/SlotGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/db/NameDataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/db/NameDataBase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/main/Thorns.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/Dialogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/Dialogue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/ChoiceScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/ChoiceScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/DataManagerScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/DataManagerScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/EfxScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/EfxScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/FadeScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/FadeScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/FadeTopBottomScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/FadeTopBottomScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/HistoryScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/HistoryScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/LoadScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/LoadScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/MainMenuScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/MainMenuScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/Scene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nona/mi/scene/StandardScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nona/mi/scene/StandardScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/misc/copy.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/misc/copy.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/misc/delete.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/misc/delete.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/misc/history.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/misc/history.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/misc/load.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/misc/load.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/misc/main.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/misc/main.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/misc/save.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/misc/save.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/misc/start.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/misc/start.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FavoritesManager">
-    <favorites_list name="Thorns2" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -47,7 +88,6 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -117,118 +157,36 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="272" y="186" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1581682490556">
-      <screen x="0" y="0" width="1024" height="728" />
-    </state>
-    <state x="272" y="186" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1024.728@0.0.1024.728" timestamp="1581682490556" />
-    <state x="261" y="221" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1581680113336">
-      <screen x="0" y="0" width="1024" height="728" />
-    </state>
-    <state x="261" y="221" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1024.728@0.0.1024.728" timestamp="1581680113336" />
-    <state x="317" y="0" width="380" height="565" key="#com.intellij.ide.util.MemberChooser" timestamp="1585438441458">
+    <state width="978" height="157" key="GridCell.Tab.0.bottom" timestamp="1594995988905">
       <screen x="0" y="0" width="1024" height="568" />
     </state>
-    <state x="317" y="0" width="380" height="565" key="#com.intellij.ide.util.MemberChooser/0.0.1024.568@0.0.1024.568" timestamp="1585438441458" />
-    <state x="317" y="93" key="#com.intellij.ide.util.MemberChooser/0.0.1024.728@0.0.1024.728" timestamp="1585162654278" />
-    <state x="242" y="149" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1583174476503">
-      <screen x="0" y="0" width="1024" height="728" />
-    </state>
-    <state x="242" y="149" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1024.728@0.0.1024.728" timestamp="1583174476503" />
-    <state x="316" y="195" key="#com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog" timestamp="1580116687150">
-      <screen x="0" y="0" width="1024" height="728" />
-    </state>
-    <state x="316" y="195" key="#com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog/0.0.1024.728@0.0.1024.728" timestamp="1580116687150" />
-    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1583081653317">
-      <screen x="0" y="0" width="1024" height="728" />
-    </state>
-    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1024.728@0.0.1024.728" timestamp="1583081653317" />
-    <state x="242" y="130" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1585054270150">
-      <screen x="0" y="0" width="1024" height="728" />
-    </state>
-    <state x="242" y="130" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1024.728@0.0.1024.728" timestamp="1585054270150" />
-    <state x="242" y="132" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1581775248392">
-      <screen x="0" y="0" width="1024" height="728" />
-    </state>
-    <state x="242" y="132" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1024.728@0.0.1024.728" timestamp="1581775248392" />
-    <state x="292" y="118" key="FileChooserDialogImpl" timestamp="1584525108011">
-      <screen x="0" y="0" width="1024" height="728" />
-    </state>
-    <state x="292" y="118" key="FileChooserDialogImpl/0.0.1024.728@0.0.1024.728" timestamp="1584525108011" />
-    <state width="978" height="174" key="GridCell.Tab.0.bottom" timestamp="1585654050876">
+    <state width="978" height="157" key="GridCell.Tab.0.bottom/0.0.1024.568@0.0.1024.568" timestamp="1594995988905" />
+    <state width="981" height="320" key="GridCell.Tab.0.bottom/0.0.1024.728@0.0.1024.728" timestamp="1591166231624" />
+    <state width="978" height="157" key="GridCell.Tab.0.center" timestamp="1594995988899">
       <screen x="0" y="0" width="1024" height="568" />
     </state>
-    <state width="978" height="174" key="GridCell.Tab.0.bottom/0.0.1024.568@0.0.1024.568" timestamp="1585654050876" />
-    <state width="980" height="359" key="GridCell.Tab.0.bottom/0.0.1024.728@0.0.1024.728" timestamp="1585418916271" />
-    <state width="978" height="174" key="GridCell.Tab.0.center" timestamp="1585654050872">
+    <state width="978" height="157" key="GridCell.Tab.0.center/0.0.1024.568@0.0.1024.568" timestamp="1594995988899" />
+    <state width="981" height="320" key="GridCell.Tab.0.center/0.0.1024.728@0.0.1024.728" timestamp="1591166231624" />
+    <state width="978" height="157" key="GridCell.Tab.0.left" timestamp="1594995988897">
       <screen x="0" y="0" width="1024" height="568" />
     </state>
-    <state width="978" height="174" key="GridCell.Tab.0.center/0.0.1024.568@0.0.1024.568" timestamp="1585654050872" />
-    <state width="980" height="359" key="GridCell.Tab.0.center/0.0.1024.728@0.0.1024.728" timestamp="1585418916271" />
-    <state width="978" height="174" key="GridCell.Tab.0.left" timestamp="1585654050869">
+    <state width="978" height="157" key="GridCell.Tab.0.left/0.0.1024.568@0.0.1024.568" timestamp="1594995988897" />
+    <state width="981" height="320" key="GridCell.Tab.0.left/0.0.1024.728@0.0.1024.728" timestamp="1591166231624" />
+    <state width="978" height="157" key="GridCell.Tab.0.right" timestamp="1594995988902">
       <screen x="0" y="0" width="1024" height="568" />
     </state>
-    <state width="978" height="174" key="GridCell.Tab.0.left/0.0.1024.568@0.0.1024.568" timestamp="1585654050869" />
-    <state width="980" height="359" key="GridCell.Tab.0.left/0.0.1024.728@0.0.1024.728" timestamp="1585418916271" />
-    <state width="978" height="174" key="GridCell.Tab.0.right" timestamp="1585654050874">
-      <screen x="0" y="0" width="1024" height="568" />
-    </state>
-    <state width="978" height="174" key="GridCell.Tab.0.right/0.0.1024.568@0.0.1024.568" timestamp="1585654050874" />
-    <state width="980" height="359" key="GridCell.Tab.0.right/0.0.1024.728@0.0.1024.728" timestamp="1585418916271" />
-    <state width="980" height="248" key="GridCell.Tab.1.bottom" timestamp="1584749009845">
-      <screen x="0" y="0" width="1024" height="728" />
-    </state>
-    <state width="980" height="248" key="GridCell.Tab.1.bottom/0.0.1024.728@0.0.1024.728" timestamp="1584749009845" />
-    <state width="980" height="248" key="GridCell.Tab.1.center" timestamp="1584749009845">
-      <screen x="0" y="0" width="1024" height="728" />
-    </state>
-    <state width="980" height="248" key="GridCell.Tab.1.center/0.0.1024.728@0.0.1024.728" timestamp="1584749009845" />
-    <state width="980" height="248" key="GridCell.Tab.1.left" timestamp="1584749009845">
-      <screen x="0" y="0" width="1024" height="728" />
-    </state>
-    <state width="980" height="248" key="GridCell.Tab.1.left/0.0.1024.728@0.0.1024.728" timestamp="1584749009845" />
-    <state width="980" height="248" key="GridCell.Tab.1.right" timestamp="1584749009845">
-      <screen x="0" y="0" width="1024" height="728" />
-    </state>
-    <state width="980" height="248" key="GridCell.Tab.1.right/0.0.1024.728@0.0.1024.728" timestamp="1584749009845" />
-    <state x="319" y="96" key="RollbackChangesDialog" timestamp="1579730180500">
-      <screen x="0" y="0" width="1024" height="728" />
-    </state>
-    <state x="319" y="96" key="RollbackChangesDialog/0.0.1024.728@0.0.1024.728" timestamp="1579730180500" />
-    <state x="0" y="0" key="SettingsEditor" timestamp="1583174504056">
-      <screen x="0" y="0" width="1024" height="728" />
-    </state>
-    <state x="0" y="0" key="SettingsEditor/0.0.1024.728@0.0.1024.728" timestamp="1583174504056" />
-    <state x="316" y="234" key="classpath-attribute-editor" timestamp="1581762426933">
-      <screen x="0" y="0" width="1024" height="728" />
-    </state>
-    <state x="316" y="234" key="classpath-attribute-editor/0.0.1024.728@0.0.1024.728" timestamp="1581762426933" />
-    <state x="208" y="0" width="607" height="728" key="find.popup" timestamp="1584999862419">
-      <screen x="0" y="0" width="1024" height="728" />
-    </state>
-    <state x="208" y="0" width="607" height="728" key="find.popup/0.0.1024.728@0.0.1024.728" timestamp="1584999862419" />
-    <state x="0" y="0" key="new project wizard" timestamp="1581955451243">
-      <screen x="0" y="0" width="1024" height="728" />
-    </state>
-    <state x="0" y="0" key="new project wizard/0.0.1024.728@0.0.1024.728" timestamp="1581955451243" />
-    <state x="176" y="176" key="run.anything.popup" timestamp="1585005307962">
-      <screen x="0" y="0" width="1024" height="728" />
-    </state>
-    <state x="176" y="176" key="run.anything.popup/0.0.1024.728@0.0.1024.728" timestamp="1585005307962" />
-    <state x="175" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1584485993712">
-      <screen x="0" y="0" width="1024" height="728" />
-    </state>
-    <state x="175" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1024.728@0.0.1024.728" timestamp="1584485993712" />
+    <state width="978" height="157" key="GridCell.Tab.0.right/0.0.1024.568@0.0.1024.568" timestamp="1594995988902" />
+    <state width="981" height="320" key="GridCell.Tab.0.right/0.0.1024.728@0.0.1024.728" timestamp="1591166231624" />
   </component>
 </project>

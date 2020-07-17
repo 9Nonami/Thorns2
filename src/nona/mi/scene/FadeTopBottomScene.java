@@ -11,12 +11,19 @@ public class FadeTopBottomScene extends Scene {
     private BaseImage[] bottom;
     private ImageEfx[] top;
 
+    public static final int SCENE_TYPE = 4;
+
 
 
     public FadeTopBottomScene(Game game, BaseImage[] bottom, ImageEfx[] top, int nextScene, int sceneId) {
         super(game, nextScene, sceneId);
         this.bottom = bottom;
         this.top = top;
+    }
+
+    @Override
+    public int getSceneType() {
+        return SCENE_TYPE;
     }
 
     @Override

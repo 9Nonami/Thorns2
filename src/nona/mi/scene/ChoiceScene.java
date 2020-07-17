@@ -17,6 +17,8 @@ public class ChoiceScene extends Scene {
     public static final int LINE_SPACING = 0;
     public static final int SENTENCE_SPACING = 50;
 
+    public static final int SCENE_TYPE = 0;
+
 
 
     public ChoiceScene(Game game, int sceneId, String[] sentences) {
@@ -33,6 +35,11 @@ public class ChoiceScene extends Scene {
         defineInitialY();
         focusedRectangle = Rectangle.NO_FOCUS;
         //log();
+    }
+
+    @Override
+    public int getSceneType() {
+        return SCENE_TYPE;
     }
 
     private void defineLines() {

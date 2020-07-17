@@ -70,9 +70,11 @@ public class SlotGroup {
                 for (int j = 0; j < column; j++) {
                     int id = (i * column) + j + ((row * column) * h); //esta formula faz o id ir de 1 em 1. ex: 0, 1, 2...
                     if (screenshots.containsKey(buttons[id].getId())) {
-                        buttons[id].setImages(screenshots.get(buttons[id].getId()), focusedButtonImage, xx, yy);
+                        buttons[id].setImages(screenshots.get(buttons[id].getId()), focusedButtonImage);
+                        buttons[id].setXY(xx, yy);
                     } else {
-                        buttons[id].setImages(standardButtonImage, focusedButtonImage, xx, yy);
+                        buttons[id].setImages(standardButtonImage, focusedButtonImage);
+                        buttons[id].setXY(xx, yy);
                     }
                     xx += spacing + buttonWidth;
                 }

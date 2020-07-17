@@ -13,6 +13,8 @@ public class FadeScene extends Scene {
     private BaseImage[] backgrounds;
     private int directScene;
 
+    public static final int SCENE_TYPE = 3;
+
 
 
     public FadeScene(Game game, BaseImage[] backgrounds, Fade fade, int nextScene, int sceneId) {
@@ -27,6 +29,11 @@ public class FadeScene extends Scene {
         this.background = background;
         this.fade = fade;
         directScene = Scene.NO_SCENE;
+    }
+
+    @Override
+    public int getSceneType() {
+        return SCENE_TYPE;
     }
 
     public void setDirectScene(int directScene) {

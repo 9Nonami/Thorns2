@@ -50,6 +50,8 @@ public class DataManagerScene extends Scene {
 
     private int tempChosenSlot; //id do slot clicado
 
+    public static final int SCENE_TYPE = 1;
+
 
 
     //ESSENCIAL-------------------------------------
@@ -71,6 +73,11 @@ public class DataManagerScene extends Scene {
         lockForPaste = true;
         lockYnForCopy = true;
 
+    }
+
+    @Override
+    public int getSceneType() {
+        return SCENE_TYPE;
     }
 
     public void createSlotImages(BufferedImage standard, BufferedImage focus) {

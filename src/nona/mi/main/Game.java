@@ -1,6 +1,7 @@
 package nona.mi.main;
 
 import nona.mi.button.ButtonGroup;
+import nona.mi.button.ButtonOrganizer;
 import nona.mi.cont.Cont;
 import nona.mi.db.FontDataBase;
 import nona.mi.db.NameBgDataBase;
@@ -9,8 +10,7 @@ import nona.mi.image.BaseImage;
 import nona.mi.image.ImageEfx;
 import nona.mi.jukebox.MyJukeBox;
 import nona.mi.save.Save;
-import nona.mi.scene.Scene;
-import nona.mi.scene.ScenePackage;
+import nona.mi.scene.*;
 
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
@@ -94,6 +94,8 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
 
     protected NameDataBase nameDataBase;
     protected NameBgDataBase nameBgDataBaseBasis;
+
+    protected ButtonOrganizer buttonOrganizer;
 
 
 
@@ -305,6 +307,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
     //MUDANCA DE CENA-------------------------------------------------------------------------
 
     public void nextScene() {
+        int tempSceneType = sceneBasis.getSceneType();
         if (sceneBasis.getNextScene() == Scene.LAST_SCENE) {
             int tempNextPack = sceneBasis.getNextPack();
             loadPack(tempNextPack, 0); // 0 = primeira cena do novo pack
@@ -313,6 +316,7 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
             sceneBasis.reset();
             sceneBasis = getSceneFromCurrentPack(tempNextScene);
         }
+        checkButtonsConfig(tempSceneType);
     }
 
     public Scene getSceneFromCurrentPack(int id) {
@@ -374,6 +378,19 @@ public abstract class Game implements Runnable, KeyListener, MouseListener, Mous
         closePackJukebox();
         currentSound = null;
         packJukebox = null;
+    }
+
+    private void checkButtonsConfig(int tempSceneType) {
+        int type = sceneBasis.getSceneType();
+        if (tempSceneType != type) {
+            if (type == MainMenuScene.SCENE_TYPE) {
+                buttonOrganizer.defineMainConfig();
+            } else if (type == StandardScene.SCENE_TYPE) {
+                buttonOrganizer.defineStanConfig();
+            } else if (type == ChoiceScene.SCENE_TYPE) {
+                buttonOrganizer.defineChoiceConfig();
+            }
+        }
     }
 
     //----------------------------------------------------------------------------------------

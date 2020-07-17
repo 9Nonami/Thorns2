@@ -10,8 +10,15 @@ import java.awt.Graphics;
 
 public class MainMenuScene extends Scene {
 
+    public static final int SCENE_TYPE = 7;
+
     public MainMenuScene(Game game, int sceneId) {
         super(game, Scene.LAST_SCENE, sceneId);
+    }
+
+    @Override
+    public int getSceneType() {
+        return SCENE_TYPE;
     }
 
     @Override

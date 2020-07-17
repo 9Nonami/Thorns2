@@ -37,17 +37,30 @@ public abstract class Button {
     public static final int HISTORY = -20;
     public static final int MAIN = -21;
 
+    public static final int STAN_Y_ALL = 323;
+    public static final int CHOICE_Y_ALL = 457;
+
+    public static final int STAN_CHOICE_X_SAVE = 289;
+    public static final int STAN_CHOICE_X_LOAD = 382;
+    public static final int STAN_CHOICE_X_COPY = 475;
+    public static final int STAN_CHOICE_X_DELETE = 568;
+    public static final int STAN_CHOICE_X_HISTORY = 661;
+    public static final int STAN_CHOICE_X_MAIN = 754;
+
+    public static final int MAIN_X_START = 10;
+    public static final int MAIN_Y_START = 10;
+    public static final int MAIN_X_LOAD = 10;
+    public static final int MAIN_Y_LOAD = 40;
+
 
 
     public Button(Game game) {
         this.game = game;
     }
 
-    public void setImages(BufferedImage standardImage, BufferedImage focusedImage, int imageX, int imageY) {
+    public void setImages(BufferedImage standardImage, BufferedImage focusedImage) {
         this.standardImage = standardImage;
         this.focusedImage = focusedImage;
-        this.imageX = imageX;
-        this.imageY = imageY;
     }
 
     public void update() {
@@ -124,6 +137,11 @@ public abstract class Button {
 
     public int getY() {
         return imageY;
+    }
+
+    public void setXY(int imageX, int imageY) {
+        this.imageX = imageX;
+        this.imageY = imageY;
     }
 
     public int getWidth() {

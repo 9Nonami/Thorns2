@@ -24,6 +24,8 @@ public class StandardScene extends Scene {
     private boolean hide;
     private boolean lockHCheck;
 
+    public static final int SCENE_TYPE = 8;
+
 
 
     //ESSENCIAL--------------------------------------
@@ -37,6 +39,11 @@ public class StandardScene extends Scene {
     public StandardScene(Game game, BaseImage[] backgrounds, int nextScene, int sceneId) {
         super(game, nextScene, sceneId);
         this.backgrounds = backgrounds;
+    }
+
+    @Override
+    public int getSceneType() {
+        return SCENE_TYPE;
     }
 
     //-----------------------------------------------

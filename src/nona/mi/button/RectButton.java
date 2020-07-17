@@ -18,8 +18,8 @@ public class RectButton extends Button {
     }
 
     @Override
-    public void setImages(BufferedImage standardImage, BufferedImage focusedImage, int imageX, int imageY) {
-        super.setImages(standardImage, focusedImage, imageX, imageY);
+    public void setImages(BufferedImage standardImage, BufferedImage focusedImage) {
+        super.setImages(standardImage, focusedImage);
         this.imageWidth = standardImage.getWidth();
         this.imageHeight = standardImage.getHeight();
     }

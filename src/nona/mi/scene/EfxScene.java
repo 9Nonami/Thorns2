@@ -13,6 +13,8 @@ public class EfxScene extends Scene {
     private BaseImage[] backgrounds;
     private boolean endAnimation;
 
+    public static final int SCENE_TYPE = 2;
+
 
 
     public EfxScene(Game game, ImageEfx[] images, BaseImage background, int nextScene, int sceneId) {
@@ -25,6 +27,11 @@ public class EfxScene extends Scene {
         super(game, nextScene, sceneId);
         this.images = images;
         this.backgrounds = backgrounds;
+    }
+
+    @Override
+    public int getSceneType() {
+        return SCENE_TYPE;
     }
 
     @Override

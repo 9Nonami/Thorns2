@@ -30,7 +30,7 @@ public abstract class Scene {
 	public static final int NO_PACK = -1;
 
 	protected boolean lockAudio; //faz com que o codigo do updateAudio so execute uma vez
-
+	protected boolean lockNullAudio;
 
 
 	//ESSENCIAL------------------------------------------------------
@@ -57,37 +57,32 @@ public abstract class Scene {
 	}
 
 	private void updateAudio() {
-		if	(!lockAudio && soundName != null) {
-
-			String temp = game.getCurrentSound();
-			System.out.println("audio atual: " + temp);
-
-			// verifica se esta tocando o mesmo audio que a cena anterior
-			if (temp != null) {
-				if (temp.equals(soundName) && game.getPackJukebox().isPlaying(temp)) {
-					System.out.println("RETORNANDO! mesmo audio!" + "\n");
-					lockAudio = true;
-					return;
+		if (soundName != null) {
+			if (!lockAudio) {
+				String temp = game.getCurrentSound();
+				System.out.println("audio atual: " + temp);
+				// verifica se esta tocando o mesmo audio que a cena anterior
+				if (temp != null) {
+					if (temp.equals(soundName) && game.getPackJukebox().isPlaying(temp)) {
+						System.out.println("RETORNANDO! mesmo audio!" + "\n");
+						lockAudio = true;
+						return;
+					}
 				}
+				// executa se o audio for diferente da cena anterior
+				if (game.getPackJukebox().isPlaying(temp)) {
+					game.getPackJukebox().stop(temp);
+					System.out.println("audio PARADO: " + temp);
+				}
+				game.setCurrentSound(this.soundName);
+				System.out.println("novo audio: " + soundName + "\n");
+				if (soundStyle == MyJukeBox.ONCE) {
+					game.getPackJukebox().play(this.soundName);
+				} else if (soundStyle == MyJukeBox.LOOP) {
+					game.getPackJukebox().loop(this.soundName);
+				}
+				lockAudio = true;
 			}
-
-			// executa se o audio for diferente da cena anterior
-			if	(game.getPackJukebox().isPlaying(temp)) {
-				game.getPackJukebox().stop(temp);
-				System.out.println("audio PARADO: " + temp);
-			}
-
-			game.setCurrentSound(this.soundName);
-
-			System.out.println("novo audio: " + soundName + "\n");
-
-			if	(soundStyle == MyJukeBox.ONCE) {
-				game.getPackJukebox().play(this.soundName);
-			} else if (soundStyle == MyJukeBox.LOOP) {
-				game.getPackJukebox().loop(this.soundName);
-			}
-
-			lockAudio = true;
 		}
 	}
 
@@ -140,8 +135,11 @@ public abstract class Scene {
 
 	//----------------------------------------------------------------
 
+	public abstract int getSceneType();
+
 	public void reset() {
 		lockAudio = false;
+		lockNullAudio = false;
 	}
 
 }
